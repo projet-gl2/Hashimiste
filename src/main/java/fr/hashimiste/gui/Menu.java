@@ -11,16 +11,29 @@ public class Menu extends JFrame implements ActionListener {
     private JButton ButModeLibre = new JButton("Mode Libre");
     private JButton ButMultijoueur = new JButton("Multijoueur");
     private JButton ButTechnique = new JButton("Technique");
-    private JButton ButParametre = new JButton("Paramètres");
-    private JButton ButProfils = new JButton("Quitter");
+    private JButton ButParametre = new JButton("Parametres");
+    private JButton ButProfils = new JButton("Profils");
     private JLabel lblSomeText = new JLabel("Hashimiste", SwingConstants.CENTER);
+    // taille de la fenêtre minimum et maximum
+    private int tailleMinX = 500;
+    private int tailleMinY = 300;
+    private int tailleMaxX = 1280;
+    private int tailleMaxY = 720;
 
     public Menu() {
         this.setTitle("Hashimiste");
         this.setIconImages(getIconImages());
-        this.setSize(500, 300);
+        this.setSize(tailleMinX, tailleMinY);
+
         // Minimum size pour la fenêtre
-        this.setMinimumSize(new java.awt.Dimension(500, 300));
+        this.setMinimumSize(new java.awt.Dimension(tailleMinX, tailleMinY));
+        // Preferred size pour la fenêtre
+        this.setPreferredSize(new java.awt.Dimension(tailleMinX, tailleMinY));
+        // Taille maximum pour la fenêtre
+        this.setMaximumSize(new java.awt.Dimension(tailleMaxX, tailleMaxY));
+
+        // Désactiver le bouton agrandir mais en laissant la modification de la taille de la fenêtre
+        this.setResizable(false);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -35,18 +48,18 @@ public class Menu extends JFrame implements ActionListener {
         ButParametre.addActionListener((e) -> pageParametre());
         ButProfils.addActionListener((e) -> pageProfils());
 
-        // Minimum size pour les boutons et texte
-        lblSomeText.setMinimumSize(new java.awt.Dimension(50, 20));
-        ButAventure.setMinimumSize(new java.awt.Dimension(50, 20));
-        ButTutoriel.setMinimumSize(new java.awt.Dimension(50, 20));
-        ButModeLibre.setMinimumSize(new java.awt.Dimension(50, 20));
-        ButMultijoueur.setMinimumSize(new java.awt.Dimension(50, 20));
-        ButTechnique.setMinimumSize(new java.awt.Dimension(50, 20));
-        ButParametre.setMinimumSize(new java.awt.Dimension(50, 20));
-        ButProfils.setMinimumSize(new java.awt.Dimension(50, 20));
+        // Minimum size pour les boutons et texte ( relative à la taille de la fenêtre ( calcule de la taille de la fenêtre / 5 ) )
+        lblSomeText.setPreferredSize(new java.awt.Dimension(50, 20));
+        ButAventure.setPreferredSize(new java.awt.Dimension(50, 20));
+        ButTutoriel.setPreferredSize(new java.awt.Dimension(50, 20));
+        ButModeLibre.setPreferredSize(new java.awt.Dimension(50, 20));
+        ButMultijoueur.setPreferredSize(new java.awt.Dimension(50, 20));
+        ButTechnique.setPreferredSize(new java.awt.Dimension(50, 20));
+        ButParametre.setPreferredSize(new java.awt.Dimension(50, 20));
+        ButProfils.setPreferredSize(new java.awt.Dimension(50, 20));
 
 
-        // Preferred size pour le texte et bouton de 100x20
+        // Prefered size pour les boutons et texte ( relative à la taille de la fenêtre ( calcule de la taille de la fenêtre / 5 ) )
         lblSomeText.setPreferredSize(new java.awt.Dimension(50, 20));
         ButAventure.setPreferredSize(new java.awt.Dimension(50, 20));
         ButTutoriel.setPreferredSize(new java.awt.Dimension(50, 20));
@@ -96,11 +109,53 @@ public class Menu extends JFrame implements ActionListener {
         ButParametre.setAlignmentX(JButton.LEFT_ALIGNMENT);
         ButProfils.setAlignmentX(JButton.RIGHT_ALIGNMENT);
         jp2.add(ButParametre);
-        // Espace entre les boutons ( ButParametre collé en bas à gauche et ButProfils collé en bas à droite)
-        jp2.add(Box.createHorizontalGlue());
+        // Espace entre les boutons ButParametre collé en bas à gauche et ButProfils collé en bas à droite en laissant la taille preférée ( autre que horizontaleGlu et verticaleGlu)
+        jp2.add(Box.createHorizontalStrut(100));
+
         jp2.add(ButProfils);
         jp.add(jp2);
 
+        // Gestionnaire d'événements pour le redimensionnement
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                // Minimum size pour la fenêtre
+                setSize(Math.max(getWidth(), tailleMinX), Math.max(getHeight(), tailleMinY));
+                // Preferred size pour la fenêtre
+                setPreferredSize(new java.awt.Dimension(Math.max(getWidth(), tailleMinX), Math.max(getHeight(), tailleMinY)));
+                // Taille maximum pour la fenêtre
+                setMaximumSize(new java.awt.Dimension(Math.max(getWidth(), tailleMaxX), Math.max(getHeight(), tailleMaxY)));
+
+                // Taille maximum pour les boutons
+                int width = (int) (getWidth() * 0.1);
+                int height = (int) (getHeight() * 0.05);
+
+                // Minimum size pour les boutons et texte ( relative à la taille de la fenêtre ( calcule de la taille de la fenêtre / 5 ) )
+                lblSomeText.setMinimumSize(new java.awt.Dimension(width, height));
+                ButAventure.setMinimumSize(new java.awt.Dimension(width, height));
+                ButTutoriel.setMinimumSize(new java.awt.Dimension(width, height));
+                ButModeLibre.setMinimumSize(new java.awt.Dimension(width, height));
+                ButMultijoueur.setMinimumSize(new java.awt.Dimension(width, height));
+                ButTechnique.setMinimumSize(new java.awt.Dimension(width, height));
+                ButParametre.setMinimumSize(new java.awt.Dimension(width, height));
+                ButProfils.setMinimumSize(new java.awt.Dimension(width, height));
+
+                // Prefered size pour les boutons et texte ( relative à la taille de la fenêtre ( calcule de la taille de la fenêtre / 5 ) )
+                lblSomeText.setPreferredSize(new java.awt.Dimension(width, height));
+                ButAventure.setPreferredSize(new java.awt.Dimension(width, height));
+                ButTutoriel.setPreferredSize(new java.awt.Dimension(width, height));
+                ButModeLibre.setPreferredSize(new java.awt.Dimension(width, height));
+                ButMultijoueur.setPreferredSize(new java.awt.Dimension(width, height));
+                ButTechnique.setPreferredSize(new java.awt.Dimension(width, height));
+                ButParametre.setPreferredSize(new java.awt.Dimension(width, height));
+                ButProfils.setPreferredSize(new java.awt.Dimension(width, height));
+
+            }
+        });
+
+
+        // La taille de la fenêtre s'adapte à la taille des éléments
+        this.pack();
         this.setContentPane(jp);
         this.setVisible(true);
     }
