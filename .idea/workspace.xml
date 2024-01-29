@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Grille.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="base de l'algorithme pour trouver les indices">
+      <change afterPath="$PROJECT_DIR$/main/java/Grille.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/java/Technique.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grille.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,15 +41,21 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2bRQaAih2vJCzoSplj1woZmSiQH" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -60,7 +67,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "damien",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/DAMIEN/Desktop/Administratif/Cours/Licence Info/L3/GL2/Hashimiste",
     "node.js.detected.package.eslint": "true",
@@ -86,6 +93,15 @@
       <updated>1706175482167</updated>
       <workItem from="1706175483939" duration="300000" />
     </task>
+    <task id="LOCAL-00001" summary="base de l'algorithme pour trouver les indices">
+      <option name="closed" value="true" />
+      <created>1706521343290</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1706521343290</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -96,10 +112,26 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="damien" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="base de l'algorithme pour trouver les indices" />
+    <option name="LAST_COMMIT_MESSAGE" value="base de l'algorithme pour trouver les indices" />
   </component>
 </project>
