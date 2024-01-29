@@ -7,18 +7,19 @@ public class Grille {
      * @return l'île qui peut bénéficier d'un indice.
      */
     public Ile aide(){
+        Technique.values();
         int fIndMin = Technique.TECHNIQUE_LIST.getLength(); //une liste des fonctions qui appliquent une technique
                                                             //elles prennent en paramètre une île, et renvoient vrai si la technique s'applique à l'île
 
         Ile aideIle = null; //l'île sur laquelle on peut avancer à l'aide des techniques
 
-        for(int i,i<this.c,i++){
-            for(int j,j<this.l,j++){
+        for(int i;i<this.c;i++){
+            for(int j;j<this.l;j++){
                 if(this.getIle(i,j) != null) {
-                    for (int fInd, fInd<fInfMin, fInd++){
+                    for (int fInd; fInd<fIndMin; fInd++){
                         if(Technique.TECHNIQUE_LIST.get(fInd).apply(this.getIle(i, j))){ //si la technique s'applique à l'île
                             aideIle = this.getIle(i,j);
-                            fInfMin = fInd; //on ne vérifie que les techniques de plus bas niveau que celles trouvées
+                            fIndMin = fInd; //on ne vérifie que les techniques de plus bas niveau que celles trouvées
                         }
                     }
                 }
