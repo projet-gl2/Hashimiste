@@ -17,8 +17,8 @@ public class Menu extends JFrame implements ActionListener {
     // taille de la fenêtre minimum et maximum
     private int tailleMinX = 500;
     private int tailleMinY = 300;
-    private int tailleMaxX = 1280;
-    private int tailleMaxY = 720;
+    private int tailleMaxX = 1920;
+    private int tailleMaxY = 1080;
 
     public Menu() {
         this.setTitle("Hashimiste");
@@ -32,8 +32,9 @@ public class Menu extends JFrame implements ActionListener {
         // Taille maximum pour la fenêtre
         this.setMaximumSize(new java.awt.Dimension(tailleMaxX, tailleMaxY));
 
-        // Désactiver le bouton agrandir mais en laissant la modification de la taille de la fenêtre
+        // Bloquer le redimensionnement de la fenêtre
         this.setResizable(false);
+
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -115,7 +116,8 @@ public class Menu extends JFrame implements ActionListener {
         jp2.add(ButProfils);
         jp.add(jp2);
 
-        // Gestionnaire d'événements pour le redimensionnement
+        /*
+        // Gestionnaire d'événements pour le redimensionnement si on veut le réactiver
         this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
@@ -150,8 +152,10 @@ public class Menu extends JFrame implements ActionListener {
                 ButParametre.setPreferredSize(new java.awt.Dimension(width, height));
                 ButProfils.setPreferredSize(new java.awt.Dimension(width, height));
 
+
             }
         });
+        */
 
 
         // La taille de la fenêtre s'adapte à la taille des éléments
