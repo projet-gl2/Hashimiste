@@ -26,9 +26,15 @@ public class Pont extends Component {
         boolean horizontal = ile1.getY() == ile2.getY();
         for (int i = 0; i < n; i++) {
             if (horizontal) {
-                g.drawLine(ile1.getX() + 20 + i * 20, ile1.getY(), ile2.getX() + 20 + i * 20, ile2.getY());
+                g.drawLine(ile1.getX() + ile1.getWidth() / 2 + i * 20 + ile1.getWidth() / 2,
+                        ile1.getY() + ile1.getHeight() / 2,
+                        ile2.getX() + ile2.getWidth() / 2 + i * 20 - ile2.getWidth() / 2,
+                        ile2.getY() + ile2.getHeight() / 2);
             } else {
-                g.drawLine(ile1.getX(), ile1.getY() + 20 + i * 20, ile2.getX(), ile2.getY() + 20 + i * 20);
+                g.drawLine(ile1.getX() + ile1.getHeight() / 2,
+                        ile1.getY() + ile1.getHeight() / 2 + i * 20 + ile1.getHeight() / 2,
+                        ile2.getX() + ile2.getHeight() / 2,
+                        ile2.getY() + ile2.getHeight() / 2 + i * 20 - ile2.getHeight() / 2);
             }
         }
         super.paint(g);
