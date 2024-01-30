@@ -7,6 +7,13 @@ public class Pont extends Component {
     private final Ile ile2;
     private int n;
 
+    /**
+     * Créer un pont
+     *
+     * @param ile1 l'ile 1
+     * @param ile2 l'ile 2
+     * @param n    le nombre de ponts
+     */
     public Pont(Ile ile1, Ile ile2, int n) {
         this.ile1 = ile1;
         this.ile2 = ile2;
@@ -27,18 +34,38 @@ public class Pont extends Component {
         super.paint(g);
     }
 
+    /**
+     * Modifie le nombre de ponts
+     *
+     * @param n le nouveau nombre de ponts
+     */
     public void setN(int n) {
         this.n = n;
     }
 
+    /**
+     * Récupérer l'ile 1
+     *
+     * @return l'ile 1
+     */
     public Ile getIle1() {
         return ile1;
     }
 
+    /**
+     * Récupérer l'ile 2
+     *
+     * @return l'ile 2
+     */
     public Ile getIle2() {
         return ile2;
     }
 
+    /**
+     * Récupérer le nombre de ponts
+     *
+     * @return le nombre de ponts
+     */
     public int getN() {
         return n;
     }

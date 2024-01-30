@@ -39,4 +39,22 @@ public class Ile extends Component {
         g.drawString(String.valueOf(nbPont), x + 8, y + 14);
         super.paint(g);
     }
+
+    /**
+     * Récupérer le nombre de ponts de l'ile
+     *
+     * @return le nombre de ponts de l'ile
+     */
+    public int getNbPont() {
+        return nbPont;
+    }
+
+    @Override
+    public String toString() {
+        return "Ile{" +
+                "x=" + getX() +
+                ", y=" + getY() +
+                ", nbPont=" + nbPont +
+                '}';
+    }
 }
