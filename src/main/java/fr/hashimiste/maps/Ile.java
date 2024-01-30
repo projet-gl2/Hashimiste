@@ -13,6 +13,9 @@ public class Ile extends Component {
      * @param nbPont le nombre de ponts que l'ile doit avoir
      */
     public Ile(int x, int y, int nbPont) {
+        if (nbPont <= 0) {
+            throw new IllegalArgumentException("Le nombre de ponts ne peut pas être négatif ou égal à 0");
+        }
         setLocation(x, y);
         setSize(20, 20);
         this.nbPont = nbPont;
