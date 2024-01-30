@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PontTest {
+    /**
+     * Ce test vérifie la fonctionnalité de création d'un pont entre deux îles.
+     */
     @Test
     public void shouldCreateBridgeWithValidParameters() {
         Ile ile1 = new Ile(5, 10, 3);
@@ -18,6 +21,9 @@ class PontTest {
         assertEquals(2, pont.getN());
     }
 
+    /**
+     * Ce test vérifie que l'exception IllegalArgumentException est bien levée lorsque l'on crée un pont avec un nombre de ponts négatif.
+     */
     @Test
     public void shouldThrowExceptionWhenCreatingBridgeWithNegativeBridges() {
         Ile ile1 = new Ile(5, 10, 3);
@@ -26,6 +32,9 @@ class PontTest {
         assertThrows(IllegalArgumentException.class, () -> new Pont(ile1, ile2, -1));
     }
 
+    /**
+     * Ce test vérifie que l'exception IllegalArgumentException est bien levée lorsque l'on crée un pont avec une île nulle.
+     */
     @Test
     public void shouldThrowExceptionWhenCreatingBridgeWithNullIslands() {
         Ile ile1 = new Ile(5, 10, 3);
@@ -35,6 +44,9 @@ class PontTest {
         assertThrows(IllegalArgumentException.class, () -> new Pont(null, null, 2));
     }
 
+    /**
+     * Ce test vérifie que l'exception IllegalArgumentException est bien levée lorsque l'on crée un pont avec les mêmes îles.
+     */
     @Test
     public void shouldThrowExceptionWhenCreatingBridgeWithSameIslands() {
         Ile ile1 = new Ile(5, 10, 3);
@@ -42,6 +54,9 @@ class PontTest {
         assertThrows(IllegalArgumentException.class, () -> new Pont(ile1, ile1, 2));
     }
 
+    /**
+     * Ce test vérifie que la représentation textuelle d'un pont est correcte.
+     */
     @Test
     public void shouldReturnCorrectToString() {
         Ile ile1 = new Ile(5, 10, 3);
@@ -51,6 +66,9 @@ class PontTest {
         assertEquals("Pont{ile1=" + ile1 + ", ile2=" + ile2 + ", n=2}", pont.toString());
     }
 
+    /**
+     * Ce test vérifie que le nombre de ponts est bien mis à jour.
+     */
     @Test
     public void shouldUpdateNumberOfBridges() {
         Ile ile1 = new Ile(5, 10, 3);
