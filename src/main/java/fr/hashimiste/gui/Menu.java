@@ -4,31 +4,35 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class Menu extends JFrame implements ActionListener {
-    private JPanel jp = new JPanel();
-    private JPanel jp2 = new JPanel();
-    private JButton ButAventure = new JButton("Aventure");
-    private JButton ButTutoriel = new JButton("Tutoriel");
-    private JButton ButModeLibre = new JButton("Mode Libre");
-    private JButton ButMultijoueur = new JButton("Multijoueur");
-    private JButton ButTechnique = new JButton("Technique");
-    private JButton ButParametre = new JButton("Parametres");
-    private JButton ButProfils = new JButton("Profils");
-    private JLabel lblSomeText = new JLabel("Hashimiste", SwingConstants.CENTER);
+    private final JPanel jp = new JPanel();
+    private final JPanel jp2 = new JPanel();
+    private final JButton ButAventure = new JButton("Aventure");
+    private final JButton ButTutoriel = new JButton("Tutoriel");
+    private final JButton ButModeLibre = new JButton("Mode Libre");
+    private final JButton ButMultijoueur = new JButton("Multijoueur");
+    private final JButton ButTechnique = new JButton("Technique");
+    private final JButton ButParametre = new JButton("Parametres");
+    private final JButton ButProfils = new JButton("Profils");
+    private final JLabel lblSomeText = new JLabel("Hashimiste", SwingConstants.CENTER);
     // taille de la fenêtre minimum et maximum
-    private int tailleMinX = 500;
-    private int tailleMinY = 300;
-    private int tailleMaxX = 1920;
-    private int tailleMaxY = 1080;
+    private final int tailleMinX = 500;
+    private final int tailleMinY = 300;
+    private final int taillePrefX = 550;
+    private final int taillePrefY = 350;
+    private final int tailleMaxX = 1920;
+    private final int tailleMaxY = 1080;
 
     public Menu() {
+
+        // Titre de la fenêtre
         this.setTitle("Hashimiste");
-        this.setIconImages(getIconImages());
+        this.setIconImage(new ImageIcon("src/main/resources/images/iconTransparent.png").getImage());
         this.setSize(tailleMinX, tailleMinY);
 
         // Minimum size pour la fenêtre
         this.setMinimumSize(new java.awt.Dimension(tailleMinX, tailleMinY));
         // Preferred size pour la fenêtre
-        this.setPreferredSize(new java.awt.Dimension(tailleMinX, tailleMinY));
+        this.setPreferredSize(new java.awt.Dimension(taillePrefX, taillePrefY));
         // Taille maximum pour la fenêtre
         this.setMaximumSize(new java.awt.Dimension(tailleMaxX, tailleMaxY));
 
@@ -50,14 +54,14 @@ public class Menu extends JFrame implements ActionListener {
         ButProfils.addActionListener((e) -> pageProfils());
 
         // Minimum size pour les boutons et texte ( relative à la taille de la fenêtre ( calcule de la taille de la fenêtre / 5 ) )
-        lblSomeText.setPreferredSize(new java.awt.Dimension(50, 20));
-        ButAventure.setPreferredSize(new java.awt.Dimension(50, 20));
-        ButTutoriel.setPreferredSize(new java.awt.Dimension(50, 20));
-        ButModeLibre.setPreferredSize(new java.awt.Dimension(50, 20));
-        ButMultijoueur.setPreferredSize(new java.awt.Dimension(50, 20));
-        ButTechnique.setPreferredSize(new java.awt.Dimension(50, 20));
-        ButParametre.setPreferredSize(new java.awt.Dimension(50, 20));
-        ButProfils.setPreferredSize(new java.awt.Dimension(50, 20));
+        lblSomeText.setMinimumSize(new java.awt.Dimension(50, 20));
+        ButAventure.setMinimumSize(new java.awt.Dimension(50, 20));
+        ButTutoriel.setMinimumSize(new java.awt.Dimension(50, 20));
+        ButModeLibre.setMinimumSize(new java.awt.Dimension(50, 20));
+        ButMultijoueur.setMinimumSize(new java.awt.Dimension(50, 20));
+        ButTechnique.setMinimumSize(new java.awt.Dimension(50, 20));
+        ButParametre.setMinimumSize(new java.awt.Dimension(50, 20));
+        ButProfils.setMinimumSize(new java.awt.Dimension(50, 20));
 
 
         // Prefered size pour les boutons et texte ( relative à la taille de la fenêtre ( calcule de la taille de la fenêtre / 5 ) )
@@ -90,7 +94,97 @@ public class Menu extends JFrame implements ActionListener {
         ButMultijoueur.setAlignmentX(JButton.CENTER_ALIGNMENT);
         ButTechnique.setAlignmentX(JButton.CENTER_ALIGNMENT);
 
+        // Couleur des boutons en utilisant l'exadecimal A09EBC
+        ButAventure.setBackground(new java.awt.Color(160, 158, 188));
+        ButTutoriel.setBackground(new java.awt.Color(160, 158, 188));
+        ButModeLibre.setBackground(new java.awt.Color(160, 158, 188));
+        ButMultijoueur.setBackground(new java.awt.Color(197, 179, 179));
+        ButTechnique.setBackground(new java.awt.Color(160, 158, 188));
+        ButParametre.setBackground(new java.awt.Color(160, 158, 188));
+        ButProfils.setBackground(new java.awt.Color(160, 158, 188));
 
+        // Couleur du text des boutons en utilisant l'exadecimal FBFAF2
+        ButAventure.setForeground(new java.awt.Color(251, 250, 242));
+        ButTutoriel.setForeground(new java.awt.Color(251, 250, 242));
+        ButModeLibre.setForeground(new java.awt.Color(251, 250, 242));
+        ButMultijoueur.setForeground(new java.awt.Color(251, 250, 242));
+        ButTechnique.setForeground(new java.awt.Color(251, 250, 242));
+        ButParametre.setForeground(new java.awt.Color(251, 250, 242));
+        ButProfils.setForeground(new java.awt.Color(251, 250, 242));
+
+        // Changer la couleur du bouton quand on passe la souris dessus
+        ButAventure.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ButAventure.setBackground(new java.awt.Color(251, 250, 242));
+                ButAventure.setForeground(new java.awt.Color(160, 158, 188));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ButAventure.setBackground(new java.awt.Color(160, 158, 188));
+                ButAventure.setForeground(new java.awt.Color(251, 250, 242));
+            }
+            
+        });
+
+        ButTutoriel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ButTutoriel.setBackground(new java.awt.Color(251, 250, 242));
+                ButTutoriel.setForeground(new java.awt.Color(160, 158, 188));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ButTutoriel.setBackground(new java.awt.Color(160, 158, 188));
+                ButTutoriel.setForeground(new java.awt.Color(251, 250, 242));
+            }
+        });
+
+        ButModeLibre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ButModeLibre.setBackground(new java.awt.Color(251, 250, 242));
+                ButModeLibre.setForeground(new java.awt.Color(160, 158, 188));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ButModeLibre.setBackground(new java.awt.Color(160, 158, 188));
+                ButModeLibre.setForeground(new java.awt.Color(251, 250, 242));
+            }
+        });
+
+        ButTechnique.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ButTechnique.setBackground(new java.awt.Color(251, 250, 242));
+                ButTechnique.setForeground(new java.awt.Color(160, 158, 188));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ButTechnique.setBackground(new java.awt.Color(160, 158, 188));
+                ButTechnique.setForeground(new java.awt.Color(251, 250, 242));
+            }
+        });
+
+        ButParametre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ButParametre.setBackground(new java.awt.Color(251, 250, 242));
+                ButParametre.setForeground(new java.awt.Color(160, 158, 188));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ButParametre.setBackground(new java.awt.Color(160, 158, 188));
+                ButParametre.setForeground(new java.awt.Color(251, 250, 242));
+            }
+        });
+
+        ButProfils.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ButProfils.setBackground(new java.awt.Color(251, 250, 242));
+                ButProfils.setForeground(new java.awt.Color(160, 158, 188));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ButProfils.setBackground(new java.awt.Color(160, 158, 188));
+                ButProfils.setForeground(new java.awt.Color(251, 250, 242));
+            }
+        });
 
         jp.add(lblSomeText);
         jp.add(Box.createVerticalStrut(10));
@@ -100,6 +194,8 @@ public class Menu extends JFrame implements ActionListener {
         jp.add(Box.createVerticalStrut(10));
         jp.add(ButModeLibre);
         jp.add(Box.createVerticalStrut(10));
+        // Bouton multijoueur désactivé
+        ButMultijoueur.setEnabled(false);
         jp.add(ButMultijoueur);
         jp.add(Box.createVerticalStrut(10));
         jp.add(ButTechnique);
@@ -116,8 +212,9 @@ public class Menu extends JFrame implements ActionListener {
         jp2.add(ButProfils);
         jp.add(jp2);
 
+
+        // Gestionnaire d'événements pour le redimensionnement si on veut le réactiver pour la fenêtre
         /*
-        // Gestionnaire d'événements pour le redimensionnement si on veut le réactiver
         this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
@@ -155,7 +252,8 @@ public class Menu extends JFrame implements ActionListener {
 
             }
         });
-        */
+         */
+
 
 
         // La taille de la fenêtre s'adapte à la taille des éléments
@@ -165,31 +263,38 @@ public class Menu extends JFrame implements ActionListener {
     }
 
     public void pageAventure() {
-
+        this.dispose();
+        // Appel de la page Aventure
     }
 
     public void pageTutoriel() {
-
+        this.dispose();
+        // Appel de la page Tutoriel
     }
 
     public void pageModeLibre() {
-
+        this.dispose();
+        // Appel de la page Mode Libre
     }
 
     public void pageMultijoueur() {
-
+        this.dispose();
+        // Appel de la page Multijoueur
     }
 
     public void pageTechnique() {
-
+        this.dispose();
+        // Appel de la page Technique
     }
 
     public void pageParametre() {
-
+        this.dispose();
+        // Appel de la page Paramètres
     }
 
     public void pageProfils() {
-
+        this.dispose();
+        // Appel de la page Profils
     }
 
     @Override
