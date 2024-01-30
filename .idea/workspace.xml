@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="encore besoin de changer l'accès aux enum">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Ile.java" afterDir="false" />
+    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="accès énum + ajout technique de base 1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Grille.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grille.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Ile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Technique.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Technique.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,6 +71,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "damien",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/DAMIEN/Desktop/Administratif/Cours/Licence Info/L3/GL2/Hashimiste",
     "node.js.detected.package.eslint": "true",
@@ -126,7 +127,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706526979073</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="accès énum + ajout technique de base 1">
+      <option name="closed" value="true" />
+      <created>1706604124411</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1706604124411</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,6 +168,7 @@
     <MESSAGE value="base de l'algorithme pour trouver les indices" />
     <MESSAGE value="organisation + type enum pour les techniques + technique de depart" />
     <MESSAGE value="encore besoin de changer l'accès aux enum" />
-    <option name="LAST_COMMIT_MESSAGE" value="encore besoin de changer l'accès aux enum" />
+    <MESSAGE value="accès énum + ajout technique de base 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="accès énum + ajout technique de base 1" />
   </component>
 </project>

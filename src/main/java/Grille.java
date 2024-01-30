@@ -1,6 +1,15 @@
 public class Grille {
 
-    int c,l; //nb colonnes et nb lignes
+    private int c; //nb colonnes
+    private int l; //nb lignes
+
+    public int getC(){
+        return c;
+    }
+
+    public int getL(){
+        return l;
+    }
 
     /**
      * Renvoie l'île située à l'emplacement (i,j). Renvoie null s'il n'y a pas d'île à cet endroit.
@@ -23,10 +32,10 @@ public class Grille {
 
         Ile aideIle = null; //l'île sur laquelle on peut avancer à l'aide des techniques
 
-        for(int i;i<this.c;i++){
-            for(int j;j<this.l;j++){
+        for(int i=0;i<this.c;i++){
+            for(int j=0;j<this.l;j++){
                 if(this.getIle(i,j) != null) {
-                    for (int fInd; fInd<fIndMin; fInd++){
+                    for (int fInd=0; fInd<fIndMin; fInd++){
                         if(lTech[fInd].getFonction().apply(this.getIle(i, j))){ //si la technique s'applique à l'île
                             aideIle = this.getIle(i,j);
                             fIndMin = fInd; //on ne vérifie que les techniques de plus bas niveau que celles trouvées

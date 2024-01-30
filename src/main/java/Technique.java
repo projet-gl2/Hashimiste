@@ -8,7 +8,7 @@ public enum Technique {
     TECH_DEP_1("Si une île a un chiffre pair et son nombre de voisins correspond à n/2 alors elle est reliée 2 fois à chacun de ses voisins"
             , o -> {
 
-        if(o.complete) return false; //si l'île est déjà complète, cette technique est inutile.
+        if(o.complete()) return false; //si l'île est déjà complète, cette technique est inutile.
 
         int n = o.getN();
         if(n == 8) return true;
@@ -35,7 +35,7 @@ public enum Technique {
     TECH_DEP_2("Si une île a un chiffre pair et son nombre de voisins correspond à n/2 alors elle est reliée 2 fois à chacun de ses voisins"
                        , o -> {
 
-        if(o.complete) return false; //si l'île est déjà complète, cette technique est inutile.
+        if(o.complete()) return false; //si l'île est déjà complète, cette technique est inutile.
 
         int n = o.getN();
         int nbV = o.nbVoisin(); //fonction qui calcule le nombre de voisin possible d'une île
@@ -48,22 +48,22 @@ public enum Technique {
             "exactement ce nombre de voisins alors elle est obligatoirement relié au moins une fois à\n" +
             "chacun de ses voisins"
             , o -> {
-        if(o.complete) return false;
+        if(o.complete()) return false;
 
         int n = o.getN();
         int nbV = o.nbVoisin();
-        int nbL = o.nbLien();
-        if(n == 7 && nbL < 4) return true;
-        if(n == 5 && nbV < 4 && nbL < 3) return true;
-        if(n == 3 && nbV < 3 && nbL < 2) return true;
-        if(n == 1 && nbV < 2 && nbL < 1) return true;
+        int nbP = o.nbPont();
+        if(n == 7 && nbP < 4) return true;
+        if(n == 5 && nbV < 4 && nbP < 3) return true;
+        if(n == 3 && nbV < 3 && nbP < 2) return true;
+        if(n == 1 && nbV < 2 && nbP < 1) return true;
         return false;
     });
 
     private final String description;
-    private final Function<Object, Boolean> fonction;
+    private final Function<Ile, Boolean> fonction;
 
-    Technique(String description, Function<Object, Boolean> fonction) {
+    Technique(String description, Function<Ile, Boolean> fonction) {
         this.description = description;
         this.fonction = fonction;
     }
@@ -72,7 +72,7 @@ public enum Technique {
         return description;
     }
 
-    public Function<Object, Boolean> getFonction() {
+    public Function<Ile, Boolean> getFonction() {
         return fonction;
     }
 }
