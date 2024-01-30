@@ -6,20 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Pont {
-    public static void main(String[] args) {
-        if (args.length != 1) {
-            System.out.println("Nombre d'argument incorrect : 1 argument attendu");
-            System.out.println("Usage : java SaveMap \"n\"");
-            System.err.println("Nombre d'argument incorrect");
-        }
-        String bddHashi = "base.db";
-
-        Integer n = Integer.valueOf(args[0]);
-
+    public String bddHashi = "base.db";
+    public void save(int n) {
         try {
-            Connection connection = DriverManager.getConnection(bddHashi);
-
-            //String select_idDep = "";
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:"+bddHashi);
 
             String insertQuery = "INSERT INTO pont (n) VALUES (?)";
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
@@ -30,6 +21,8 @@ public class Pont {
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 }
