@@ -11,10 +11,10 @@ sql/        @projet-gl2/sql
 gui/        @projet-gl2/gui
 
 # Gui menu owner
-gui/menu/   @projet-gl2/gui/menu
+gui/menu/   @projet-gl2/menu
 
 # Gui game owner
-gui/game/   @projet-gl2/gui/game
+gui/game/   @projet-gl2/jeu
 
 
 # Technique owner
