@@ -6,19 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Map {
-    public static void main(String[] args) {
-        if (args.length != 2) {
-            System.out.println("Nombre d'argument incorrect : 2 arguments attendus");
-            System.out.println("Usage : java SaveMap \"nom\" \"difficulte\"");
-            System.err.println("Nombre d'argument incorrect");
-        }
-        String bddHashi = "base.db";
-
-        String nom = args[0];
-        Integer diff = Integer.valueOf(args[1]);
-
+    public String bddHashi = "base.db";
+    public void save(String nom, int diff) {
         try {
-            Connection connection = DriverManager.getConnection(bddHashi);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:"+bddHashi);
 
             String insertQuery = "INSERT INTO map (nom, difficulte) VALUES (?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
@@ -30,6 +22,8 @@ public class Map {
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 }
