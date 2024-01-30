@@ -181,7 +181,8 @@ public class Menu extends JFrame implements ActionListener {
     }
 
     public void pageTechnique() {
-
+        MenuTechnique t = new MenuTechnique();
+        this.dispose();
     }
 
     public void pageParametre() {
