@@ -7,18 +7,11 @@ import java.sql.SQLException;
 import java.util.Date;
 
 public class Historique {
-    public static void main(String[] args) {
-        if (args.length != 1) {
-            System.out.println("Nombre d'argument incorrect : 1 argument attendu");
-            System.out.println("Usage : java SaveMap \"etat\"");
-            System.err.println("Nombre d'argument incorrect");
-        }
-        String bddHashi = "base.db";
-
-        Integer etat = Integer.valueOf(args[0]);
-
+    public String bddHashi = "base.db";
+    public void save(int etat) {
         try {
-            Connection connection = DriverManager.getConnection(bddHashi);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:"+bddHashi);
 
             String insertQuery = "INSERT INTO historique (date_h, etat) VALUES (?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
@@ -30,6 +23,8 @@ public class Historique {
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 }
