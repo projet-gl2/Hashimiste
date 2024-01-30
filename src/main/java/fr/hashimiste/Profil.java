@@ -6,18 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Profil {
-    public static void main(String[] args) {
-        if (args.length != 1) {
-            System.out.println("Nombre d'argument incorrect : 1 argument attendu");
-            System.out.println("Usage : java SaveProfil \"nom\"");
-            System.err.println("Nombre d'argument incorrect");
-        }
-        String bddHashi = "base.db";
-
-        String nom = args[0];
-
+    public String bddHashi = "base.db";
+    public void save(String nom) {
         try {
-            Connection connection = DriverManager.getConnection(bddHashi);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:"+bddHashi);
 
             String insertQuery = "INSERT INTO map (nom) VALUES (?)";
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
@@ -28,6 +21,8 @@ public class Profil {
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 }
