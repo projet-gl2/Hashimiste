@@ -3,8 +3,6 @@ package fr.hashimiste.maps;
 import java.awt.*;
 
 public class Ile extends Component {
-    private final int x;
-    private final int y;
     private final int nbPont;
 
     /**
@@ -15,8 +13,8 @@ public class Ile extends Component {
      * @param nbPont le nombre de ponts que l'ile doit avoir
      */
     public Ile(int x, int y, int nbPont) {
-        this.x = x;
-        this.y = y;
+        setLocation(x, y);
+        setSize(20, 20);
         this.nbPont = nbPont;
     }
 
@@ -34,9 +32,8 @@ public class Ile extends Component {
     @Override
     public void paint(Graphics g) {
         g.setColor(Color.BLACK);
-        g.fillOval(x, y, 20, 20);
-        g.setColor(Color.WHITE);
-        g.drawString(String.valueOf(nbPont), x + 8, y + 14);
+        g.drawOval(getX(), getY(), getWidth(), getHeight());
+        g.drawString(String.valueOf(nbPont), getX() + 8, getY() + 14);
         super.paint(g);
     }
 
