@@ -5,27 +5,25 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class SaveIle {
+public class Pont {
     public static void main(String[] args) {
-        if (args.length != 3) {
-            System.out.println("Nombre d'argument incorrect : 3 arguments attendus");
-            System.out.println("Usage : java SaveIle \"x\" \"y\" \"n\"");
+        if (args.length != 1) {
+            System.out.println("Nombre d'argument incorrect : 1 argument attendu");
+            System.out.println("Usage : java SaveMap \"n\"");
             System.err.println("Nombre d'argument incorrect");
         }
         String bddHashi = "base.db";
 
-        Integer x = Integer.valueOf(args[0]);
-        Integer y = Integer.valueOf(args[1]);
-        Integer n = Integer.valueOf(args[2]);
+        Integer n = Integer.valueOf(args[0]);
 
         try {
             Connection connection = DriverManager.getConnection(bddHashi);
 
-            String insertQuery = "INSERT INTO ile (x, y, n) VALUES (?, ?, ?)";
+            //String select_idDep = "";
+
+            String insertQuery = "INSERT INTO pont (n) VALUES (?)";
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
-            preparedStatement.setInt(1, x);
-            preparedStatement.setInt(2, y);
-            preparedStatement.setInt(3, n);
+            preparedStatement.setInt(1, n);
             preparedStatement.executeUpdate();
 
             preparedStatement.close();

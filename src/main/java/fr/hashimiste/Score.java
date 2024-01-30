@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class SaveScore {
+public class Score {
     public static void main(String[] args) {
         String bddHashi = "base.db";
 

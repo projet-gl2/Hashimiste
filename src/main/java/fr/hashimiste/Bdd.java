@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class bdd {
+public class Bdd {
     public static void main(String[] args) {
         String bddHashi = "base.db";
 
@@ -42,13 +42,13 @@ public class bdd {
 
             // Exécution des create
             connect_map.execute();
-            connect_save.executeQuery();
-            connect_profil.executeQuery();
-            connect_statistique.executeQuery();
-            connect_score.executeQuery();
-            connect_ile.executeQuery();
-            connect_pont.executeQuery();
-            connect_historique.executeQuery();
+            connect_save.execute();
+            connect_profil.execute();
+            connect_statistique.execute();
+            connect_score.execute();
+            connect_ile.execute();
+            connect_pont.execute();
+            connect_historique.execute();
 
             // Fermeture des connexion
             connect_map.close();
