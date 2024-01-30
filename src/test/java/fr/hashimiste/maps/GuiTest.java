@@ -5,9 +5,9 @@ import java.awt.*;
 
 public class GuiTest {
     public static void main(String[] args) {
-        Ile ile1 = new Ile(100, 100, 3);
-        Ile ile2 = new Ile(200, 100, 2);
-        Ile ile3 = new Ile(100, 200, 1);
+        Ile ile1 = new Ile(null, 100, 100, 3);
+        Ile ile2 = new Ile(null, 200, 100, 2);
+        Ile ile3 = new Ile(null, 100, 200, 1);
 
         Pont pont = ile1.creerPont(ile2, 1);
         Pont pont2 = ile1.creerPont(ile3, 1);
