@@ -1,9 +1,9 @@
 public class Ile {
 
-    private int n;
-    private int x;
-    private int y;
-    private Grille grille;
+    private int n; //valeur de l'île
+    private int x; //coordonée en ligne
+    private int y; //coordonée en colonnes
+    private Grille grille; //grille dans laquelle se trouve l'île
 
     public int getN() {
         return n;

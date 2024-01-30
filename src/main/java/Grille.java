@@ -34,7 +34,7 @@ public class Grille {
 
         for(int i=0;i<this.c;i++){
             for(int j=0;j<this.l;j++){
-                if(this.getIle(i,j) != null) {
+                if(this.getIle(i,j) != null && !(this.getIle(i,j).complete())) { //si l'île n'est pas complète
                     for (int fInd=0; fInd<fIndMin; fInd++){
                         if(lTech[fInd].getFonction().apply(this.getIle(i, j))){ //si la technique s'applique à l'île
                             aideIle = this.getIle(i,j);

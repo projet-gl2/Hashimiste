@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="ajout squellette de la classe Ile">
+    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="ajout technique complétion + technique de base 3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Ile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Technique.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Technique.java" afterDir="false" />
@@ -142,7 +142,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706605031760</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="ajout technique complétion + technique de base 3">
+      <option name="closed" value="true" />
+      <created>1706606655124</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1706606655124</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -177,6 +185,7 @@
     <MESSAGE value="encore besoin de changer l'accès aux enum" />
     <MESSAGE value="accès énum + ajout technique de base 1" />
     <MESSAGE value="ajout squellette de la classe Ile" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajout squellette de la classe Ile" />
+    <MESSAGE value="ajout technique complétion + technique de base 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajout technique complétion + technique de base 3" />
   </component>
 </project>
