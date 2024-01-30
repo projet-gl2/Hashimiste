@@ -47,6 +47,23 @@ public class Ile extends Component {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ile ile = (Ile) o;
+        return getNbPont() == ile.getNbPont() && getX() == ile.getX() && getY() == ile.getY();
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + getX();
+        hash = 31 * hash + getY();
+        hash = 31 * hash + getNbPont();
+        return hash;
+    }
+
+    @Override
     public String toString() {
         return "Ile{" +
                 "x=" + getX() +
