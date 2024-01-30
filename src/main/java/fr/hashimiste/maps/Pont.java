@@ -13,6 +13,9 @@ public class Pont extends Component {
      * @param ile1 l'ile 1
      * @param ile2 l'ile 2
      * @param n    le nombre de ponts
+     * @throws IllegalArgumentException si le nombre de ponts est négatif,
+     *                                  si une des iles est nulle,
+     *                                  si les iles sont les mêmes
      */
     public Pont(Ile ile1, Ile ile2, int n) {
         if (n < 0) {

@@ -11,6 +11,7 @@ public class Ile extends Component {
      * @param x      l'abscisse de l'ile
      * @param y      l'ordonnée de l'ile
      * @param nbPont le nombre de ponts que l'ile doit avoir
+     * @throws IllegalArgumentException si le nombre de ponts est négatif ou égal à 0
      */
     public Ile(int x, int y, int nbPont) {
         if (nbPont <= 0) {
