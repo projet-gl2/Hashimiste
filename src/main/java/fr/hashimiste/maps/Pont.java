@@ -30,6 +30,8 @@ public class Pont extends Component {
         this.ile1 = ile1;
         this.ile2 = ile2;
         this.n = n;
+        ile1.addPont(this);
+        ile2.addPont(this);
     }
 
     @Override

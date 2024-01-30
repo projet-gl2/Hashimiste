@@ -1,22 +1,29 @@
 package fr.hashimiste.maps;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 public class Ile extends Component {
+    private final Grille grille;
     private final int nbPont;
+    private final List<Pont> pontsLiees = new ArrayList<>();
 
     /**
      * Créer une ile
      *
+     * @param grille la grille de l'ile
      * @param x      l'abscisse de l'ile
      * @param y      l'ordonnée de l'ile
      * @param nbPont le nombre de ponts que l'ile doit avoir
      * @throws IllegalArgumentException si le nombre de ponts est négatif ou égal à 0
      */
-    public Ile(int x, int y, int nbPont) {
+    public Ile(Grille grille, int x, int y, int nbPont) {
         if (nbPont <= 0) {
             throw new IllegalArgumentException("Le nombre de ponts ne peut pas être négatif ou égal à 0");
         }
+        this.grille = grille;
         setLocation(x, y);
         setSize(20, 20);
         this.nbPont = nbPont;
@@ -33,6 +40,15 @@ public class Ile extends Component {
         return new Pont(this, ile, n);
     }
 
+    /**
+     * Récupérer la grille de l'ile
+     *
+     * @return la grille de l'ile
+     */
+    public Grille getGrille() {
+        return grille;
+    }
+
     @Override
     public void paint(Graphics g) {
         g.setColor(Color.BLACK);
@@ -46,8 +62,36 @@ public class Ile extends Component {
      *
      * @return le nombre de ponts de l'ile
      */
-    public int getNbPont() {
+    public int getNbPontPossible() {
         return nbPont;
+    }
+
+    /**
+     * Récupérer le nombre de ponts liés à l'ile
+     *
+     * @return le nombre de ponts liés à l'ile
+     */
+    public int getNbPont() {
+        return pontsLiees.stream().mapToInt(Pont::getN).sum();
+    }
+
+    /**
+     * Vérifier si l'ile est complète
+     *
+     * @return true si l'ile est complète, false sinon
+     */
+    public boolean isComplete() {
+        return getNbPont() == getNbPontPossible();
+    }
+
+    /**
+     * Retourne le nombre de ponts liés à l'ile qui vérifient le filtre
+     *
+     * @param filtre le filtre à appliquer
+     * @return le nombre de ponts liés à l'ile qui vérifient le filtre
+     */
+    public int getNbPont(Predicate<Ile> filtre) {
+        return (int) pontsLiees.stream().filter(pont -> pont.getIle1() == this || pont.getIle2() == this).filter(pont -> filtre.test(pont.getIle1()) || filtre.test(pont.getIle2())).mapToInt(Pont::getN).sum();
     }
 
     @Override
@@ -55,7 +99,7 @@ public class Ile extends Component {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ile ile = (Ile) o;
-        return getNbPont() == ile.getNbPont() && getX() == ile.getX() && getY() == ile.getY();
+        return getNbPontPossible() == ile.getNbPontPossible() && getX() == ile.getX() && getY() == ile.getY();
     }
 
     @Override
@@ -63,7 +107,7 @@ public class Ile extends Component {
         int hash = 7;
         hash = 31 * hash + getX();
         hash = 31 * hash + getY();
-        hash = 31 * hash + getNbPont();
+        hash = 31 * hash + getNbPontPossible();
         return hash;
     }
 
@@ -74,5 +118,14 @@ public class Ile extends Component {
                 ", y=" + getY() +
                 ", nbPont=" + nbPont +
                 '}';
+    }
+
+    /**
+     * Ajoute un pont à l'ile
+     *
+     * @param pont le pont à ajouter
+     */
+    void addPont(Pont pont) {
+        pontsLiees.add(pont);
     }
 }
