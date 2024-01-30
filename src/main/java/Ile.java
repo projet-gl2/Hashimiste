@@ -39,10 +39,26 @@ public class Ile {
     }
 
     /**
+     * Compte le nombre de voisins de valeur "1" possibles pour l'île.
+     * @return nombre d'îles voisines de valeur "1".
+     */
+    int nbVoisinAvec1(){
+        return 0;
+    }
+
+    /**
      * Compte le nombre de ponts actuel de l'île.
      * @return nombre de ponts actuel.
      */
     int nbPont(){
+        return 0;
+    }
+
+    /**
+     * Compte le nombre de ponts max possibles de l'île par rapport à ses voisins.
+     * @return nombre de ponts max possible.
+     */
+    int nbPontPossible(){
         return 0;
     }
 }
