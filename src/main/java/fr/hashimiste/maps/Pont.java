@@ -23,7 +23,7 @@ public class Pont extends Component {
     @Override
     public void paint(Graphics g) {
         g.setColor(Color.BLACK);
-        boolean horizontal = ile1.getX() == ile2.getX() && ile1.getY() != ile2.getY();
+        boolean horizontal = ile1.getY() == ile2.getY();
         for (int i = 0; i < n; i++) {
             if (horizontal) {
                 g.drawLine(ile1.getX() + 20 + i * 20, ile1.getY(), ile2.getX() + 20 + i * 20, ile2.getY());
