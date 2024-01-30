@@ -4,30 +4,28 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Date;
 
 public class Score {
-    public static void main(String[] args) {
-        String bddHashi = "base.db";
-
-        if (args.length != 3) {
-            System.out.println("Nombre d'argument incorrect : 3 arguments attendus");
-            System.out.println("Usage : java SaveScore \"nomProfil\" \"nomMap\" \"score\"");
-            System.err.println("Nombre d'argument incorrect");
-        }
-
-        int score = Integer.valueOf(args[2]);
-
+    public String bddHashi = "base.db";
+    public void save(int id_p, int id_m, int score) {
         try {
-            Connection bdd = DriverManager.getConnection(bddHashi);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + bddHashi);
 
             String insertQuery = "INSERT INTO statistique (id_p, id_m, value) VALUES (?, ?, ?)";
-            PreparedStatement connect_stat = bdd.prepareStatement(insertQuery);
-            connect_stat.setString(1, "SELECT id_profil FROM profil where " + args[0] + ")");
-            connect_stat.setString(2, "(SELECT id_map FROM map where " + args[1] + ")");
-            connect_stat.setInt(3, score);
-            connect_stat.executeUpdate();
+            PreparedStatement connect_score = connection.prepareStatement(insertQuery);
+            connect_score.setString(1, "SELECT id_profil FROM profil where " + id_p + ")");
+            connect_score.setString(2, "(SELECT id_map FROM map where " + id_m + ")");
+            connect_score.setInt(3, score);
+            connect_score.executeUpdate();
+
+            connect_score.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 }
