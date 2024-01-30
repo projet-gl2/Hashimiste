@@ -84,4 +84,13 @@ public class Pont extends Component {
     public int getN() {
         return n;
     }
+
+    @Override
+    public String toString() {
+        return "Pont{" +
+                "ile1=" + ile1 +
+                ", ile2=" + ile2 +
+                ", n=" + n +
+                '}';
+    }
 }
