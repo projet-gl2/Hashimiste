@@ -6,20 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Ile {
-    public static void main(String[] args) {
-        if (args.length != 3) {
-            System.out.println("Nombre d'argument incorrect : 3 arguments attendus");
-            System.out.println("Usage : java SaveIle \"x\" \"y\" \"n\"");
-            System.err.println("Nombre d'argument incorrect");
-        }
-        String bddHashi = "base.db";
-
-        Integer x = Integer.valueOf(args[0]);
-        Integer y = Integer.valueOf(args[1]);
-        Integer n = Integer.valueOf(args[2]);
-
+    public String bddHashi = "base.db";
+    public void save(int x, int y, int n) {
         try {
-            Connection connection = DriverManager.getConnection(bddHashi);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:"+bddHashi);
 
             String insertQuery = "INSERT INTO ile (x, y, n) VALUES (?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
@@ -30,7 +21,7 @@ public class Ile {
 
             preparedStatement.close();
             connection.close();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
