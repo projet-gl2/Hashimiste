@@ -1,2 +1,9 @@
-package PACKAGE_NAME;public class ModeLibreGui {
+import fr.hashimiste.gui.modelibre.ModeLibre;
+
+public class ModeLibreGui {
+
+    public static void main(String[] args) {
+        new ModeLibre();
+    }
+
 }

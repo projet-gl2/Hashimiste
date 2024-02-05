@@ -1,7 +1,9 @@
-package fr.hashimiste.gui;
+package fr.hashimiste.gui.modelibre;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Random;
 
 public class PreviewComponent extends JComponent {
@@ -17,7 +19,7 @@ public class PreviewComponent extends JComponent {
     public PreviewComponent(Color color)
     {
         this.color = color;
-        //this.setMaximumSize(new Dimension(50,50));
+        this.setMinimumSize(new Dimension(50,50));
     }
 
     /**
@@ -35,5 +37,13 @@ public class PreviewComponent extends JComponent {
         int y = (size.height - d) / 2;
         g.setColor(this.color);
         g.fillRect(x,y,d,d);
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }
