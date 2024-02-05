@@ -56,6 +56,8 @@ public class Ile {
 
     /**
      * Compte le nombre de ponts max possibles de l'île par rapport à ses voisins.
+     * Par exemple, s'il il a trois voisins, affichant les nombres 4, 2 et 1,
+     * alors il est possible de faire 5 ponts au maximum. (deux pour 4 et 2, un pour 1)
      * @return nombre de ponts max possible.
      */
     int nbPontPossible(){

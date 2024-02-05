@@ -32,9 +32,9 @@ public class Grille {
 
         Ile aideIle = null; //l'île sur laquelle on peut avancer à l'aide des techniques
 
-        for(int i=0;i<this.c;i++){
-            for(int j=0;j<this.l;j++){
-                if(this.getIle(i,j) != null && !(this.getIle(i,j).complete())) { //si l'île n'est pas complète
+        for(int i=0;i<this.c;i++){ //parcours colonnes
+            for(int j=0;j<this.l;j++){ //parcours lignes
+                if(this.getIle(i,j) != null && !(this.getIle(i,j).complete())) { //si l'île existe et n'est pas complète
                     for (int fInd=0; fInd<fIndMin; fInd++){
                         if(lTech[fInd].getFonction().apply(this.getIle(i, j))){ //si la technique s'applique à l'île
                             aideIle = this.getIle(i,j);
