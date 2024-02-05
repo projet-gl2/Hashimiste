@@ -1,18 +1,33 @@
-package fr.hashimiste.gui;
+package fr.hashimiste.gui.modelibre;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Random;
 
 public class PreviewComponent extends JComponent {
 
     private Color color;
 
+    /**
+     *
+     *  Créer un composant de prévisualisation
+     *
+     * @param color     la couleur du composant
+     */
     public PreviewComponent(Color color)
     {
         this.color = color;
-        //this.setMaximumSize(new Dimension(50,50));
+        this.setMinimumSize(new Dimension(50,50));
     }
+
+    /**
+     *
+     *  Affiche le composant de prévisualisation
+     *
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -24,11 +39,11 @@ public class PreviewComponent extends JComponent {
         g.fillRect(x,y,d,d);
     }
 
-    /*@Override
-    public void paint(Graphics g) {
-        g.setColor(color);
-        g.fillRect(0, 0, this.getWidth(), this.getWidth());
-        super.paint(g);
+    public Color getColor() {
+        return color;
+    }
 
-    }*/
+    public void setColor(Color color) {
+        this.color = color;
+    }
 }
