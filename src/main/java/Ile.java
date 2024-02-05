@@ -63,4 +63,16 @@ public class Ile {
     int nbPontPossible(){
         return 0;
     }
+
+    /**
+     * Vérifie ce qu'il y a en face de l'île dans la direction donnée.
+     * @param d Direction à vérifier peut être NORD, EST, SUD ou OUEST
+     * @return -1 s'il n'y aucune île accessible,
+     * 0 s'il y a une île sans pont,
+     * 1 s'il y a une île reliée par un pont,
+     * 2 s'il y a une île réliée par deux ponts
+     */
+    int nbPontsDirection(Direction d){
+        return 0;
+    }
 }

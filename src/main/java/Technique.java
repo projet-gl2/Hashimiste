@@ -50,16 +50,32 @@ public enum Technique {
         return n == nbPoss;
     }),
     TECH_BAS_1("Technique 3",
-            " Si une île a un chiffre impair n elle a au minimum n%2+1 voisins. Si elle a " +
+            " Si une île a un chiffre impair n, elle a au minimum n%2+1 voisins. Si elle a " +
             "exactement ce nombre de voisins alors elle est obligatoirement relié au moins une fois à " +
             "chacun de ses voisins"
             , o -> {
         int n = o.getN();
         int nbV = o.nbVoisin();
         int nbP = o.nbPont();
-        if(n == 7 && nbP < 4) return true;
-        if(n == 5 && nbV == 3 && nbP < 3) return true;
-        if(n == 3 && nbV == 2 && nbP < 2) return true;
+
+        int i;
+        boolean verif = false; //prend la valeur true s'il y a un pont possible dans une direction
+
+        Direction[] lD = Direction.values();
+
+        if(n == 7 && nbP < 4) {
+            for(i=0;i<4;i++){
+                verif = (o.nbPontsDirection(lD[i]) == 0) || verif;
+            }
+        }
+        if(n == 5 && nbV == 3 && nbP < 3)
+            for(i=0;i<4;i++){
+                verif = (o.nbPontsDirection(lD[i]) == 0) || verif;
+            }
+        if(n == 3 && nbV == 2 && nbP < 2)
+            for(i=0;i<4;i++){
+                verif = (o.nbPontsDirection(lD[i]) == 0) || verif;
+            }
         return false;
     }),
     TECH_BAS_2("Technique 3.5",
