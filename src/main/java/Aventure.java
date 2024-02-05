@@ -14,7 +14,11 @@ public class Aventure {
     private int hauteurBouton;
 
     /**
-     *  Il faudra voir si le nombre de niveau est statique on pourra changer le constructeur afin de faire ça de manière statique
+     *  Méthode de création du mode aventure avec la liste des niveaux et le bouton de retour au menu
+     * @param nbBouton nombre de boutons pour les niveaux
+     * @param largeurBouton taille de la largeur du bouton
+     * @param hauteurBouton taille de la hauteur du bouton
+     *  Il faudra voir si le nombre de niveau est statique on pourra changer le constructeur afin de faire ça de manière statique de meme pour la taille des boutons
      **/
     public Aventure(int nbBouton, int largeurBouton, int hauteurBouton) {
 
@@ -22,9 +26,7 @@ public class Aventure {
         this.largeurBouton = largeurBouton;
         this.hauteurBouton = hauteurBouton;
 
-        /**
-         *  Titre de la frame
-         **/
+        // Titre de la frame
         frame = new Frame("Hashimiste");
         frame.setLayout(new GridBagLayout());
 
@@ -38,18 +40,12 @@ public class Aventure {
         for (int i = 0; i < nbBouton; i++) {
             boutons[i] = new Button(" " + i + " ");
             boutonsPanel.add(boutons[i]);
-            /**
-             *  Rajouter l'action pour lié les niveaux aux boutons
-             **/
+            // Rajouter l'action pour lié les niveaux aux boutons
         }
 
         menuButton = new Button("Menu"); // Création du bouton pour le menu
-        /**
-         Rajouter l'action pour créer le menu
-         **/
-        /**
-         * Rajouter l'action pour destroy cette fenetre
-         **/
+        // Rajouter l'action pour créer le menu
+        // Rajouter l'action pour destroy cette fenetre
 
         Panel menuPanel = new Panel();
         menuPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -63,18 +59,13 @@ public class Aventure {
         titrePanel.add(titre);
 
         gbc.gridx = 0;
-        /**
-         *  Titre
-         * */
+        //Titre
         gbc.gridy = 0;
         frame.add(titrePanel, gbc);
-        /**
-         *  Liste de Boutons
-         **/
+        //Liste de Boutons
         gbc.gridy = 1;
         frame.add(boutonsPanel, gbc);
-        /** Bouton Menu
-         **/
+        // Bouton Menu
         gbc.gridy = 2;
         frame.add(menuPanel, gbc);
 
@@ -92,6 +83,7 @@ public class Aventure {
 
     /**
      *  Le main ici sert seulement à tester le menu comme dit précédemment on pourra passer les valeurs en statique une fois que le nombre de niveau aura été définit
+     *  @param args Argument passé lors du démarrage
      **/
     public static void main(String[] args) {
         new Aventure(40, 60, 60);
