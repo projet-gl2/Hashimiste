@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+/**
+ * La classe Ile représente une île dans une grille (Grille).
+ * Elle contient des informations sur la grille à laquelle elle appartient, ses coordonnées et le nombre de ponts qu'elle doit avoir.
+ * Elle contient également une liste de ponts (Pont) qui lui sont liés.
+ * Elle fournit des méthodes pour créer un pont vers une autre île, récupérer des informations sur l'île et ses ponts, et vérifier si l'île est complète (c'est-à-dire si tous ses ponts ont été créés).
+ */
 public class Ile extends Component {
     private final Grille grille;
     private final int nbPont;

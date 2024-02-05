@@ -5,6 +5,11 @@ import fr.hashimiste.Difficulte;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * La classe Grille représente une grille dans un jeu ou une tâche.
+ * Elle contient des informations sur le niveau de difficulté de la grille, les îles (Ile) dans la grille et les ponts (Pont) dans la grille.
+ * Elle fournit des méthodes pour récupérer des informations sur la grille, ses îles et ses ponts.
+ */
 public class Grille {
     private final Difficulte difficulte;
     private final List<Ile> iles;

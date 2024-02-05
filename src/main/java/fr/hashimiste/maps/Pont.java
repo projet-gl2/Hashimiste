@@ -2,6 +2,11 @@ package fr.hashimiste.maps;
 
 import java.awt.*;
 
+/**
+ * La classe Pont représente un pont entre deux îles (Ile).
+ * Elle contient des informations sur les deux îles qu'elle relie et le nombre de ponts entre elles.
+ * Elle contient également des méthodes pour modifier le nombre de ponts et récupérer des informations sur les îles et le nombre de ponts.
+ */
 public class Pont extends Component {
     private final Ile ile1;
     private final Ile ile2;
