@@ -1,3 +1,6 @@
+/**
+ * La classe Jeu correspond au jeu lorsqu'on est face à l'écran de jeu avec les boutons ainsi que la grille, il y divers boutons (retour arrière, poser un checkpoint, aide, etc)
+ **/
 public class Jeu {
     ArrayList<Boutons> listeBoutons = new ArrayList<Boutons>();
     /* */ grille;
@@ -16,25 +19,41 @@ public class Jeu {
     }
 
     public void retourArriere(){
-        /* Si sauvegarde existante alors chargement sauvegarde (Bouton cliquable) */
+        /**
+         *  Si sauvegarde existante alors chargement sauvegarde (Bouton cliquable)
+         **/
 
-        /* Sinon ne rien faire (Bouton non cliquable) */
+        /**
+         *  Sinon ne rien faire (Bouton non cliquable)
+         **/
     }
 
     public void poserCheckpoint(){
-        /* Si sauvegarde existe alors on supprime l'ancienne */
+        /**
+         * Si sauvegarde existe alors on supprime l'ancienne
+         **/
 
-        /* On créer un nouveau checkpoint*/
+        /**
+         * On créer un nouveau checkpoint
+         **/
     }
 
     public void chargerCheckpoint(){
-        /* Si checkpoint existe alors on charge (Bouton cliquable)*/
-        /* Sinon checkpoint n'existe pas (Bouton non cliquable) */
+        /**
+         * Si checkpoint existe alors on charge (Bouton cliquable)
+         **/
+        /**
+         * Sinon checkpoint n'existe pas (Bouton non cliquable)
+         **/
     }
 
-    /* Méthode qui vérifie île par île si la grille est bonne*/
+    /**
+     * Méthode qui vérifie île par île si la grille est bonne
+     **/
     public void verifierGrille(){
-        /* Appel de la fonction de map */
+        /**
+         * Appel de la fonction de map
+         **/
 
     }
 
