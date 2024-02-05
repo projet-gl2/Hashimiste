@@ -13,17 +13,15 @@ import java.util.ArrayList;
  */
 
 public class MenuTechnique extends JFrame implements ActionListener{
-    JPanel jp = new JPanel();
-    JPanel jp2 = new JPanel();
-    DefaultListModel<String> dlm = new DefaultListModel<>();
-    JList<String> jl = new JList<>();
-    DefaultListModel<String> dlm2 = new DefaultListModel<>();
-    JList<String> jl2 = new JList<>();
-    JButton butMenu = new JButton("Menu");
+    private JPanel jp = new JPanel();
+    private JPanel jp2 = new JPanel();
+    private DefaultListModel<String> dlm = new DefaultListModel<>();
+    private JList<String> jl = new JList<>();
+    private JButton butMenu = new JButton("Menu");
 
-    JLabel description = new JLabel();
+    private JLabel description = new JLabel();
 
-    ArrayList<String> listDesc = new ArrayList<>();
+    private ArrayList<String> listDesc = new ArrayList<>();
 
     private int tailleMinX = 950;
     private int tailleMinY = 400;
@@ -73,9 +71,22 @@ public class MenuTechnique extends JFrame implements ActionListener{
         butMenu.setAlignmentX(JButton.LEFT_ALIGNMENT);
         description.setAlignmentX(JLabel.LEFT_ALIGNMENT);
 
-        description.setVerticalTextPosition(SwingConstants.NORTH);
-
+        butMenu.setBackground(new Color(160, 158, 188));
         description.setBackground(Color.WHITE);
+
+        butMenu.setForeground(new Color(251, 250, 242));
+
+        butMenu.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e){
+                butMenu.setBackground(new Color(251, 250, 242));
+                butMenu.setForeground(new Color(160, 158, 188));
+            }
+
+            public void mouseExited(MouseEvent e){
+                butMenu.setBackground(new Color(160, 158, 188));
+                butMenu.setForeground(new Color(251, 250, 242));
+            }
+        });
 
         jp.add(butMenu);
         //jp.add(Box.createVerticalStrut(10));
@@ -127,7 +138,7 @@ public class MenuTechnique extends JFrame implements ActionListener{
     }
 
     /**
-     * Méthode pour afficher la page du menu
+     * Méthode pour afficher la page du menu et détruire la page des techniques
      */
     public void pageMenu(){
         Menu m = new Menu();
