@@ -286,84 +286,81 @@ public class Menu extends JFrame implements ActionListener {
         });
 
         // Detecter quand on clique sur agrandir ou réduire
-        this.addWindowStateListener(new WindowStateListener() {
-            @Override
-            public void windowStateChanged(WindowEvent e) {
-                // Minimum size pour la fenêtre
-                setSize(Math.max(getWidth(), tailleMinX), Math.max(getHeight(), tailleMinY));
-                // Preferred size pour la fenêtre
-                setPreferredSize(new java.awt.Dimension(Math.max(getWidth(), tailleMinX), Math.max(getHeight(), tailleMinY)));
-                // Taille maximum pour la fenêtre
-                setMaximumSize(new java.awt.Dimension(Math.max(getWidth(), tailleMaxX), Math.max(getHeight(), tailleMaxY)));
+        this.addWindowStateListener(e -> {
+            // Minimum size pour la fenêtre
+            setSize(Math.max(getWidth(), tailleMinX), Math.max(getHeight(), tailleMinY));
+            // Preferred size pour la fenêtre
+            setPreferredSize(new java.awt.Dimension(Math.max(getWidth(), tailleMinX), Math.max(getHeight(), tailleMinY)));
+            // Taille maximum pour la fenêtre
+            setMaximumSize(new java.awt.Dimension(Math.max(getWidth(), tailleMaxX), Math.max(getHeight(), tailleMaxY)));
 
-                if(e.getNewState() == 0){
-                    // Taille maximum pour les boutons
-                    int width = (int) (getWidth() * coefWidth1);
-                    int height = (int) (getHeight() * coefHeight1);
+            if(e.getNewState() == 0){
+                // Taille maximum pour les boutons
+                int width = (int) (getWidth() * coefWidth1);
+                int height = (int) (getHeight() * coefHeight1);
 
-                    // Minimum size pour les boutons et texte ( relative à la taille de la fenêtre ( calcule de la taille de la fenêtre / 5 ) )
-                    lblSomeText.setMinimumSize(new java.awt.Dimension(width, height));
-                    ButAventure.setMinimumSize(new java.awt.Dimension(width, height));
-                    ButTutoriel.setMinimumSize(new java.awt.Dimension(width, height));
-                    ButModeLibre.setMinimumSize(new java.awt.Dimension(width, height));
-                    ButMultijoueur.setMinimumSize(new java.awt.Dimension(width, height));
-                    ButTechnique.setMinimumSize(new java.awt.Dimension(width, height));
-                    ButParametre.setMinimumSize(new java.awt.Dimension(width, height));
-                    ButProfils.setMinimumSize(new java.awt.Dimension(width, height));
+                // Minimum size pour les boutons et texte ( relative à la taille de la fenêtre ( calcule de la taille de la fenêtre / 5 ) )
+                lblSomeText.setMinimumSize(new java.awt.Dimension(width, height));
+                ButAventure.setMinimumSize(new java.awt.Dimension(width, height));
+                ButTutoriel.setMinimumSize(new java.awt.Dimension(width, height));
+                ButModeLibre.setMinimumSize(new java.awt.Dimension(width, height));
+                ButMultijoueur.setMinimumSize(new java.awt.Dimension(width, height));
+                ButTechnique.setMinimumSize(new java.awt.Dimension(width, height));
+                ButParametre.setMinimumSize(new java.awt.Dimension(width, height));
+                ButProfils.setMinimumSize(new java.awt.Dimension(width, height));
 
-                    // Prefered size pour les boutons et texte ( relative à la taille de la fenêtre ( calcule de la taille de la fenêtre / 5 ) )
-                    lblSomeText.setPreferredSize(new java.awt.Dimension(width, height));
-                    ButAventure.setPreferredSize(new java.awt.Dimension(width, height));
-                    ButTutoriel.setPreferredSize(new java.awt.Dimension(width, height));
-                    ButModeLibre.setPreferredSize(new java.awt.Dimension(width, height));
-                    ButMultijoueur.setPreferredSize(new java.awt.Dimension(width, height));
-                    ButTechnique.setPreferredSize(new java.awt.Dimension(width, height));
-                    ButParametre.setPreferredSize(new java.awt.Dimension(width, height));
-                    ButProfils.setPreferredSize(new java.awt.Dimension(width, height));
+                // Prefered size pour les boutons et texte ( relative à la taille de la fenêtre ( calcule de la taille de la fenêtre / 5 ) )
+                lblSomeText.setPreferredSize(new java.awt.Dimension(width, height));
+                ButAventure.setPreferredSize(new java.awt.Dimension(width, height));
+                ButTutoriel.setPreferredSize(new java.awt.Dimension(width, height));
+                ButModeLibre.setPreferredSize(new java.awt.Dimension(width, height));
+                ButMultijoueur.setPreferredSize(new java.awt.Dimension(width, height));
+                ButTechnique.setPreferredSize(new java.awt.Dimension(width, height));
+                ButParametre.setPreferredSize(new java.awt.Dimension(width, height));
+                ButProfils.setPreferredSize(new java.awt.Dimension(width, height));
 
-                    // Taille maximum pour les boutons
-                    lblSomeText.setMaximumSize(new java.awt.Dimension(width, height));
-                    ButAventure.setMaximumSize(new java.awt.Dimension(width, height));
-                    ButTutoriel.setMaximumSize(new java.awt.Dimension(width, height));
-                    ButModeLibre.setMaximumSize(new java.awt.Dimension(width, height));
-                    ButMultijoueur.setMaximumSize(new java.awt.Dimension(width, height));
-                    ButTechnique.setMaximumSize(new java.awt.Dimension(width, height));
-                    ButParametre.setMaximumSize(new java.awt.Dimension(width, height));
-                    ButProfils.setMaximumSize(new java.awt.Dimension(width, height));
+                // Taille maximum pour les boutons
+                lblSomeText.setMaximumSize(new java.awt.Dimension(width, height));
+                ButAventure.setMaximumSize(new java.awt.Dimension(width, height));
+                ButTutoriel.setMaximumSize(new java.awt.Dimension(width, height));
+                ButModeLibre.setMaximumSize(new java.awt.Dimension(width, height));
+                ButMultijoueur.setMaximumSize(new java.awt.Dimension(width, height));
+                ButTechnique.setMaximumSize(new java.awt.Dimension(width, height));
+                ButParametre.setMaximumSize(new java.awt.Dimension(width, height));
+                ButProfils.setMaximumSize(new java.awt.Dimension(width, height));
 
-                    // Taille de jp
-                    jp.setPreferredSize(new java.awt.Dimension(Math.max(getWidth(), tailleMaxX), Math.max(getHeight(), tailleMaxY)));
-                    jp2.setPreferredSize(new java.awt.Dimension(Math.max(getWidth (), tailleMaxX), Math.max(getHeight(), tailleMaxY)));
+                // Taille de jp
+                jp.setPreferredSize(new java.awt.Dimension(Math.max(getWidth(), tailleMaxX), Math.max(getHeight(), tailleMaxY)));
+                jp2.setPreferredSize(new java.awt.Dimension(Math.max(getWidth (), tailleMaxX), Math.max(getHeight(), tailleMaxY)));
 
-                }else{
-                    // Taille maximum pour les boutons
-                    int width = (int) (getWidth() * coefWidth2);
-                    int height = (int) (getHeight() * coefHeight2);
+            }else{
+                // Taille maximum pour les boutons
+                int width = (int) (getWidth() * coefWidth2);
+                int height = (int) (getHeight() * coefHeight2);
 
-                    // Minimum size pour les boutons et texte ( relative à la taille de la fenêtre ( calcule de la taille de la fenêtre / 5 ) )
-                    lblSomeText.setMinimumSize(new java.awt.Dimension(width, height));
-                    ButAventure.setMinimumSize(new java.awt.Dimension(width, height));
-                    ButTutoriel.setMinimumSize(new java.awt.Dimension(width, height));
-                    ButModeLibre.setMinimumSize(new java.awt.Dimension(width, height));
-                    ButMultijoueur.setMinimumSize(new java.awt.Dimension(width, height));
-                    ButTechnique.setMinimumSize(new java.awt.Dimension(width, height));
-                    ButParametre.setMinimumSize(new java.awt.Dimension(width, height));
-                    ButProfils.setMinimumSize(new java.awt.Dimension(width, height));
+                // Minimum size pour les boutons et texte ( relative à la taille de la fenêtre ( calcule de la taille de la fenêtre / 5 ) )
+                lblSomeText.setMinimumSize(new java.awt.Dimension(width, height));
+                ButAventure.setMinimumSize(new java.awt.Dimension(width, height));
+                ButTutoriel.setMinimumSize(new java.awt.Dimension(width, height));
+                ButModeLibre.setMinimumSize(new java.awt.Dimension(width, height));
+                ButMultijoueur.setMinimumSize(new java.awt.Dimension(width, height));
+                ButTechnique.setMinimumSize(new java.awt.Dimension(width, height));
+                ButParametre.setMinimumSize(new java.awt.Dimension(width, height));
+                ButProfils.setMinimumSize(new java.awt.Dimension(width, height));
 
-                    // Prefered size pour les boutons et texte ( relative à la taille de la fenêtre ( calcule de la taille de la fenêtre / 5 ) )
-                    lblSomeText.setPreferredSize(new java.awt.Dimension(width, height));
-                    ButAventure.setPreferredSize(new java.awt.Dimension(width, height));
-                    ButTutoriel.setPreferredSize(new java.awt.Dimension(width, height));
-                    ButModeLibre.setPreferredSize(new java.awt.Dimension(width, height));
-                    ButMultijoueur.setPreferredSize(new java.awt.Dimension(width, height));
-                    ButTechnique.setPreferredSize(new java.awt.Dimension(width, height));
-                    ButParametre.setPreferredSize(new java.awt.Dimension(width, height));
-                    ButProfils.setPreferredSize(new java.awt.Dimension(width, height));
+                // Prefered size pour les boutons et texte ( relative à la taille de la fenêtre ( calcule de la taille de la fenêtre / 5 ) )
+                lblSomeText.setPreferredSize(new java.awt.Dimension(width, height));
+                ButAventure.setPreferredSize(new java.awt.Dimension(width, height));
+                ButTutoriel.setPreferredSize(new java.awt.Dimension(width, height));
+                ButModeLibre.setPreferredSize(new java.awt.Dimension(width, height));
+                ButMultijoueur.setPreferredSize(new java.awt.Dimension(width, height));
+                ButTechnique.setPreferredSize(new java.awt.Dimension(width, height));
+                ButParametre.setPreferredSize(new java.awt.Dimension(width, height));
+                ButProfils.setPreferredSize(new java.awt.Dimension(width, height));
 
-                    // Taille de jp
-                    jp.setPreferredSize(new java.awt.Dimension(Math.max(getWidth(), tailleMinX), Math.max(getHeight(), tailleMinY)));
-                    jp2.setPreferredSize(new java.awt.Dimension(Math.max(getWidth(), tailleMaxX), Math.max(getHeight(), tailleMaxY)));
-                }
+                // Taille de jp
+                jp.setPreferredSize(new java.awt.Dimension(Math.max(getWidth(), tailleMinX), Math.max(getHeight(), tailleMinY)));
+                jp2.setPreferredSize(new java.awt.Dimension(Math.max(getWidth(), tailleMaxX), Math.max(getHeight(), tailleMaxY)));
             }
         });
 
@@ -375,7 +372,6 @@ public class Menu extends JFrame implements ActionListener {
 
     /**
      * Méthode pour changer de page pour la page Aventure
-     * @return void
      */
     public void pageAventure() {
         this.dispose();
@@ -408,7 +404,6 @@ public class Menu extends JFrame implements ActionListener {
 
     /**
      * Méthode pour changer de page pour la page Technique
-     * @return void
      */
     public void pageTechnique() {
         MenuTechnique t = new MenuTechnique();
@@ -417,7 +412,6 @@ public class Menu extends JFrame implements ActionListener {
 
     /**
      * Méthode pour changer de page pour la page Paramètres
-     * @return void
      */
     public void pageParametre() {
         this.dispose();
@@ -426,7 +420,6 @@ public class Menu extends JFrame implements ActionListener {
 
     /**
      * Méthode pour changer de page pour la page Profils
-     * @return void
      */
     public void pageProfils() {
         this.dispose();
@@ -436,7 +429,6 @@ public class Menu extends JFrame implements ActionListener {
     /**
      * Methode pour les actions des boutons
      * @param e ActionEvent pour les boutons
-     * @return void
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -445,8 +437,7 @@ public class Menu extends JFrame implements ActionListener {
 
     /**
      * Méthode main pour lancer l'application
-     * @param args
-     * @return void
+     * @param args Arguments du main
      */
     public static void main(String[] args) {
         Menu m = new Menu();
