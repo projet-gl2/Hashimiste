@@ -75,4 +75,13 @@ public class Ile {
     int nbPontsDirection(Direction d){
         return 0;
     }
+
+    /**
+     * Vérifie la valeur de l'île en face de l'île appelée dans la direction donnée.
+     * @param d Direction à vérifier peut être NORD, EST, SUD ou OUEST
+     * @return -1 s'il n'y aucune île accessible, la valeur de l'île en face sinon.
+     */
+    int valeurIleDirection(Direction d){
+        return 0;
+    }
 }

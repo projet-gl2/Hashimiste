@@ -100,7 +100,7 @@ public enum Technique {
         int n = o.getN();
         int nbV = o.nbVoisin();
         if(n == 1 || n == 2){
-            if(nbV == 1) return true;
+            return nbV == 1;
         }
         return false;
     }),
@@ -115,7 +115,14 @@ public enum Technique {
             "Si une île de valeur 6 possède un voisin de valeur 1, alors il possède au moins " +
                     "un pont avec chacun de ses autres voisins."
             , o -> {
-        return (o.getN() == 6 && o.nbVoisinAvec1() == 1);
+        boolean verif = false;
+        if (o.getN() == 6 && o.nbVoisinAvec1() == 1){
+            Direction[] lD = Direction.values();
+            for(int i=0; i<4; i++){
+                verif = verif || (o.valeurIleDirection(lD[i]) != 1 && o.nbPontsDirection(lD[i]) == 0);
+            }
+        }
+        return verif;
     }),
     TECH_ISO_1("Technique 7",
             "Si une île de valeur 1 est voisin avec un 1, il ne peut pas y avoir de pont " +

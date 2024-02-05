@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="modif commentaires et descriptions">
+    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="ajout enum direction">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Ile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Technique.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Technique.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,8 +39,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -165,7 +166,23 @@
       <option name="project" value="LOCAL" />
       <updated>1707127438822</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fix technique n impair (ne renvoit plus vrai alors que la technique a déjà été utilisée)">
+      <option name="closed" value="true" />
+      <created>1707129103773</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1707129103773</updated>
+    </task>
+    <task id="LOCAL-00010" summary="ajout enum direction">
+      <option name="closed" value="true" />
+      <created>1707129260812</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1707129260812</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,6 +220,8 @@
     <MESSAGE value="ajout technique complétion + technique de base 3" />
     <MESSAGE value="ajout techniques 4 à 7 + ajout nom à l'enumerate Technique + changement place de la vérification Ile.complete" />
     <MESSAGE value="modif commentaires et descriptions" />
-    <option name="LAST_COMMIT_MESSAGE" value="modif commentaires et descriptions" />
+    <MESSAGE value="fix technique n impair (ne renvoit plus vrai alors que la technique a déjà été utilisée)" />
+    <MESSAGE value="ajout enum direction" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajout enum direction" />
   </component>
 </project>
