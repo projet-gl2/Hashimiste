@@ -180,10 +180,10 @@ public enum Technique {
         return (verifVoisin2 && verifPont0);
     }),
     /**
-     * Technique vérifiant si une île est un 2 possédant deux voisin dont l'un est aussi un 2
+     * Technique vérifiant si une île est un 2 possédant trois voisin dont deux sont des 1
      * et dont l'autre n'est relié par aucun pont.
      */
-    TECH_ISO_3("Technique 7.2",
+    TECH_ISO_3("Technique 8.1",
             "Si une île de valeur 2 est voisin avec deux 1, il ne peut pas être rélié " +
                     "aux deux, car cela brise la règle d'isolation."
             , o -> {
