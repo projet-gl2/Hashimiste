@@ -1,9 +1,8 @@
 package fr.hashimiste;
 
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import org.sqlite.JDBC;
+
+import java.sql.*;
 
 /**
  * La classe Save hérite de la classe Connection du package fr.hashimiste.
@@ -18,10 +17,8 @@ public class Save {
      */
     public void save(String nom, String nom_profil) {
         try {
-            // Chargement du pilote JDBC SQLite
             Class.forName("org.sqlite.JDBC");
-            // Établissement de la connexion à la base de données en utilisant le chemin récupéré à partir de la classe parente
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:sqlite:" + Constant.CHEMIN_BDD);
+            Connection connection = DriverManager.getConnection(JDBC.PREFIX + SQLConstant.DB_FICHIER);
 
             int id_profil = 0;
             // Requête pour récupérer l'identifiant du profil à partir du nom du profil donné
