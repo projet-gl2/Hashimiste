@@ -7,7 +7,9 @@ public class Jeu {
     private Frame frame;
     private Button[] boutons; //Liste des boutons pour les fonctions
 
-    public static final int NBBOUTON = 7;
+    public static final int NBBOUTON = 7; // Nombre de boutons disponible
+
+    // Constantes qui correspondent à l'emplacement des boutons dans le tableau de boutons
     public  static  final int MENU = 1;
     public  static  final int VERIFIER = 2;
     public  static  final int CHARGER = 3;
