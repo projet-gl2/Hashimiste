@@ -59,7 +59,7 @@ public class Ile extends Component {
     public void paint(Graphics g) {
         g.setColor(Color.BLACK);
         g.drawOval(getX(), getY(), getWidth(), getHeight());
-        g.drawString(String.valueOf(nbPont), getX() + 8, getY() + 14);
+        g.drawString(String.valueOf(getNbPontPossible()), getX() + 8, getY() + 14);
         super.paint(g);
     }
 

@@ -1,19 +1,39 @@
 package fr.hashimiste.gui.modelibre;
 
+import fr.hashimiste.Difficulte;
+import fr.hashimiste.maps.Grille;
+import fr.hashimiste.maps.Ile;
+
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-public class ModeLibre extends JFrame implements MouseListener {
+public class ModeLibre extends JFrame  {
 
     // Variable de test
     private final PreviewComponent[] previewTab = new PreviewComponent[10];
 
-    private final PreviewComponent bigPreview = new PreviewComponent(Color.GRAY);
+    Grille grille = new Grille(Difficulte.FACILE, Arrays.asList(new Ile(null, 1,1,3),
+            new Ile(null, 1,1,3),
+            new Ile(null, 5,3,3),
+            new Ile(null, 6,0, 2),
+            new Ile(null, 0,0, 2),
+            new Ile(null,0,6,6),
+            new Ile(null, 6,6,5)
+            ));
 
-    private final int tailleMinX = 500;
+
+
+
+    private final PreviewComponent bigPreview = new PreviewComponent(Color.GRAY, grille);
+
+    private final int tailleMinX = 550;
     private final int tailleMinY = 500;
     private final int tailleMaxX = 1920;
     private final int tailleMaxY = 1080;
@@ -53,12 +73,13 @@ public class ModeLibre extends JFrame implements MouseListener {
         this.setMaximumSize(new java.awt.Dimension(tailleMaxX, tailleMaxY));
 
         // definition des couleurs de fond
-        getContentPane().setBackground(Color.white);
-        panelFacile.setBackground(Color.WHITE);
-        panelMoyen.setBackground(Color.WHITE);
-        panelDifficile.setBackground(Color.WHITE);
-        panelPreview.setBackground(Color.WHITE);
-        bigPreview.setColor(Color.WHITE);
+        Color color = UIManager.getColor ( "Panel.background" );
+        getContentPane().setBackground(color);
+        panelFacile.setBackground(color);
+        panelMoyen.setBackground(color);
+        panelDifficile.setBackground(color);
+        panelPreview.setBackground(color);
+        bigPreview.setColor(color);
 
         // definition des textes
         facileLabel.setText("Facile");
@@ -71,14 +92,15 @@ public class ModeLibre extends JFrame implements MouseListener {
         panelFacile.setLayout(new GridLayout(2,5));
         panelMoyen.setLayout(new GridLayout(2,5));
         panelDifficile.setLayout(new GridLayout(2,5));
+        panelPreview.setLayout(null);
 
         // ajout des composants de prévisualisation dans les grilles
         for(int i = 0; i <= 9; i++)
         {
-            Color c = /*Color.DARK_GRAY;*/new Color((int)(Math.random() * 0x1000000));
-            panelFacile.add(new PreviewComponent(c));
-            panelMoyen.add(new PreviewComponent(c));
-            panelDifficile.add(new PreviewComponent(c));
+            Color c = Color.WHITE;/*new Color((int)(Math.random() * 0x1000000))*/;
+            panelFacile.add(new PreviewComponent(c, grille));
+            panelMoyen.add(new PreviewComponent(c, null));
+            panelDifficile.add(new PreviewComponent(c, null));
         }
 
         // ajout des composants à la fenêtre
@@ -102,9 +124,14 @@ public class ModeLibre extends JFrame implements MouseListener {
                 System.out.println(c.getClass());
                 if(c instanceof PreviewComponent previewComponent)
                 {
+                    playButton.setVisible(true);
+                    bigPreview.setVisible(true);
                     bigPreview.setColor(previewComponent.getColor());
                     bigPreview.paint(bigPreview.getGraphics());
+                    //playButton.paint(playButton.getGraphics());
+                    panelPreview.paint(panelPreview.getGraphics());
                     System.out.println("preview");
+
                 }
 
             }
@@ -114,32 +141,13 @@ public class ModeLibre extends JFrame implements MouseListener {
         panelMoyen.addMouseListener(gridListener);
         panelDifficile.addMouseListener(gridListener);
 
-        paint(getGraphics()); // on redessine la fenêtre avant de l'afficher
+        playButton.setVisible(false);
+        bigPreview.setVisible(false);
         this.setVisible(true); // affichage de a fenêtre
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
+        paint(getGraphics()); // on redessine la fenêtre avant de l'afficher
+        this.revalidate();
+        //this.repaint();
+        SwingUtilities.invokeLater(this::repaint);
 
     }
 
