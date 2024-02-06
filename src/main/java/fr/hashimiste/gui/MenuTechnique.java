@@ -145,11 +145,19 @@ public class MenuTechnique extends JFrame implements ActionListener{
         this.dispose();
     }
 
+    /**
+     * Exception levée pour les actions effectués par des composants
+     * @param e Action qui vient d'être effectuée
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
 
+    /**
+     * Méthode main pour lancer la fenêtre (individuellement)
+     * @param args Arguments du main (entrés en ligne de commande)
+     */
     public static void main(String args[]){
         MenuTechnique t = new MenuTechnique();
     }
