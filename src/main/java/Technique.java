@@ -10,7 +10,8 @@ public enum Technique {
      * Technique vérifiant si une île est un 4 dans un coin, un 6 en bordure, ou un 8.
      */
     TECH_DEP_1("Technique 1 (bordure)",
-            "Si une île a un chiffre pair n et que son nombre de voisins correspond à n/2 alors elle est reliée 2 fois à chacun de ses voisins"
+            "Si une île a un chiffre pair n et que son nombre de voisins correspond à n/2 " +
+                    "alors elle est reliée 2 fois à chacun de ses voisins"
             , o -> {
         int n = o.getN();
         if(n == 8) return true;
@@ -38,7 +39,8 @@ public enum Technique {
      * Technique vérifiant si une île est un 4 avec deux voisin, un 6 avec trois voisins, ou un 8.
      */
     TECH_DEP_2("Technique 1",
-            "Si une île a un chiffre pair et son nombre de voisins correspond à n/2 alors elle est reliée 2 fois à chacun de ses voisins"
+            "Si une île a un chiffre pair et son nombre de voisins correspond à n/2 alors " +
+                    "elle est reliée 2 fois à chacun de ses voisins"
                        , o -> {
         int n = o.getN();
         int nbV = o.nbVoisin(); //fonction qui calcule le nombre de voisin possible d'une île
