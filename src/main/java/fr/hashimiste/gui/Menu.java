@@ -40,7 +40,7 @@ public class Menu extends JFrame implements ActionListener {
 
         // Titre de la fenêtre
         this.setTitle("Hashimiste");
-        this.setIconImage(new ImageIcon("src/main/resources/images/iconTransparent.png").getImage());
+        this.setIconImage(new ImageIcon(Image.getCheminIconeTransparent()).getImage());
         this.setSize(tailleMinX, tailleMinY);
 
         // Minimum size pour la fenêtre
