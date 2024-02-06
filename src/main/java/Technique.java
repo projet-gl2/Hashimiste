@@ -178,6 +178,23 @@ public enum Technique {
             }
         }
         return (verifVoisin2 && verifPont0);
+    }),
+    /**
+     * Technique vérifiant si une île est un 2 possédant deux voisin dont l'un est aussi un 2
+     * et dont l'autre n'est relié par aucun pont.
+     */
+    TECH_ISO_3("Technique 7.2",
+            "Si une île de valeur 2 est voisin avec deux 1, il ne peut pas être rélié " +
+                    "aux deux, car cela brise la règle d'isolation."
+            , o -> {
+        boolean verifPont0 = false; //vérifie si le voisin qui n'est pas un 1 n'est pas relié par un pont.
+        if (o.getN() == 2 && (o.nbVoisin() - o.nbVoisinAvec1()) == 1){
+            Direction[] lD = Direction.values();
+            for(int i=0; i<4; i++){
+                verifPont0 = verifPont0 || (o.valeurIleDirection(lD[i]) != 1 && o.nbPontsDirection(lD[i]) == 0);
+            }
+        }
+        return (verifPont0);
     });
 
     private final String nom;
