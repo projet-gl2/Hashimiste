@@ -62,7 +62,7 @@ public enum Technique {
      * Technique vérifiant si une île est un 3 avec deux voisins, un 5 avec trois voisins, ou un 7. 
      * Vérifie aussi si elle a au moins un pont avec chacun de ses voisins.
      */
-    TECH_BAS_1("Technique 3",
+    TECH_BAS_1("Technique 3.1",
             " Si une île a un chiffre impair n, elle a au minimum n%2+1 voisins. Si elle a " +
             "exactement ce nombre de voisins alors elle est obligatoirement relié au moins une fois à " +
             "chacun de ses voisins"
@@ -95,8 +95,8 @@ public enum Technique {
      * Technique vérifiant si une île est un 3 avec deux voisins, un 5 avec trois voisins, ou un 7. 
      * Vérifie en plus si l'un de ses voisins est un 1.
      */
-    TECH_BAS_2("Technique 3.5",
-            ": Si une île a un chiffre impair > 1 elle à au minimum n%2+1 voisins. Si elle a " +
+    TECH_BAS_2("Technique 3.2",
+            "Si une île a un chiffre impair > 1 elle à au minimum n%2+1 voisins. Si elle a " +
             "exactement ce nombre de voisins alors elle est obligatoirement relié au moins une fois à " +
             "chacun de ses voisins. Si parmi ses voisins il y a une île avec le chiffre 1, alors l'île sera relié 2 fois à " +
             "tous ses autres voisins"
@@ -154,11 +154,30 @@ public enum Technique {
     /**
      * Technique vérifiant si une île est un 1 possédant uniquement un voisin qui n'est pas non plus un 1.
      */
-    TECH_ISO_1("Technique 7",
+    TECH_ISO_1("Technique 7.1",
             "Si une île de valeur 1 est voisin avec un 1, il ne peut pas y avoir de pont " +
                     "entre eux, car cela brise la règle d'isolation."
             , o -> {
         return(o.getN() == 1 && (o.nbVoisin()-o.nbVoisinAvec1() == 1));
+    }),
+    /**
+     * Technique vérifiant si une île est un 2 possédant deux voisin dont l'un est aussi un 2
+     * et dont l'autre n'est relié par aucun pont.
+     */
+    TECH_ISO_2("Technique 7.2",
+            "Si une île de valeur 2 est voisin avec un 2, il ne peut pas y avoir deux ponts " +
+                    "entre eux, car cela brise la règle d'isolation."
+                       , o -> {
+        boolean verifVoisin2 = false; //vérifie si l'un des voisins est un 2.
+        boolean verifPont0 = false; //vérifie si le voisin qui n'est pas un 2 n'est pas relié par un pont.
+        if (o.getN() == 2 && o.nbVoisin() == 2){
+            Direction[] lD = Direction.values();
+            for(int i=0; i<4; i++){
+                verifVoisin2 = verifVoisin2 || (o.valeurIleDirection(lD[i]) == 2);
+                verifPont0 = verifPont0 || (o.valeurIleDirection(lD[i]) != 2 && o.nbPontsDirection(lD[i]) == 0);
+            }
+        }
+        return (verifVoisin2 && verifPont0);
     });
 
     private final String nom;
@@ -185,7 +204,7 @@ public enum Technique {
      * @return renvoie vrai si la technique peut aider à compléter l'île, faux sinon.
      */
     public boolean execute(Ile ile) {
-        return function.apply(ile);
+        return this.fonction.apply(ile);
     }
 
     /**

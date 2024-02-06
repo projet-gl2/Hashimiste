@@ -1,5 +1,5 @@
 /**
-* Enumerate continant les directions cardinales pour se repérer dans la grille de jeu
+* Enumerate contenant les directions cardinales pour se repérer dans la grille de jeu
 */
 public enum Direction {
     /**

@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="ajout enum direction">
+    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="ajout d'indications pour préciser si une méthode n'a pas encore été écrite.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Ile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Technique.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Technique.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -182,7 +181,31 @@
       <option name="project" value="LOCAL" />
       <updated>1707129260812</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fix technique six avec un voisin 1 + ajout méthode valeurIleDirection">
+      <option name="closed" value="true" />
+      <created>1707131478040</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1707131478040</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fix méthode execute de Technique">
+      <option name="closed" value="true" />
+      <created>1707208511923</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1707208511923</updated>
+    </task>
+    <task id="LOCAL-00013" summary="ajout d'indications pour préciser si une méthode n'a pas encore été écrite.">
+      <option name="closed" value="true" />
+      <created>1707208951981</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1707208951981</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -222,6 +245,9 @@
     <MESSAGE value="modif commentaires et descriptions" />
     <MESSAGE value="fix technique n impair (ne renvoit plus vrai alors que la technique a déjà été utilisée)" />
     <MESSAGE value="ajout enum direction" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajout enum direction" />
+    <MESSAGE value="fix technique six avec un voisin 1 + ajout méthode valeurIleDirection" />
+    <MESSAGE value="fix méthode execute de Technique" />
+    <MESSAGE value="ajout d'indications pour préciser si une méthode n'a pas encore été écrite." />
+    <option name="LAST_COMMIT_MESSAGE" value="ajout d'indications pour préciser si une méthode n'a pas encore été écrite." />
   </component>
 </project>
