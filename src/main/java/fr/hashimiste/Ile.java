@@ -5,19 +5,43 @@ import org.sqlite.JDBC;
 import java.sql.*;
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+/**
+ * Cette classe représente une île dans un jeu.
+ * Les îles sont définies par leurs coordonnées x et y ainsi que leur numéro n.
+ * Les îles sont également enregistrées dans une collection statique pour un accès global.
+ */
 public class Ile {
+
+    /**
+     * Une collection statique qui contient toutes les îles indexées par leur identifiant.
+     */
     protected static final Map<Integer, Ile> ILES = new HashMap<>();
+
+    /**
+     * Les coordonnées x, y de l'île et son numéro n.
+     */
     int x, y, n;
+
+    /**
+     * Constructeur de la classe Ile.
+     * @param x La coordonnée x de l'île.
+     * @param y La coordonnée y de l'île.
+     * @param n Le numéro de l'île.
+     */
     Ile(int x, int y, int n) {
         this.x = x;
         this.y = y;
         this.n = n;
     }
+
+    /**
+     * Méthode statique pour charger les îles à partir d'une base de données pour une carte spécifique.
+     * @param idMap L'identifiant de la carte pour laquelle charger les îles.
+     * @return Une liste d'objets Ile représentant les îles chargées.
+     */
     public static ArrayList<Ile> chargerIle(int idMap) {
         ArrayList<Ile> iles = new ArrayList<>();
         try {
@@ -45,6 +69,11 @@ public class Ile {
         }
         return iles;
     }
+
+    /**
+     * Méthode pour sauvegarder une île dans la base de données.
+     * @param nom_map Le nom de la carte dans laquelle sauvegarder l'île.
+     */
     public void save(String nom_map) {
         int x = 0;
         int y = 0;

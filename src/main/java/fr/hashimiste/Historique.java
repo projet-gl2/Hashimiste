@@ -6,8 +6,19 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Date;
 
+/**
+ * Cette classe fournit des méthodes pour charger et sauvegarder des données d'historique dans une base de données.
+ */
 public class Historique {
 
+    /**
+     * Charge les données d'historique à partir de la base de données.
+     *
+     * @param date      La date de l'historique à charger.
+     * @param nomMap    Le nom de la carte associée à l'historique.
+     * @param nomProfil Le nom du profil associé à l'historique.
+     * @return          La carte chargée à partir de la base de données ou null s'il n'y a pas de sauvegarde correspondante.
+     */
     public static Map charger(Date date, String nomMap, String nomProfil) {
         try {
             Class.forName("org.sqlite.JDBC");
@@ -56,6 +67,17 @@ public class Historique {
         }
     }
 
+    /**
+     * Sauvegarde les données d'historique dans la base de données.
+     *
+     * @param etat      L'état de l'historique à sauvegarder.
+     * @param x_ile1    La coordonnée x de la première île.
+     * @param y_ile1    La coordonnée y de la première île.
+     * @param x_ile2    La coordonnée x de la deuxième île.
+     * @param y_ile2    La coordonnée y de la deuxième île.
+     * @param nomMap    Le nom de la carte associée à l'historique.
+     * @param nomProfil Le nom du profil associé à l'historique.
+     */
     public void save(int etat, int x_ile1, int y_ile1, int x_ile2, int y_ile2, String nomMap, String nomProfil) {
         try {
             Class.forName("org.sqlite.JDBC");

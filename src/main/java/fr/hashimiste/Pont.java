@@ -8,14 +8,36 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Cette classe représente un pont reliant deux îles dans un jeu.
+ */
 public class Pont {
-    Ile ile1, ile2;
+    /** Première île reliée par le pont. */
+    Ile ile1;
+    /** Deuxième île reliée par le pont. */
+    Ile ile2;
+    /** Nombre de ressources nécessaires pour traverser le pont. */
     int n;
+
+    /**
+     * Constructeur de la classe Pont.
+     *
+     * @param ile1 Première île reliée par le pont.
+     * @param ile2 Deuxième île reliée par le pont.
+     * @param n Nombre de ressources nécessaires pour traverser le pont.
+     */
     Pont(Ile ile1, Ile ile2, int n) {
         this.ile1 = ile1;
         this.ile2 = ile2;
         this.n = n;
     }
+
+    /**
+     * Méthode statique pour charger les ponts d'une carte donnée depuis la base de données.
+     *
+     * @param idMap L'identifiant de la carte pour laquelle charger les ponts.
+     * @return Une liste d'objets Pont chargés depuis la base de données.
+     */
     public static ArrayList<Pont> chargerPont(int idMap) {
         ArrayList<Pont> ponts = new ArrayList<>();
         try {
@@ -27,10 +49,11 @@ public class Pont {
             statement.setInt(1, idMap);
             ResultSet result = statement.executeQuery(select);
 
-            while(result.next()) {
+            while (result.next()) {
                 int id1 = result.getInt("id_dep");
                 int id2 = result.getInt("id_dest");
 
+                // Création d'un nouveau pont à partir des données de la base de données
                 Pont pont = new Pont(Ile.ILES.get(id1), Ile.ILES.get(id2), result.getInt("n"));
                 ponts.add(pont);
             }
@@ -45,6 +68,11 @@ public class Pont {
         }
         return ponts;
     }
+
+    /**
+     * Méthode pour sauvegarder le pont dans la base de données.
+     * Cette méthode suppose que les coordonnées des îles et le nom de la carte ont déjà été définis.
+     */
     public void save() {
         int x_ile1 = 0;
         int y_ile1 = 0;
@@ -56,6 +84,7 @@ public class Pont {
             Class.forName("org.sqlite.JDBC");
             Connection connection = DriverManager.getConnection(JDBC.PREFIX + SQLConstant.DB_FICHIER);
 
+            // Recherche de l'identifiant de l'île de départ dans la base de données
             String selectIdDep = "SELECT id_ile FROM ile JOIN map ON ile.id_m = map.id_map WHERE x=? and y=? and nom=?";
             PreparedStatement idDepStatement = connection.prepareStatement(selectIdDep);
             idDepStatement.setInt(1, x_ile1);
@@ -67,6 +96,7 @@ public class Pont {
                 idIleDep = resultSet.getInt("id_ile");
             }
 
+            // Recherche de l'identifiant de l'île de destination dans la base de données
             String selectIdDest = "SELECT id_ile FROM ile JOIN map ON ile.id_m = map.id_map WHERE x=? and y=? and nom=?";
             PreparedStatement idDestStatement = connection.prepareStatement(selectIdDest);
             idDestStatement.setInt(1, x_ile2);
@@ -79,6 +109,7 @@ public class Pont {
                 idIleDest = resultSet.getInt("id_ile");
             }
 
+            // Insertion du pont dans la base de données
             String insertQuery = "INSERT INTO pont (id_dep, id_dest, n) VALUES (?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
             preparedStatement.setInt(1, idIleDep);
