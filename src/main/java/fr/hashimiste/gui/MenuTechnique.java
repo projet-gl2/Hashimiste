@@ -1,7 +1,7 @@
 package fr.hashimiste.gui;
 
 //Importation du package à changer quand tous les packages seront créés
-import a.Technique;
+import fr.hashimiste.techniques.Technique;
 
 import javax.swing.*;
 import java.awt.*;
