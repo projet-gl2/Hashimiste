@@ -26,9 +26,6 @@ public class MenuTechnique extends JFrame implements ActionListener{
 
     private ArrayList<String> listDesc = new ArrayList<>();
 
-    private Color couleurBouton = new java.awt.Color(160, 158, 188);
-    private Color couleurTextBouton = new java.awt.Color(251, 250, 242);
-
     private int tailleMinX = 950;
     private int tailleMinY = 400;
     private int tailleMaxX = 1920;
@@ -78,20 +75,20 @@ public class MenuTechnique extends JFrame implements ActionListener{
         description.setAlignmentX(JLabel.LEFT_ALIGNMENT);
         description.setVerticalAlignment(JLabel.TOP);
 
-        butMenu.setBackground(new Color(couleurBouton.getRGB()));
+        butMenu.setBackground(Couleur.getCouleurBouton());
         description.setBackground(Color.WHITE);
 
-        butMenu.setForeground(new Color(couleurTextBouton.getRGB()));
+        butMenu.setForeground(Couleur.getCouleurTextBouton());
 
         butMenu.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e){
-                butMenu.setBackground(new Color(couleurTextBouton.getRGB()));
-                butMenu.setForeground(new Color(couleurBouton.getRGB()));
+                butMenu.setBackground(Couleur.getCouleurTextBouton());
+                butMenu.setForeground(Couleur.getCouleurBouton());
             }
 
             public void mouseExited(MouseEvent e){
-                butMenu.setBackground(new Color(couleurBouton.getRGB()));
-                butMenu.setForeground(new Color(couleurTextBouton.getRGB()));
+                butMenu.setBackground(Couleur.getCouleurBouton());
+                butMenu.setForeground(Couleur.getCouleurTextBouton());
             }
         });
 
