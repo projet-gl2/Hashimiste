@@ -1,68 +1,79 @@
 package fr.hashimiste;
 
+import org.sqlite.JDBC;
+
 import java.sql.*;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-/**
- * La classe Ile hérite de la classe Connection du package fr.hashimiste.
- */
 public class Ile {
-
-    /**
-     * Méthode pour sauvegarder les informations d'une île dans la base de données.
-     *
-     * @param x        La coordonnée x de l'île.
-     * @param y        La coordonnée y de l'île.
-     * @param n        La valeur n de l'île.
-     * @param nom_map  Le nom de la carte associée à l'île.
-     */
-    public void save(int x, int y, int n, String nom_map) {
+    protected static final Map<Integer, Ile> ILES = new HashMap<>();
+    int x, y, n;
+    Ile(int x, int y, int n) {
+        this.x = x;
+        this.y = y;
+        this.n = n;
+    }
+    public static ArrayList<Ile> chargerIle(int idMap) {
+        ArrayList<Ile> iles = new ArrayList<>();
         try {
-            // Chargement du driver JDBC SQLite
             Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(JDBC.PREFIX + SQLConstant.DB_FICHIER);
 
-            // Établissement de la connexion à la base de données en utilisant la méthode Constant.CHEMIN_BDD héritée
-            Connection connection = DriverManager.getConnection("jdbc:sqlite:"+ Constant.CHEMIN_BDD);
+            String select = "SELECT * FROM ile WHERE id_m=?";
+            PreparedStatement statement = connection.prepareStatement(select);
+            statement.setInt(1, idMap);
+            ResultSet result = statement.executeQuery(select);
 
-            // Initialisation de l'identifiant de la carte à 0
+            while(result.next()) {
+                Ile ile = new Ile(result.getInt("x"), result.getInt("y"), result.getInt("n"));
+                iles.add(ile);
+                ILES.put(result.getInt("id"), ile);
+            }
+
+            result.close();
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return iles;
+    }
+    public void save(String nom_map) {
+        int x = 0;
+        int y = 0;
+        int n = 0;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(JDBC.PREFIX + SQLConstant.DB_FICHIER);
+
             int id_map = 0;
-
-            // Requête pour récupérer l'identifiant de la carte à partir de son nom
             String selectMapQuery = "SELECT id_map FROM map WHERE nom="+nom_map;
-
-            // Préparation de la requête SQL
             PreparedStatement selectMapStatement = connection.prepareStatement(selectMapQuery);
-
-            // Exécution de la requête et récupération du résultat
             ResultSet resultSet = selectMapStatement.executeQuery();
-
-            // Si un résultat est retourné
             if (resultSet.next()) {
-                // Récupération de l'identifiant de la carte
                 id_map = resultSet.getInt("id_map");
             }
 
-            // Requête pour insérer les informations de l'île dans la table "ile"
             String insertQuery = "INSERT INTO ile (id_ile, id_m, x, y, n) VALUES (?, ?, ?, ?, ?)";
-
-            // Préparation de la requête d'insertion
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
-
-            // Définition des valeurs des paramètres de la requête
-            preparedStatement.setString(1, "DEFAULT"); // Valeur par défaut pour l'identifiant de l'île
-            preparedStatement.setInt(2, id_map); // Identifiant de la carte
-            preparedStatement.setInt(3, x); // Coordonnée x de l'île
-            preparedStatement.setInt(4, y); // Coordonnée y de l'île
-            preparedStatement.setInt(5, n); // Valeur n de l'île
-            // Exécution de la requête d'insertion
+            preparedStatement.setString(1, "DEFAULT");
+            preparedStatement.setInt(2, id_map);
+            preparedStatement.setInt(3, x);
+            preparedStatement.setInt(4, y);
+            preparedStatement.setInt(5, n);
             preparedStatement.execute();
 
-            // Fermeture des ressources
-            preparedStatement.close(); // Fermeture du PreparedStatement
-            connection.close(); // Fermeture de la connexion à la base de données
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException | ClassNotFoundException e) {
-            // Gestion des exceptions
-            e.printStackTrace(); // Affichage de la trace de la pile en cas d'erreur
+            e.printStackTrace();
         }
     }
 }

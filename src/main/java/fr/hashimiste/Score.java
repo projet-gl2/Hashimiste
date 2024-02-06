@@ -1,5 +1,7 @@
 package fr.hashimiste;
 
+import org.sqlite.JDBC;
+
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -8,7 +10,7 @@ public class Score {
     public void save(int score, String nomMap, String nomProfil) {
         try {
             Class.forName("org.sqlite.JDBC");
-            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + Constant.CHEMIN_BDD);
+            Connection connection = DriverManager.getConnection(JDBC.PREFIX + SQLConstant.DB_FICHIER);
 
             String selectIdMap = "SELECT id_map FROM map WHERE nom=?";
             PreparedStatement idMapStatement = connection.prepareStatement(selectIdMap);
