@@ -4,17 +4,38 @@
 import java.awt.*;
 import java.awt.event.*;
 public class Jeu {
+
     private Frame frame;
     private Button[] boutons; //Liste des boutons pour les fonctions
 
-    public static final int NBBOUTON = 7; // Nombre de boutons disponible
+    /**
+     * Constante qui indique le nombre de boutons de le menu
+     **/
+    public static final int NBBOUTON = 7;
 
-    // Constantes qui correspondent à l'emplacement des boutons dans le tableau de boutons
+    /**
+     * Constante qui correspond à l'emplacement du bouton menu dans le tableau de boutons
+     **/
     public  static  final int MENU = 1;
+    /**
+     * Constante qui correspond à l'emplacement du bouton verifier dans le tableau de boutons
+     **/
     public  static  final int VERIFIER = 2;
+    /**
+     * Constante qui correspond à l'emplacement du bouton charger dans le tableau de boutons
+     **/
     public  static  final int CHARGER = 3;
+    /**
+     * Constante qui correspond à l'emplacement du bouton sauvegarde dans le tableau de boutons
+     **/
     public  static  final int SAUVEGARDE = 4;
+    /**
+     * Constante qui correspond à l'emplacement du bouton retour dans le tableau de boutons
+     **/
     public  static  final int RETOUR = 5;
+    /**
+     * Constante qui correspond à l'emplacement du bouton aide dans le tableau de boutons
+     **/
     public  static  final int AIDE = 6;
 
     // grille;
