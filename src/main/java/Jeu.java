@@ -1,8 +1,20 @@
 /**
  * La classe Jeu correspond au jeu lorsqu'on est face à l'écran de jeu avec les boutons ainsi que la grille, il y divers boutons (retour arrière, poser un checkpoint, aide, etc)
  **/
+import java.awt.*;
+import java.awt.event.*;
 public class Jeu {
-    private ArrayList<Boutons> listeBoutons = new ArrayList<Boutons>();
+    private Frame frame;
+    private Button[] boutons; //Liste des boutons pour les fonctions
+
+    public static final int NBBOUTON = 7;
+    public  static  final int MENU = 1;
+    public  static  final int VERIFIER = 2;
+    public  static  final int CHARGER = 3;
+    public  static  final int SAUVEGARDE = 4;
+    public  static  final int RETOUR = 5;
+    public  static  final int AIDE = 6;
+
     // grille;
     // grilleComplete;
 
@@ -10,14 +22,64 @@ public class Jeu {
      * Méthode de création de la fenetre de jeu avec la grille ainsi que la liste de boutons chacun correpondant à une fonction prédéfinit
      **/
     public Jeu(/*la grille de jeu, la grile solution*/){
-        //Implémentation des boutons
-        //Bouton retour en arrière
-        //Bouton poser un checkpoint
-        //Bouton charger le checkpoint
-        //Bouton vérifier si grille correcte
-        //Bouton aide
         //this.grille = /* la grille de jeu */;
         //this.grilleComplete = /* la grille solution */
+
+        // Titre de la frame
+        frame = new Frame("Hashimiste");
+        frame.setLayout(new GridBagLayout());
+
+        // Contrainte pour la disposition vertical et horizontal
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.BOTH;
+
+        // Création du panel pour les boutons
+        Panel boutonsPanel = new Panel();
+        boutonsPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+        // Création des boutons
+        boutons = new Button[NBBOUTON];
+
+        boutons[MENU] = new Button("Menu");
+        boutonsPanel.add(boutons[MENU]);
+
+        boutons[VERIFIER] = new Button("Verifier");
+        boutonsPanel.add(boutons[VERIFIER]);
+
+        boutons[CHARGER] = new Button("Charger");
+        boutonsPanel.add(boutons[CHARGER]);
+
+        boutons[SAUVEGARDE] = new Button("Sauvegarde");
+        boutonsPanel.add(boutons[SAUVEGARDE]);
+
+        boutons[RETOUR] = new Button("Retour");
+        boutonsPanel.add(boutons[RETOUR]);
+
+        boutons[AIDE] = new Button("Aide");
+        boutonsPanel.add(boutons[AIDE]);
+
+        // Rajouter les actions pour chaque boutons
+
+
+        // Liste des boutons
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weighty = 1.0; // Prend tout l'espace vertical restant
+        frame.add(boutonsPanel, gbc);
+        // Grille de jeu
+        //gbc.gridy = 1;
+        //frame.add(grillePanel,gbc);
+
+        // Fermeture de la fenetre
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
+
+        frame.setSize(Toolkit.getDefaultToolkit().getScreenSize()); // Affichage adapté à la taille de l'écran
+        frame.setVisible(true); // Affiche la fenêtre
 
     }
 
@@ -56,4 +118,11 @@ public class Jeu {
 
     }
 
+    /**
+     *  Méthode qui permet de generer le jeu avec la liste de boutons ainsi que la grille
+     *  @param args Argument passé lors du démarrage
+     **/
+    public static void main(String[] args){
+        new Jeu();
+    }
 }
