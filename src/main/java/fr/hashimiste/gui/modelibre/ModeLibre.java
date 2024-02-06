@@ -1,6 +1,8 @@
 package fr.hashimiste.gui.modelibre;
 
 import fr.hashimiste.Difficulte;
+import fr.hashimiste.gui.Couleur;
+import fr.hashimiste.gui.Image;
 import fr.hashimiste.maps.Grille;
 import fr.hashimiste.maps.Ile;
 
@@ -10,8 +12,10 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class ModeLibre extends JFrame  {
@@ -73,7 +77,8 @@ public class ModeLibre extends JFrame  {
         this.setMaximumSize(new java.awt.Dimension(tailleMaxX, tailleMaxY));
 
         // definition des couleurs de fond
-        Color color = UIManager.getColor ( "Panel.background" );
+        //Color color = UIManager.getColor ( "Panel.background" );
+        Color color = Couleur.getCouleurFond();
         getContentPane().setBackground(color);
         panelFacile.setBackground(color);
         panelMoyen.setBackground(color);
@@ -81,11 +86,33 @@ public class ModeLibre extends JFrame  {
         panelPreview.setBackground(color);
         bigPreview.setColor(color);
 
+        menuButton.setOpaque(true);
+        menuButton.setBackground(Couleur.getCouleurBouton());
+        menuButton.setForeground(Couleur.getCouleurTextBouton());
+
+        playButton.setOpaque(true);
+        playButton.setBackground(Couleur.getCouleurBouton());
+        playButton.setForeground(Couleur.getCouleurTextBouton());
+
+
+
+        //URL iconUrl = getClass().getResource("/resources/images/logo.png");
+        //ImageIcon icon = new ImageIcon(iconUrl.toString());
+        //setIconImage(icon.getImage());
+
+        //this.setIconImage(new ImageIcon(Objects.requireNonNull(Toolkit.getDefaultToolkit().getClass().getResource("/resources/images/icon.png"))).getImage());
+
+
+        this.setIconImage(new ImageIcon(Image.getCheminIconeTransparent()).getImage());
+
+
+
+
         // definition des textes
         facileLabel.setText("Facile");
         moyenLabel.setText("Moyen");
         difficileLabel.setText("Difficile");
-        menuButton.setText("MENU");
+        menuButton.setText("Menu");
         playButton.setText("Jouer");
 
         // création des layouts pour les grilles
@@ -97,7 +124,7 @@ public class ModeLibre extends JFrame  {
         // ajout des composants de prévisualisation dans les grilles
         for(int i = 0; i <= 9; i++)
         {
-            Color c = Color.WHITE;/*new Color((int)(Math.random() * 0x1000000))*/;
+            Color c = Couleur.getCouleurBouton();/*new Color((int)(Math.random() * 0x1000000))*/;
             panelFacile.add(new PreviewComponent(c, grille));
             panelMoyen.add(new PreviewComponent(c, null));
             panelDifficile.add(new PreviewComponent(c, null));
@@ -141,13 +168,22 @@ public class ModeLibre extends JFrame  {
         panelMoyen.addMouseListener(gridListener);
         panelDifficile.addMouseListener(gridListener);
 
+
+
+        //menuButton.setOpaque(true);
+        //menuButton.setForeground(Color.BLUE);
+        //menuButton.setBackground(Color.BLACK);
+
         playButton.setVisible(false);
         bigPreview.setVisible(false);
         this.setVisible(true); // affichage de a fenêtre
         paint(getGraphics()); // on redessine la fenêtre avant de l'afficher
-        this.revalidate();
-        //this.repaint();
-        SwingUtilities.invokeLater(this::repaint);
+        this.repaint();
+        // Force un redessin de la fenêtre pour corriger les problèmes de rendu initiaux
+        SwingUtilities.invokeLater(() -> {
+            this.revalidate();
+            this.repaint();
+        });
 
     }
 
