@@ -26,6 +26,7 @@ public class Ile {
      * @return vrai si l'île est complétée, faux sinon.
      */
     boolean complete(){
+        //**A FAIRE**//
         return false;
     }
 
@@ -35,6 +36,7 @@ public class Ile {
      * @return nombre d'îles voisines.
      */
     int nbVoisin(){
+        //**A FAIRE**//
         return 0;
     }
 
@@ -43,6 +45,7 @@ public class Ile {
      * @return nombre d'îles voisines de valeur "1".
      */
     int nbVoisinAvec1(){
+        //**A FAIRE**//
         return 0;
     }
 
@@ -51,6 +54,7 @@ public class Ile {
      * @return nombre de ponts actuel.
      */
     int nbPont(){
+        //**A FAIRE**//
         return 0;
     }
 
@@ -61,6 +65,7 @@ public class Ile {
      * @return nombre de ponts max possible.
      */
     int nbPontPossible(){
+        //**A FAIRE**//
         return 0;
     }
 
@@ -73,6 +78,7 @@ public class Ile {
      * 2 s'il y a une île réliée par deux ponts
      */
     int nbPontsDirection(Direction d){
+        //**A FAIRE**//
         return 0;
     }
 
@@ -82,6 +88,7 @@ public class Ile {
      * @return -1 s'il n'y aucune île accessible, la valeur de l'île en face sinon.
      */
     int valeurIleDirection(Direction d){
+        //**A FAIRE**//
         return 0;
     }
 }
