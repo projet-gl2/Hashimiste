@@ -9,7 +9,7 @@ public class Couleur {
     private static java.awt.Color couleurTextBouton = new java.awt.Color(251, 250, 242);
     private static java.awt.Color couleurBoutonDesactive = new java.awt.Color(197, 179, 179);
     private static java.awt.Color couleurFond = new java.awt.Color(251,250,242);
-
+    public final static java.awt.Color couleurTransparent=new java.awt.Color(0x00000000, true);
     /**
      * Retourne la couleur du bouton
      * @return Color
