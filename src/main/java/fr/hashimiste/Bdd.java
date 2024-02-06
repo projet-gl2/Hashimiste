@@ -10,7 +10,7 @@ import java.sql.SQLException;
 /**
  * Cette classe est utilisée pour créer les tables dans la base de données.
  */
-public class bdd {
+public class Bdd {
 
     /**
      * Méthode principale pour exécuter la création des tables dans la base de données.
