@@ -6,6 +6,9 @@ import java.util.function.Function;
  * Pas besoin de vérifier dans les fonctions si l'île est complète, cette étape est déjà faite dans la méthode aide de la classe Grille.
  */
 public enum Technique {
+    /**
+     * Technique vérifiant si une île est un 4 dans un coin, un 6 en bordure, ou un 8.
+     */
     TECH_DEP_1("Technique 1 (bordure)",
             "Si une île a un chiffre pair n et que son nombre de voisins correspond à n/2 alors elle est reliée 2 fois à chacun de ses voisins"
             , o -> {
@@ -31,6 +34,9 @@ public enum Technique {
         }
         return false;
     }),
+    /**
+     * Technique vérifiant si une île est un 4 avec deux voisin, un 6 avec trois voisins, ou un 8.
+     */
     TECH_DEP_2("Technique 1",
             "Si une île a un chiffre pair et son nombre de voisins correspond à n/2 alors elle est reliée 2 fois à chacun de ses voisins"
                        , o -> {
@@ -41,6 +47,9 @@ public enum Technique {
         if(n == 4 && nbV == 2) return true;
         return false;
     }),
+    /**
+     * Technique vérifiant si une île a autant de ponts possible que sa valeur.
+     */
     TECH_COMPL("Technique 2",
             "Si le nombre de ponts possibles de l'île est égale à sa valeur," +
             " alors il faut ajouter tous ces ponts possibles."
@@ -49,6 +58,10 @@ public enum Technique {
         int nbPoss = o.nbPontPossible();
         return n == nbPoss;
     }),
+    /**
+     * Technique vérifiant si une île est un 3 avec deux voisins, un 5 avec trois voisins, ou un 7. 
+     * Vérifie aussi si elle a au moins un pont avec chacun de ses voisins.
+     */
     TECH_BAS_1("Technique 3",
             " Si une île a un chiffre impair n, elle a au minimum n%2+1 voisins. Si elle a " +
             "exactement ce nombre de voisins alors elle est obligatoirement relié au moins une fois à " +
@@ -59,7 +72,7 @@ public enum Technique {
         int nbP = o.nbPont();
 
         int i;
-        boolean verif = false; //prend la valeur true s'il y a un pont possible dans une direction
+        boolean verif = false; //prend la valeur true s'il y a un pont possible dans une direction qui n'a pas été placé
 
         Direction[] lD = Direction.values();
 
@@ -78,6 +91,10 @@ public enum Technique {
             }
         return false;
     }),
+    /**
+     * Technique vérifiant si une île est un 3 avec deux voisins, un 5 avec trois voisins, ou un 7. 
+     * Vérifie en plus si l'un de ses voisins est un 1.
+     */
     TECH_BAS_2("Technique 3.5",
             ": Si une île a un chiffre impair > 1 elle à au minimum n%2+1 voisins. Si elle a " +
             "exactement ce nombre de voisins alors elle est obligatoirement relié au moins une fois à " +
@@ -92,6 +109,9 @@ public enum Technique {
         if(n == 3 && nbV == 2 && nbV1 == 1) return true;
         return false;
     }),
+    /**
+     * Technique vérifiant si une île est un 1 ou un 2 avec un seul voisin.
+     */
     TECH_BAS_3("Technique 4",
             "Si une île a le chiffre 1 ou 2 et qu’elle possède seulement 1 voisin alors elle sera " +
             "forcément reliée à ce voisin, cela fonctionne seulement le chiffre 1 et 2 puisque dans le " +
@@ -104,6 +124,10 @@ public enum Technique {
         }
         return false;
     }),
+    /**
+     * Technique vérifiant si une île est un 4 avec trois voisins dont deux d'entres eux sont des 1,
+     * ou un 5 avec quatre voisins dont trois d'entre eux sont des 1.
+     */
     TECH_BAS_4("Technique 5",
             "Si une île de valeur 4 possède trois voisins, " +
             "dont deux d'entre eux sont de valeurs 1, alors on peut la compléter. " +
@@ -111,6 +135,9 @@ public enum Technique {
             o -> {
         return ((o.getN() == 4 && o.nbVoisin() == 3 && o.nbVoisinAvec1() == 2) || (o.getN() == 5 && o.nbVoisin() == 4 && o.nbVoisinAvec1() == 3));
     }),
+    /**
+     * Technique vérifiant si une île est un 6 avec un 1 pour voisin, et si elle n'a pas de ponts avec ses voisins qui ne sont pas des 1.
+     */
     TECH_BAS_5("Technique 6",
             "Si une île de valeur 6 possède un voisin de valeur 1, alors il possède au moins " +
                     "un pont avec chacun de ses autres voisins."
@@ -124,6 +151,9 @@ public enum Technique {
         }
         return verif;
     }),
+    /**
+     * Technique vérifiant si une île est un 1 possédant uniquement un voisin qui n'est pas non plus un 1.
+     */
     TECH_ISO_1("Technique 7",
             "Si une île de valeur 1 est voisin avec un 1, il ne peut pas y avoir de pont " +
                     "entre eux, car cela brise la règle d'isolation."
@@ -141,6 +171,10 @@ public enum Technique {
         this.fonction = fonction;
     }
 
+    /**
+     * Renvoie la description de la technique choisie.
+     * @return description de la technique choisie
+     */
     public String getDescription() {
         return description;
     }
