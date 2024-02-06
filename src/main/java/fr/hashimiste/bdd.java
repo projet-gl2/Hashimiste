@@ -1,5 +1,7 @@
 package fr.hashimiste;
 
+import org.sqlite.JDBC;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,18 +9,9 @@ import java.sql.SQLException;
 
 public class bdd {
     public static void main(String[] args) {
-        String bddHashi = "base.db";
-
         try {
             Class.forName("org.sqlite.JDBC");
-            Connection bdd = DriverManager.getConnection("jdbc:sqlite:"+bddHashi);
-
-            /*String insertQuery = "INSERT INTO employees (first_name, last_name, age) VALUES (?, ?, ?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
-            preparedStatement.setString(1, "John");
-            preparedStatement.setString(2, "Doe");
-            preparedStatement.setInt(3, 30);
-            preparedStatement.executeUpdate();*/
+            Connection bdd = DriverManager.getConnection(JDBC.PREFIX + SQLConstant.DB_FICHIER);
 
             // Creation des tables
 			String creaTable_map = "CREATE TABLE map (id_map serial PRIMARY KEY, nom varchar(15), difficulte integer);";
@@ -42,13 +35,13 @@ public class bdd {
 
             // Exécution des create
             connect_map.execute();
-            connect_save.executeQuery();
-            connect_profil.executeQuery();
-            connect_statistique.executeQuery();
-            connect_score.executeQuery();
-            connect_ile.executeQuery();
-            connect_pont.executeQuery();
-            connect_historique.executeQuery();
+            connect_save.execute();
+            connect_profil.execute();
+            connect_statistique.execute();
+            connect_score.execute();
+            connect_ile.execute();
+            connect_pont.execute();
+            connect_historique.execute();
 
             // Fermeture des connexion
             connect_map.close();
