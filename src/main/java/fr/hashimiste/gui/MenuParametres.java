@@ -15,6 +15,9 @@ public class MenuParametres extends JFrame implements ActionListener{
     private JPanel jp = new JPanel();
     private JButton butMenu = new JButton("Menu");
 
+    private Color couleurBouton = new java.awt.Color(160, 158, 188);
+    private Color couleurTextBouton = new java.awt.Color(251, 250, 242);
+
     private int tailleMinX = 500;
     private int tailleMinY = 300;
     private int tailleMaxX = 1920;
@@ -53,6 +56,27 @@ public class MenuParametres extends JFrame implements ActionListener{
 
         butMenu.setAlignmentX(JButton.RIGHT_ALIGNMENT);
 
+        //Couleur du font et du texte des composants
+        butMenu.setBackground(new Color(couleurBouton.getRGB()));
+        butMenu.setForeground(new Color(couleurTextBouton.getRGB()));
+
+        //Ajout d'un mouseListener au bouton du menu pour changer la couleur quand on survole le bouton
+        butMenu.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e){
+                butMenu.setBackground(new Color(couleurTextBouton.getRGB()));
+                butMenu.setForeground(new Color(couleurBouton.getRGB()));
+            }
+
+            public void mouseExited(MouseEvent e){
+                butMenu.setBackground(new Color(couleurBouton.getRGB()));
+                butMenu.setForeground(new Color(couleurTextBouton.getRGB()));
+            }
+        });
+
+        jp.add(butMenu);
+
+        this.setContentPane(jp);
+
         this.pack();
         this.setVisible(true);
     }
@@ -65,11 +89,19 @@ public class MenuParametres extends JFrame implements ActionListener{
         this.dispose();
     }
 
+    /**
+     * Exception levée pour les actions effectués par des composants
+     * @param e Action qui vient d'être effectuée
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
 
+    /**
+     * Méthode main pour lancer la fenêtre (individuellement)
+     * @param args Arguments du main (entrés en ligne de commande)
+     */
     public static void main(String args[]){
         MenuParametres p = new MenuParametres();
     }
