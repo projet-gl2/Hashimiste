@@ -5,6 +5,7 @@ import java.awt.event.*;
 
 /**
  * Classe Menu pour la page d'accueil
+ * @author Arthur Dureau
  */
 public class Menu extends JFrame implements ActionListener {
     private final JPanel jp = new JPanel();
@@ -34,6 +35,7 @@ public class Menu extends JFrame implements ActionListener {
     private final java.awt.Color couleurBouton = new java.awt.Color(160, 158, 188);
     private final java.awt.Color couleurTextBouton = new java.awt.Color(251, 250, 242);
     private final java.awt.Color couleurBoutonDesactive = new java.awt.Color(197, 179, 179);
+    private final java.awt.Color couleurFond = new java.awt.Color(251,250,242);
 
     /**
      * Constructeur de la classe Menu
@@ -236,8 +238,9 @@ public class Menu extends JFrame implements ActionListener {
         this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
+                System.out.println("Taille de la fenêtre : " + getWidth() + "x" + getHeight());
                 // Minimum size pour la fenêtre
-                setSize(Math.max(getWidth(), tailleMinX), Math.max(getHeight(), tailleMinY));
+                //setSize(Math.max(getWidth(), tailleMinX), Math.max(getHeight(), tailleMinY));
                 // Preferred size pour la fenêtre
                 setPreferredSize(new java.awt.Dimension(Math.max(getWidth(), tailleMinX), Math.max(getHeight(), tailleMinY)));
                 // Taille maximum pour la fenêtre
@@ -288,7 +291,7 @@ public class Menu extends JFrame implements ActionListener {
         // Detecter quand on clique sur agrandir ou réduire
         this.addWindowStateListener(e -> {
             // Minimum size pour la fenêtre
-            setSize(Math.max(getWidth(), tailleMinX), Math.max(getHeight(), tailleMinY));
+            //setSize(Math.max(getWidth(), tailleMinX), Math.max(getHeight(), tailleMinY));
             // Preferred size pour la fenêtre
             setPreferredSize(new java.awt.Dimension(Math.max(getWidth(), tailleMinX), Math.max(getHeight(), tailleMinY)));
             // Taille maximum pour la fenêtre
@@ -364,14 +367,18 @@ public class Menu extends JFrame implements ActionListener {
             }
         });
 
+
         // La taille de la fenêtre s'adapte à la taille des éléments
         this.pack();
         this.setContentPane(jp);
+        // Changer la couleur de fond de la fenêtre
+        jp.setBackground(new java.awt.Color(couleurFond.getRGB()));
+        jp2.setBackground(new java.awt.Color(couleurFond.getRGB()));
         this.setVisible(true);
     }
 
     /**
-     * Méthode pour changer de page pour la page Aventure
+     * Methode pour changer de page pour la page Aventure
      */
     public void pageAventure() {
         this.dispose();
@@ -379,7 +386,7 @@ public class Menu extends JFrame implements ActionListener {
     }
 
     /**
-     * Méthode pour changer de page pour la page Tutoriel
+     * Methode pour changer de page pour la page Tutoriel
      */
     public void pageTutoriel() {
         this.dispose();
@@ -387,7 +394,7 @@ public class Menu extends JFrame implements ActionListener {
     }
 
     /**
-     * Méthode pour changer de page pour la page Mode Libre
+     * Methode pour changer de page pour la page Mode Libre
      */
     public void pageModeLibre() {
         this.dispose();
@@ -395,7 +402,7 @@ public class Menu extends JFrame implements ActionListener {
     }
 
     /**
-     * Méthode pour changer de page pour la page Multijoueur
+     * Methode pour changer de page pour la page Multijoueur
      */
     public void pageMultijoueur() {
         this.dispose();
@@ -403,7 +410,7 @@ public class Menu extends JFrame implements ActionListener {
     }
 
     /**
-     * Méthode pour changer de page pour la page Technique
+     * Methode pour changer de page pour la page Technique
      */
     public void pageTechnique() {
         MenuTechnique t = new MenuTechnique();
@@ -411,17 +418,19 @@ public class Menu extends JFrame implements ActionListener {
     }
 
     /**
-     * Méthode pour changer de page pour la page Paramètres
+     * Methode pour changer de page pour la page Paramètres
      */
     public void pageParametre() {
+        MenuParametres p = new MenuParametres();
         this.dispose();
         // Appel de la page Paramètres
     }
 
     /**
-     * Méthode pour changer de page pour la page Profils
+     * Methode pour changer de page pour la page Profils
      */
     public void pageProfils() {
+        MenuProfilCreation pc = new MenuProfilCreation();
         this.dispose();
         // Appel de la page Profils
     }
