@@ -32,10 +32,6 @@ public class Menu extends JFrame implements ActionListener {
     private final int tailleButParamProfilX = 100;
     private final int tailleButY = 20;
     private final int tailleButX = 50;
-    private final java.awt.Color couleurBouton = new java.awt.Color(160, 158, 188);
-    private final java.awt.Color couleurTextBouton = new java.awt.Color(251, 250, 242);
-    private final java.awt.Color couleurBoutonDesactive = new java.awt.Color(197, 179, 179);
-    private final java.awt.Color couleurFond = new java.awt.Color(251,250,242);
 
     /**
      * Constructeur de la classe Menu
@@ -116,95 +112,95 @@ public class Menu extends JFrame implements ActionListener {
         ButMultijoueur.setAlignmentX(JButton.CENTER_ALIGNMENT);
         ButTechnique.setAlignmentX(JButton.CENTER_ALIGNMENT);
 
-        // Couleur des boutons en utilisant l'exadecimal A09EBC
-        ButAventure.setBackground(new java.awt.Color(couleurBouton.getRGB()));
-        ButTutoriel.setBackground(new java.awt.Color(couleurBouton.getRGB()));
-        ButModeLibre.setBackground(new java.awt.Color(couleurBouton.getRGB()));
-        ButMultijoueur.setBackground(new java.awt.Color(couleurBoutonDesactive.getRGB()));
-        ButTechnique.setBackground(new java.awt.Color(couleurBouton.getRGB()));
-        ButParametre.setBackground(new java.awt.Color(couleurBouton.getRGB()));
-        ButProfils.setBackground(new java.awt.Color(couleurBouton.getRGB()));
+        // Couleur des boutons en utilisant les couleurs de la classe Couleur (couleurBouton, couleurTextBouton, couleurBoutonDesactive)
+        ButAventure.setBackground(new java.awt.Color(Couleur.getCouleurBouton().getRGB()));
+        ButTutoriel.setBackground(new java.awt.Color(Couleur.getCouleurBouton().getRGB()));
+        ButModeLibre.setBackground(new java.awt.Color(Couleur.getCouleurBouton().getRGB()));
+        ButMultijoueur.setBackground(new java.awt.Color(Couleur.getCouleurBoutonDesactive().getRGB()));
+        ButTechnique.setBackground(new java.awt.Color(Couleur.getCouleurBouton().getRGB()));
+        ButParametre.setBackground(new java.awt.Color(Couleur.getCouleurBouton().getRGB()));
+        ButProfils.setBackground(new java.awt.Color(Couleur.getCouleurBouton().getRGB()));
 
-        // Couleur du text des boutons en utilisant l'exadecimal FBFAF2
-        ButAventure.setForeground(new java.awt.Color(couleurTextBouton.getRGB()));
-        ButTutoriel.setForeground(new java.awt.Color(couleurTextBouton.getRGB()));
-        ButModeLibre.setForeground(new java.awt.Color(couleurTextBouton.getRGB()));
-        ButMultijoueur.setForeground(new java.awt.Color(couleurTextBouton.getRGB()));
-        ButTechnique.setForeground(new java.awt.Color(couleurTextBouton.getRGB()));
-        ButParametre.setForeground(new java.awt.Color(couleurTextBouton.getRGB()));
-        ButProfils.setForeground(new java.awt.Color(couleurTextBouton.getRGB()));
+        // Couleur du text des boutons en utilisant les couleurs de la classe Couleur (couleurTextBouton)
+        ButAventure.setForeground(new java.awt.Color(Couleur.getCouleurTextBouton().getRGB()));
+        ButTutoriel.setForeground(new java.awt.Color(Couleur.getCouleurTextBouton().getRGB()));
+        ButModeLibre.setForeground(new java.awt.Color(Couleur.getCouleurTextBouton().getRGB()));
+        ButMultijoueur.setForeground(new java.awt.Color(Couleur.getCouleurTextBouton().getRGB()));
+        ButTechnique.setForeground(new java.awt.Color(Couleur.getCouleurTextBouton().getRGB()));
+        ButParametre.setForeground(new java.awt.Color(Couleur.getCouleurTextBouton().getRGB()));
+        ButProfils.setForeground(new java.awt.Color(Couleur.getCouleurTextBouton().getRGB()));
 
         // Changer la couleur du bouton quand on passe la souris dessus
         ButAventure.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                ButAventure.setBackground(new java.awt.Color(couleurTextBouton.getRGB()));
-                ButAventure.setForeground(new java.awt.Color(couleurBouton.getRGB()));
+                ButAventure.setBackground(new java.awt.Color(Couleur.getCouleurTextBouton().getRGB()));
+                ButAventure.setForeground(new java.awt.Color(Couleur.getCouleurBouton().getRGB()));
             }
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                ButAventure.setBackground(new java.awt.Color(couleurBouton.getRGB()));
-                ButAventure.setForeground(new java.awt.Color(couleurTextBouton.getRGB()));
+                ButAventure.setBackground(new java.awt.Color(Couleur.getCouleurBouton().getRGB()));
+                ButAventure.setForeground(new java.awt.Color(Couleur.getCouleurTextBouton().getRGB()));
             }
 
         });
 
         ButTutoriel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                ButTutoriel.setBackground(new java.awt.Color(couleurTextBouton.getRGB()));
-                ButTutoriel.setForeground(new java.awt.Color(couleurBouton.getRGB()));
+                ButTutoriel.setBackground(new java.awt.Color(Couleur.getCouleurTextBouton().getRGB()));
+                ButTutoriel.setForeground(new java.awt.Color(Couleur.getCouleurBouton().getRGB()));
             }
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                ButTutoriel.setBackground(new java.awt.Color(couleurBouton.getRGB()));
-                ButTutoriel.setForeground(new java.awt.Color(couleurTextBouton.getRGB()));
+                ButTutoriel.setBackground(new java.awt.Color(Couleur.getCouleurBouton().getRGB()));
+                ButTutoriel.setForeground(new java.awt.Color(Couleur.getCouleurTextBouton().getRGB()));
             }
         });
 
         ButModeLibre.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                ButModeLibre.setBackground(new java.awt.Color(couleurTextBouton.getRGB()));
-                ButModeLibre.setForeground(new java.awt.Color(couleurBouton.getRGB()));
+                ButModeLibre.setBackground(new java.awt.Color(Couleur.getCouleurTextBouton().getRGB()));
+                ButModeLibre.setForeground(new java.awt.Color(Couleur.getCouleurBouton().getRGB()));
             }
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                ButModeLibre.setBackground(new java.awt.Color(couleurBouton.getRGB()));
-                ButModeLibre.setForeground(new java.awt.Color(couleurTextBouton.getRGB()));
+                ButModeLibre.setBackground(new java.awt.Color(Couleur.getCouleurBouton().getRGB()));
+                ButModeLibre.setForeground(new java.awt.Color(Couleur.getCouleurTextBouton().getRGB()));
             }
         });
 
         ButTechnique.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                ButTechnique.setBackground(new java.awt.Color(couleurTextBouton.getRGB()));
-                ButTechnique.setForeground(new java.awt.Color(couleurBouton.getRGB()));
+                ButTechnique.setBackground(new java.awt.Color(Couleur.getCouleurTextBouton().getRGB()));
+                ButTechnique.setForeground(new java.awt.Color(Couleur.getCouleurBouton().getRGB()));
             }
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                ButTechnique.setBackground(new java.awt.Color(couleurBouton.getRGB()));
-                ButTechnique.setForeground(new java.awt.Color(couleurTextBouton.getRGB()));
+                ButTechnique.setBackground(new java.awt.Color(Couleur.getCouleurBouton().getRGB()));
+                ButTechnique.setForeground(new java.awt.Color(Couleur.getCouleurTextBouton().getRGB()));
             }
         });
 
         ButParametre.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                ButParametre.setBackground(new java.awt.Color(couleurTextBouton.getRGB()));
-                ButParametre.setForeground(new java.awt.Color(couleurBouton.getRGB()));
+                ButParametre.setBackground(new java.awt.Color(Couleur.getCouleurTextBouton().getRGB()));
+                ButParametre.setForeground(new java.awt.Color(Couleur.getCouleurBouton().getRGB()));
             }
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                ButParametre.setBackground(new java.awt.Color(couleurBouton.getRGB()));
-                ButParametre.setForeground(new java.awt.Color(couleurTextBouton.getRGB()));
+                ButParametre.setBackground(new java.awt.Color(Couleur.getCouleurBouton().getRGB()));
+                ButParametre.setForeground(new java.awt.Color(Couleur.getCouleurTextBouton().getRGB()));
             }
         });
 
         ButProfils.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                ButProfils.setBackground(new java.awt.Color(couleurTextBouton.getRGB()));
-                ButProfils.setForeground(new java.awt.Color(couleurBouton.getRGB()));
+                ButProfils.setBackground(new java.awt.Color(Couleur.getCouleurTextBouton().getRGB()));
+                ButProfils.setForeground(new java.awt.Color(Couleur.getCouleurBouton().getRGB()));
             }
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                ButProfils.setBackground(new java.awt.Color(couleurBouton.getRGB()));
-                ButProfils.setForeground(new java.awt.Color(couleurTextBouton.getRGB()));
+                ButProfils.setBackground(new java.awt.Color(Couleur.getCouleurBouton().getRGB()));
+                ButProfils.setForeground(new java.awt.Color(Couleur.getCouleurTextBouton().getRGB()));
             }
         });
 
@@ -372,8 +368,8 @@ public class Menu extends JFrame implements ActionListener {
         this.pack();
         this.setContentPane(jp);
         // Changer la couleur de fond de la fenêtre
-        jp.setBackground(new java.awt.Color(couleurFond.getRGB()));
-        jp2.setBackground(new java.awt.Color(couleurFond.getRGB()));
+        jp.setBackground(new java.awt.Color(Couleur.getCouleurFond().getRGB()));
+        jp2.setBackground(new java.awt.Color(Couleur.getCouleurFond().getRGB()));
         this.setVisible(true);
     }
 
