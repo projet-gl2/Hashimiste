@@ -1,5 +1,8 @@
 package fr.hashimiste.gui;
 
+//Importation du package à changer quand tous les packages seront créés
+import fr.hashimiste.techniques.Technique;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -70,21 +73,22 @@ public class MenuTechnique extends JFrame implements ActionListener{
 
         butMenu.setAlignmentX(JButton.LEFT_ALIGNMENT);
         description.setAlignmentX(JLabel.LEFT_ALIGNMENT);
+        description.setVerticalAlignment(JLabel.TOP);
 
-        butMenu.setBackground(new Color(160, 158, 188));
+        butMenu.setBackground(Couleur.getCouleurBouton());
         description.setBackground(Color.WHITE);
 
-        butMenu.setForeground(new Color(251, 250, 242));
+        butMenu.setForeground(Couleur.getCouleurTextBouton());
 
         butMenu.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e){
-                butMenu.setBackground(new Color(251, 250, 242));
-                butMenu.setForeground(new Color(160, 158, 188));
+                butMenu.setBackground(Couleur.getCouleurTextBouton());
+                butMenu.setForeground(Couleur.getCouleurBouton());
             }
 
             public void mouseExited(MouseEvent e){
-                butMenu.setBackground(new Color(160, 158, 188));
-                butMenu.setForeground(new Color(251, 250, 242));
+                butMenu.setBackground(Couleur.getCouleurBouton());
+                butMenu.setForeground(Couleur.getCouleurTextBouton());
             }
         });
 
@@ -94,26 +98,11 @@ public class MenuTechnique extends JFrame implements ActionListener{
         jp2.setLayout(new BoxLayout(jp2, BoxLayout.X_AXIS));
         jp2.setAlignmentX(JPanel.LEFT_ALIGNMENT);
 
-        //Ajout des descriptions dans la liste de descriptions des techniques
-        listDesc.add("Si une île a un chiffre pair et son nombre de voisins correspond à n/2 alors elle est reliée 2 fois à chacun de ses voisins.");
-        listDesc.add("Si une île a le chiffre 1 ou 2 et qu’elle possède seulement 1 voisin alors elle sera forcément reliée à ce voisin, cela fonctionne seulement le chiffre 1 et 2 puisque dans le hashi il peut seulement exister maximum 2 ponts entre 2 îles.");
-        listDesc.add("Si une île a un chiffre impair > 1 elle à au minimum n%2+1 voisins. Si elle a exactement ce nombre de voisins alors elle est obligatoirement relié au moins une fois à chacun de ses voisins");
-        listDesc.add("Si parmi ses voisins il y a une île avec le chiffre 1, alors l'île sera relié 2 fois à tous ses autres voisins.");
-        listDesc.add("Voici une liste du nombre maximum de voisins 1 que peut avoir une ile : <br>" + //
-                        "(chiffre | nb voisin 1 max) <br>" + //
-                        "1 = 0, 2 = 1, 3 = 2, 4 = 3, 5 = 3, 6 = 2, 7 = 1, 8 = 0");
-        listDesc.add("Si une ile à plusieurs voisins et que l’un deux implique que l’ile soit séparer du reste de l’ensemble alors ce n’est pas la bonne solution.");
-        listDesc.add("Parfois le plus gros ensemble d’îles connectés peut être amené à devenir une structure isolée, pour éviter cela on préfèrera connecter la structure à une île ouverte.");
-        listDesc.add("Si la création d’un pont tends à insoler une partie de la structure principal il faut se raviser et effectuer le chemin inverse île par île pour vérifier s’il n’existe pas un meilleur chemin.");
-
-        dlm.addElement("Technique 1");
-        dlm.addElement("Technique 2");
-        dlm.addElement("Technique 3");
-        dlm.addElement("Technique 3.5");
-        dlm.addElement("Technique 4");
-        dlm.addElement("Technique 5");
-        dlm.addElement("Technique 6");
-        dlm.addElement("Technique 7");
+        //Ajout des descriptions dans la liste de descriptions des techniques et les noms dans la JList
+        for(Technique t : Technique.values()){
+            listDesc.add(t.getDescription());
+            dlm.addElement(t.getNom());
+        }
 
         jl.setModel(dlm);
         jl.setOpaque(true);
@@ -145,11 +134,19 @@ public class MenuTechnique extends JFrame implements ActionListener{
         this.dispose();
     }
 
+    /**
+     * Exception levée pour les actions effectués par des composants
+     * @param e Action qui vient d'être effectuée
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
 
+    /**
+     * Méthode main pour lancer la fenêtre (individuellement)
+     * @param args Arguments du main (entrés en ligne de commande)
+     */
     public static void main(String args[]){
         MenuTechnique t = new MenuTechnique();
     }
