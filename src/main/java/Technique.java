@@ -179,10 +179,19 @@ public enum Technique {
         return description;
     }
 
+    /**
+     * Applique la fonction associée à la technique sur l'île entrée en paramètre.
+     * @param ile l'île dont on veut vérifier si la technique concernée peut aider à la compléter
+     * @return renvoie vrai si la technique peut aider à compléter l'île, faux sinon.
+     */
     public boolean execute(Ile ile) {
         return function.apply(ile);
     }
 
+    /**
+     * Renvoie le nom de la technique choisie.
+     * @return nom de la technique choisie
+     */
     public String getNom() {
         return nom;
     }
