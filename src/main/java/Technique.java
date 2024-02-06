@@ -179,8 +179,8 @@ public enum Technique {
         return description;
     }
 
-    public Function<Ile, Boolean> getFonction() {
-        return fonction;
+    public boolean execute(Ile ile) {
+        return function.apply(ile);
     }
 
     public String getNom() {
