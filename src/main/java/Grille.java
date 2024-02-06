@@ -1,16 +1,24 @@
 /**
-*    Une grille correspond à un niveau de jeu. Elle sont définies par les Îles qu'elles contiennent, 
-*    et permettent d'effectuer différentes opérations comme afficher une aide de jeu.
-*/
+ * Une grille correspond à un niveau de jeu. Elle sont définies par les Îles qu'elles contiennent, 
+ * et permettent d'effectuer différentes opérations comme afficher une aide de jeu.
+ */
 public class Grille {
 
     private int c; //nb colonnes
     private int l; //nb lignes
 
+    /**
+     * Renvoie le nombre de colonnes de la grille.
+     * @return nombre de colonnes de la grille
+     */
     public int getC(){
         return c;
     }
 
+    /**
+     * Renvoie le nombre de lignes de la grille.
+     * @return nombre de lignes de la grille
+     */
     public int getL(){
         return l;
     }
