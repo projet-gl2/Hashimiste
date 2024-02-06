@@ -48,7 +48,7 @@ public class Grille {
             for(int j=0;j<this.l;j++){ //parcours lignes
                 if(this.getIle(i,j) != null && !(this.getIle(i,j).complete())) { //si l'île existe et n'est pas complète
                     for (int fInd=0; fInd<fIndMin; fInd++){
-                        if(lTech[fInd].getFonction().apply(this.getIle(i, j))){ //si la technique s'applique à l'île
+                        if(lTech[fInd].execute(this.getIle(i, j))){ //si la technique s'applique à l'île
                             aideIle = this.getIle(i,j);
                             fIndMin = fInd; //on ne vérifie que les techniques de plus bas niveau que celles trouvées
                         }

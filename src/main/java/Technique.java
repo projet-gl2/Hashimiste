@@ -185,7 +185,7 @@ public enum Technique {
      * @return renvoie vrai si la technique peut aider à compléter l'île, faux sinon.
      */
     public boolean execute(Ile ile) {
-        return function.apply(ile);
+        return this.fonction.apply(ile);
     }
 
     /**

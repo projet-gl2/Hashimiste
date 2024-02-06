@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="ajout enum direction">
+    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="fix technique six avec un voisin 1 + ajout méthode valeurIleDirection">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Ile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Technique.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Technique.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +180,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707129260812</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fix technique six avec un voisin 1 + ajout méthode valeurIleDirection">
+      <option name="closed" value="true" />
+      <created>1707131478040</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1707131478040</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -222,6 +228,7 @@
     <MESSAGE value="modif commentaires et descriptions" />
     <MESSAGE value="fix technique n impair (ne renvoit plus vrai alors que la technique a déjà été utilisée)" />
     <MESSAGE value="ajout enum direction" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajout enum direction" />
+    <MESSAGE value="fix technique six avec un voisin 1 + ajout méthode valeurIleDirection" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix technique six avec un voisin 1 + ajout méthode valeurIleDirection" />
   </component>
 </project>
