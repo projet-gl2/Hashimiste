@@ -78,7 +78,7 @@ public class ModeLibre extends JFrame  {
 
         // definition des couleurs de fond
         //Color color = UIManager.getColor ( "Panel.background" );
-        Color color = Couleur.getCouleurFond();
+        Color color = Couleur.COULEUR_FOND;
         getContentPane().setBackground(color);
         panelFacile.setBackground(color);
         panelMoyen.setBackground(color);
@@ -87,15 +87,15 @@ public class ModeLibre extends JFrame  {
         bigPreview.setColor(color);
 
         menuButton.setOpaque(true);
-        menuButton.setBackground(Couleur.getCouleurBouton());
-        menuButton.setForeground(Couleur.getCouleurTextBouton());
+        menuButton.setBackground(Couleur.COULEUR_BOUTON);
+        menuButton.setForeground(Couleur.COULEUR_TEXTE_BOUTON);
 
         playButton.setOpaque(true);
-        playButton.setBackground(Couleur.getCouleurBouton());
-        playButton.setForeground(Couleur.getCouleurTextBouton());
+        playButton.setBackground(Couleur.COULEUR_BOUTON);
+        playButton.setForeground(Couleur.COULEUR_TEXTE_BOUTON);
 
 
-        this.setIconImage(new ImageIcon(Image.getCheminIconeTransparent()).getImage());
+        this.setIconImage(new ImageIcon(Image.ICON_TRANSPARENT).getImage());
 
         // definition des textes
         facileLabel.setText("Facile");
@@ -114,7 +114,7 @@ public class ModeLibre extends JFrame  {
         // ajout des composants de prévisualisation dans les grilles
         for(int i = 0; i <= 9; i++)
         {
-            Color c = Couleur.getCouleurBouton();/*new Color((int)(Math.random() * 0x1000000))*/;
+            Color c = Couleur.COULEUR_BOUTON;/*new Color((int)(Math.random() * 0x1000000))*/;
             panelFacile.add(new PreviewComponent(c, grille));
             panelMoyen.add(new PreviewComponent(c, null));
             panelDifficile.add(new PreviewComponent(c, null));
@@ -131,7 +131,7 @@ public class ModeLibre extends JFrame  {
         panelPreview.add(bigPreview);
         panelPreview.add(menuButton);
         panelPreview.add(playButton);
-        
+
         MouseListener gridListener = new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
