@@ -5,59 +5,33 @@ package fr.hashimiste.gui;
  * @author Arthur Dureau
  */
 public class Image {
-    private final static String cheminIcone = "src/main/resources/images/icon.png";
-    private final static String cheminIconeTransparent = "src/main/resources/images/iconTransparent.png";
-    private final static String logo = "src/main/resources/images/logo.png";
-    private final static String logoOriginal = "src/main/resources/images/logoOriginal.png";
-    private final static String logoTitre = "src/main/resources/images/logoTitre.png";
-    private final static String logoTitreTransparent = "src/main/resources/images/logoTitreTransparent.png";
+    /**
+     * Chemin de l'icone
+     */
+    public final static String ICON = "src/main/resources/images/icon.png";
+    /**
+     * Chemin de l'icone transparent
+     */
+    public final static String ICON_TRANSPARENT = "src/main/resources/images/iconTransparent.png";
+    /**
+     * Chemin du logo
+     */
+    public final static String LOGO = "src/main/resources/images/logo.png";
+    /**
+     * Chemin du logo original
+     */
+    public final static String LOGO_ORIGINAL = "src/main/resources/images/logoOriginal.png";
+    /**
+     * Chemin du logo titre
+     */
+    public final static String LOGO_TITRE = "src/main/resources/images/logoTitre.png";
+    /**
+     * Chemin du logo titre transparent
+     */
+    public final static String LOGO_TITRE_TRANSPARENT = "src/main/resources/images/logoTitreTransparent.png";
 
     /**
-     * Retourne le chemin de l'icone
-     * @return String
-     */
-    public static String getCheminIcone() {
-        return cheminIcone;
-    }
-
-    /**
-     * Retourne le chemin de l'icone transparent
-     * @return String
-     */
-    public static String getCheminIconeTransparent() {
-        return cheminIconeTransparent;
-    }
-
-    /**
-     * Retourne le chemin du logo
-     * @return String
-     */
-    public static String getLogo() {
-        return logo;
-    }
-
-    /**
-     * Retourne le chemin du logo original
-     * @return String
-     */
-    public static String getLogoOriginal() {
-        return logoOriginal;
-    }
-
-    /**
-     * Retourne le chemin du logo titre
-     * @return String
-     */
-    public static String getLogoTitre() {
-        return logoTitre;
-    }
-
-    /**
-     * Retourne le chemin du logo titre transparent
-     * @return String
-     */
-    public static String getLogoTitreTransparent() {
-        return logoTitreTransparent;
-    }
-
+     * Constructeur privée pour éviter l'instanciation
+     **/
+    private Image() {}
 }
