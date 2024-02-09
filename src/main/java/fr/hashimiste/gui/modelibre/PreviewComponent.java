@@ -9,10 +9,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Random;
 
+/**
+ * Classe gérant les composants de prévisualisation de grille
+ * @author  elie
+ */
+
 public class PreviewComponent extends JComponent {
 
     private Color color;
-    private Grille grille;
+    private final Grille grille;
 
     /**
      *
@@ -24,7 +29,7 @@ public class PreviewComponent extends JComponent {
     {
         this.grille = grille;
         this.color = color;
-        this.setMinimumSize(new Dimension(50,50));
+        //this.setMinimumSize(new Dimension(50,50)); inutile car grid layout
     }
 
     /**
@@ -46,20 +51,27 @@ public class PreviewComponent extends JComponent {
         {
             for(Ile ile : grille.getIles()) {
                 g.setColor(Color.black);
-                int t = d / 7;
-                g.drawOval(x + t * ile.getX(), y + t *ile.getY(), t, t);
-                g.setFont(new Font("Andale Mono", Font.BOLD, t));
-                g.drawString(String.valueOf(ile.getNbPontPossible()), x + t*ile.getX()+t/2/2, y + t*ile.getY()+(t)-t/6);
+                g.drawOval(x + (d / 7) * ile.getX(), y + (d / 7) *ile.getY(), d / 7, d / 7);
+                g.setFont(new Font("Andale Mono", Font.BOLD, d / 7));
+                g.drawString(String.valueOf(ile.getNbPontPossible()), x + (d / 7)*ile.getX()+(d / 7)/2/2, y + (d / 7)*ile.getY()+(d / 7)-(d / 7)/6);
                 //grille.getIles().get(0).paint(g);
             }
         }
 
     }
 
+    /**
+     * récupère la couleur du composant
+     * @return Color
+     */
     public Color getColor() {
         return color;
     }
 
+    /**
+     * Définit la couleur du composant
+     * @param color
+     */
     public void setColor(Color color) {
         this.color = color;
     }

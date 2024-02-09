@@ -4,8 +4,16 @@ import fr.hashimiste.gui.modelibre.ModeLibre;
 
 import javax.swing.*;
 
+/**
+ * Classe de test pour démarer le GUI du mode libre
+ * @author elie
+ */
 public class ModeLibreGui {
 
+    /**
+     * lance le gui avec un look and feel adapter pour mac
+     * @param args
+     */
     public static void main(String[] args) {
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {

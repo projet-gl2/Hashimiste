@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ModeLibre extends JFrame  {
 
-    // Variable de test
+    // TODO :: implémenter les vrai grilles
     private final PreviewComponent[] previewTab = new PreviewComponent[10];
 
     Grille grille = new Grille(Difficulte.FACILE, Arrays.asList(new Ile(null, 1,1,3),
@@ -37,10 +37,10 @@ public class ModeLibre extends JFrame  {
 
     private final PreviewComponent bigPreview = new PreviewComponent(Color.GRAY, grille);
 
-    private final int tailleMinX = 550;
-    private final int tailleMinY = 500;
-    private final int tailleMaxX = 1920;
-    private final int tailleMaxY = 1080;
+    private static final int tailleMinX = 550;
+    private static final int tailleMinY = 500;
+    private static final int tailleMaxX = 1920;
+    private static final int tailleMaxY = 1080;
 
     private final JPanel panelFacile = new JPanel();
     private final JPanel panelMoyen = new JPanel();
@@ -95,18 +95,7 @@ public class ModeLibre extends JFrame  {
         playButton.setForeground(Couleur.getCouleurTextBouton());
 
 
-
-        //URL iconUrl = getClass().getResource("/resources/images/logo.png");
-        //ImageIcon icon = new ImageIcon(iconUrl.toString());
-        //setIconImage(icon.getImage());
-
-        //this.setIconImage(new ImageIcon(Objects.requireNonNull(Toolkit.getDefaultToolkit().getClass().getResource("/resources/images/icon.png"))).getImage());
-
-
         this.setIconImage(new ImageIcon(Image.getCheminIconeTransparent()).getImage());
-
-
-
 
         // definition des textes
         facileLabel.setText("Facile");
@@ -121,6 +110,7 @@ public class ModeLibre extends JFrame  {
         panelDifficile.setLayout(new GridLayout(2,5));
         panelPreview.setLayout(null);
 
+        // TODO :: implémenter les grilles
         // ajout des composants de prévisualisation dans les grilles
         for(int i = 0; i <= 9; i++)
         {
@@ -141,14 +131,12 @@ public class ModeLibre extends JFrame  {
         panelPreview.add(bigPreview);
         panelPreview.add(menuButton);
         panelPreview.add(playButton);
-
+        
         MouseListener gridListener = new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                System.out.println("bip");
                 Point point = new Point(e.getX(), e.getY());
                 Component c = panelFacile.getComponentAt(e.getPoint());
-                System.out.println(c.getClass());
                 if(c instanceof PreviewComponent previewComponent)
                 {
                     playButton.setVisible(true);
