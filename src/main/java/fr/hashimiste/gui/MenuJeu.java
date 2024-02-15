@@ -1,9 +1,10 @@
+package fr.hashimiste.gui;
 /**
  * La classe Jeu correspond au jeu lorsqu'on est face à l'écran de jeu avec les boutons ainsi que la grille, il y divers boutons (retour arrière, poser un checkpoint, aide, etc)
  **/
 import java.awt.*;
 import java.awt.event.*;
-public class Jeu {
+public class MenuJeu {
 
     private Frame frame;
     private Button[] boutons; //Liste des boutons pour les fonctions
@@ -44,7 +45,7 @@ public class Jeu {
     /**
      * Méthode de création de la fenetre de jeu avec la grille ainsi que la liste de boutons chacun correpondant à une fonction prédéfinit
      **/
-    public Jeu(/*la grille de jeu, la grile solution*/){
+    public MenuJeu(/*la grille de jeu, la grile solution*/){
         //this.grille = /* la grille de jeu */;
         //this.grilleComplete = /* la grille solution */
 
@@ -146,6 +147,6 @@ public class Jeu {
      *  @param args Argument passé lors du démarrage
      **/
     public static void main(String[] args){
-        new Jeu();
+        new MenuJeu();
     }
 }
