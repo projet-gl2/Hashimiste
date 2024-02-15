@@ -14,7 +14,7 @@ import java.util.Arrays;
  */
 public class Map {
     /** Liste des îles présentes sur la carte. */
-    ArrayList<Ile> iles;
+    public ArrayList<Ile> iles;
     /** Liste des ponts présents sur la carte. */
     ArrayList<Pont> ponts;
 
