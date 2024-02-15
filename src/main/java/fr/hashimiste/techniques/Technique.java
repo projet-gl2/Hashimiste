@@ -1,3 +1,7 @@
+package fr.hashimiste.techniques;
+
+import fr.hashimiste.maps.Ile;
+
 import java.util.function.Function;
 
 /**
