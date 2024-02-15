@@ -24,12 +24,24 @@ public class Pont {
      *
      * @param ile1 Première île reliée par le pont.
      * @param ile2 Deuxième île reliée par le pont.
-     * @param n Nombre de ressources nécessaires pour traverser le pont.
+     * @param n Nombre de ponts qui relie les deux îles (1 ou 2).
      */
     Pont(Ile ile1, Ile ile2, int n) {
         this.ile1 = ile1;
         this.ile2 = ile2;
         this.n = n;
+    }
+
+    public Ile getIle1() {
+        return this.ile1;
+    }
+
+    public Ile getIle2() {
+        return this.ile2;
+    }
+
+    public int getN() {
+        return this.n;
     }
 
     /**
