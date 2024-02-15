@@ -138,10 +138,42 @@ public enum Technique {
         return ((o.getN() == 4 && o.nbVoisin() == 3 && o.nbVoisinAvec1() == 2) || (o.getN() == 5 && o.nbVoisin() == 4 && o.nbVoisinAvec1() == 3));
     }),
     /**
+     * Technique vérifiant si une île est un 2 avec deux voisins, dont un avec un 1, et si elle n'a pas de ponts avec son autre voisin.
+     */
+    TECH_BAS_5("Technique 6.1",
+            "Si une île de valeur 2 possède deux voisins, dont un de valeur 1, alors il possède au moins " +
+                    "un pont avec son autre voisin."
+            , o -> {
+        boolean verif = false;
+        if (o.getN() == 2 && o.getNbVoisin() == 2 && o.nbVoisinAvec1() == 1){
+            Direction[] lD = Direction.values();
+            for(int i=0; i<4; i++){
+                verif = verif || (o.valeurIleDirection(lD[i]) > 1 && o.nbPontsDirection(lD[i]) == 0);
+            }
+        }
+        return verif;
+    }),
+    /**
+     * Technique vérifiant si une île est un 4 avec trois voisins, dont un avec un 1, et si elle n'a pas de ponts avec ses voisins qui ne sont pas des 1.
+     */
+    TECH_BAS_6("Technique 6.2",
+            "Si une île de valeur 4 possède trois voisins dont un de valeur 1, alors elle possède au moins " +
+                    "un pont avec chacun de ses autres voisins."
+            , o -> {
+        boolean verif = false;
+        if (o.getN() == 4 && o.getNbVoisin() == 3 && o.nbVoisinAvec1() == 1){
+            Direction[] lD = Direction.values();
+            for(int i=0; i<4; i++){
+                verif = verif || (o.valeurIleDirection(lD[i]) > 1 && o.nbPontsDirection(lD[i]) == 0);
+            }
+        }
+        return verif;
+    }),
+    /**
      * Technique vérifiant si une île est un 6 avec un 1 pour voisin, et si elle n'a pas de ponts avec ses voisins qui ne sont pas des 1.
      */
-    TECH_BAS_5("Technique 6",
-            "Si une île de valeur 6 possède un voisin de valeur 1, alors il possède au moins " +
+    TECH_BAS_7("Technique 6.3",
+            "Si une île de valeur 6 possède un voisin de valeur 1, alors elle possède au moins " +
                     "un pont avec chacun de ses autres voisins."
             , o -> {
         boolean verif = false;
