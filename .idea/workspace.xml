@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="ajout d'indications pour préciser si une méthode n'a pas encore été écrite.">
+    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="sauts de ligne">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Technique.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Technique.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +50,20 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "DamiBoul"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="82eae04b-e8b0-445b-981d-d1cb1b3286f6" />
+        <option name="url" value="https://github.com/projet-gl2/Hashimiste.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/java/Grille.java" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -71,7 +84,7 @@
     &quot;git-widget-placeholder&quot;: &quot;damien&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/DAMIEN/Desktop/Administratif/Cours/Licence Info/L3/GL2/Hashimiste&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/DAMIEN/Desktop/Administratif/Cours/Licence Info/L3/Java/revision&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -205,7 +218,47 @@
       <option name="project" value="LOCAL" />
       <updated>1707208951981</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="ajout technique 2 isolé">
+      <option name="closed" value="true" />
+      <created>1707213984394</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1707213984394</updated>
+    </task>
+    <task id="LOCAL-00015" summary="typo">
+      <option name="closed" value="true" />
+      <created>1707214327152</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1707214327153</updated>
+    </task>
+    <task id="LOCAL-00016" summary="ajout technique 2 isolé (avec deux 1)">
+      <option name="closed" value="true" />
+      <created>1707214693103</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1707214693103</updated>
+    </task>
+    <task id="LOCAL-00017" summary="modif nom technique +  docu">
+      <option name="closed" value="true" />
+      <created>1707214796593</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1707214796593</updated>
+    </task>
+    <task id="LOCAL-00018" summary="sauts de ligne">
+      <option name="closed" value="true" />
+      <created>1707217234707</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1707217234707</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,6 +301,11 @@
     <MESSAGE value="fix technique six avec un voisin 1 + ajout méthode valeurIleDirection" />
     <MESSAGE value="fix méthode execute de Technique" />
     <MESSAGE value="ajout d'indications pour préciser si une méthode n'a pas encore été écrite." />
-    <option name="LAST_COMMIT_MESSAGE" value="ajout d'indications pour préciser si une méthode n'a pas encore été écrite." />
+    <MESSAGE value="ajout technique 2 isolé" />
+    <MESSAGE value="typo" />
+    <MESSAGE value="ajout technique 2 isolé (avec deux 1)" />
+    <MESSAGE value="modif nom technique +  docu" />
+    <MESSAGE value="sauts de ligne" />
+    <option name="LAST_COMMIT_MESSAGE" value="sauts de ligne" />
   </component>
 </project>
