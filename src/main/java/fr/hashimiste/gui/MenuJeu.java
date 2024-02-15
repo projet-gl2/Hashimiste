@@ -1,43 +1,29 @@
 package fr.hashimiste.gui;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+
 /**
  * La classe Jeu correspond au jeu lorsqu'on est face à l'écran de jeu avec les boutons ainsi que la grille, il y divers boutons (retour arrière, poser un checkpoint, aide, etc)
  **/
-import java.awt.*;
-import java.awt.event.*;
-public class MenuJeu {
+public class MenuJeu extends JFrame{
 
-    private Frame frame;
-    private Button[] boutons; //Liste des boutons pour les fonctions
+    private ArrayList<JButton> boutons = new ArrayList<>(); //Liste des boutons pour les fonctions
 
     /**
      * Constante qui indique le nombre de boutons de le menu
      **/
-    public static final int NBBOUTON = 7;
+    public static final int NB_BOUTON = 7;
 
-    /**
-     * Constante qui correspond à l'emplacement du bouton menu dans le tableau de boutons
-     **/
-    public  static  final int MENU = 1;
-    /**
-     * Constante qui correspond à l'emplacement du bouton verifier dans le tableau de boutons
-     **/
-    public  static  final int VERIFIER = 2;
-    /**
-     * Constante qui correspond à l'emplacement du bouton charger dans le tableau de boutons
-     **/
-    public  static  final int CHARGER = 3;
-    /**
-     * Constante qui correspond à l'emplacement du bouton sauvegarde dans le tableau de boutons
-     **/
-    public  static  final int SAUVEGARDE = 4;
-    /**
-     * Constante qui correspond à l'emplacement du bouton retour dans le tableau de boutons
-     **/
-    public  static  final int RETOUR = 5;
-    /**
-     * Constante qui correspond à l'emplacement du bouton aide dans le tableau de boutons
-     **/
-    public  static  final int AIDE = 6;
+    private JButton butMenu = new JButton("Menu");
+    private JButton butVerifier = new JButton("Vérifier");
+    private JButton butCharger = new JButton("Charger");
+    private JButton butSauvegarder = new JButton("Sauvegarder");
+    private JButton butCheckpoint = new JButton("Checkpoint");
+    private JButton butRetour = new JButton("Retour");
+    private JButton butAide = new JButton("Aide");
 
     // grille;
     // grilleComplete;
@@ -50,60 +36,75 @@ public class MenuJeu {
         //this.grilleComplete = /* la grille solution */
 
         // Titre de la frame
-        frame = new Frame("Hashimiste");
-        frame.setLayout(new GridBagLayout());
+        super("Hashimiste");
+        this.setLayout(new GridBagLayout());
 
         // Contrainte pour la disposition vertical et horizontal
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
 
         // Création du panel pour les boutons
-        Panel boutonsPanel = new Panel();
-        boutonsPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JPanel jp = new JPanel();
+        jp.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+        butMenu.addActionListener((e) -> pageMenu());
+        butVerifier.addActionListener((e) -> verifierGrille());
+        butCharger.addActionListener((e) -> charger());
+        butSauvegarder.addActionListener((e) -> sauvegarder());
+        butCheckpoint.addActionListener((e) -> poserCheckpoint());
+        butRetour.addActionListener((e) -> retourArriere());
+        butAide.addActionListener((e) -> demandeAide());
+
+        boutons.add(butMenu);
+        boutons.add(butVerifier);
+        boutons.add(butCharger);
+        boutons.add(butSauvegarder);
+        boutons.add(butCheckpoint);
+        boutons.add(butRetour);
+        boutons.add(butAide);
+
+        for(JButton b : boutons){
+            b.setBackground(Couleur.COULEUR_BOUTON);
+            b.setForeground(Couleur.COULEUR_TEXTE_BOUTON);
+
+            b.addMouseListener(new MouseAdapter() {
+                public void mouseEntered(MouseEvent e){
+                    b.setBackground(Couleur.COULEUR_TEXTE_BOUTON);
+                    b.setForeground(Couleur.COULEUR_BOUTON);
+                }
+
+                public void mouseExited(MouseEvent e){
+                    b.setBackground(Couleur.COULEUR_BOUTON);
+                    b.setForeground(Couleur.COULEUR_TEXTE_BOUTON);
+                }
+            });
+        }
 
         // Création des boutons
-        boutons = new Button[NBBOUTON];
-
-        boutons[MENU] = new Button("Menu");
-        boutonsPanel.add(boutons[MENU]);
-
-        boutons[VERIFIER] = new Button("Verifier");
-        boutonsPanel.add(boutons[VERIFIER]);
-
-        boutons[CHARGER] = new Button("Charger");
-        boutonsPanel.add(boutons[CHARGER]);
-
-        boutons[SAUVEGARDE] = new Button("Sauvegarde");
-        boutonsPanel.add(boutons[SAUVEGARDE]);
-
-        boutons[RETOUR] = new Button("Retour");
-        boutonsPanel.add(boutons[RETOUR]);
-
-        boutons[AIDE] = new Button("Aide");
-        boutonsPanel.add(boutons[AIDE]);
-
-        // Rajouter les actions pour chaque boutons
+        for(JButton b : boutons){
+            jp.add(b);
+        }
 
 
         // Liste des boutons
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weighty = 1.0; // Prend tout l'espace vertical restant
-        frame.add(boutonsPanel, gbc);
+        this.add(jp, gbc);
         // Grille de jeu
         //gbc.gridy = 1;
         //frame.add(grillePanel,gbc);
 
         // Fermeture de la fenetre
-        frame.addWindowListener(new WindowAdapter() {
+        this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
             }
         });
 
-        frame.setSize(Toolkit.getDefaultToolkit().getScreenSize()); // Affichage adapté à la taille de l'écran
-        frame.setVisible(true); // Affiche la fenêtre
+        this.setSize(Toolkit.getDefaultToolkit().getScreenSize()); // Affichage adapté à la taille de l'écran
+        this.setVisible(true); // Affiche la fenêtre
 
     }
 
@@ -128,10 +129,17 @@ public class MenuJeu {
     /**
      * Méthode qui permet de revenir à un point de sauvegarde rapide que l'utilisateur pourra créer
      **/
-    public void chargerCheckpoint(){
+    public void charger(){
         //Si checkpoint existe alors on charge (Bouton cliquable)
 
         //Sinon checkpoint n'existe pas (Bouton non cliquable)
+    }
+
+    /**
+     * Méthode qui permet de sauvegarder notre partie pour quitter le jeu
+     */
+    public void sauvegarder(){
+
     }
 
     /**
@@ -140,6 +148,18 @@ public class MenuJeu {
     public void verifierGrille(){
         //Appel de la fonction de map
 
+    }
+
+    /**
+     * Méthode pour demander de l'aide pendant une partie
+     */
+    public void demandeAide(){
+
+    }
+
+    public void pageMenu(){
+        Menu m = new Menu();
+        this.dispose();
     }
 
     /**
