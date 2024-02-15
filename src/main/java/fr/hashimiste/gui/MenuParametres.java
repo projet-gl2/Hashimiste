@@ -18,21 +18,36 @@ public class MenuParametres extends JFrame implements ActionListener{
     private Color couleurBouton = new java.awt.Color(160, 158, 188);
     private Color couleurTextBouton = new java.awt.Color(251, 250, 242);
 
-    private int tailleMinX = 500;
-    private int tailleMinY = 300;
-    private int tailleMaxX = 1920;
-    private int tailleMaxY = 1080;
+    /**
+     * Taille minimum de la fenêtre en largeur
+     */
+    private final static int TAILLE_MIN_X = 500;
+
+    /**
+     * Taille minimum de la fenêtre en hauteur
+     */
+    private final static int TAILLE_MIN_Y = 300;
+
+    /**
+     * Taille maximum de la fenêtre en largeur
+     */
+    private final static int TAILLE_MAX_X = 1920;
+
+    /**
+     * Taille maximum de la fenêtre en hauteur
+     */
+    private final static int TAILLE_MAX_Y = 1080;
 
     public MenuParametres(){
         this.setTitle("Hashimiste");
         this.setIconImages(getIconImages());
 
         //Taille minimum pour la fenêtre
-        this.setMinimumSize(new Dimension(tailleMinX, tailleMinY));
+        this.setMinimumSize(new Dimension(TAILLE_MIN_X, TAILLE_MIN_Y));
         //Preferred size pour la fenêtre
-        this.setPreferredSize(new Dimension(tailleMinX, tailleMinY));
+        this.setPreferredSize(new Dimension(TAILLE_MIN_X, TAILLE_MIN_Y));
         //Taille maximum pour la fenêtre
-        this.setMaximumSize(new Dimension(tailleMaxX, tailleMaxY));
+        this.setMaximumSize(new Dimension(TAILLE_MAX_X, TAILLE_MAX_Y));
 
         //Bloquer le redimensionnement de la fenêtre
         this.setResizable(false);
