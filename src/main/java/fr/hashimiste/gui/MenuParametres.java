@@ -5,9 +5,9 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * Classe pour l'affichage du menu des paramètres
+ * Classe pour l'affichage du menu des paramètres.
  * 
- * @author Henzo
+ * @author Henzo Ageorges
  * @version 16.0.2
  */
 

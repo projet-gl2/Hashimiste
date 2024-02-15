@@ -9,9 +9,10 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 /**
- * Classe pour l'affichage du menu des techniques
+ * Classe pour l'affichage du menu des techniques.
+ * Cette fenêtre affiche une liste de techniques qui ont chacune leur description
  * 
- * @author Henzo
+ * @author Henzo Ageorges
  * @version 16.0.2
  */
 
