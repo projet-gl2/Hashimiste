@@ -1,3 +1,4 @@
+package fr.hashimiste.techniques;
 public class Ile {
 
     private int n; //valeur de l'île

@@ -1,3 +1,4 @@
+package fr.hashimiste.techniques;
 import java.util.function.Function;
 
 /**
