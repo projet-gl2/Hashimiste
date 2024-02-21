@@ -175,7 +175,6 @@ public class Ile extends Component {
     }
 
 
-
     /**
      * Vérifie la valeur de l'île en face de l'île appelée dans la direction donnée.
      * @param d Direction à vérifier peut être NORD, EST, SUD ou OUEST
