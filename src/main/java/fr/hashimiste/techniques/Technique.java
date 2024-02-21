@@ -45,7 +45,7 @@ public enum Technique {
             "Si une île a un chiffre pair et son nombre de voisins correspond à n/2 alors elle est reliée 2 fois à chacun de ses voisins"
                        , o -> {
         int n = o.getN();
-        int nbV = o.nbVoisin(); //fonction qui calcule le nombre de voisin possible d'une île
+        int nbV = o.getNbVoisin(); //fonction qui calcule le nombre de voisin possible d'une île
         if(n == 8) return true;
         if(n == 6 && nbV == 3) return true;
         if(n == 4 && nbV == 2) return true;
@@ -59,7 +59,7 @@ public enum Technique {
             " alors il faut ajouter tous ces ponts possibles."
             , o -> {
         int n = o.getN();
-        int nbPoss = o.nbPontPossible();
+        int nbPoss = o.getNbPontPossible();
         return n == nbPoss;
     }),
     /**
@@ -72,8 +72,8 @@ public enum Technique {
             "chacun de ses voisins"
             , o -> {
         int n = o.getN();
-        int nbV = o.nbVoisin();
-        int nbP = o.nbPont();
+        int nbV = o.getNbVoisin();
+        int nbP = o.getNbPont();
 
         int i;
         boolean verif = false; //prend la valeur true s'il y a un pont possible dans une direction qui n'a pas été placé
@@ -106,8 +106,8 @@ public enum Technique {
             "tous ses autres voisins"
             , o -> {
         int n = o.getN();
-        int nbV = o.nbVoisin();
-        int nbV1 = o.nbVoisinAvec1();
+        int nbV = o.getNbVoisin();
+        int nbV1 = o.getNbVoisinAvec1();
         if(n == 7 && nbV1 == 1) return true;
         if(n == 5 && nbV == 3 && nbV1 == 1) return true;
         if(n == 3 && nbV == 2 && nbV1 == 1) return true;
@@ -122,7 +122,7 @@ public enum Technique {
             "hashi il peut seulement exister maximum 2 ponts entre 2 îles."
             , o -> {
         int n = o.getN();
-        int nbV = o.nbVoisin();
+        int nbV = o.getNbVoisin();
         if(n == 1 || n == 2){
             return nbV == 1;
         }
@@ -137,7 +137,7 @@ public enum Technique {
             "dont deux d'entre eux sont de valeurs 1, alors on peut la compléter. " +
                     "Même chose si une île est de valeur 5, avec trois voisins de valeur 1." ,
             o -> {
-        return ((o.getN() == 4 && o.nbVoisin() == 3 && o.nbVoisinAvec1() == 2) || (o.getN() == 5 && o.nbVoisin() == 4 && o.nbVoisinAvec1() == 3));
+        return ((o.getN() == 4 && o.getNbVoisin() == 3 && o.getNbVoisinAvec1() == 2) || (o.getN() == 5 && o.getNbVoisin() == 4 && o.getNbVoisinAvec1() == 3));
     }),
     /**
      * Technique vérifiant si une île est un 6 avec un 1 pour voisin, et si elle n'a pas de ponts avec ses voisins qui ne sont pas des 1.
@@ -147,7 +147,7 @@ public enum Technique {
                     "un pont avec chacun de ses autres voisins."
             , o -> {
         boolean verif = false;
-        if (o.getN() == 6 && o.nbVoisinAvec1() == 1){
+        if (o.getN() == 6 && o.getNbVoisinAvec1() == 1){
             Direction[] lD = Direction.values();
             for(int i=0; i<4; i++){
                 verif = verif || (o.valeurIleDirection(lD[i]) != 1 && o.nbPontsDirection(lD[i]) == 0);
@@ -162,7 +162,7 @@ public enum Technique {
             "Si une île de valeur 1 est voisin avec un 1, il ne peut pas y avoir de pont " +
                     "entre eux, car cela brise la règle d'isolation."
             , o -> {
-        return(o.getN() == 1 && (o.nbVoisin()-o.nbVoisinAvec1() == 1));
+        return(o.getN() == 1 && (o.getNbVoisin()-o.getNbVoisinAvec1() == 1));
     }),
     /**
      * Technique vérifiant si une île est un 2 possédant deux voisin dont l'un est aussi un 2
@@ -174,7 +174,7 @@ public enum Technique {
                        , o -> {
         boolean verifVoisin2 = false; //vérifie si l'un des voisins est un 2.
         boolean verifPont0 = false; //vérifie si le voisin qui n'est pas un 2 n'est pas relié par un pont.
-        if (o.getN() == 2 && o.nbVoisin() == 2){
+        if (o.getN() == 2 && o.getNbVoisin() == 2){
             Direction[] lD = Direction.values();
             for(int i=0; i<4; i++){
                 verifVoisin2 = verifVoisin2 || (o.valeurIleDirection(lD[i]) == 2);
