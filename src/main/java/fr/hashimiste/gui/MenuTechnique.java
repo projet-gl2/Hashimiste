@@ -4,14 +4,16 @@ package fr.hashimiste.gui;
 import fr.hashimiste.techniques.Technique;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
 /**
- * Classe pour l'affichage du menu des techniques
+ * Classe pour l'affichage du menu des techniques.
+ * Cette fenêtre affiche une liste de techniques qui ont chacune leur description
  * 
- * @author Henzo
+ * @author Henzo Ageorges
  * @version 16.0.2
  */
 
@@ -26,10 +28,25 @@ public class MenuTechnique extends JFrame implements ActionListener{
 
     private ArrayList<String> listDesc = new ArrayList<>();
 
-    private int tailleMinX = 950;
-    private int tailleMinY = 400;
-    private int tailleMaxX = 1920;
-    private int tailleMaxY = 1080;
+    /**
+     * Taille minimum de la fenêtre en largeur
+     */
+    private final static int TAILLE_MIN_X = 950;
+
+    /**
+     * Taille minimum de la fenêtre en hauteur
+     */
+    private final static int TAILLE_MIN_Y = 400;
+
+    /**
+     * Taille maximum de la fenêtre en largeur
+     */
+    private final static int TAILLE_MAX_X = 1920;
+
+    /**
+     * Taille maximum de la fenêtre en hauteur
+     */
+    private final static int TAILLE_MAX_Y = 1080;
 
     /**
      * Constructeur pour créer tous les composants de la fenêtre
@@ -39,11 +56,11 @@ public class MenuTechnique extends JFrame implements ActionListener{
         this.setIconImages(getIconImages());
 
         //Taille minimum pour la fenêtre
-        this.setMinimumSize(new Dimension(tailleMinX, tailleMinY));
+        this.setMinimumSize(new Dimension(TAILLE_MIN_X, TAILLE_MIN_Y));
         //Preferred size pour la fenêtre
-        this.setPreferredSize(new Dimension(tailleMinX, tailleMinY));
+        this.setPreferredSize(new Dimension(TAILLE_MIN_X, TAILLE_MIN_Y));
         //Taille maximum pour la fenêtre
-        this.setMaximumSize(new Dimension(tailleMaxX, tailleMaxY));
+        this.setMaximumSize(new Dimension(TAILLE_MAX_X, TAILLE_MAX_Y));
 
         //Bloquer le redimensionnement de la fenêtre
         this.setResizable(false);
@@ -75,20 +92,20 @@ public class MenuTechnique extends JFrame implements ActionListener{
         description.setAlignmentX(JLabel.LEFT_ALIGNMENT);
         description.setVerticalAlignment(JLabel.TOP);
 
-        butMenu.setBackground(Couleur.getCouleurBouton());
+        butMenu.setBackground(Couleur.COULEUR_BOUTON);
         description.setBackground(Color.WHITE);
 
-        butMenu.setForeground(Couleur.getCouleurTextBouton());
+        butMenu.setForeground(Couleur.COULEUR_TEXTE_BOUTON);
 
         butMenu.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e){
-                butMenu.setBackground(Couleur.getCouleurTextBouton());
-                butMenu.setForeground(Couleur.getCouleurBouton());
+                butMenu.setBackground(Couleur.COULEUR_TEXTE_BOUTON);
+                butMenu.setForeground(Couleur.COULEUR_BOUTON);
             }
 
             public void mouseExited(MouseEvent e){
-                butMenu.setBackground(Couleur.getCouleurBouton());
-                butMenu.setForeground(Couleur.getCouleurTextBouton());
+                butMenu.setBackground(Couleur.COULEUR_BOUTON);
+                butMenu.setForeground(Couleur.COULEUR_TEXTE_BOUTON);
             }
         });
 
@@ -122,6 +139,8 @@ public class MenuTechnique extends JFrame implements ActionListener{
 
         this.setContentPane(jp);
 
+        this.setIconImage(new ImageIcon(Image.ICON_TRANSPARENT).getImage());
+
         this.pack();
         this.setVisible(true);
     }
@@ -130,7 +149,7 @@ public class MenuTechnique extends JFrame implements ActionListener{
      * Méthode pour afficher la page du menu et détruire la page des techniques
      */
     public void pageMenu(){
-        Menu m = new Menu();
+        new Menu();
         this.dispose();
     }
 
@@ -148,6 +167,6 @@ public class MenuTechnique extends JFrame implements ActionListener{
      * @param args Arguments du main (entrés en ligne de commande)
      */
     public static void main(String args[]){
-        MenuTechnique t = new MenuTechnique();
+        new MenuTechnique();
     }
 }

@@ -3,6 +3,7 @@ package fr.hashimiste.gui.modelibre;
 import fr.hashimiste.Difficulte;
 import fr.hashimiste.gui.Couleur;
 import fr.hashimiste.gui.Image;
+import fr.hashimiste.gui.Menu;
 import fr.hashimiste.maps.Grille;
 import fr.hashimiste.maps.Ile;
 
@@ -23,7 +24,7 @@ public class ModeLibre extends JFrame  {
     // TODO :: implémenter les vrai grilles
     private final PreviewComponent[] previewTab = new PreviewComponent[10];
 
-    Grille grille = new Grille(Difficulte.FACILE, Arrays.asList(new Ile(null, 1,1,3),
+    Grille grille = new Grille(new Dimension(7,7),Difficulte.FACILE, Arrays.asList(new Ile(null, 1,1,3),
             new Ile(null, 1,1,3),
             new Ile(null, 5,3,3),
             new Ile(null, 6,0, 2),
@@ -137,8 +138,9 @@ public class ModeLibre extends JFrame  {
             public void mousePressed(MouseEvent e) {
                 Point point = new Point(e.getX(), e.getY());
                 Component c = panelFacile.getComponentAt(e.getPoint());
-                if(c instanceof PreviewComponent previewComponent)
+                if(c instanceof PreviewComponent)
                 {
+                    PreviewComponent previewComponent = (PreviewComponent) c;
                     playButton.setVisible(true);
                     bigPreview.setVisible(true);
                     bigPreview.setColor(previewComponent.getColor());
@@ -156,6 +158,8 @@ public class ModeLibre extends JFrame  {
         panelMoyen.addMouseListener(gridListener);
         panelDifficile.addMouseListener(gridListener);
 
+        menuButton.addActionListener(e -> openMenu());
+        playButton.addActionListener(e -> openGame());
 
 
         //menuButton.setOpaque(true);
@@ -196,5 +200,17 @@ public class ModeLibre extends JFrame  {
         moyenLabel.setBounds(10, h/3+facileLabel.getHeight(), 100,20);
         difficileLabel.setBounds(10,(h/3)*2+facileLabel.getHeight()*2,100,20);
         super.paint(g);
+    }
+
+    public void openMenu()
+    {
+        this.setVisible(false);
+        new Menu();
+    }
+
+    void openGame()
+    {
+        this.setVisible(false);
+        new GridTest();
     }
 }
