@@ -15,7 +15,7 @@ import java.util.function.Predicate;
  */
 public class Ile extends Component {
     private final Grille grille;
-    private final int nbPont;
+    private final int n; //valeur de l'île
     private final List<Pont> pontsLiees = new ArrayList<>();
 
     /**
@@ -34,7 +34,7 @@ public class Ile extends Component {
         this.grille = grille;
         setLocation(x, y);
         setSize(20, 20);
-        this.nbPont = nbPont;
+        this.n = nbPont;
     }
 
     /**
@@ -65,13 +65,18 @@ public class Ile extends Component {
         super.paint(g);
     }
 
+    public int getN() {
+        return n;
+    }
+
     /**
-     * Récupérer le nombre de ponts de l'ile
+     * Récupérer le nombre de ponts maximum qu'il est possible de faire depuis l'ile
      *
-     * @return le nombre de ponts de l'ile
+     * @return le nombre maximum de ponts
      */
     public int getNbPontPossible() {
-        return nbPont;
+        //*A FAIRE*
+        return 0;
     }
 
     /**
@@ -124,7 +129,7 @@ public class Ile extends Component {
         return "Ile{" +
                 "x=" + getX() +
                 ", y=" + getY() +
-                ", nbPont=" + nbPont +
+                ", nbPont=" + n +
                 '}';
     }
 
@@ -137,6 +142,37 @@ public class Ile extends Component {
         pontsLiees.add(pont);
     }
 
+    /**
+     * Compte le nombre de voisins possibles pour l'île, c'est-à-dire le nombre
+     * d'îles différentes avec lesquelles il est possible de construire un pont.
+     * @return nombre d'îles voisines.
+     */
+    public int getNbVoisin(){
+        //**A FAIRE**//
+        return 0;
+    }
+
+    /**
+     * Compte le nombre de voisins de valeur "1" possibles pour l'île.
+     * @return nombre d'îles voisines de valeur "1".
+     */
+    public int getNbVoisinAvec1(){
+        //**A FAIRE**//
+        return 0;
+    }
+
+    /**
+     * Vérifie ce qu'il y a en face de l'île dans la direction donnée.
+     * @param d Direction à vérifier peut être NORD, EST, SUD ou OUEST
+     * @return -1 s'il n'y aucune île accessible,
+     * 0 s'il y a une île sans pont,
+     * 1 s'il y a une île reliée par un pont,
+     * 2 s'il y a une île réliée par deux ponts
+     */
+    public int nbPontsDirection(Direction d){
+        //**A FAIRE**//
+        return 0;
+    }
 
 
     /**
@@ -144,7 +180,7 @@ public class Ile extends Component {
      * @param d Direction à vérifier peut être NORD, EST, SUD ou OUEST
      * @return -1 s'il n'y aucune île accessible, la valeur de l'île en face sinon.
      */
-    int valeurIleDirection(Direction d){
+    public int valeurIleDirection(Direction d){
         //**A FAIRE**//
         return 0;
     }

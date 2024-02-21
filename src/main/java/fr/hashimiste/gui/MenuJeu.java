@@ -158,7 +158,7 @@ public class MenuJeu extends JFrame{
     }
 
     public void pageMenu(){
-        Menu m = new Menu();
+        new Menu();
         this.dispose();
     }
 
