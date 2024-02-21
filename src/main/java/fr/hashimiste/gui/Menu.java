@@ -384,7 +384,8 @@ public class Menu extends JFrame implements ActionListener, WindowStateListener 
     /**
      * Methode pour changer de page pour la page Aventure
      */
-    private void pageAventure() {
+    public void pageAventure() {
+        new MenuAventure();
         this.dispose();
         // Appel de la page Aventure
     }

@@ -3,7 +3,7 @@ package fr.hashimiste.gui; /**
  **/
 import java.awt.*;
 import java.awt.event.*;
-
+import javax.swing.*;
 public class MenuAventure {
 
     private Frame frame;
@@ -13,6 +13,24 @@ public class MenuAventure {
     private int largeurBouton;
     private int hauteurBouton;
 
+
+    /**
+     * Constante qui indique le nombre de niveau  du mode aventure
+     **/
+    public static final int NB_NIVEAU = 10;
+
+    /**
+     * Constante qui indique la largeur des boutons des niveaux
+     **/
+    public static final int LARGE_BOUT = 20;
+
+    /**
+     * Constante qui indique la longueur  des boutons des niveaux
+     **/
+    public static final int LONG_BOUT = 20;
+
+
+
     /**
      *  Méthode de création du mode aventure avec la liste des niveaux et le bouton de retour au menu
      * @param nbBouton nombre de boutons pour les niveaux
@@ -20,11 +38,11 @@ public class MenuAventure {
      * @param hauteurBouton taille de la hauteur du bouton
      *  Il faudra voir si le nombre de niveau est statique on pourra changer le constructeur afin de faire ça de manière statique de meme pour la taille des boutons
      **/
-    public MenuAventure(int nbBouton, int largeurBouton, int hauteurBouton) {
+    public MenuAventure() {
 
-        this.nbBouton = nbBouton;
-        this.largeurBouton = largeurBouton;
-        this.hauteurBouton = hauteurBouton;
+        this.nbBouton = NB_NIVEAU;
+        this.largeurBouton = LARGE_BOUT;
+        this.hauteurBouton = LONG_BOUT;
 
         // Titre de la frame
         frame = new Frame("Hashimiste");
@@ -38,14 +56,13 @@ public class MenuAventure {
 
         boutons = new Button[nbBouton];
         for (int i = 0; i < nbBouton; i++) {
-            boutons[i] = new Button(" " + i + " ");
+            boutons[i] = new Button("Niveau " + i + " ");
             boutonsPanel.add(boutons[i]);
             // Rajouter l'action pour lié les niveaux aux boutons
         }
 
         menuButton = new Button("Menu"); // Création du bouton pour le menu
-        // Rajouter l'action pour créer le menu
-        // Rajouter l'action pour destroy cette fenetre
+        menuButton.addActionListener((e) -> pageMenu());
 
         Panel menuPanel = new Panel();
         menuPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -82,11 +99,19 @@ public class MenuAventure {
     }
 
     /**
+     * Méthode pour afficher la page du menu et détruire la page des paramètres
+     * */
+    public void pageMenu(){
+        new Menu();
+        frame.dispose();
+    }
+
+    /**
      *  Le main ici sert seulement à tester le menu comme dit précédemment on pourra passer les valeurs en statique une fois que le nombre de niveau aura été définit
      *  @param args Argument passé lors du démarrage
      **/
     public static void main(String[] args) {
-        new MenuAventure(40, 60, 60);
+        new MenuAventure();
     }
 }
 
