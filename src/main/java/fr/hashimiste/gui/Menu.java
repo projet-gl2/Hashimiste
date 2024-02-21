@@ -108,7 +108,7 @@ public class Menu extends JFrame implements ActionListener, WindowStateListener 
     /**
      * Etat de la fenêtre avant d'être maximisée
      */
-    public static int stateBeforeMaximized = JFrame.NORMAL;
+    public static int STATE_BEFORE_MAXIMISED = JFrame.NORMAL;
 
     /**
      * Constructeur de la classe Menu
@@ -324,10 +324,10 @@ public class Menu extends JFrame implements ActionListener, WindowStateListener 
     public void windowStateChanged(WindowEvent e) {
         // Si la fenêtre est maximisée, la remettre dans l'état précédent
         if ((e.getNewState() & JFrame.MAXIMIZED_BOTH) == JFrame.MAXIMIZED_BOTH) {
-            this.setExtendedState(stateBeforeMaximized);
+            this.setExtendedState(STATE_BEFORE_MAXIMISED);
         } else {
             // Sauvegarder le dernier état non maximisé
-            stateBeforeMaximized = e.getNewState();
+            STATE_BEFORE_MAXIMISED = e.getNewState();
         }
     }
 
