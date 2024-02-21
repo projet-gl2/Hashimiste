@@ -1,9 +1,16 @@
 plugins {
     id("java")
+    id("application")
 }
 
 group = "fr.hashimiste"
 version = "1.0-SNAPSHOT"
+
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+    sourceCompatibility = JavaVersion.VERSION_1_8.toString()
+    targetCompatibility = JavaVersion.VERSION_1_8.toString()
+}
 
 repositories {
     mavenCentral()
@@ -16,4 +23,8 @@ dependencies {
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
+}
+
+application {
+    mainClass.set("fr.hashimiste.gui.MenuJeu")
 }
