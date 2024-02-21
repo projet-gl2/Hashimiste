@@ -106,6 +106,26 @@ public class Grille {
     }
 
     /**
+     * Récupérer la longeur de la grille
+     *
+     * @return la longeur de la grille
+     */
+    public int getL(){
+        //**A FAIRE**
+        return 0;
+    }
+
+    /**
+     * Récupérer la hauteur de la grille
+     *
+     * @return la hauteur de la grille
+     */
+    public int getC(){
+        //**A FAIRE**
+        return 0;
+    }
+
+    /**
      * Parcourt la grille dans son état actuel pour vérifier les techniques qui s'appliquent aux îles et donner un indice au joueur.
      * @return l'île qui peut bénéficier d'un indice.
      */

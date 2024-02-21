@@ -95,6 +95,10 @@ public class Pont extends Component {
         return n;
     }
 
+    /**
+     * Indique si le pont peut être construit, c'est à dire qu'il n'y a pas de pont déjà existant qui entre en collision avec lui.
+     * @return True si le pont peut être construit, False sinon
+     */
     public boolean constructionPossible() {
         return true;
     }
