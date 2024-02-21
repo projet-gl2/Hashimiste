@@ -1,42 +1,26 @@
 package fr.hashimiste.gui.modelibre;
 
-import fr.hashimiste.Difficulte;
 import fr.hashimiste.gui.Couleur;
 import fr.hashimiste.gui.Image;
 import fr.hashimiste.gui.Menu;
-import fr.hashimiste.maps.Grille;
-import fr.hashimiste.maps.Ile;
+import fr.hashimiste.gui.modelibre.components.PreviewComponent;
+import fr.hashimiste.gui.modelibre.gallerie.ExempleGrille;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 public class ModeLibre extends JFrame  {
 
     // TODO :: implémenter les vrai grilles
     private final PreviewComponent[] previewTab = new PreviewComponent[10];
 
-    Grille grille = new Grille(new Dimension(7,7),Difficulte.FACILE, Arrays.asList(new Ile(null, 1,1,3),
-            new Ile(null, 1,1,3),
-            new Ile(null, 5,3,3),
-            new Ile(null, 6,0, 2),
-            new Ile(null, 0,0, 2),
-            new Ile(null,0,6,6),
-            new Ile(null, 6,6,5)
-            ));
 
 
 
-
-    private final PreviewComponent bigPreview = new PreviewComponent(Color.GRAY, grille);
+    private final PreviewComponent bigPreview = new PreviewComponent(Color.GRAY, null);
 
     private static final int tailleMinX = 550;
     private static final int tailleMinY = 500;
@@ -106,8 +90,11 @@ public class ModeLibre extends JFrame  {
         playButton.setText("Jouer");
 
         // création des layouts pour les grilles
+        panelFacile.setName("facile");
         panelFacile.setLayout(new GridLayout(2,5));
+        panelMoyen.setName("moyen");
         panelMoyen.setLayout(new GridLayout(2,5));
+        panelDifficile.setName("difficile");
         panelDifficile.setLayout(new GridLayout(2,5));
         panelPreview.setLayout(null);
 
@@ -116,8 +103,12 @@ public class ModeLibre extends JFrame  {
         for(int i = 0; i <= 9; i++)
         {
             Color c = Couleur.COULEUR_BOUTON;/*new Color((int)(Math.random() * 0x1000000))*/;
-            panelFacile.add(new PreviewComponent(c, grille));
-            panelMoyen.add(new PreviewComponent(c, null));
+            PreviewComponent pf = new PreviewComponent(c, ExempleGrille.grille_facile);
+            pf.setId(i);
+            panelFacile.add(pf);
+            PreviewComponent pm = new PreviewComponent(c, ExempleGrille.grille_moyen);
+            pm.setId(10+i);
+            panelMoyen.add(pm);
             panelDifficile.add(new PreviewComponent(c, null));
         }
 
@@ -133,30 +124,36 @@ public class ModeLibre extends JFrame  {
         panelPreview.add(menuButton);
         panelPreview.add(playButton);
 
+        panelFacile.setBackground(Color.BLUE);
+        panelMoyen.setBackground(Color.red);
+
         MouseListener gridListener = new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 Point point = new Point(e.getX(), e.getY());
-                Component c = panelFacile.getComponentAt(e.getPoint());
+                Component panel = ModeLibre.this.getContentPane().getComponentAt(e.getPoint());
+                System.out.println(panel.getName());
+                Component c = panel.getComponentAt(point);
+                System.out.println(point);
+
                 if(c instanceof PreviewComponent)
                 {
                     PreviewComponent previewComponent = (PreviewComponent) c;
+                    bigPreview.setGrille(previewComponent.getGrille());
                     playButton.setVisible(true);
                     bigPreview.setVisible(true);
                     bigPreview.setColor(previewComponent.getColor());
                     bigPreview.paint(bigPreview.getGraphics());
                     //playButton.paint(playButton.getGraphics());
                     panelPreview.paint(panelPreview.getGraphics());
-                    System.out.println("preview");
+                    System.out.println("preview:" + previewComponent.getId());
 
                 }
 
             }
         };
 
-        panelFacile.addMouseListener(gridListener);
-        panelMoyen.addMouseListener(gridListener);
-        panelDifficile.addMouseListener(gridListener);
+        this.addMouseListener(gridListener);
 
         menuButton.addActionListener(e -> openMenu());
         playButton.addActionListener(e -> openGame());
@@ -211,6 +208,6 @@ public class ModeLibre extends JFrame  {
     void openGame()
     {
         this.setVisible(false);
-        new GridTest();
+        new GrilleJeu();
     }
 }

@@ -14,8 +14,7 @@ public enum Technique {
      * Technique vérifiant si une île est un 4 dans un coin, un 6 en bordure, ou un 8.
      */
     TECH_DEP_1("Technique 1 (bordure)",
-            "Si une île a un chiffre pair n et que son nombre de voisins correspond à n/2 " +
-                    "alors elle est reliée 2 fois à chacun de ses voisins"
+            "Si une île a un chiffre pair n et que son nombre de voisins correspond à n/2 alors elle est reliée 2 fois à chacun de ses voisins"
             , o -> {
         int n = o.getN();
         if(n == 8) return true;
@@ -43,8 +42,7 @@ public enum Technique {
      * Technique vérifiant si une île est un 4 avec deux voisin, un 6 avec trois voisins, ou un 8.
      */
     TECH_DEP_2("Technique 1",
-            "Si une île a un chiffre pair et son nombre de voisins correspond à n/2 alors " +
-                    "elle est reliée 2 fois à chacun de ses voisins"
+            "Si une île a un chiffre pair et son nombre de voisins correspond à n/2 alors elle est reliée 2 fois à chacun de ses voisins"
                        , o -> {
         int n = o.getN();
         int nbV = o.getNbVoisin(); //fonction qui calcule le nombre de voisin possible d'une île
@@ -142,42 +140,10 @@ public enum Technique {
         return ((o.getN() == 4 && o.getNbVoisin() == 3 && o.getNbVoisinAvec1() == 2) || (o.getN() == 5 && o.getNbVoisin() == 4 && o.getNbVoisinAvec1() == 3));
     }),
     /**
-     * Technique vérifiant si une île est un 2 avec deux voisins, dont un avec un 1, et si elle n'a pas de ponts avec son autre voisin.
-     */
-    TECH_BAS_5("Technique 6.1",
-            "Si une île de valeur 2 possède deux voisins, dont un de valeur 1, alors il possède au moins " +
-                    "un pont avec son autre voisin."
-            , o -> {
-        boolean verif = false;
-        if (o.getN() == 2 && o.getNbVoisin() == 2 && o.getNbVoisinAvec1() == 1){
-            Direction[] lD = Direction.values();
-            for(int i=0; i<4; i++){
-                verif = verif || (o.valeurIleDirection(lD[i]) > 1 && o.nbPontsDirection(lD[i]) == 0);
-            }
-        }
-        return verif;
-    }),
-    /**
-     * Technique vérifiant si une île est un 4 avec trois voisins, dont un avec un 1, et si elle n'a pas de ponts avec ses voisins qui ne sont pas des 1.
-     */
-    TECH_BAS_6("Technique 6.2",
-            "Si une île de valeur 4 possède trois voisins dont un de valeur 1, alors elle possède au moins " +
-                    "un pont avec chacun de ses autres voisins."
-            , o -> {
-        boolean verif = false;
-        if (o.getN() == 4 && o.getNbVoisin() == 3 && o.getNbVoisinAvec1() == 1){
-            Direction[] lD = Direction.values();
-            for(int i=0; i<4; i++){
-                verif = verif || (o.valeurIleDirection(lD[i]) > 1 && o.nbPontsDirection(lD[i]) == 0);
-            }
-        }
-        return verif;
-    }),
-    /**
      * Technique vérifiant si une île est un 6 avec un 1 pour voisin, et si elle n'a pas de ponts avec ses voisins qui ne sont pas des 1.
      */
-    TECH_BAS_7("Technique 6.3",
-            "Si une île de valeur 6 possède un voisin de valeur 1, alors elle possède au moins " +
+    TECH_BAS_5("Technique 6",
+            "Si une île de valeur 6 possède un voisin de valeur 1, alors il possède au moins " +
                     "un pont avec chacun de ses autres voisins."
             , o -> {
         boolean verif = false;
@@ -216,23 +182,6 @@ public enum Technique {
             }
         }
         return (verifVoisin2 && verifPont0);
-    }),
-    /**
-     * Technique vérifiant si une île est un 2 possédant trois voisin dont deux sont des 1
-     * et dont l'autre n'est relié par aucun pont.
-     */
-    TECH_ISO_3("Technique 8.1",
-            "Si une île de valeur 2 est voisin avec deux 1, il ne peut pas être rélié " +
-                    "aux deux, car cela brise la règle d'isolation."
-            , o -> {
-        boolean verifPont0 = false; //vérifie si le voisin qui n'est pas un 1 n'est pas relié par un pont.
-        if (o.getN() == 2 && (o.getNbVoisin() - o.getNbVoisinAvec1()) == 1){
-            Direction[] lD = Direction.values();
-            for(int i=0; i<4; i++){
-                verifPont0 = verifPont0 || (o.valeurIleDirection(lD[i]) != 1 && o.nbPontsDirection(lD[i]) == 0);
-            }
-        }
-        return (verifPont0);
     });
 
     private final String nom;

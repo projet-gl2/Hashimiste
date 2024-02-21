@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 /**
  * La classe Jeu correspond au jeu lorsqu'on est face à l'écran de jeu avec les boutons ainsi que la grille, il y divers boutons (retour arrière, poser un checkpoint, aide, etc)
+ * 
+ * @author Ilyas 
  **/
 public class MenuJeu extends JFrame{
 
@@ -104,7 +106,7 @@ public class MenuJeu extends JFrame{
         });
 
         this.setIconImage(new ImageIcon(Image.ICON_TRANSPARENT).getImage());
-        
+
         this.setSize(Toolkit.getDefaultToolkit().getScreenSize()); // Affichage adapté à la taille de l'écran
         this.setVisible(true); // Affiche la fenêtre
 

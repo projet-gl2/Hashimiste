@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import static fr.hashimiste.gui.Fenetre.*;
+
 /**
  * Classe pour l'affichage du menu des paramètres.
  * 
@@ -14,29 +16,6 @@ import java.awt.event.*;
 public class MenuParametres extends JFrame implements ActionListener{
     private JPanel jp = new JPanel();
     private JButton butMenu = new JButton("Menu");
-
-    private Color couleurBouton = new java.awt.Color(160, 158, 188);
-    private Color couleurTextBouton = new java.awt.Color(251, 250, 242);
-
-    /**
-     * Taille minimum de la fenêtre en largeur
-     */
-    private final static int TAILLE_MIN_X = 500;
-
-    /**
-     * Taille minimum de la fenêtre en hauteur
-     */
-    private final static int TAILLE_MIN_Y = 300;
-
-    /**
-     * Taille maximum de la fenêtre en largeur
-     */
-    private final static int TAILLE_MAX_X = 1920;
-
-    /**
-     * Taille maximum de la fenêtre en hauteur
-     */
-    private final static int TAILLE_MAX_Y = 1080;
 
     public MenuParametres(){
         this.setTitle("Hashimiste");
@@ -61,30 +40,30 @@ public class MenuParametres extends JFrame implements ActionListener{
         butMenu.addActionListener((e) -> pageMenu());
 
         //Taille minimum des composants
-        butMenu.setMinimumSize(new Dimension(30, 20));
+        butMenu.setMinimumSize(new Dimension(TAILLE_MIN_COMPOSANT_X, TAILLE_MIN_COMPOSANT_Y));
 
         //Preferred size des composants
-        butMenu.setPreferredSize(new Dimension(30, 20));
+        butMenu.setPreferredSize(new Dimension(TAILLE_PREF_COMPOSANT_X, TAILLE_PREF_COMPOSANT_Y));
 
         //Taille maximum des composants
-        butMenu.setMaximumSize(new Dimension(80, 20));
+        butMenu.setMaximumSize(new Dimension(TAILLE_MAX_COMPOSANT_X, TAILLE_MAX_COMPOSANT_Y));
 
         butMenu.setAlignmentX(JButton.RIGHT_ALIGNMENT);
 
         //Couleur du font et du texte des composants
-        butMenu.setBackground(new Color(couleurBouton.getRGB()));
-        butMenu.setForeground(new Color(couleurTextBouton.getRGB()));
+        butMenu.setBackground(new Color(Couleur.COULEUR_BOUTON.getRGB()));
+        butMenu.setForeground(new Color(Couleur.COULEUR_TEXTE_BOUTON.getRGB()));
 
         //Ajout d'un mouseListener au bouton du menu pour changer la couleur quand on survole le bouton
         butMenu.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e){
-                butMenu.setBackground(new Color(couleurTextBouton.getRGB()));
-                butMenu.setForeground(new Color(couleurBouton.getRGB()));
+                butMenu.setBackground(new Color(Couleur.COULEUR_TEXTE_BOUTON.getRGB()));
+                butMenu.setForeground(new Color(Couleur.COULEUR_BOUTON.getRGB()));
             }
 
             public void mouseExited(MouseEvent e){
-                butMenu.setBackground(new Color(couleurBouton.getRGB()));
-                butMenu.setForeground(new Color(couleurTextBouton.getRGB()));
+                butMenu.setBackground(new Color(Couleur.COULEUR_BOUTON.getRGB()));
+                butMenu.setForeground(new Color(Couleur.COULEUR_TEXTE_BOUTON.getRGB()));
             }
         });
 

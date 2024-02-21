@@ -1,4 +1,4 @@
-package fr.hashimiste;
+package fr.hashimiste.maps;
 
 /**
  * L'énumération Difficulte représente les niveaux de difficulté d'un jeu ou d'une tâche.

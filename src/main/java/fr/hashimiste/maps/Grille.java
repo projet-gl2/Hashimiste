@@ -1,10 +1,7 @@
 package fr.hashimiste.maps;
-
-import fr.hashimiste.Difficulte;
 import fr.hashimiste.techniques.Technique;
 
 import java.awt.geom.Dimension2D;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,43 +12,68 @@ import java.util.List;
 public class Grille {
     private final Dimension2D dimension;
     private final Difficulte difficulte;
+    private final Case[][] matrice;
     private final List<Ile> iles;
     private final List<Pont> ponts;
+    private final Map map;
 
     /**
      * Créer une grille
      *
      * @param dimension  la dimension de la grille
+     * @param idMap      l'id de la map
      * @param difficulte la difficulté de la grille
-     * @param iles       les iles de la grille
-     * @param ponts      les ponts de la grille
      */
-    public Grille(Dimension2D dimension, Difficulte difficulte, List<Ile> iles, List<Pont> ponts) {
+    public Grille(Dimension2D dimension, int idMap, Difficulte difficulte) {
         this.dimension = dimension;
         this.difficulte = difficulte;
-        this.iles = iles;
-        this.ponts = ponts;
+        this.map = Map.chargerMap(idMap);
+        this.matrice = new Case[(int) dimension.getWidth()][(int) dimension.getHeight()];
+        this.importerIles();
+        this.importerPonts();
+        this.iles = map.iles;
+        this.ponts = map.ponts;
     }
 
-    /**
-     * Créer une grille
-     *
-     * @param dimension  la dimension de la grille
-     * @param difficulte la difficulté de la grille
-     * @param iles      les iles de la grille
-     */
-    public Grille(Dimension2D dimension, Difficulte difficulte, List<Ile> iles) {
-        this(dimension, difficulte, iles, new ArrayList<>());
+    private void importerIles() {
+        for (Ile ile : map.iles) {
+            this.matrice[ile.getX()][ile.getY()] = new CaseIle(ile.getX(), ile.getY(), ile.getNbPont());
+        }
     }
 
-    /**
-     * Créer une grille
-     *
-     * @param dimension  la dimension de la grille
-     * @param difficulte la difficulté de la grille
-     */
-    public Grille(Dimension2D dimension, Difficulte difficulte) {
-        this(dimension, difficulte, new ArrayList<>());
+    private void importerPonts() {
+        for (Pont pont : map.ponts) {
+            Ile ile1 = pont.getIle1();
+            Ile ile2 = pont.getIle2();
+            if (pont.getIle1().getX() == pont.getIle2().getX()) {
+                if (pont.getIle1().getY() - pont.getIle2().getY() < 0) {
+                    ile2 = pont.getIle1();
+                    ile1 = pont.getIle2();
+                }
+                for (int i = ile1.getY() + 1; i < ile2.getY(); i++) {
+                    this.matrice[ile1.getX()][i] = new CasePont(ile1.getX(), i, pont.getN());
+                }
+            }
+            else {
+                if (pont.getIle1().getX() - pont.getIle2().getX() < 0) {
+                    ile2 = pont.getIle1();
+                    ile1 = pont.getIle2();
+                }
+                for (int i = ile1.getX() + 1; i < ile2.getX(); i++) {
+                    this.matrice[i][ile1.getY()] = new CasePont(i, ile1.getY(), pont.getN());
+                }
+            }
+        }
+    }
+
+    private void caseVide() {
+        for (int i = 0; i < dimension.getHeight(); i++) {
+            for (int j = 0; j < dimension.getWidth(); j++) {
+                if (this.matrice[i][j] == null) {
+                    this.matrice[i][j] = new CaseVide(i, j);
+                }
+            }
+        }
     }
 
     /**
@@ -111,7 +133,7 @@ public class Grille {
      * @return la longeur de la grille
      */
     public int getL(){
-        //**A FAIRE**
+        // TODO
         return 0;
     }
 
@@ -121,34 +143,47 @@ public class Grille {
      * @return la hauteur de la grille
      */
     public int getC(){
-        //**A FAIRE**
+        // TODO
         return 0;
     }
 
     /**
+     * Vérifie s'il n'y a aucune erreur dans la grille, c'est-à-dire, s'il n'y a aucun pont en trop par rapport à la solution.
+     * @return true si la grille ne contient pas d'erreur, false sinon
+     */
+    public Boolean verification(){
+        // TODO
+        return true;
+    }
+
+    /**
      * Parcourt la grille dans son état actuel pour vérifier les techniques qui s'appliquent aux îles et donner un indice au joueur.
-     * @return l'île qui peut bénéficier d'un indice.
+     * Si la grille contient une erreur, l'aide l'indiquera en renvoyant une île vide.
+     * @return l'île qui peut bénéficier d'un indice, ou alors null si la grille contient déjà une erreur
      */
     public Ile aide(){
-        Technique[] lTech = Technique.values();
-        int fIndMin = lTech.length; //une liste des fonctions qui appliquent une technique
-        //elles prennent en paramètre une île, et renvoient vrai si la technique s'applique à l'île
+        if (!this.verification()) return null;
+        else{
+            Technique[] lTech = Technique.values();
+            int fIndMin = lTech.length; //une liste des fonctions qui appliquent une technique
+            //elles prennent en paramètre une île, et renvoient vrai si la technique s'applique à l'île
 
-        Ile aideIle = null; //l'île sur laquelle on peut avancer à l'aide des techniques
+            Ile aideIle = null; //l'île sur laquelle on peut avancer à l'aide des techniques
 
-        for(int i=0;i<this.dimension.getWidth();i++){ //parcours colonnes
-            for(int j=0;j<this.dimension.getHeight();j++){ //parcours lignes
-                if(this.getIle(i,j) != null && !(this.getIle(i,j).isComplete())) { //si l'île existe et n'est pas complète
-                    for (int fInd=0; fInd<fIndMin; fInd++){
-                        if(lTech[fInd].execute(this.getIle(i, j))){ //si la technique s'applique à l'île
-                            aideIle = this.getIle(i,j);
-                            fIndMin = fInd; //on ne vérifie que les techniques de plus bas niveau que celles trouvées
+            for (int i = 0; i < this.dimension.getWidth(); i++) { //parcours colonnes
+                for (int j = 0; j < this.dimension.getHeight(); j++) { //parcours lignes
+                    if (this.getIle(i, j) != null && !(this.getIle(i, j).isComplete())) { //si l'île existe et n'est pas complète
+                        for (int fInd = 0; fInd < fIndMin; fInd++) { //parcours techniques
+                            if (lTech[fInd].execute(this.getIle(i, j))) { //si la technique s'applique à l'île
+                                aideIle = this.getIle(i, j);
+                                fIndMin = fInd; //on ne vérifie que les techniques de plus bas niveau que celles trouvées précédemments
+                            }
                         }
                     }
                 }
             }
-        }
 
-        return aideIle;
+            return aideIle;
+        }
     }
 }
