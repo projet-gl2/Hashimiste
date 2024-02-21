@@ -37,6 +37,12 @@ public class Ile {
         this.n = n;
     }
 
+    public int getX() { return this.x; }
+
+    public int getY() { return this.y; }
+
+    public int getN() { return this.n; }
+
     /**
      * Méthode statique pour charger les îles à partir d'une base de données pour une carte spécifique.
      * @param idMap L'identifiant de la carte pour laquelle charger les îles.
