@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="ajout méthodes sur Ile (reste à régler méthodes de Grille)">
+    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="ajout méthodes sur Ile et Grille">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/hashimiste/maps/Grille.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/hashimiste/maps/Grille.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/hashimiste/maps/Ile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/hashimiste/maps/Ile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/hashimiste/techniques/Technique.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/hashimiste/techniques/Technique.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/hashimiste/maps/Pont.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/hashimiste/maps/Pont.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,12 +51,12 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "DamiBoul"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;DamiBoul&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -277,7 +275,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708006379362</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="ajout méthodes sur Ile et Grille">
+      <option name="closed" value="true" />
+      <created>1708011625798</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1708011625798</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -328,6 +334,7 @@
     <MESSAGE value="déplacement Ile.java" />
     <MESSAGE value="ajout technique n pair et (n/2)+1 voisins dont un avec 1" />
     <MESSAGE value="ajout méthodes sur Ile (reste à régler méthodes de Grille)" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajout méthodes sur Ile (reste à régler méthodes de Grille)" />
+    <MESSAGE value="ajout méthodes sur Ile et Grille" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajout méthodes sur Ile et Grille" />
   </component>
 </project>
