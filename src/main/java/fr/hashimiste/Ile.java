@@ -23,7 +23,7 @@ public class Ile {
     /**
      * Les coordonnées x, y de l'île et son numéro n.
      */
-    int x, y, n;
+    public int x, y, n;
 
     /**
      * Constructeur de la classe Ile.

@@ -13,11 +13,11 @@ import java.util.Date;
  */
 public class Pont {
     /** Première île reliée par le pont. */
-    Ile ile1;
+    public Ile ile1;
     /** Deuxième île reliée par le pont. */
-    Ile ile2;
+    public Ile ile2;
     /** Nombre de ressources nécessaires pour traverser le pont. */
-    int n;
+    public int n;
 
     /**
      * Constructeur de la classe Pont.
