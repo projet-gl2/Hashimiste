@@ -384,7 +384,7 @@ public class Menu extends JFrame implements ActionListener, WindowStateListener 
     /**
      * Methode pour changer de page pour la page Aventure
      */
-    public void pageAventure() {
+    private void pageAventure() {
         this.dispose();
         // Appel de la page Aventure
     }
@@ -392,7 +392,7 @@ public class Menu extends JFrame implements ActionListener, WindowStateListener 
     /**
      * Methode pour changer de page pour la page Tutoriel
      */
-    public void pageTutoriel() {
+    private void pageTutoriel() {
         this.dispose();
         // Appel de la page Tutoriel
     }
@@ -400,7 +400,7 @@ public class Menu extends JFrame implements ActionListener, WindowStateListener 
     /**
      * Methode pour changer de page pour la page Mode Libre
      */
-    public void pageModeLibre() {
+    private void pageModeLibre() {
         this.dispose();
         // Appel de la page Mode Libre
     }
@@ -408,7 +408,7 @@ public class Menu extends JFrame implements ActionListener, WindowStateListener 
     /**
      * Methode pour changer de page pour la page Multijoueur
      */
-    public void pageMultijoueur() {
+    private void pageMultijoueur() {
         this.dispose();
         // Appel de la page Multijoueur
     }
@@ -416,7 +416,7 @@ public class Menu extends JFrame implements ActionListener, WindowStateListener 
     /**
      * Methode pour changer de page pour la page Technique
      */
-    public void pageTechnique() {
+    private void pageTechnique() {
         new MenuTechnique();
         this.dispose();
     }
@@ -424,7 +424,7 @@ public class Menu extends JFrame implements ActionListener, WindowStateListener 
     /**
      * Methode pour changer de page pour la page Paramètres
      */
-    public void pageParametre() {
+    private void pageParametre() {
         new MenuParametres();
         this.dispose();
         // Appel de la page Paramètres
@@ -433,7 +433,7 @@ public class Menu extends JFrame implements ActionListener, WindowStateListener 
     /**
      * Methode pour changer de page pour la page Profils
      */
-    public void pageProfils() {
+    private void pageProfils() {
         new MenuProfilCreation();
         this.dispose();
         // Appel de la page Profils
