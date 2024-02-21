@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="ajout méthodes sur Ile et Grille">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/hashimiste/maps/Pont.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/hashimiste/maps/Pont.java" afterDir="false" />
-    </list>
+    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="ajout java doc pont constructionPossible" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -283,7 +280,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708011625798</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="ajout java doc pont constructionPossible">
+      <option name="closed" value="true" />
+      <created>1708520867893</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1708520867893</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,6 +340,7 @@
     <MESSAGE value="ajout technique n pair et (n/2)+1 voisins dont un avec 1" />
     <MESSAGE value="ajout méthodes sur Ile (reste à régler méthodes de Grille)" />
     <MESSAGE value="ajout méthodes sur Ile et Grille" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajout méthodes sur Ile et Grille" />
+    <MESSAGE value="ajout java doc pont constructionPossible" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajout java doc pont constructionPossible" />
   </component>
 </project>

@@ -111,7 +111,7 @@ public class Grille {
      * @return la longeur de la grille
      */
     public int getL(){
-        //**A FAIRE**
+        // TODO
         return 0;
     }
 
@@ -121,7 +121,7 @@ public class Grille {
      * @return la hauteur de la grille
      */
     public int getC(){
-        //**A FAIRE**
+        // TODO
         return 0;
     }
 

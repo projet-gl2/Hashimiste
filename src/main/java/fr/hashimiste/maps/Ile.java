@@ -75,7 +75,7 @@ public class Ile extends Component {
      * @return le nombre maximum de ponts
      */
     public int getNbPontPossible() {
-        //*A FAIRE*
+        // TODO
         return 0;
     }
 
@@ -148,7 +148,7 @@ public class Ile extends Component {
      * @return nombre d'îles voisines.
      */
     public int getNbVoisin(){
-        //**A FAIRE**//
+        // TODO
         return 0;
     }
 
@@ -157,7 +157,7 @@ public class Ile extends Component {
      * @return nombre d'îles voisines de valeur "1".
      */
     public int getNbVoisinAvec1(){
-        //**A FAIRE**//
+        // TODO
         return 0;
     }
 
@@ -170,7 +170,7 @@ public class Ile extends Component {
      * 2 s'il y a une île réliée par deux ponts
      */
     public int nbPontsDirection(Direction d){
-        //**A FAIRE**//
+        // TODO
         return 0;
     }
 
@@ -181,7 +181,7 @@ public class Ile extends Component {
      * @return -1 s'il n'y aucune île accessible, la valeur de l'île en face sinon.
      */
     public int valeurIleDirection(Direction d){
-        //**A FAIRE**//
+        // TODO
         return 0;
     }
 }
