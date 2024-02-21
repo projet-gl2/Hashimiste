@@ -1,21 +1,2 @@
 # Global owners
 *           @projet-gl2/code-review @projet-gl2/javadoc-review
-
-# Maps owner
-maps/       @projet-gl2/maps
-
-# SQL owner
-sql/        @projet-gl2/sql
-
-# Gui owner
-gui/        @projet-gl2/gui
-
-# Gui menu owner
-gui/menu/   @projet-gl2/menu
-
-# Gui game owner
-gui/game/   @projet-gl2/jeu
-
-
-# Technique owner
-technique/  @projet-gl2/technique

@@ -1,10 +1,7 @@
 package fr.hashimiste.maps;
-
-import fr.hashimiste.Difficulte;
 import fr.hashimiste.techniques.Technique;
 
 import java.awt.geom.Dimension2D;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,43 +12,68 @@ import java.util.List;
 public class Grille {
     private final Dimension2D dimension;
     private final Difficulte difficulte;
+    private final Case[][] matrice;
     private final List<Ile> iles;
     private final List<Pont> ponts;
+    private final Map map;
 
     /**
      * Créer une grille
      *
      * @param dimension  la dimension de la grille
+     * @param idMap      l'id de la map
      * @param difficulte la difficulté de la grille
-     * @param iles       les iles de la grille
-     * @param ponts      les ponts de la grille
      */
-    public Grille(Dimension2D dimension, Difficulte difficulte, List<Ile> iles, List<Pont> ponts) {
+    public Grille(Dimension2D dimension, int idMap, Difficulte difficulte) {
         this.dimension = dimension;
         this.difficulte = difficulte;
-        this.iles = iles;
-        this.ponts = ponts;
+        this.map = Map.chargerMap(idMap);
+        this.matrice = new Case[(int) dimension.getWidth()][(int) dimension.getHeight()];
+        this.importerIles();
+        this.importerPonts();
+        this.iles = map.iles;
+        this.ponts = map.ponts;
     }
 
-    /**
-     * Créer une grille
-     *
-     * @param dimension  la dimension de la grille
-     * @param difficulte la difficulté de la grille
-     * @param iles      les iles de la grille
-     */
-    public Grille(Dimension2D dimension, Difficulte difficulte, List<Ile> iles) {
-        this(dimension, difficulte, iles, new ArrayList<>());
+    private void importerIles() {
+        for (Ile ile : map.iles) {
+            this.matrice[ile.getX()][ile.getY()] = new CaseIle(ile.getX(), ile.getY(), ile.getNbPont());
+        }
     }
 
-    /**
-     * Créer une grille
-     *
-     * @param dimension  la dimension de la grille
-     * @param difficulte la difficulté de la grille
-     */
-    public Grille(Dimension2D dimension, Difficulte difficulte) {
-        this(dimension, difficulte, new ArrayList<>());
+    private void importerPonts() {
+        for (Pont pont : map.ponts) {
+            Ile ile1 = pont.getIle1();
+            Ile ile2 = pont.getIle2();
+            if (pont.getIle1().getX() == pont.getIle2().getX()) {
+                if (pont.getIle1().getY() - pont.getIle2().getY() < 0) {
+                    ile2 = pont.getIle1();
+                    ile1 = pont.getIle2();
+                }
+                for (int i = ile1.getY() + 1; i < ile2.getY(); i++) {
+                    this.matrice[ile1.getX()][i] = new CasePont(ile1.getX(), i, pont.getN());
+                }
+            }
+            else {
+                if (pont.getIle1().getX() - pont.getIle2().getX() < 0) {
+                    ile2 = pont.getIle1();
+                    ile1 = pont.getIle2();
+                }
+                for (int i = ile1.getX() + 1; i < ile2.getX(); i++) {
+                    this.matrice[i][ile1.getY()] = new CasePont(i, ile1.getY(), pont.getN());
+                }
+            }
+        }
+    }
+
+    private void caseVide() {
+        for (int i = 0; i < dimension.getHeight(); i++) {
+            for (int j = 0; j < dimension.getWidth(); j++) {
+                if (this.matrice[i][j] == null) {
+                    this.matrice[i][j] = new CaseVide(i, j);
+                }
+            }
+        }
     }
 
     /**

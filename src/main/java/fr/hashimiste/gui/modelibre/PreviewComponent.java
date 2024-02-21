@@ -52,7 +52,7 @@ public class PreviewComponent extends JComponent {
             for(Ile ile : grille.getIles()) {
                 g.setColor(Color.black);
                 g.drawOval(x + (d / 7) * ile.getX(), y + (d / 7) *ile.getY(), d / 7, d / 7);
-                g.setFont(new Font("Andale Mono", Font.BOLD, d / 7));
+                g.setFont(new Font("Futura", Font.PLAIN, d / 7));
                 g.drawString(String.valueOf(ile.getNbPontPossible()), x + (d / 7)*ile.getX()+(d / 7)/2/2, y + (d / 7)*ile.getY()+(d / 7)-(d / 7)/6);
                 //grille.getIles().get(0).paint(g);
             }
