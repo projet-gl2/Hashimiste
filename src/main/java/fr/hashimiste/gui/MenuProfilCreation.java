@@ -161,6 +161,6 @@ public class MenuProfilCreation extends JFrame {
         this.repaint();
     }
    public static void main(String[] args){
-    MenuProfilCreation ecran=new MenuProfilCreation();
+    new MenuProfilCreation();
    }
 }

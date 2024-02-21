@@ -9,6 +9,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
+import static fr.hashimiste.gui.Fenetre.*;
+
 /**
  * Classe pour l'affichage du menu des techniques.
  * Cette fenêtre affiche une liste de techniques qui ont chacune leur description
@@ -29,26 +31,6 @@ public class MenuTechnique extends JFrame implements ActionListener{
     private ArrayList<String> listDesc = new ArrayList<>();
 
     /**
-     * Taille minimum de la fenêtre en largeur
-     */
-    private final static int TAILLE_MIN_X = 950;
-
-    /**
-     * Taille minimum de la fenêtre en hauteur
-     */
-    private final static int TAILLE_MIN_Y = 400;
-
-    /**
-     * Taille maximum de la fenêtre en largeur
-     */
-    private final static int TAILLE_MAX_X = 1920;
-
-    /**
-     * Taille maximum de la fenêtre en hauteur
-     */
-    private final static int TAILLE_MAX_Y = 1080;
-
-    /**
      * Constructeur pour créer tous les composants de la fenêtre
      */
     public MenuTechnique(){
@@ -56,9 +38,9 @@ public class MenuTechnique extends JFrame implements ActionListener{
         this.setIconImages(getIconImages());
 
         //Taille minimum pour la fenêtre
-        this.setMinimumSize(new Dimension(TAILLE_MIN_X, TAILLE_MIN_Y));
+        this.setMinimumSize(new Dimension(TAILLE_MIN_ALLONGE_X, TAILLE_MIN_ALLONGE_Y));
         //Preferred size pour la fenêtre
-        this.setPreferredSize(new Dimension(TAILLE_MIN_X, TAILLE_MIN_Y));
+        this.setPreferredSize(new Dimension(TAILLE_MIN_ALLONGE_X, TAILLE_MIN_ALLONGE_Y));
         //Taille maximum pour la fenêtre
         this.setMaximumSize(new Dimension(TAILLE_MAX_X, TAILLE_MAX_Y));
 
@@ -74,17 +56,17 @@ public class MenuTechnique extends JFrame implements ActionListener{
         butMenu.addActionListener((e) -> pageMenu());
 
         //Taille minimum des composants
-        butMenu.setMinimumSize(new Dimension(30, 20));
+        butMenu.setMinimumSize(new Dimension(TAILLE_MIN_COMPOSANT_X, TAILLE_MIN_COMPOSANT_Y));
         jl.setMinimumSize(new Dimension(200, 200));
         description.setMinimumSize(jl.getMinimumSize());
 
         //Preferred size des composants
-        butMenu.setPreferredSize(new Dimension(30, 20));
+        butMenu.setPreferredSize(new Dimension(TAILLE_PREF_COMPOSANT_X, TAILLE_PREF_COMPOSANT_Y));
         jl.setPreferredSize(new Dimension(200, 200));
         description.setPreferredSize(jl.getPreferredSize());
 
         //Taille maximum des composants
-        butMenu.setMaximumSize(new Dimension(80, 20));
+        butMenu.setMaximumSize(new Dimension(TAILLE_MAX_COMPOSANT_X, TAILLE_MAX_COMPOSANT_Y));
         jl.setMaximumSize(new Dimension(300, 200));
         description.setMaximumSize(jl.getMaximumSize());
 
