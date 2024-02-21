@@ -146,7 +146,7 @@ public class MenuTechnique extends JFrame implements ActionListener{
      * Méthode pour afficher la page du menu et détruire la page des techniques
      */
     public void pageMenu(){
-        Menu m = new Menu();
+        new Menu();
         this.dispose();
     }
 
@@ -164,6 +164,6 @@ public class MenuTechnique extends JFrame implements ActionListener{
      * @param args Arguments du main (entrés en ligne de commande)
      */
     public static void main(String args[]){
-        MenuTechnique t = new MenuTechnique();
+        new MenuTechnique();
     }
 }
