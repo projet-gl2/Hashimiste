@@ -1,10 +1,22 @@
 package fr.hashimiste.gui;
 
-import javax.swing.*;
-import java.awt.event.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.BoxLayout;
+import javax.swing.Box;
+import javax.swing.JComponent;
+import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.ActionEvent;
 import java.awt.Component;
 
 // import components
@@ -372,8 +384,6 @@ public class Menu extends JFrame implements ActionListener {
      * Methode pour changer de page pour la page Aventure
      */
     public void pageAventure() {
-        // appel de la page Aventure ( qui se trouve dans le package fr.hashimiste )
-        // Aventure a = new Aventure(10, 50, 20);
         this.dispose();
         // Appel de la page Aventure
     }
