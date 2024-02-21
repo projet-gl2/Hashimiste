@@ -100,7 +100,7 @@ public class MenuParametres extends JFrame implements ActionListener{
      * Méthode pour afficher la page du menu et détruire la page des paramètres
      */
     public void pageMenu(){
-        Menu m = new Menu();
+        new Menu();
         this.dispose();
     }
 
@@ -118,6 +118,6 @@ public class MenuParametres extends JFrame implements ActionListener{
      * @param args Arguments du main (entrés en ligne de commande)
      */
     public static void main(String args[]){
-        MenuParametres p = new MenuParametres();
+        new MenuParametres();
     }
 }
