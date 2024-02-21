@@ -103,7 +103,7 @@ public class Ile extends Component {
      * @return true si l'ile est complète, false sinon
      */
     public boolean isComplete() {
-        return getNbPont() == getNbPontPossible();
+        return getNbPont() == this.n;
     }
 
     /**
