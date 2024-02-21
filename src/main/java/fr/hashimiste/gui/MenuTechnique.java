@@ -4,6 +4,7 @@ package fr.hashimiste.gui;
 import fr.hashimiste.techniques.Technique;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -137,6 +138,8 @@ public class MenuTechnique extends JFrame implements ActionListener{
         jp.add(jp2);
 
         this.setContentPane(jp);
+
+        this.setIconImage(new ImageIcon(Image.ICON_TRANSPARENT).getImage());
 
         this.pack();
         this.setVisible(true);
