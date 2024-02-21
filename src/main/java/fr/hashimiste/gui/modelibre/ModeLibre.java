@@ -138,8 +138,9 @@ public class ModeLibre extends JFrame  {
             public void mousePressed(MouseEvent e) {
                 Point point = new Point(e.getX(), e.getY());
                 Component c = panelFacile.getComponentAt(e.getPoint());
-                if(c instanceof PreviewComponent previewComponent)
+                if(c instanceof PreviewComponent)
                 {
+                    PreviewComponent previewComponent = (PreviewComponent) c;
                     playButton.setVisible(true);
                     bigPreview.setVisible(true);
                     bigPreview.setColor(previewComponent.getColor());
