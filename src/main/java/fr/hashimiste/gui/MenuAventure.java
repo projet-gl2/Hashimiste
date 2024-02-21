@@ -3,7 +3,7 @@ package fr.hashimiste.gui; /**
  **/
 import java.awt.*;
 import java.awt.event.*;
-
+import javax.swing.*;
 public class MenuAventure {
 
     private Frame frame;
@@ -55,15 +55,14 @@ public class MenuAventure {
         boutonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         boutons = new Button[nbBouton];
-        for (int i = 1; i < nbBouton; i++) {
+        for (int i = 0; i < nbBouton; i++) {
             boutons[i] = new Button("Niveau " + i + " ");
             boutonsPanel.add(boutons[i]);
             // Rajouter l'action pour lié les niveaux aux boutons
         }
 
         menuButton = new Button("Menu"); // Création du bouton pour le menu
-        // Rajouter l'action pour créer le menu
-        // Rajouter l'action pour destroy cette fenetre
+        menuButton.addActionListener((e) -> pageMenu());
 
         Panel menuPanel = new Panel();
         menuPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -97,6 +96,14 @@ public class MenuAventure {
         frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         frame.setLocationRelativeTo(null); // Centre la fenêtre sur l'écran
         frame.setVisible(true); // Affiche la fenêtre
+    }
+
+    /**
+     * Méthode pour afficher la page du menu et détruire la page des paramètres
+     * */
+    public void pageMenu(){
+        new Menu();
+        frame.dispose();
     }
 
     /**
