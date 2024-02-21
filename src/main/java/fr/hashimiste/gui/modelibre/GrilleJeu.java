@@ -1,6 +1,8 @@
 package fr.hashimiste.gui.modelibre;
 
 import fr.hashimiste.Difficulte;
+import fr.hashimiste.gui.Couleur;
+import fr.hashimiste.gui.modelibre.components.GridComponent;
 import fr.hashimiste.maps.Grille;
 import fr.hashimiste.maps.Ile;
 
@@ -8,7 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
 
-public class GridTest extends JFrame {
+public class GrilleJeu extends JFrame {
 
 
     Grille grille = new Grille(new Dimension(7,7), Difficulte.FACILE, Arrays.asList(new Ile(null, 1,1,3),
@@ -20,14 +22,14 @@ public class GridTest extends JFrame {
             new Ile(null, 6,6,5)
     ));
 
-    public GridTest()
+    public GrilleJeu()
     {
         //this.setLayout(null);
         this.setSize(400,400);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
-        GridComponent grid = new GridComponent(Color.pink, grille);
+        GridComponent grid = new GridComponent(Couleur.COULEUR_BOUTON, grille);
         grid.setLocation(10,10);
         grid.setSize(this.getWidth()-50, this.getWidth()-50);
         this.add(grid);
@@ -35,10 +37,6 @@ public class GridTest extends JFrame {
         JButton b = new JButton();
         b.setBounds(10,10,this.getWidth(),50);
         //this.add(b);
-    }
-
-    public static void main(String[] args) {
-        new GridTest();
     }
 
     @Override
