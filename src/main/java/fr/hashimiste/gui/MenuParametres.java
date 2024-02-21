@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import static fr.hashimiste.gui.Fenetre.*;
+
 /**
  * Classe pour l'affichage du menu des paramètres.
  * 
@@ -17,26 +19,6 @@ public class MenuParametres extends JFrame implements ActionListener{
 
     private Color couleurBouton = new java.awt.Color(160, 158, 188);
     private Color couleurTextBouton = new java.awt.Color(251, 250, 242);
-
-    /**
-     * Taille minimum de la fenêtre en largeur
-     */
-    private final static int TAILLE_MIN_X = 500;
-
-    /**
-     * Taille minimum de la fenêtre en hauteur
-     */
-    private final static int TAILLE_MIN_Y = 300;
-
-    /**
-     * Taille maximum de la fenêtre en largeur
-     */
-    private final static int TAILLE_MAX_X = 1920;
-
-    /**
-     * Taille maximum de la fenêtre en hauteur
-     */
-    private final static int TAILLE_MAX_Y = 1080;
 
     public MenuParametres(){
         this.setTitle("Hashimiste");

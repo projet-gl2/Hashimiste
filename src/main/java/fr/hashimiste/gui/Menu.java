@@ -9,14 +9,16 @@ import javax.swing.BoxLayout;
 import javax.swing.Box;
 import javax.swing.JComponent;
 import javax.swing.ImageIcon;
-import java.awt.event.ActionListener;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowStateListener;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Component;
 
 // import components
@@ -29,7 +31,8 @@ import static fr.hashimiste.gui.Image.*;
  *
  * @author Arthur Dureau
  */
-public class Menu extends JFrame implements ActionListener {
+public class Menu extends JFrame implements ActionListener, WindowStateListener {
+
     /**
      * JPanel pour les composants principaux
      */
@@ -102,6 +105,10 @@ public class Menu extends JFrame implements ActionListener {
      * Taille des boutons en largeur
      */
     public static int TAILLE_BUT_X = 50;
+    /**
+     * Etat de la fenêtre avant d'être maximisée
+     */
+    public static int stateBeforeMaximized = JFrame.NORMAL;
 
     /**
      * Constructeur de la classe Menu
@@ -304,8 +311,25 @@ public class Menu extends JFrame implements ActionListener {
         // Définir l'opération de fermeture par défaut et centrer la fenêtre
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
+
+        // Gestionnaire d'événements pour le redimensionnement de la fenêtre
+        addWindowStateListener(this);
     }
 
+    /**
+     * Méthode pour gérer l'état de la fenêtre
+     * @param e
+     */
+    @Override
+    public void windowStateChanged(WindowEvent e) {
+        // Si la fenêtre est maximisée, la remettre dans l'état précédent
+        if ((e.getNewState() & JFrame.MAXIMIZED_BOTH) == JFrame.MAXIMIZED_BOTH) {
+            this.setExtendedState(stateBeforeMaximized);
+        } else {
+            // Sauvegarder le dernier état non maximisé
+            stateBeforeMaximized = e.getNewState();
+        }
+    }
 
     /**
      * Méthode pour configurer les boutons
@@ -393,7 +417,7 @@ public class Menu extends JFrame implements ActionListener {
      * Methode pour changer de page pour la page Technique
      */
     public void pageTechnique() {
-        MenuTechnique t = new MenuTechnique();
+        new MenuTechnique();
         this.dispose();
     }
 
@@ -401,7 +425,7 @@ public class Menu extends JFrame implements ActionListener {
      * Methode pour changer de page pour la page Paramètres
      */
     public void pageParametre() {
-        MenuParametres p = new MenuParametres();
+        new MenuParametres();
         this.dispose();
         // Appel de la page Paramètres
     }
@@ -410,7 +434,7 @@ public class Menu extends JFrame implements ActionListener {
      * Methode pour changer de page pour la page Profils
      */
     public void pageProfils() {
-        MenuProfilCreation pc = new MenuProfilCreation();
+        new MenuProfilCreation();
         this.dispose();
         // Appel de la page Profils
     }
@@ -431,7 +455,7 @@ public class Menu extends JFrame implements ActionListener {
      * @param args Arguments du main
      */
     public static void main(String[] args) {
-        Menu m = new Menu();
+        new Menu();
     }
 
 }
