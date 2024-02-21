@@ -416,7 +416,7 @@ public class Menu extends JFrame implements ActionListener {
      * Methode pour changer de page pour la page Technique
      */
     public void pageTechnique() {
-        MenuTechnique t = new MenuTechnique();
+        new MenuTechnique();
         this.dispose();
     }
 
@@ -424,7 +424,7 @@ public class Menu extends JFrame implements ActionListener {
      * Methode pour changer de page pour la page Paramètres
      */
     public void pageParametre() {
-        MenuParametres p = new MenuParametres();
+        new MenuParametres();
         this.dispose();
         // Appel de la page Paramètres
     }
@@ -433,7 +433,7 @@ public class Menu extends JFrame implements ActionListener {
      * Methode pour changer de page pour la page Profils
      */
     public void pageProfils() {
-        MenuProfilCreation pc = new MenuProfilCreation();
+        new MenuProfilCreation();
         this.dispose();
         // Appel de la page Profils
     }
@@ -454,7 +454,7 @@ public class Menu extends JFrame implements ActionListener {
      * @param args Arguments du main
      */
     public static void main(String[] args) {
-        Menu m = new Menu();
+        new Menu();
     }
 
 }
