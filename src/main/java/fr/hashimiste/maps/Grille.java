@@ -1,59 +1,74 @@
 package fr.hashimiste.maps;
+import fr.hashimiste.techniques.Technique;
+
+import java.awt.geom.Dimension2D;
+import java.util.List;
 
 /**
- * Une grille correspond à un niveau de jeu. Elle sont définies par les Îles qu'elles contiennent,
- * et permettent d'effectuer différentes opérations comme afficher une aide de jeu.
+ * La classe Grille représente une grille dans un jeu ou une tâche.
+ * Elle contient des informations sur le niveau de difficulté de la grille, les îles (Ile) dans la grille et les ponts (Pont) dans la grille.
+ * Elle fournit des méthodes pour récupérer des informations sur la grille, ses îles et ses ponts.
  */
 public class Grille {
-    private Map map;
-    private Case[][] matrice;
-    private int c; //nb colonnes
-    private int l; //nb lignes
+    private final Dimension2D dimension;
+    private final Difficulte difficulte;
+    private final Case[][] matrice;
+    private final List<Ile> iles;
+    private final List<Pont> ponts;
+    private final Map map;
 
-    Grille(int idMap, int c, int l) {
+    /**
+     * Créer une grille
+     *
+     * @param dimension  la dimension de la grille
+     * @param idMap      l'id de la map
+     * @param difficulte la difficulté de la grille
+     */
+    public Grille(Dimension2D dimension, int idMap, Difficulte difficulte) {
+        this.dimension = dimension;
+        this.difficulte = difficulte;
         this.map = Map.chargerMap(idMap);
-        this.c = c;
-        this.l = l;
-        this.matrice = new Case[c][l];
+        this.matrice = new Case[(int) dimension.getWidth()][(int) dimension.getHeight()];
         this.importerIles();
         this.importerPonts();
-        this.caseVide();
+        this.iles = map.iles;
+        this.ponts = map.ponts;
     }
 
     private void importerIles() {
         for (Ile ile : map.iles) {
-            this.matrice[ile.x][ile.y] = new CaseIle(ile.x, ile.y, ile.n);
+            this.matrice[ile.getX()][ile.getY()] = new CaseIle(ile.getX(), ile.getY(), ile.getNbPont());
         }
     }
 
     private void importerPonts() {
         for (Pont pont : map.ponts) {
-            Ile ile1 = pont.ile1;
-            Ile ile2 = pont.ile2;
-            if (pont.ile1.x == pont.ile2.x) {
-                if (pont.ile1.y - pont.ile2.y < 0) {
-                    ile2 = pont.ile1;
-                    ile1 = pont.ile2;
+            Ile ile1 = pont.getIle1();
+            Ile ile2 = pont.getIle2();
+            if (pont.getIle1().getX() == pont.getIle2().getX()) {
+                if (pont.getIle1().getY() - pont.getIle2().getY() < 0) {
+                    ile2 = pont.getIle1();
+                    ile1 = pont.getIle2();
                 }
-                for (int i = ile1.y + 1; i < ile2.y; i++) {
-                    this.matrice[ile1.x][i] = new CasePont(ile1.x, i, pont.n);
+                for (int i = ile1.getY() + 1; i < ile2.getY(); i++) {
+                    this.matrice[ile1.getX()][i] = new CasePont(ile1.getX(), i, pont.getN());
                 }
             }
             else {
-                if (pont.ile1.x - pont.ile2.x < 0) {
-                    ile2 = pont.ile1;
-                    ile1 = pont.ile2;
+                if (pont.getIle1().getX() - pont.getIle2().getX() < 0) {
+                    ile2 = pont.getIle1();
+                    ile1 = pont.getIle2();
                 }
-                for (int i = ile1.x + 1; i < ile2.x; i++) {
-                    this.matrice[i][ile1.y] = new CasePont(i, ile1.y, pont.n);
+                for (int i = ile1.getX() + 1; i < ile2.getX(); i++) {
+                    this.matrice[i][ile1.getY()] = new CasePont(i, ile1.getY(), pont.getN());
                 }
             }
         }
     }
 
     private void caseVide() {
-        for (int i = 0; i < c; i++) {
-            for (int j = 0; j < l; j++) {
+        for (int i = 0; i < dimension.getHeight(); i++) {
+            for (int j = 0; j < dimension.getWidth(); j++) {
                 if (this.matrice[i][j] == null) {
                     this.matrice[i][j] = new CaseVide(i, j);
                 }
@@ -62,30 +77,54 @@ public class Grille {
     }
 
     /**
-     * Renvoie le nombre de colonnes de la grille.
-     * @return nombre de colonnes de la grille
+     * Récupérer la difficulté de la grille
+     *
+     * @return la difficulté de la grille
      */
-    public int getC(){
-        return c;
+    public Difficulte getDifficulte() {
+        return difficulte;
     }
 
     /**
-     * Renvoie le nombre de lignes de la grille.
-     * @return nombre de lignes de la grille
+     * Récupérer les iles de la grille
+     *
+     * @return les iles de la grille
      */
-    public int getL(){
-        return l;
+    public List<Ile> getIles() {
+        return iles;
     }
 
     /**
-     * Renvoie l'île située à l'emplacement (i,j). Renvoie null s'il n'y a pas d'île à cet endroit.
-     * @param i coordonnées sur les lignes
-     * @param j coordonnées sur les colonnes
-     * @return l'île située à (i,j)
+     * Récupérer les ponts de la grille
+     *
+     * @return les ponts de la grille
      */
-    public Ile getIle(int i, int j){
-        //**A FAIRE**//
+    public List<Pont> getPonts() {
+        return ponts;
+    }
+
+    /**
+     * Récupérer une île de la grille
+     * @param x l'abscisse de l'île
+     * @param y l'ordonnée de l'île
+     * @return l'île de la grille
+     */
+    public Ile getIle(int x, int y) {
+        for (Ile ile : iles) {
+            if (ile.getX() == x && ile.getY() == y) {
+                return ile;
+            }
+        }
         return null;
+    }
+
+    /**
+     * Récupérer la dimension de la grille
+     *
+     * @return la dimension de la grille
+     */
+    public Dimension2D getDimension() {
+        return dimension;
     }
 
     /**
@@ -99,9 +138,9 @@ public class Grille {
 
         Ile aideIle = null; //l'île sur laquelle on peut avancer à l'aide des techniques
 
-        for(int i=0;i<this.c;i++){ //parcours colonnes
-            for(int j=0;j<this.l;j++){ //parcours lignes
-                if(this.getIle(i,j) != null && !(this.getIle(i,j).complete())) { //si l'île existe et n'est pas complète
+        for(int i=0;i<this.dimension.getWidth();i++){ //parcours colonnes
+            for(int j=0;j<this.dimension.getHeight();j++){ //parcours lignes
+                if(this.getIle(i,j) != null && !(this.getIle(i,j).isComplete())) { //si l'île existe et n'est pas complète
                     for (int fInd=0; fInd<fIndMin; fInd++){
                         if(lTech[fInd].execute(this.getIle(i, j))){ //si la technique s'applique à l'île
                             aideIle = this.getIle(i,j);

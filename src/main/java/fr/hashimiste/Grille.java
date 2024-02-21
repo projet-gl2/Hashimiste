@@ -1,16 +1,16 @@
 package fr.hashimiste;
 
-import java.util.ArrayList;
+import fr.hashimiste.techniques.Technique;
 
 /**
  * Une grille correspond à un niveau de jeu. Elle sont définies par les Îles qu'elles contiennent,
  * et permettent d'effectuer différentes opérations comme afficher une aide de jeu.
  */
 public class Grille {
-    private Map map;
-    private Case[][] matrice;
-    private int c; //nb colonnes
-    private int l; //nb lignes
+    private final Map map;
+    private final Case[][] matrice;
+    private final int c; //nb colonnes
+    private final int l; //nb lignes
 
     Grille(int idMap, int c, int l) {
         this.map = Map.chargerMap(idMap);

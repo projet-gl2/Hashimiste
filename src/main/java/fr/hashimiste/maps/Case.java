@@ -3,7 +3,7 @@ package fr.hashimiste.maps;
 public abstract class Case {
     private final int x;
     private final int y;
-    Case(int x, int y) {
+    public Case(int x, int y) {
         this.x = x;
         this.y = y;
     }

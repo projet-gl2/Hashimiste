@@ -1,5 +1,6 @@
 package fr.hashimiste.maps;
 
+import fr.hashimiste.SQLConstant;
 import org.sqlite.JDBC;
 
 import java.sql.Connection;
