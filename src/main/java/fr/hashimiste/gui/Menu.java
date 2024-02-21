@@ -384,7 +384,7 @@ public class Menu extends JFrame implements ActionListener {
      * Methode pour changer de page pour la page Aventure
      */
     public void pageAventure() {
-        new MenuAventure(10,20,20);
+        new MenuAventure();
         this.dispose();
         // Appel de la page Aventure
     }
