@@ -4,6 +4,7 @@ package fr.hashimiste.gui;
 import fr.hashimiste.techniques.Technique;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -138,6 +139,8 @@ public class MenuTechnique extends JFrame implements ActionListener{
 
         this.setContentPane(jp);
 
+        this.setIconImage(new ImageIcon(Image.ICON_TRANSPARENT).getImage());
+
         this.pack();
         this.setVisible(true);
     }
@@ -146,7 +149,7 @@ public class MenuTechnique extends JFrame implements ActionListener{
      * Méthode pour afficher la page du menu et détruire la page des techniques
      */
     public void pageMenu(){
-        Menu m = new Menu();
+        new Menu();
         this.dispose();
     }
 
@@ -164,6 +167,6 @@ public class MenuTechnique extends JFrame implements ActionListener{
      * @param args Arguments du main (entrés en ligne de commande)
      */
     public static void main(String args[]){
-        MenuTechnique t = new MenuTechnique();
+        new MenuTechnique();
     }
 }
