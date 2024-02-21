@@ -1,4 +1,4 @@
-package fr.hashimiste.gui.modelibre;
+package fr.hashimiste.gui.modelibre.components;
 
 import fr.hashimiste.maps.Grille;
 import fr.hashimiste.maps.Ile;
@@ -17,7 +17,7 @@ import java.util.Random;
 public class PreviewComponent extends JComponent {
 
     private Color color;
-    private final Grille grille;
+    private Grille grille;
 
     /**
      *
@@ -41,6 +41,7 @@ public class PreviewComponent extends JComponent {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        int grid_size = grille == null ? 0 : (int)grille.getDimension().getWidth();
         Dimension size = this.getSize();
         int d = Math.min(size.width, size.height) - 10;
         int x = (size.width - d) / 2;
@@ -51,9 +52,9 @@ public class PreviewComponent extends JComponent {
         {
             for(Ile ile : grille.getIles()) {
                 g.setColor(Color.black);
-                g.drawOval(x + (d / 7) * ile.getX(), y + (d / 7) *ile.getY(), d / 7, d / 7);
-                g.setFont(new Font("Futura", Font.PLAIN, d / 7));
-                g.drawString(String.valueOf(ile.getNbPontPossible()), x + (d / 7)*ile.getX()+(d / 7)/2/2, y + (d / 7)*ile.getY()+(d / 7)-(d / 7)/6);
+                g.drawOval(x + (d / grid_size) * ile.getX(), y + (d / grid_size) *ile.getY(), d / grid_size, d / grid_size);
+                g.setFont(new Font("Futura", Font.PLAIN, d / grid_size));
+                g.drawString(String.valueOf(ile.getN()), x + (d / grid_size)*ile.getX()+(d / grid_size)/2/2, y + (d / grid_size)*ile.getY()+(d / grid_size)-(d / grid_size)/6);
                 //grille.getIles().get(0).paint(g);
             }
         }
@@ -74,5 +75,15 @@ public class PreviewComponent extends JComponent {
      */
     public void setColor(Color color) {
         this.color = color;
+    }
+
+
+    public Grille getGrille() {
+        return grille;
+    }
+
+    public void setGrille(Grille grille)
+    {
+        this.grille = grille;
     }
 }
