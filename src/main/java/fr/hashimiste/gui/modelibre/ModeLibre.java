@@ -23,7 +23,7 @@ public class ModeLibre extends JFrame  {
     // TODO :: implémenter les vrai grilles
     private final PreviewComponent[] previewTab = new PreviewComponent[10];
 
-    Grille grille = new Grille(Difficulte.FACILE, Arrays.asList(new Ile(null, 1,1,3),
+    Grille grille = new Grille(new Dimension(7,7),Difficulte.FACILE, Arrays.asList(new Ile(null, 1,1,3),
             new Ile(null, 1,1,3),
             new Ile(null, 5,3,3),
             new Ile(null, 6,0, 2),

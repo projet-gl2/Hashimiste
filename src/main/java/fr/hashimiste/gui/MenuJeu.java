@@ -103,6 +103,8 @@ public class MenuJeu extends JFrame{
             }
         });
 
+        this.setIconImage(new ImageIcon(Image.ICON_TRANSPARENT).getImage());
+        
         this.setSize(Toolkit.getDefaultToolkit().getScreenSize()); // Affichage adapté à la taille de l'écran
         this.setVisible(true); // Affiche la fenêtre
 

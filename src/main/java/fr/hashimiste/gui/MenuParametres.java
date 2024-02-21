@@ -92,6 +92,8 @@ public class MenuParametres extends JFrame implements ActionListener{
 
         this.setContentPane(jp);
 
+        this.setIconImage(new ImageIcon(Image.ICON_TRANSPARENT).getImage());
+
         this.pack();
         this.setVisible(true);
     }
