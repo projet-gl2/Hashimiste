@@ -22,6 +22,10 @@ public class Profil {
         this.nom = nom;
     }
 
+    public String getNom() {
+        return this.nom;
+    }
+
     /**
      * Charge tous les profils à partir de la base de données.
      *
