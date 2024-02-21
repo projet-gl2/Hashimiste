@@ -1,4 +1,4 @@
-package fr.hashimiste.gui.modelibre;
+package fr.hashimiste.gui.modelibre.components;
 
 import fr.hashimiste.maps.Grille;
 

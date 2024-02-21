@@ -20,24 +20,26 @@ import java.util.function.Supplier;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+
 /** Classe pour représenter le Premier Menu du jeu (gestion/connexion/création de profil  )
   @author Teissier Antoine 
   @version 1
 */
 public class MenuProfilCreation extends JFrame {
-    public final static int  Max = 10;
-
+    public final static int  MaxCarProfilName = 10;
+    public final static int MaxProfil =7;
+    
     private static ArrayList<Profil> listeProfil=new ArrayList<Profil>();
     private static ArrayList<String> listeNom=new ArrayList<String>();
-    /** Constructeur de la classe MenuProfilCreation permet de créer une interface graphique. 
-     * 
-    */
     private JPanel jpListeProfil=new JPanel();
     private JPanel jp = new JPanel();
 
+    /** Constructeur de la classe MenuProfilCreation permet de créer une interface graphique. 
+     * 
+    */ 
     public MenuProfilCreation(){
         this.setTitle("Hashimiste");
-        this.setIconImage(new ImageIcon("../resources/images/iconTransparent.png").getImage());
+        this.setIconImage(new ImageIcon(Image.ICON_TRANSPARENT).getImage());
 
         this.setSize(500, 300);
         this.setMinimumSize(new java.awt.Dimension(1000, 720));
@@ -58,12 +60,12 @@ public class MenuProfilCreation extends JFrame {
     /**Permet de créer un bouton pour la sélection des  profils. 
      * @return Le bouton créer 
      */
-    public JButton creerButtonProfil(String chaine, Runnable ajout){
+    private JButton creerButtonProfil(String chaine, Runnable ajout){
         JButton but =new JButton(chaine);
         but.setBackground(Couleur.COULEUR_BOUTON);
         but.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         but.setAlignmentY(JLabel.CENTER_ALIGNMENT);
-        
+        but.setForeground(Couleur.COULEUR_TEXTE_BOUTON);
         but.addActionListener(
             (e)->{ ((JButton)e.getSource()).setBackground(Couleur.COULEUR_BOUTON);
                 if (ajout != null) {
@@ -98,7 +100,7 @@ public class MenuProfilCreation extends JFrame {
      */
     private Boolean verifFormatNom(String nom){
         if(nom!= null){
-            if((nom.length() > Max || isBlank(nom))){
+            if((nom.length() > MaxCarProfilName || isBlank(nom))){
                 return false;
             }
             for(String elem : listeNom){
@@ -121,15 +123,26 @@ public class MenuProfilCreation extends JFrame {
             nom=jOp.showInputDialog(this,"Erreur lors de la vérification du nom !\nNom du profil : ");
             check = verifFormatNom(nom);
         }
-        if(nom != null){
-            listeNom.add(nom);
-            listeProfil.add(new Profil(nom));
-            affichageListe();
+        if(nom != null){   
+            if( MaxProfil-1 < listeNom.size()){
+                jOp.showMessageDialog(this,"Trop de comptes creer ");
+            }else{
+                //fonction sauvegarde bdd
+                listeNom.add(nom);
+                listeProfil.add(new Profil(nom));
+                affichageListe();
+            }
+            
         }
         
     }
+    /**charge le compte et le menu principale
+     */
+    private void chargementCompte(){
+        Menu p = new Menu();
+        this.dispose();
 
-
+    }
     /**Met à jour l'affichage avec les nouveaux profils.
      * 
      */
@@ -137,7 +150,7 @@ public class MenuProfilCreation extends JFrame {
         jp.remove(jpListeProfil);
         jpListeProfil.removeAll();
         if(!listeProfil.isEmpty()){
-            listeProfil.forEach((p)-> {jpListeProfil.add(creerButtonProfil(p.nom,null));
+            listeProfil.forEach((p)-> {jpListeProfil.add(creerButtonProfil(p.nom,()->chargementCompte()));
             jpListeProfil.add(Box.createHorizontalStrut(10));
             });
         }
@@ -148,6 +161,6 @@ public class MenuProfilCreation extends JFrame {
         this.repaint();
     }
    public static void main(String[] args){
-    MenuProfilCreation ecran=new MenuProfilCreation();
+    new MenuProfilCreation();
    }
 }
