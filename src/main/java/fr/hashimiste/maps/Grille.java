@@ -126,29 +126,42 @@ public class Grille {
     }
 
     /**
+     * Vérifie s'il n'y a aucune erreur dans la grille, c'est-à-dire, s'il n'y a aucun pont en trop par rapport à la solution.
+     * @return true si la grille ne contient pas d'erreur, false sinon
+     */
+    public Boolean verification(){
+        // TODO
+        return true;
+    }
+
+    /**
      * Parcourt la grille dans son état actuel pour vérifier les techniques qui s'appliquent aux îles et donner un indice au joueur.
-     * @return l'île qui peut bénéficier d'un indice.
+     * Si la grille contient une erreur, l'aide l'indiquera en renvoyant une île vide.
+     * @return l'île qui peut bénéficier d'un indice, ou alors null si la grille contient déjà une erreur
      */
     public Ile aide(){
-        Technique[] lTech = Technique.values();
-        int fIndMin = lTech.length; //une liste des fonctions qui appliquent une technique
-        //elles prennent en paramètre une île, et renvoient vrai si la technique s'applique à l'île
+        if (!this.verification()) return null;
+        else{
+            Technique[] lTech = Technique.values();
+            int fIndMin = lTech.length; //une liste des fonctions qui appliquent une technique
+            //elles prennent en paramètre une île, et renvoient vrai si la technique s'applique à l'île
 
-        Ile aideIle = null; //l'île sur laquelle on peut avancer à l'aide des techniques
+            Ile aideIle = null; //l'île sur laquelle on peut avancer à l'aide des techniques
 
-        for(int i=0;i<this.dimension.getWidth();i++){ //parcours colonnes
-            for(int j=0;j<this.dimension.getHeight();j++){ //parcours lignes
-                if(this.getIle(i,j) != null && !(this.getIle(i,j).isComplete())) { //si l'île existe et n'est pas complète
-                    for (int fInd=0; fInd<fIndMin; fInd++){
-                        if(lTech[fInd].execute(this.getIle(i, j))){ //si la technique s'applique à l'île
-                            aideIle = this.getIle(i,j);
-                            fIndMin = fInd; //on ne vérifie que les techniques de plus bas niveau que celles trouvées
+            for (int i = 0; i < this.dimension.getWidth(); i++) { //parcours colonnes
+                for (int j = 0; j < this.dimension.getHeight(); j++) { //parcours lignes
+                    if (this.getIle(i, j) != null && !(this.getIle(i, j).isComplete())) { //si l'île existe et n'est pas complète
+                        for (int fInd = 0; fInd < fIndMin; fInd++) { //parcours techniques
+                            if (lTech[fInd].execute(this.getIle(i, j))) { //si la technique s'applique à l'île
+                                aideIle = this.getIle(i, j);
+                                fIndMin = fInd; //on ne vérifie que les techniques de plus bas niveau que celles trouvées précédemments
+                            }
                         }
                     }
                 }
             }
-        }
 
-        return aideIle;
+            return aideIle;
+        }
     }
 }
