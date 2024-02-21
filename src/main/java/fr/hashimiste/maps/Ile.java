@@ -79,8 +79,8 @@ public class Ile extends Component {
     }
 
     /**
-     * Récupérer le nombre de ponts maximum qu'il est possible de faire depuis l'ile
-     *
+     * Récupérer le nombre de ponts maximum qu'il est possible de faire depuis l'ile.
+     * Cette méthode prend en compte le fait qu'une île accessible ne peut accepter qu'un seul pont supplémentaire.
      * @return le nombre maximum de ponts
      */
     public int getNbPontPossible() {
