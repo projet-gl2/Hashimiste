@@ -95,6 +95,10 @@ public class Pont extends Component {
         return n;
     }
 
+    public boolean constructionPossible() {
+        return true;
+    }
+
     @Override
     public String toString() {
         return "Pont{" +

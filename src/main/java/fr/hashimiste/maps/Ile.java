@@ -1,5 +1,7 @@
 package fr.hashimiste.maps;
 
+import fr.hashimiste.techniques.Direction;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -97,7 +99,7 @@ public class Ile extends Component {
      * @return le nombre de ponts liés à l'ile qui vérifient le filtre
      */
     public int getNbPont(Predicate<Ile> filtre) {
-        return (int) pontsLiees.stream().filter(pont -> pont.getIle1() == this || pont.getIle2() == this).filter(pont -> filtre.test(pont.getIle1()) || filtre.test(pont.getIle2())).mapToInt(Pont::getN).sum();
+        return pontsLiees.stream().filter(pont -> pont.getIle1() == this || pont.getIle2() == this).filter(pont -> filtre.test(pont.getIle1()) || filtre.test(pont.getIle2())).mapToInt(Pont::getN).sum();
     }
 
     @Override
@@ -133,5 +135,17 @@ public class Ile extends Component {
      */
     void addPont(Pont pont) {
         pontsLiees.add(pont);
+    }
+
+
+
+    /**
+     * Vérifie la valeur de l'île en face de l'île appelée dans la direction donnée.
+     * @param d Direction à vérifier peut être NORD, EST, SUD ou OUEST
+     * @return -1 s'il n'y aucune île accessible, la valeur de l'île en face sinon.
+     */
+    int valeurIleDirection(Direction d){
+        //**A FAIRE**//
+        return 0;
     }
 }

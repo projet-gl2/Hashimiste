@@ -1,4 +1,5 @@
 package fr.hashimiste.techniques;
+
 /**
 * Enumerate contenant les directions cardinales pour se repérer dans la grille de jeu
 */
