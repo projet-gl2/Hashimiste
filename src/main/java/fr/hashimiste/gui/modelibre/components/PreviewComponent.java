@@ -19,6 +19,8 @@ public class PreviewComponent extends JComponent {
     private Color color;
     private Grille grille;
 
+    int id;
+
     /**
      *
      *  Créer un composant de prévisualisation
@@ -85,5 +87,13 @@ public class PreviewComponent extends JComponent {
     public void setGrille(Grille grille)
     {
         this.grille = grille;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 }
