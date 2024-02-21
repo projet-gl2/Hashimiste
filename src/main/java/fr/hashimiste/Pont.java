@@ -1,115 +1,47 @@
-package fr.hashimiste.maps;
+package fr.hashimiste;
 
 import org.sqlite.JDBC;
 
-import java.awt.*;
 import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
- * La classe Pont représente un pont entre deux îles (Ile).
- * Elle contient des informations sur les deux îles qu'elle relie et le nombre de ponts entre elles.
- * Elle contient également des méthodes pour modifier le nombre de ponts et récupérer des informations sur les îles et le nombre de ponts.
+ * Cette classe représente un pont reliant deux îles dans un jeu.
  */
-public class Pont extends Component {
-    private final Ile ile1;
-    private final Ile ile2;
-    private int n;
+public class Pont {
+    /** Première île reliée par le pont. */
+    public Ile ile1;
+    /** Deuxième île reliée par le pont. */
+    public Ile ile2;
+    /** Nombre de ressources nécessaires pour traverser le pont. */
+    public int n;
 
     /**
-     * Créer un pont
+     * Constructeur de la classe Pont.
      *
-     * @param ile1 l'ile 1
-     * @param ile2 l'ile 2
-     * @param n    le nombre de ponts
-     * @throws IllegalArgumentException si le nombre de ponts est négatif,
-     *                                  si une des iles est nulle,
-     *                                  si les iles sont les mêmes
+     * @param ile1 Première île reliée par le pont.
+     * @param ile2 Deuxième île reliée par le pont.
+     * @param n Nombre de ponts qui relie les deux îles (1 ou 2).
      */
-    public Pont(Ile ile1, Ile ile2, int n) {
-        if (n < 0) {
-            throw new IllegalArgumentException("Le nombre de ponts ne peut pas être négatif");
-        }
-        if (ile1 == null || ile2 == null) {
-            throw new IllegalArgumentException("Les iles ne peuvent pas être nulles");
-        }
-        if (ile1.equals(ile2)) {
-            throw new IllegalArgumentException("Les iles ne peuvent pas être les mêmes");
-        }
+    Pont(Ile ile1, Ile ile2, int n) {
         this.ile1 = ile1;
         this.ile2 = ile2;
         this.n = n;
-        ile1.addPont(this);
-        ile2.addPont(this);
     }
 
-    @Override
-    public void paint(Graphics g) {
-        g.setColor(Color.BLACK);
-        boolean horizontal = ile1.getY() == ile2.getY();
-        for (int i = 0; i < n; i++) {
-            if (horizontal) {
-                g.drawLine(ile1.getX() + ile1.getWidth() / 2 + i * 20 + ile1.getWidth() / 2,
-                        ile1.getY() + ile1.getHeight() / 2,
-                        ile2.getX() + ile2.getWidth() / 2 + i * 20 - ile2.getWidth() / 2,
-                        ile2.getY() + ile2.getHeight() / 2);
-            } else {
-                g.drawLine(ile1.getX() + ile1.getHeight() / 2,
-                        ile1.getY() + ile1.getHeight() / 2 + i * 20 + ile1.getHeight() / 2,
-                        ile2.getX() + ile2.getHeight() / 2,
-                        ile2.getY() + ile2.getHeight() / 2 + i * 20 - ile2.getHeight() / 2);
-            }
-        }
-        super.paint(g);
-    }
-
-    /**
-     * Modifie le nombre de ponts
-     *
-     * @param n le nouveau nombre de ponts
-     */
-    public void setN(int n) {
-        this.n = n;
-    }
-
-    /**
-     * Récupérer l'ile 1
-     *
-     * @return l'ile 1
-     */
     public Ile getIle1() {
-        return ile1;
+        return this.ile1;
     }
 
-    /**
-     * Récupérer l'ile 2
-     *
-     * @return l'ile 2
-     */
     public Ile getIle2() {
-        return ile2;
+        return this.ile2;
     }
 
-    /**
-     * Récupérer le nombre de ponts
-     *
-     * @return le nombre de ponts
-     */
     public int getN() {
-        return n;
-    }
-
-    public boolean constructionPossible() {
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Pont{" +
-                "ile1=" + ile1 +
-                ", ile2=" + ile2 +
-                ", n=" + n +
-                '}';
+        return this.n;
     }
 
     /**
