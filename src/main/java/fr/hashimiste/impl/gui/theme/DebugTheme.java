@@ -3,6 +3,7 @@ package fr.hashimiste.impl.gui.theme;
 import fr.hashimiste.core.gui.Theme;
 
 import java.awt.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * La classe DebugTheme implémente l'interface Theme.
@@ -17,27 +18,22 @@ public class DebugTheme implements Theme {
     /**
      * La couleur des boutons dans le thème de débogage.
      */
-    private final static Color BOUTON = new Color(0, 255, 0);
+    private static final Color BOUTON = new Color(0, 255, 0);
 
     /**
      * La couleur du texte des boutons dans le thème de débogage.
      */
-    private final static Color TEXTE_BOUTON = new Color(251, 250, 242);
+    private static final Color TEXTE_BOUTON = new Color(251, 250, 242);
 
     /**
      * La couleur des boutons désactivés dans le thème de débogage.
      */
-    private final static Color BOUTON_DESACTIVE = new Color(0, 0, 255);
-
-    /**
-     * La couleur de fond dans le thème de débogage.
-     */
-    private final static Color FOND = new Color(255, 0, 0);
+    private static final Color BOUTON_DESACTIVE = new Color(0, 0, 255);
 
     /**
      * La couleur transparente dans le thème de débogage.
      */
-    private final static Color TRANSPARENT = new Color(0, 0, 0, 0);
+    private static final Color TRANSPARENT = new Color(0, 0, 0, 0);
 
     /**
      * Le constructeur privé de la classe DebugTheme.
@@ -63,7 +59,7 @@ public class DebugTheme implements Theme {
 
     @Override
     public Color getBackgroundColor() {
-        return FOND;
+        return new Color(ThreadLocalRandom.current().nextInt(0x1000000));
     }
 
     @Override
