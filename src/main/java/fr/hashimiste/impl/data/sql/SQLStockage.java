@@ -84,7 +84,7 @@ public class SQLStockage implements Stockage {
      */
     private void miseEnPlaceTable() throws SQLException {
         creerTable("profil", "id_profil INTEGER PRIMARY KEY AUTOINCREMENT", "nom TEXT");
-        creerTable("statistique", new String[]{"id_stat INTEGER PRIMARY KEY AUTOINCREMENT", "id_profil INTEGER REFERENCES profil", "nom TEXT", "id_entity INTEGER", "valeur INTEGER"}, new String[]{"id_stat"}, new String[]{"id_stat", "id_profil", "nom", "id_entity"});
+        creerTable("statistique", new String[]{"id_stat INTEGER PRIMARY KEY AUTOINCREMENT", "id_profil INTEGER REFERENCES profil", "nom TEXT", "id_entity INTEGER", "valeur INTEGER"}, null, new String[]{"id_stat", "id_profil", "nom", "id_entity"});
         creerTable("map", "id_map INTEGER PRIMARY KEY AUTOINCREMENT", "nom TEXT", "difficulte INTEGER", "largeur INTEGER", "hauteur INTEGER");
         creerTable("ile", "id_ile INTEGER PRIMARY KEY AUTOINCREMENT", "id_map INTEGER REFERENCES map", "x INTEGER", "y INTEGER", "n INTEGER");
         creerTable("historique", new String[]{"date TIMESTAMP", "id_map INTEGER REFERENCES map", "id_ile1 INTEGER REFERENCES ile", "id_ile2 INTEGER REFERENCES ile", "action INTEGER", "avant TIMESTAMP NULL REFERENCES historique(date)"}, new String[]{"date"}, null);
