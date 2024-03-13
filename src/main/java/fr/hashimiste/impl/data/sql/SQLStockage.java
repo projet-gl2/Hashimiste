@@ -196,7 +196,7 @@ public class SQLStockage implements Stockage {
      *
      * @param clazz     la classe des données à charger.
      * @param jointures une liste de jointures.
-     * @param filtre        un filtre.
+     * @param filtre    un filtre.
      * @return une liste d'objets de la classe spécifiée, chargés à partir de la base de données.
      */
     @Override
@@ -268,7 +268,7 @@ public class SQLStockage implements Stockage {
      * Cette méthode est utilisée pour supprimer des données d'une classe spécifique de la base de données.
      * Elle prend en paramètre la classe des données à supprimer et un filtre.
      *
-     * @param clazz la classe des données à supprimer.
+     * @param clazz  la classe des données à supprimer.
      * @param filtre un filtre.
      * @throws IllegalArgumentException si la classe est nulle ou si elle n'est pas gérée par ce stockage.
      * @throws RuntimeException         si une erreur de base de données se produit.
@@ -330,8 +330,8 @@ public class SQLStockage implements Stockage {
      */
     public ResultSet executeQuery(String query) {
         logQuery(query, 1);
-        try (Statement stmt = connection.createStatement()) {
-            return stmt.executeQuery(query);
+        try {
+            return connection.createStatement().executeQuery(query);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
