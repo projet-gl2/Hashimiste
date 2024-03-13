@@ -31,6 +31,13 @@ public interface Ile extends Identifiable {
     int getY();
 
     /**
+     * Vérifie si l'ile est complète (nb de ponts égal au nombre N de l'île).
+     *
+     * @return true si l'ile est complète, false sinon.
+     */
+    public boolean isComplete();
+
+    /**
      * Récupère le nombre de voisins de l'île.
      *
      * @return le nombre de voisins de l'île.

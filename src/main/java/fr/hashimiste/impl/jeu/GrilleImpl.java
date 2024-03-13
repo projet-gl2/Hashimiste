@@ -6,6 +6,7 @@ import fr.hashimiste.core.jeu.Difficulte;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Ile;
 import fr.hashimiste.core.jeu.Sauvegarde;
+import fr.hashimiste.core.jeu.Technique;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -123,7 +124,31 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
 
     @Override
     public Ile aide() {
-        return null;
+
+        if (!this.verification()) return null;
+        else {
+            Technique[] lTech = Technique.values();
+            int fIndMin = lTech.length; //une liste des fonctions qui appliquent une technique
+            //elles prennent en paramètre une île, et renvoient vrai si la technique s'applique à l'île
+
+            Ile aideIle = null; //l'île sur laquelle on peut avancer à l'aide des techniques
+
+            for (int i = 0; i < this.dimension.getWidth(); i++) { //parcours colonnes
+                for (int j = 0; j < this.dimension.getHeight(); j++) { //parcours lignes
+                    if (this.getIle(i, j) != null && !(this.getIle(i, j).isComplete())) { //si l'île existe et n'est pas complète
+                        for (int fInd = 0; fInd < fIndMin; fInd++) { //parcours techniques
+                            if (lTech[fInd].test(this.getIle(i, j))) { //si la technique s'applique à l'île
+                                aideIle = this.getIle(i, j);
+                                fIndMin = fInd; //on ne vérifie que les techniques de plus bas niveau que celles trouvées précédemments
+                            }
+                        }
+                    }
+                }
+            }
+
+            return aideIle;
+
+        }
     }
 
     @Override
