@@ -57,6 +57,11 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
     }
 
     @Override
+    public boolean isComplete() {
+        return getNbPont() == this.n;
+    }
+
+    @Override
     public int getNbVoisin() {
         return 0;
     }
