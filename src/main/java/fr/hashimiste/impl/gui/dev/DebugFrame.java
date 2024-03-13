@@ -7,11 +7,15 @@ import fr.hashimiste.core.gui.JFrameTemplate;
 import fr.hashimiste.core.gui.JFrameTemplateProfil;
 import fr.hashimiste.core.utils.swing.ListRenderer;
 import fr.hashimiste.impl.data.sql.SQLStockage;
+import fr.hashimiste.impl.gui.builder.Editor;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -82,6 +86,16 @@ public class DebugFrame extends JFrame {
 
         panels.addTab("Data", panData);
         setupDataPanel();
+
+        panels.addTab("Editor", new JPanel());
+        panels.addChangeListener(new ChangeListener() {
+            private JFrame builder = new Editor(new File("hashimiste.properties"), stockage, null);
+
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                builder.setVisible(panels.getSelectedIndex() == 2);
+            }
+        });
         add(panels);
     }
 

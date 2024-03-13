@@ -61,6 +61,9 @@ public class Main {
 
         Stockage stockage = new SQLStockage("org.sqlite.JDBC", "jdbc:sqlite:hashimiste.db");
         recupererFenetreAsAfficher(propertiesFile, properties, stockage).setVisible(true);
+        if (DEVELOPMENT) {
+            new DebugFrame(stockage).setVisible(true);
+        }
     }
 
     /**
@@ -73,9 +76,6 @@ public class Main {
      */
     private static Frame recupererFenetreAsAfficher(File propertiesFile, Properties properties, Stockage stockage) {
         JFrameTemplate frame = new ProfilSelection(propertiesFile, stockage);
-        if (DEVELOPMENT) {
-            new DebugFrame(stockage).setVisible(true);
-        }
         if (getProperty("profil", properties) == null) {
             return frame;
         }
