@@ -11,9 +11,7 @@ import fr.hashimiste.impl.gui.component.PreviewComponent;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,7 +21,7 @@ import java.util.List;
  * Cette classe représente le jeu.
  * Elle hérite de JFrameTemplateProfil et implémente Debuggable.
  */
-public class Jeu extends JFrameTemplateProfil implements Debuggable {
+public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotionListener {
 
     private final transient Grille grille;
     private final JButton butMenu = creerBoutton("Menu", fenetreParente);
@@ -55,21 +53,6 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable {
 
         JPanel panelButtons = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-        panelButtons.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                System.out.println("bouger");
-                super.mouseMoved(e);
-            }
-        });
-
-        this.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                System.out.println("moved");
-                super.mouseMoved(e);
-            }
-        });
 
         for (JButton button : new JButton[]{butMenu, butVerifier, butCharger, butSauvegarder, butCheckpoint, butPrecedent, butAide}) {
             panelButtons.add(button);
@@ -79,15 +62,6 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable {
         // Create the game panel
         JPanel game = new JPanel(new BorderLayout());
 
-        game.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                System.out.println("moved");
-                super.mouseMoved(e);
-            }
-        });
-
-        game.setBackground(Color.GREEN);
 
         // Add the PreviewComponent to the center of the game panel
         GameComponent gameComponent = new GameComponent(grille);
@@ -99,8 +73,10 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable {
         constraints.gridy = 1; // Set the gridy to 1 to place it below the buttons
         constraints.weighty = 1; // Set weighty to 1 to make it fill the remaining space
         add(game, constraints);
-    }
 
+        //game.addMouseMotionListener(this);
+        game.addMouseMotionListener(gameComponent);
+    }
     /**
      * Cette méthode est utilisée pour vérifier le jeu.
      */
@@ -215,4 +191,13 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable {
     }
 
 
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        System.out.println("Mouse moved");
+    }
 }

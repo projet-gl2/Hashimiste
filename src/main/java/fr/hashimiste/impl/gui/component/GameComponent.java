@@ -47,8 +47,18 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        // Imprimez les coordonnées de la souris pour vérifier si l'événement de mouvement de la souris est déclenché
-        System.out.println("Mouse moved: (" + e.getX() + ", " + e.getY() + ")");
+        double factor = Math.min((getSize().getWidth() - 5) / getGrille().getDimension().width, (getSize().getHeight() - 5) / getGrille().getDimension().height);
+        int zeroX = (int) ((getSize().width / 2d) - ((getGrille().getDimension().width * factor) / 2));
+        int zeroY = (int) ((getSize().height / 2d) - ((getGrille().getDimension().height * factor) / 2));
+        if(e.getX() >= zeroX && e.getY() >= zeroY) {
+            // Imprimez les coordonnées de la souris pour vérifier si l'événement de mouvement de la souris est déclenché
+
+
+            int x = (e.getX()-zeroX);
+            int y = (e.getY()-zeroY);
+            int i = (this.getWidth()-zeroX-zeroX) / getGrille().getDimension().width;
+            System.out.println(x / i + " : " + y / i);
+        }
     }
 
     @Override
