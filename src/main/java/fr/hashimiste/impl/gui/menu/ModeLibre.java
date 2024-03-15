@@ -139,7 +139,7 @@ public class ModeLibre extends JFrameTemplateProfil implements Debuggable {
                 }
 
                 @Override
-                public void mouseClicked(MouseEvent e) {
+                public void mousePressed(MouseEvent e) {
                     ModeLibre.super.changerFenetre(new Jeu(ModeLibre.this, grille));
                     super.mouseClicked(e);
                 }
