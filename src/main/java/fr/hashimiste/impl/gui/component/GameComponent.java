@@ -1,5 +1,6 @@
 package fr.hashimiste.impl.gui.component;
 
+import fr.hashimiste.core.jeu.Direction;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Ile;
 
@@ -7,12 +8,38 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.util.Map;
 
 public class GameComponent extends PreviewComponent implements MouseMotionListener {
+
+
+    public class Bridge{
+
+        Ile ile1;
+        Ile ile2;
+        boolean hor;
+        public Bridge(Ile ile1, Ile ile2, boolean hor)
+        {
+            this.ile1 = ile1;
+            this.ile2 = ile2;
+            this.hor = hor;
+        }
+
+        public Ile getIle1() {
+            return ile1;
+        }
+
+        public Ile getIle2() {
+            return ile2;
+        }
+    }
 
     private boolean hoveringBridge = false;
     private int hoveredBridgeRow = -1;
     private int hoveredBridgeCol = -1;
+
+    private Bridge hoverBridge;
+
 
     /**
      * Constructeur de la classe GameComponent.
@@ -39,7 +66,6 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
             g.fillRect(hoveredBridgeCol * getCellSize(), hoveredBridgeRow * getCellSize(), getCellSize(), getCellSize());
         }
     }
-
     int getCellSize()
     {
         return this.getWidth()/getGrille().getDimension().width;
@@ -58,8 +84,105 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
             int y = (e.getY()-zeroY);
             int i = (this.getWidth()-zeroX-zeroX) / getGrille().getDimension().width;
             System.out.println(x / i + " : " + y / i);
+            Ile Isle = getIsle(x/i, y/i);
+            boolean isOnIsle = Isle != null;
+            System.out.println("on isle : " + isOnIsle);
+            System.out.println("isle on left: " + isIsleOnLeft(x/i, y/i));
+            System.out.println("isle on right: " + isIsleOnRight(x/i, y/i));
+            System.out.println("isle on top: " + isIsleOnTop(x/i, y/i));
+            System.out.println("isle on bottom: " + isIsleOnBottom(x/i, y/i));
+
+            if(!isOnIsle)
+            {
+                Ile ileLeft = isIsleOnLeft(x/i, y/i);
+                Ile ileRight = isIsleOnRight(x/i, y/i);
+                Ile ileTop = isIsleOnTop((x/i), (y/i));
+                Ile ileBottom = isIsleOnBottom(x/i, y/i);
+                if(ileLeft != null && ileRight != null)
+                {
+                    hoverBridge = new Bridge(ileLeft, ileRight, true);
+                }else{
+                    hoverBridge = null;
+                }
+
+                if(ileTop != null && ileBottom != null)
+                {
+                    hoverBridge = new Bridge(ileTop, ileBottom, false);
+                }else{
+                    hoverBridge = null;
+                }
+
+
+
+            }else{
+                hoverBridge = null;
+            }
+
+            if(isBridgeHover())
+            {
+                System.out.println("horizontal bridge");
+            }
+
+
+
         }
     }
+
+    public boolean isBridgeHover()
+    {
+        return hoverBridge != null;
+    }
+
+    public Ile getIsle(int x, int y)
+    {
+        for(Ile ile : getGrille().getIles())
+        {
+            if(ile.getX() == x && ile.getY() == y) return ile;
+        }
+        return null;
+    }
+
+    public Ile isIsleOnLeft(int x, int y)
+    {
+        for(int i = x-1; i >= 0; i--)
+        {
+            Ile ile = getIsle(i , y);
+            if(ile != null) return ile;
+        }
+        return null;
+    }
+
+    public Ile isIsleOnRight(int x, int y)
+    {
+        for(int i = x+1; i <= getGrille().getDimension().width-1; i++)
+        {
+            Ile ile = getIsle(i, y);
+            if(ile != null) return ile;
+        }
+        return null;
+    }
+
+    public Ile isIsleOnTop(int x, int y)
+    {
+        for(int i = y-1; i>0; i--)
+        {
+            Ile ile = getIsle(x, i);
+            if(ile != null) return ile;
+        }
+        return null;
+    }
+
+    public Ile isIsleOnBottom(int x, int y)
+    {
+        for(int i = y+1; i<getGrille().getDimension().width-1; i++)
+        {
+            Ile ile = getIsle(x,i);
+            if(ile != null) return ile;
+        }
+        return null;
+    }
+
+
 
     @Override
     public void mouseDragged(MouseEvent e) {
