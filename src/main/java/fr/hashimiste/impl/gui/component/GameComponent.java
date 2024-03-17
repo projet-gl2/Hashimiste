@@ -15,15 +15,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *  Cette classe est une sous classe de previewComponent
+ *  elle ajoute nottament des interactions
+ * @author elie
+ */
 public class GameComponent extends PreviewComponent implements MouseMotionListener {
 
 
-    public class Bridge{
+    /**
+     *  Cette classe représente des ponts potentiels
+     *  @author elie
+     */
+    public class PotentialBridge{
 
-        Ile ile1;
-        Ile ile2;
-        boolean hor;
-        public Bridge(Ile ile1, Ile ile2, boolean hor)
+        Ile ile1; // première ile du pont
+        Ile ile2; // deuxième ile du pont
+        boolean hor; // disposition du pont true: horizontal & false: false
+
+        /**
+         * Constructeur d'un pont potentiel
+         * @param ile1
+         * @param ile2
+         * @param hor
+         */
+        public PotentialBridge(Ile ile1, Ile ile2, boolean hor)
         {
             this.ile1 = ile1;
             this.ile2 = ile2;
@@ -39,12 +55,10 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
         }
     }
 
-    private boolean hoveringBridge = false;
-    private int hoveredBridgeRow = -1;
-    private int hoveredBridgeCol = -1;
-
-    private List<Bridge> hoverBridge;
-
+    /**
+     * Liste des ponts potentiels à afficher
+     */
+    private List<PotentialBridge> hoverBridge;
 
     /**
      * Constructeur de la classe GameComponent.
@@ -66,23 +80,35 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        for(Bridge bridge : hoverBridge)
+        // pour tous les ponts à afficher
+        for(PotentialBridge bridge : hoverBridge)
         {
 
             double factor = Math.min((getSize().getWidth() - 5) / getGrille().getDimension().width, (getSize().getHeight() - 5) / getGrille().getDimension().height);
+
+            // position x de la grille
             int zeroX = (int) ((getSize().width / 2d) - ((getGrille().getDimension().width * factor) / 2));
+
+            // position y de la grille
             int zeroY = (int) ((getSize().height / 2d) - ((getGrille().getDimension().height * factor) / 2));
+
+            // taille d'un cellule en pixel
             int cell_size = (this.getWidth()-zeroX-zeroX) / getGrille().getDimension().width;
 
 
             Graphics2D g2 = (Graphics2D) g;
+
+            // récuperation de la couleur du theme
             g2.setColor(DefaultTheme.INSTANCE.getPotentialBridgeColor());
+
             g2.setStroke(new BasicStroke(5));
             if(bridge.hor) // dessiner pont horizontal
             {
+                // dessin de la ligne
                 g2.draw(new Line2D.Float( zeroX+cell_size*bridge.ile1.getX()+cell_size, zeroY+cell_size*bridge.ile1.getY()+cell_size/2, zeroX+cell_size*bridge.ile2.getX(), zeroY+cell_size*bridge.ile1.getY() + cell_size/2));
 
             }else{ // dessiner pont vertical
+                // dessin de la ligne
                 g2.draw(new Line2D.Float( zeroX+cell_size*bridge.ile1.getX()+cell_size/2, zeroY+cell_size*bridge.ile1.getY()+cell_size, zeroX+cell_size*bridge.ile2.getX()+cell_size/2, zeroY+cell_size*bridge.ile2.getY()));
 
             }
@@ -90,6 +116,11 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
 
 
     }
+
+    /**
+     * récupère la position du curseur et complète la liste des ponts potentiels
+     * @param e the event to be processed
+     */
     @Override
     public void mouseMoved(MouseEvent e) {
         double factor = Math.min((getSize().getWidth() - 5) / getGrille().getDimension().width, (getSize().getHeight() - 5) / getGrille().getDimension().height);
@@ -113,30 +144,30 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
             if (!isOnIsle) {
                 hoverBridge.clear();
                 if (ileOuest != null && ileEst != null) {
-                    hoverBridge.add(new Bridge(ileOuest, ileEst, true));
+                    hoverBridge.add(new PotentialBridge(ileOuest, ileEst, true));
                 }
 
                 if (ileNord != null && ileSud != null) {
-                    hoverBridge.add(new Bridge(ileNord, ileSud, false));
+                    hoverBridge.add(new PotentialBridge(ileNord, ileSud, false));
                 }
             } else {
                 System.out.println("on isle");
                 if(ileOuest != null)
                 {
-                    hoverBridge.add(new Bridge(ileOuest, ile, true));
+                    hoverBridge.add(new PotentialBridge(ileOuest, ile, true));
                 }
                 if(ileEst != null)
                 {
-                    hoverBridge.add(new Bridge(ile, ileEst, true));
+                    hoverBridge.add(new PotentialBridge(ile, ileEst, true));
 
                 }
                 if(ileSud != null)
                 {
-                    hoverBridge.add(new Bridge(ile, ileSud, false));
+                    hoverBridge.add(new PotentialBridge(ile, ileSud, false));
                 }
                 if(ileNord != null)
                 {
-                    hoverBridge.add(new Bridge(ileNord, ile, false));
+                    hoverBridge.add(new PotentialBridge(ileNord, ile, false));
                 }
             }
 
@@ -151,11 +182,21 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
     }
 
 
+    /**
+     * Retourne vrai si au moins un potentiel pont est survolé
+     * @return boolean
+     */
     public boolean isBridgeHover()
     {
         return !hoverBridge.isEmpty();
     }
 
+    /**
+     * Retourne l'ile de la grille correspondant au coordonnées
+     * @param x position x
+     * @param y position y
+     * @return Ile
+     */
     public Ile getIsle(int x, int y)
     {
         for(Ile ile : getGrille().getIles())
@@ -165,6 +206,13 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
         return null;
     }
 
+    /**
+     * Retourne l'ile la plus proche dans la direction passé un paramètre
+     * @param dir direction
+     * @param x position x de l'ile de départ
+     * @param y position y de l'ile de départ
+     * @return
+     */
     public Ile checkNearIsle(Direction dir, int x, int y) {
         Ile ile = null;
         switch (dir) {
