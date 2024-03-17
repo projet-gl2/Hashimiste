@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class GameComponent extends PreviewComponent implements MouseMotionListener {
@@ -38,7 +40,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
     private int hoveredBridgeRow = -1;
     private int hoveredBridgeCol = -1;
 
-    private Bridge hoverBridge;
+    private List<Bridge> hoverBridge;
 
 
     /**
@@ -48,7 +50,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
      */
     public GameComponent(Grille grille) {
         super(grille);
-
+        hoverBridge = new ArrayList<>();
 
     }
 
@@ -83,44 +85,49 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
             int x = (e.getX()-zeroX);
             int y = (e.getY()-zeroY);
             int i = (this.getWidth()-zeroX-zeroX) / getGrille().getDimension().width;
-            System.out.println(x / i + " : " + y / i);
+            //System.out.println(x / i + " : " + y / i);
             Ile Isle = getIsle(x/i, y/i);
             boolean isOnIsle = Isle != null;
-            System.out.println("on isle : " + isOnIsle);
+            /*System.out.println("on isle : " + isOnIsle);
             System.out.println("isle on left: " + isIsleOnLeft(x/i, y/i));
             System.out.println("isle on right: " + isIsleOnRight(x/i, y/i));
             System.out.println("isle on top: " + isIsleOnTop(x/i, y/i));
-            System.out.println("isle on bottom: " + isIsleOnBottom(x/i, y/i));
+            System.out.println("isle on bottom: " + isIsleOnBottom(x/i, y/i));*/
+
+            Ile ileOuest = checkNearIsle(Direction.OUEST,x/i, y/i);
+            Ile ileEst = checkNearIsle(Direction.EST,x/i, y/i);
+            Ile ileNord = checkNearIsle(Direction.NORD, x/i, y/i);
+            Ile ileSud = checkNearIsle(Direction.SUD,x/i, y/i);
+
 
             if(!isOnIsle)
             {
-                Ile ileLeft = isIsleOnLeft(x/i, y/i);
-                Ile ileRight = isIsleOnRight(x/i, y/i);
-                Ile ileTop = isIsleOnTop((x/i), (y/i));
-                Ile ileBottom = isIsleOnBottom(x/i, y/i);
-                if(ileLeft != null && ileRight != null)
+                hoverBridge.clear();
+                if(ileOuest != null && ileEst != null)
                 {
-                    hoverBridge = new Bridge(ileLeft, ileRight, true);
-                }else{
-                    hoverBridge = null;
+                    hoverBridge.add(new Bridge(ileOuest, ileEst, true));
                 }
 
-                if(ileTop != null && ileBottom != null)
+                if(ileNord != null && ileSud != null)
                 {
-                    hoverBridge = new Bridge(ileTop, ileBottom, false);
-                }else{
-                    hoverBridge = null;
+                    hoverBridge.add(new Bridge(ileNord, ileSud, false));
+                }
+
+                if(ileOuest == null && ileEst == null && ileNord == null && ileSud == null)
+                {
+                    hoverBridge.clear();
                 }
 
 
 
             }else{
-                hoverBridge = null;
+
+
             }
 
             if(isBridgeHover())
             {
-                System.out.println("horizontal bridge");
+                System.out.println("bridge: " + hoverBridge.size());
             }
 
 
@@ -130,7 +137,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
 
     public boolean isBridgeHover()
     {
-        return hoverBridge != null;
+        return !hoverBridge.isEmpty();
     }
 
     public Ile getIsle(int x, int y)
@@ -142,51 +149,45 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
         return null;
     }
 
-    public Ile isIsleOnLeft(int x, int y)
+    public Ile checkNearIsle(Direction dir, int x, int y)
     {
-        for(int i = x-1; i >= 0; i--)
+        Ile ile  = null;
+        switch(dir)
         {
-            Ile ile = getIsle(i , y);
-            if(ile != null) return ile;
-        }
-        return null;
-    }
+            case OUEST:
+                for(int i = x-1; i >= 0; i--)
+                {
+                    ile = getIsle(i , y);
+                }
+                break;
 
-    public Ile isIsleOnRight(int x, int y)
-    {
-        for(int i = x+1; i <= getGrille().getDimension().width-1; i++)
-        {
-            Ile ile = getIsle(i, y);
-            if(ile != null) return ile;
-        }
-        return null;
-    }
+            case EST:
+                for(int i = x+1; i <= getGrille().getDimension().width-1; i++)
+                {
+                    ile = getIsle(i, y);
+                }
+                break;
 
-    public Ile isIsleOnTop(int x, int y)
-    {
-        for(int i = y-1; i>0; i--)
-        {
-            Ile ile = getIsle(x, i);
-            if(ile != null) return ile;
-        }
-        return null;
-    }
+            case NORD:
+                for(int i = y-1; i>0; i--)
+                {
+                    ile = getIsle(x, i);
+                }
+                break;
 
-    public Ile isIsleOnBottom(int x, int y)
-    {
-        for(int i = y+1; i<getGrille().getDimension().width-1; i++)
-        {
-            Ile ile = getIsle(x,i);
-            if(ile != null) return ile;
+            case SUD:
+                for(int i = y+1; i<getGrille().getDimension().width-1; i++)
+                {
+                    ile = getIsle(x,i);
+                }
+                break;
         }
-        return null;
+
+        return ile;
     }
 
 
 
     @Override
-    public void mouseDragged(MouseEvent e) {
-        // Imprimez les coordonnées de la souris pour vérifier si l'événement de glissement de la souris est déclenché
-        System.out.println("Mouse dragged: (" + e.getX() + ", " + e.getY() + ")");
-    }
+    public void mouseDragged(MouseEvent e) {}
 }
