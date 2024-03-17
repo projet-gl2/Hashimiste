@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -63,16 +64,29 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        if (hoveringBridge) {
-            g.setColor(Color.YELLOW); // Couleur du survol du pont
-            g.fillRect(hoveredBridgeCol * getCellSize(), hoveredBridgeRow * getCellSize(), getCellSize(), getCellSize());
-        }
-    }
-    int getCellSize()
-    {
-        return this.getWidth()/getGrille().getDimension().width;
-    }
+        for(Bridge bridge : hoverBridge)
+        {
 
+            double factor = Math.min((getSize().getWidth() - 5) / getGrille().getDimension().width, (getSize().getHeight() - 5) / getGrille().getDimension().height);
+            int zeroX = (int) ((getSize().width / 2d) - ((getGrille().getDimension().width * factor) / 2));
+            int zeroY = (int) ((getSize().height / 2d) - ((getGrille().getDimension().height * factor) / 2));
+            int cell_size = (this.getWidth()-zeroX-zeroX) / getGrille().getDimension().width;
+
+
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setColor(Color.ORANGE);
+            g2.setStroke(new BasicStroke(3));
+            if(bridge.hor) // dessiner pont horizontal
+            {
+                g2.draw(new Line2D.Float( zeroX+cell_size*bridge.ile1.getX()+cell_size, zeroY+cell_size*bridge.ile1.getY()+cell_size/2, zeroX+cell_size*bridge.ile2.getX(), zeroY+cell_size*bridge.ile1.getY() + cell_size/2));
+
+            }else{ // dessiner pont vertical
+
+            }
+        }
+
+
+    }
     @Override
     public void mouseMoved(MouseEvent e) {
         double factor = Math.min((getSize().getWidth() - 5) / getGrille().getDimension().width, (getSize().getHeight() - 5) / getGrille().getDimension().height);
@@ -122,6 +136,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
 
             if(isBridgeHover())
             {
+                paintComponent(this.getGraphics());
                 System.out.println("bridge: " + hoverBridge.size());
             }
 
