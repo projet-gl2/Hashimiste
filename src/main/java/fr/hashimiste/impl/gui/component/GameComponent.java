@@ -79,25 +79,19 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
         int zeroX = (int) ((getSize().width / 2d) - ((getGrille().getDimension().width * factor) / 2));
         int zeroY = (int) ((getSize().height / 2d) - ((getGrille().getDimension().height * factor) / 2));
         if(e.getX() >= zeroX && e.getY() >= zeroY) {
-            // Imprimez les coordonnées de la souris pour vérifier si l'événement de mouvement de la souris est déclenché
 
-
-            int x = (e.getX()-zeroX);
-            int y = (e.getY()-zeroY);
             int i = (this.getWidth()-zeroX-zeroX) / getGrille().getDimension().width;
-            //System.out.println(x / i + " : " + y / i);
-            Ile Isle = getIsle(x/i, y/i);
+            int x = (e.getX()-zeroX)/i;
+            int y = (e.getY()-zeroY)/i;
+            Ile Isle = getIsle(x, y);
             boolean isOnIsle = Isle != null;
-            /*System.out.println("on isle : " + isOnIsle);
-            System.out.println("isle on left: " + isIsleOnLeft(x/i, y/i));
-            System.out.println("isle on right: " + isIsleOnRight(x/i, y/i));
-            System.out.println("isle on top: " + isIsleOnTop(x/i, y/i));
-            System.out.println("isle on bottom: " + isIsleOnBottom(x/i, y/i));*/
 
-            Ile ileOuest = checkNearIsle(Direction.OUEST,x/i, y/i);
-            Ile ileEst = checkNearIsle(Direction.EST,x/i, y/i);
-            Ile ileNord = checkNearIsle(Direction.NORD, x/i, y/i);
-            Ile ileSud = checkNearIsle(Direction.SUD,x/i, y/i);
+            Ile ileOuest = checkNearIsle(Direction.OUEST,x, y);
+            Ile ileEst = checkNearIsle(Direction.EST,x, y);
+            Ile ileNord = checkNearIsle(Direction.NORD, x, y);
+            Ile ileSud = checkNearIsle(Direction.SUD,x, y);
+
+            System.out.println("O: " + ileOuest + " | E: " + ileEst + " | N: " + ileNord + " | S: " + ileSud);
 
 
             if(!isOnIsle)
@@ -122,6 +116,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
 
             }else{
 
+                System.out.println("on isle");
 
             }
 
@@ -158,6 +153,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
                 for(int i = x-1; i >= 0; i--)
                 {
                     ile = getIsle(i , y);
+                    if(ile != null)break;
                 }
                 break;
 
@@ -165,6 +161,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
                 for(int i = x+1; i <= getGrille().getDimension().width-1; i++)
                 {
                     ile = getIsle(i, y);
+                    if(ile != null)break;
                 }
                 break;
 
@@ -172,6 +169,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
                 for(int i = y-1; i>0; i--)
                 {
                     ile = getIsle(x, i);
+                    if(ile != null)break;
                 }
                 break;
 
@@ -179,6 +177,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
                 for(int i = y+1; i<getGrille().getDimension().width-1; i++)
                 {
                     ile = getIsle(x,i);
+                    if(ile != null)break;
                 }
                 break;
         }
