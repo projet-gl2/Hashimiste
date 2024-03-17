@@ -98,8 +98,8 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
             int i = (this.getWidth() - zeroX - zeroX) / getGrille().getDimension().width;
             int x = (e.getX() - zeroX) / i;
             int y = (e.getY() - zeroY) / i;
-            Ile Isle = getIsle(x, y);
-            boolean isOnIsle = Isle != null;
+            Ile ile = getIsle(x, y);
+            boolean isOnIsle = ile != null;
 
             Ile ileOuest = checkNearIsle(Direction.OUEST, x, y);
             Ile ileEst = checkNearIsle(Direction.EST, x, y);
@@ -118,8 +118,24 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
                     hoverBridge.add(new Bridge(ileNord, ileSud, false));
                 }
             } else {
-                hoverBridge.clear();
                 System.out.println("on isle");
+                if(ileOuest != null)
+                {
+                    hoverBridge.add(new Bridge(ileOuest, ile, true));
+                }
+                if(ileEst != null)
+                {
+                    hoverBridge.add(new Bridge(ile, ileEst, true));
+
+                }
+                if(ileSud != null)
+                {
+                    hoverBridge.add(new Bridge(ile, ileSud, false));
+                }
+                if(ileNord != null)
+                {
+                    hoverBridge.add(new Bridge(ileNord, ile, false));
+                }
             }
 
             repaint(); // Repaint the component to reflect changes
@@ -147,46 +163,37 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
         return null;
     }
 
-    public Ile checkNearIsle(Direction dir, int x, int y)
-    {
-        Ile ile  = null;
-        switch(dir)
-        {
+    public Ile checkNearIsle(Direction dir, int x, int y) {
+        Ile ile = null;
+        switch (dir) {
             case OUEST:
-                for(int i = x-1; i >= 0; i--)
-                {
-                    ile = getIsle(i , y);
-                    if(ile != null)break;
-                }
-                break;
-
-            case EST:
-                for(int i = x+1; i <= getGrille().getDimension().width-1; i++)
-                {
+                for (int i = x - 1; i >= 0; i--) {
                     ile = getIsle(i, y);
-                    if(ile != null)break;
+                    if (ile != null) break;
                 }
                 break;
-
+            case EST:
+                for (int i = x + 1; i < getGrille().getDimension().width; i++) {
+                    ile = getIsle(i, y);
+                    if (ile != null) break;
+                }
+                break;
             case NORD:
-                for(int i = y-1; i>0; i--)
-                {
+                for (int i = y - 1; i >= 0; i--) {
                     ile = getIsle(x, i);
-                    if(ile != null)break;
+                    if (ile != null) break;
                 }
                 break;
-
             case SUD:
-                for(int i = y+1; i<getGrille().getDimension().width-1; i++)
-                {
-                    ile = getIsle(x,i);
-                    if(ile != null)break;
+                for (int i = y + 1; i < getGrille().getDimension().height; i++) {
+                    ile = getIsle(x, i);
+                    if (ile != null) break;
                 }
                 break;
         }
-
         return ile;
     }
+
 
 
 
