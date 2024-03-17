@@ -75,4 +75,9 @@ public class DefaultTheme implements Theme {
     public Color getTextColor() {
         return Color.BLACK;
     }
+
+    @Override
+    public Color getPotentialBridgeColor() {
+        return Color.PINK;
+    }
 }

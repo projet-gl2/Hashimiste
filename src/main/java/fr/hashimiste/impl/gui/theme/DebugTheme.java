@@ -71,4 +71,7 @@ public class DebugTheme implements Theme {
     public Color getTextColor() {
         return Color.BLACK;
     }
+
+    @Override
+    public Color getPotentialBridgeColor() { return Color.BLUE; }
 }

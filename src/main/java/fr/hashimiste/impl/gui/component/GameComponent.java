@@ -1,8 +1,10 @@
 package fr.hashimiste.impl.gui.component;
 
+import fr.hashimiste.core.gui.Theme;
 import fr.hashimiste.core.jeu.Direction;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Ile;
+import fr.hashimiste.impl.gui.theme.DefaultTheme;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -74,8 +76,8 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
 
 
             Graphics2D g2 = (Graphics2D) g;
-            g2.setColor(Color.YELLOW);
-            g2.setStroke(new BasicStroke(3));
+            g2.setColor(DefaultTheme.INSTANCE.getPotentialBridgeColor());
+            g2.setStroke(new BasicStroke(5));
             if(bridge.hor) // dessiner pont horizontal
             {
                 g2.draw(new Line2D.Float( zeroX+cell_size*bridge.ile1.getX()+cell_size, zeroY+cell_size*bridge.ile1.getY()+cell_size/2, zeroX+cell_size*bridge.ile2.getX(), zeroY+cell_size*bridge.ile1.getY() + cell_size/2));
