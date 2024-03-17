@@ -74,7 +74,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
 
 
             Graphics2D g2 = (Graphics2D) g;
-            g2.setColor(Color.ORANGE);
+            g2.setColor(Color.YELLOW);
             g2.setStroke(new BasicStroke(3));
             if(bridge.hor) // dessiner pont horizontal
             {
@@ -93,58 +93,45 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
         double factor = Math.min((getSize().getWidth() - 5) / getGrille().getDimension().width, (getSize().getHeight() - 5) / getGrille().getDimension().height);
         int zeroX = (int) ((getSize().width / 2d) - ((getGrille().getDimension().width * factor) / 2));
         int zeroY = (int) ((getSize().height / 2d) - ((getGrille().getDimension().height * factor) / 2));
-        if(e.getX() >= zeroX && e.getY() >= zeroY) {
+        if (e.getX() >= zeroX && e.getY() >= zeroY) {
 
-            int i = (this.getWidth()-zeroX-zeroX) / getGrille().getDimension().width;
-            int x = (e.getX()-zeroX)/i;
-            int y = (e.getY()-zeroY)/i;
+            int i = (this.getWidth() - zeroX - zeroX) / getGrille().getDimension().width;
+            int x = (e.getX() - zeroX) / i;
+            int y = (e.getY() - zeroY) / i;
             Ile Isle = getIsle(x, y);
             boolean isOnIsle = Isle != null;
 
-            Ile ileOuest = checkNearIsle(Direction.OUEST,x, y);
-            Ile ileEst = checkNearIsle(Direction.EST,x, y);
+            Ile ileOuest = checkNearIsle(Direction.OUEST, x, y);
+            Ile ileEst = checkNearIsle(Direction.EST, x, y);
             Ile ileNord = checkNearIsle(Direction.NORD, x, y);
-            Ile ileSud = checkNearIsle(Direction.SUD,x, y);
+            Ile ileSud = checkNearIsle(Direction.SUD, x, y);
 
             System.out.println("O: " + ileOuest + " | E: " + ileEst + " | N: " + ileNord + " | S: " + ileSud);
 
-
-            if(!isOnIsle)
-            {
+            if (!isOnIsle) {
                 hoverBridge.clear();
-                if(ileOuest != null && ileEst != null)
-                {
+                if (ileOuest != null && ileEst != null) {
                     hoverBridge.add(new Bridge(ileOuest, ileEst, true));
                 }
 
-                if(ileNord != null && ileSud != null)
-                {
+                if (ileNord != null && ileSud != null) {
                     hoverBridge.add(new Bridge(ileNord, ileSud, false));
                 }
-
-                if(ileOuest == null && ileEst == null && ileNord == null && ileSud == null)
-                {
-                    hoverBridge.clear();
-                }
-
-
-
-            }else{
-
+            } else {
+                hoverBridge.clear();
                 System.out.println("on isle");
-
             }
 
-            if(isBridgeHover())
-            {
-                paintComponent(this.getGraphics());
+            repaint(); // Repaint the component to reflect changes
+
+            if (isBridgeHover()) {
                 System.out.println("bridge: " + hoverBridge.size());
+            } else {
+                // Do something if no bridge is hovered
             }
-
-
-
         }
     }
+
 
     public boolean isBridgeHover()
     {
