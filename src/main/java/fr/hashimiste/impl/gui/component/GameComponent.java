@@ -17,17 +17,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *  Cette classe est une sous classe de previewComponent
- *  elle ajoute nottament des interactions
+ * Cette classe est une sous classe de previewComponent
+ * elle ajoute nottament des interactions
+ *
  * @author elie
  */
 public class GameComponent extends PreviewComponent implements MouseMotionListener, MouseListener {
 
     /**
-     *  Cette classe représente des ponts potentiels
-     *  @author elie
+     * Cette classe représente des ponts potentiels
+     *
+     * @author elie
      */
-    public class Bridge{
+    public class Bridge {
 
         Ile ile1; // première ile du pont
         Ile ile2; // deuxième ile du pont
@@ -37,12 +39,12 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
 
         /**
          * Constructeur d'un pont potentiel
+         *
          * @param ile1
          * @param ile2
          * @param hor
          */
-        public Bridge(Ile ile1, Ile ile2, boolean hor)
-        {
+        public Bridge(Ile ile1, Ile ile2, boolean hor) {
             this.ile1 = ile1;
             this.ile2 = ile2;
             this.hor = hor;
@@ -98,7 +100,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
         int zeroY = (int) ((getSize().height / 2d) - ((getGrille().getDimension().height * factor) / 2));
 
         // taille d'un cellule en pixel
-        int cell_size = (this.getWidth()-zeroX-zeroX) / getGrille().getDimension().width;
+        int cell_size = (this.getWidth() - zeroX - zeroX) / getGrille().getDimension().width;
 
 
         Graphics2D g2 = (Graphics2D) g;
@@ -106,36 +108,34 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
         g2.setStroke(new BasicStroke(5));
 
         // pour tous les ponts à afficher
-        for(Bridge bridge : potentialsBridges)
-        {
+        for (Bridge bridge : potentialsBridges) {
             // récuperation de la couleur du theme
             g2.setColor(DefaultTheme.INSTANCE.getPotentialBridgeColor());
 
-            if(bridge.hor) // dessiner pont horizontal
+            if (bridge.hor) // dessiner pont horizontal
             {
                 // dessin de la ligne
-                g2.draw(new Line2D.Float( zeroX+cell_size*bridge.ile1.getX()+cell_size, zeroY+cell_size*bridge.ile1.getY()+cell_size/2, zeroX+cell_size*bridge.ile2.getX(), zeroY+cell_size*bridge.ile1.getY() + cell_size/2));
+                g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2, zeroX + cell_size * bridge.ile2.getX(), zeroY + cell_size * bridge.ile1.getY() + cell_size / 2));
 
-            }else{ // dessiner pont vertical
+            } else { // dessiner pont vertical
                 // dessin de la ligne
-                g2.draw(new Line2D.Float( zeroX+cell_size*bridge.ile1.getX()+cell_size/2, zeroY+cell_size*bridge.ile1.getY()+cell_size, zeroX+cell_size*bridge.ile2.getX()+cell_size/2, zeroY+cell_size*bridge.ile2.getY()));
+                g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size / 2, zeroY + cell_size * bridge.ile1.getY() + cell_size, zeroX + cell_size * bridge.ile2.getX() + cell_size / 2, zeroY + cell_size * bridge.ile2.getY()));
 
             }
         }
 
-        for(Bridge bridge : bridges)
-        {
+        for (Bridge bridge : bridges) {
             g2.setColor(Color.BLACK);
             //System.out.println("duo: " + bridge.duo);
-            if(bridge.duo) g2.setColor(Color.CYAN);
-            if(bridge.hor) // dessiner pont horizontal
+            if (bridge.duo) g2.setColor(Color.CYAN);
+            if (bridge.hor) // dessiner pont horizontal
             {
                 // dessin de la ligne
-                g2.draw(new Line2D.Float( zeroX+cell_size*bridge.ile1.getX()+cell_size, zeroY+cell_size*bridge.ile1.getY()+cell_size/2, zeroX+cell_size*bridge.ile2.getX(), zeroY+cell_size*bridge.ile1.getY() + cell_size/2));
+                g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2, zeroX + cell_size * bridge.ile2.getX(), zeroY + cell_size * bridge.ile1.getY() + cell_size / 2));
 
-            }else{ // dessiner pont vertical
+            } else { // dessiner pont vertical
                 // dessin de la ligne
-                g2.draw(new Line2D.Float( zeroX+cell_size*bridge.ile1.getX()+cell_size/2, zeroY+cell_size*bridge.ile1.getY()+cell_size, zeroX+cell_size*bridge.ile2.getX()+cell_size/2, zeroY+cell_size*bridge.ile2.getY()));
+                g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size / 2, zeroY + cell_size * bridge.ile1.getY() + cell_size, zeroX + cell_size * bridge.ile2.getX() + cell_size / 2, zeroY + cell_size * bridge.ile2.getY()));
 
             }
         }
@@ -145,19 +145,26 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
 
     /**
      * récupère la position du curseur et complète la liste des ponts potentiels
+     *
      * @param e the event to be processed
      */
     @Override
     public void mouseMoved(MouseEvent e) {
+
+        refreshBridge(e.getX(), e.getY());
+        //System.out.println("size: " + potentialsBridges.size());
+    }
+
+    public void refreshBridge(int souris_x, int souris_y) {
         potentialsBridges.clear();
         double factor = Math.min((getSize().getWidth() - 5) / getGrille().getDimension().width, (getSize().getHeight() - 5) / getGrille().getDimension().height);
         int zeroX = (int) ((getSize().width / 2d) - ((getGrille().getDimension().width * factor) / 2));
         int zeroY = (int) ((getSize().height / 2d) - ((getGrille().getDimension().height * factor) / 2));
-        if (e.getX() >= zeroX && e.getY() >= zeroY) {
 
+        if (souris_x >= zeroX && souris_y >= zeroY) {
             int i = (this.getWidth() - zeroX - zeroX) / getGrille().getDimension().width;
-            int x = (e.getX() - zeroX) / i;
-            int y = (e.getY() - zeroY) / i;
+            int x = (souris_x - zeroX) / i;
+            int y = (souris_y - zeroY) / i;
             Ile ile = getIsle(x, y);
             boolean isOnIsle = ile != null;
 
@@ -165,8 +172,6 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
             Ile ileEst = checkNearIsle(Direction.EST, x, y);
             Ile ileNord = checkNearIsle(Direction.NORD, x, y);
             Ile ileSud = checkNearIsle(Direction.SUD, x, y);
-
-            //System.out.println("O: " + ileOuest + " | E: " + ileEst + " | N: " + ileNord + " | S: " + ileSud);
 
             if (!isOnIsle) {
                 if (ileOuest != null && ileEst != null) {
@@ -177,7 +182,6 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
                     potentialsBridges.add(new Bridge(ileNord, ileSud, false));
                 }
             } else {
-                //System.out.println("on isle");
                 for (Bridge bridge : bridges) {
                     if ((bridge.ile1 == ile || bridge.ile2 == ile) && !bridge.duo) {
                         potentialsBridges.add(bridge);
@@ -197,49 +201,42 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
                     potentialsBridges.add(new Bridge(ileNord, ile, false));
                 }
             }
-
-            repaint(); // Repaint the component to reflect changes
-
-            if (isBridgeHover()) {
-                //System.out.println("bridge: " + potentialsBridges.size());
-            } else {
-                // Do something if no bridge is hovered
-            }
         }
-        //System.out.println("size: " + potentialsBridges.size());
-    }
 
+        // Repaint the component to reflect changes
+        repaint();
+    }
 
 
     /**
      * Retourne vrai si au moins un potentiel pont est survolé
+     *
      * @return boolean
      */
-    public boolean isBridgeHover()
-    {
+    public boolean isBridgeHover() {
         return !potentialsBridges.isEmpty();
     }
 
     /**
      * Retourne l'ile de la grille correspondant au coordonnées
+     *
      * @param x position x
      * @param y position y
      * @return Ile
      */
-    public Ile getIsle(int x, int y)
-    {
-        for(Ile ile : getGrille().getIles())
-        {
-            if(ile.getX() == x && ile.getY() == y) return ile;
+    public Ile getIsle(int x, int y) {
+        for (Ile ile : getGrille().getIles()) {
+            if (ile.getX() == x && ile.getY() == y) return ile;
         }
         return null;
     }
 
     /**
      * Retourne l'ile la plus proche dans la direction passé un paramètre
+     *
      * @param dir direction
-     * @param x position x de l'ile de départ
-     * @param y position y de l'ile de départ
+     * @param x   position x de l'ile de départ
+     * @param y   position y de l'ile de départ
      * @return
      */
     public Ile checkNearIsle(Direction dir, int x, int y) {
@@ -274,7 +271,8 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
     }
 
     @Override
-    public void mouseDragged(MouseEvent e) {}
+    public void mouseDragged(MouseEvent e) {
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -283,31 +281,51 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
 
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println("pb: " + potentialsBridges.size());
-        System.out.println("b: " + bridges.size());
+        // Si des ponts potentiels sont détectés
+        if (isBridgeHover()) {
             Bridge selectedBridge = potentialsBridges.get(0);
-            if (!bridges.contains(potentialsBridges)) {
+            int index = BridgeAlreadyExists(selectedBridge);
+
+            System.out.println("index: " + index);
+            if (index < 0) {
                 // Ajouter le pont à la liste des ponts
                 bridges.add(selectedBridge);
             } else {
+                Bridge currentBridge = bridges.get(index);
+
                 // Le pont est déjà dans la liste, le rendre double ou le supprimer
-                int index = bridges.indexOf(selectedBridge);
-                System.out.println("index: " + index);
-                if (selectedBridge.duo) {
+                if (currentBridge.duo) {
                     // Supprimer le pont
                     bridges.remove(index);
                 } else {
                     // Rendre le pont double
-                    selectedBridge.duo = true;
+                    currentBridge.duo = true;
                 }
             }
+
+            // Rafraîchir les ponts potentiels après chaque clic de souris
+            refreshBridge(e.getX(), e.getY());
+
             repaint();
+            System.out.println("pb: " + potentialsBridges.size());
+            System.out.println("b: " + bridges.size());
+        }
     }
 
-    private boolean BridgeAlreadyExists()
-    {
-        return false;
+
+
+
+    private int BridgeAlreadyExists(Bridge bridge) {
+        for (int i = 0; i < bridges.size(); i++) {
+            Bridge b = bridges.get(i);
+            if (bridge.ile1.getX() == b.ile1.getX() && bridge.ile1.getY() == b.ile1.getY() &&
+                    bridge.ile2.getX() == b.ile2.getX() && bridge.ile2.getY() == b.ile2.getY()) {
+                return i; // Retourner l'index si le pont existe déjà
+            }
+        }
+        return -1; // Retourner -1 si le pont n'existe pas
     }
+
 
 
     @Override
