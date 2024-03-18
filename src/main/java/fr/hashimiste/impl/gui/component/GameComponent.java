@@ -90,58 +90,60 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-
         double factor = Math.min((getSize().getWidth() - 5) / getGrille().getDimension().width, (getSize().getHeight() - 5) / getGrille().getDimension().height);
-
-        // position x de la grille
         int zeroX = (int) ((getSize().width / 2d) - ((getGrille().getDimension().width * factor) / 2));
-
-        // position y de la grille
         int zeroY = (int) ((getSize().height / 2d) - ((getGrille().getDimension().height * factor) / 2));
-
-        // taille d'un cellule en pixel
         int cell_size = (this.getWidth() - zeroX - zeroX) / getGrille().getDimension().width;
 
-
         Graphics2D g2 = (Graphics2D) g;
-
         g2.setStroke(new BasicStroke(5));
 
-        // pour tous les ponts à afficher
+        // Espacement entre les deux lignes d'un pont double
+        int bridgeSpacing = 4;
+
+        // Dessiner les ponts potentiels
         for (Bridge bridge : potentialsBridges) {
-            // récuperation de la couleur du theme
             g2.setColor(DefaultTheme.INSTANCE.getPotentialBridgeColor());
-
-            if (bridge.hor) // dessiner pont horizontal
-            {
-                // dessin de la ligne
-                g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2, zeroX + cell_size * bridge.ile2.getX(), zeroY + cell_size * bridge.ile1.getY() + cell_size / 2));
-
-            } else { // dessiner pont vertical
-                // dessin de la ligne
-                g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size / 2, zeroY + cell_size * bridge.ile1.getY() + cell_size, zeroX + cell_size * bridge.ile2.getX() + cell_size / 2, zeroY + cell_size * bridge.ile2.getY()));
-
+            if (bridge.hor) {
+                g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2,
+                        zeroX + cell_size * bridge.ile2.getX(), zeroY + cell_size * bridge.ile1.getY() + cell_size / 2));
+            } else {
+                g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size / 2, zeroY + cell_size * bridge.ile1.getY() + cell_size,
+                        zeroX + cell_size * bridge.ile2.getX() + cell_size / 2, zeroY + cell_size * bridge.ile2.getY()));
             }
         }
 
+        // Dessiner les ponts
         for (Bridge bridge : bridges) {
             g2.setColor(Color.BLACK);
-            //System.out.println("duo: " + bridge.duo);
-            if (bridge.duo) g2.setColor(Color.CYAN);
-            if (bridge.hor) // dessiner pont horizontal
-            {
-                // dessin de la ligne
-                g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2, zeroX + cell_size * bridge.ile2.getX(), zeroY + cell_size * bridge.ile1.getY() + cell_size / 2));
-
-            } else { // dessiner pont vertical
-                // dessin de la ligne
-                g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size / 2, zeroY + cell_size * bridge.ile1.getY() + cell_size, zeroX + cell_size * bridge.ile2.getX() + cell_size / 2, zeroY + cell_size * bridge.ile2.getY()));
-
+            if (bridge.duo) {
+                if (bridge.hor) {
+                    // Dessiner deux lignes pour un pont double horizontal avec un petit espacement
+                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2 - bridgeSpacing,
+                            zeroX + cell_size * bridge.ile2.getX(), zeroY + cell_size * bridge.ile1.getY() + cell_size / 2 - bridgeSpacing));
+                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2 + bridgeSpacing,
+                            zeroX + cell_size * bridge.ile2.getX(), zeroY + cell_size * bridge.ile1.getY() + cell_size / 2 + bridgeSpacing));
+                } else {
+                    // Dessiner deux lignes pour un pont double vertical avec un petit espacement
+                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size / 2 - bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size,
+                            zeroX + cell_size * bridge.ile2.getX() + cell_size / 2 - bridgeSpacing, zeroY + cell_size * bridge.ile2.getY()));
+                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size / 2 + bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size,
+                            zeroX + cell_size * bridge.ile2.getX() + cell_size / 2 + bridgeSpacing, zeroY + cell_size * bridge.ile2.getY()));
+                }
+            } else {
+                if (bridge.hor) {
+                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2,
+                            zeroX + cell_size * bridge.ile2.getX(), zeroY + cell_size * bridge.ile1.getY() + cell_size / 2));
+                } else {
+                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size / 2, zeroY + cell_size * bridge.ile1.getY() + cell_size,
+                            zeroX + cell_size * bridge.ile2.getX() + cell_size / 2, zeroY + cell_size * bridge.ile2.getY()));
+                }
             }
         }
-
-
     }
+
+
+
 
     /**
      * récupère la position du curseur et complète la liste des ponts potentiels
