@@ -74,8 +74,8 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
         constraints.weighty = 1; // Set weighty to 1 to make it fill the remaining space
         add(game, constraints);
 
-        //game.addMouseMotionListener(this);
         game.addMouseMotionListener(gameComponent);
+        game.addMouseListener(gameComponent);
     }
     /**
      * Cette méthode est utilisée pour vérifier le jeu.
