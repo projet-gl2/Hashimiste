@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import fr.hashimiste.core.data.Filter;
 import fr.hashimiste.core.data.Join;
 import fr.hashimiste.core.data.Stockage;
+import fr.hashimiste.impl.gui.theme.DefaultTheme;
 import fr.hashimiste.impl.joueur.ProfilImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,6 @@ import java.util.function.Predicate;
 import fr.hashimiste.core.joueur.Profil;
 import fr.hashimiste.core.gui.JFrameTemplate;
 import org.opentest4j.AssertionFailedError;
-
 
 class MenuTest {
     // TODO: write tests for Menu class
@@ -90,6 +90,10 @@ class MenuTest {
         menu.getProperties().setProperty("theme", "candy");
         assertEquals("candy", menu.getProperties().getProperty("theme"), "Le thème devrait être 'candy'");
 
+        // Test de repassé au thème par défaut
+        menu.getProperties().setProperty("theme", "default");
+        assertEquals("default", menu.getProperties().getProperty("theme"), "Le thème devrait être 'default'");
+
         System.out.println("Le test des composants du menu réussi");
     }
 
@@ -100,6 +104,11 @@ class MenuTest {
         assertNotNull(boutonParametre, "Le bouton paramètre ne devrait pas être null");
         assertTrue(boutonParametre.isEnabled(), "Le bouton paramètre devrait être activé");
         assertEquals("Paramètre", boutonParametre.getText(), "Le texte du bouton paramètre devrait être 'Paramètre'");
+        // Vérifie si le text du bouton ainsi que tu text du bouton est bien de la bonne couleur selon le thème actuel ( getButtonColor() et getButtonTextColor() )
+        DefaultTheme theme = (DefaultTheme) DefaultTheme.INSTANCE;
+        assertEquals(theme.getButtonColor(), boutonParametre.getBackground(), "La couleur du bouton paramètre devrait être celle du thème par défaut");
+        assertEquals(theme.getButtonTextColor(), boutonParametre.getForeground(), "La couleur du texte du bouton paramètre devrait être celle du thème par défaut");
+
         System.out.println("Le test du bouton paramètre réussi");
     }
 
@@ -110,6 +119,11 @@ class MenuTest {
         assertNotNull(boutonAventure, "Le bouton aventure ne devrait pas être null");
         assertTrue(boutonAventure.isEnabled(), "Le bouton aventure devrait être activé");
         assertEquals("Aventure", boutonAventure.getText(), "Le texte du bouton aventure devrait être 'Aventure'");
+        // Vérifie si le text du bouton ainsi que tu text du bouton est bien de la bonne couleur selon le thème actuel ( getButtonColor() et getButtonTextColor() )
+        DefaultTheme theme = (DefaultTheme) DefaultTheme.INSTANCE;
+        assertEquals(theme.getButtonColor(), boutonAventure.getBackground(), "La couleur du bouton aventure devrait être celle du thème par défaut");
+        assertEquals(theme.getButtonTextColor(), boutonAventure.getForeground(), "La couleur du texte du bouton aventure devrait être celle du thème par défaut");
+
         System.out.println("Le test du bouton aventure réussi");
     }
 
@@ -120,6 +134,11 @@ class MenuTest {
         assertNotNull(boutonTutoriel, "Le bouton tutoriel ne devrait pas être null");
         assertFalse(boutonTutoriel.isEnabled(), "Le bouton tutoriel devrait être désactivé");
         assertEquals("Tutoriel", boutonTutoriel.getText(), "Le texte du bouton tutoriel devrait être 'Tutoriel'");
+        // Vérifie si le text du bouton ainsi que tu text du bouton est bien de la bonne couleur selon le thème actuel ( getDisabledButtonColor() et getButtonTextColor() )
+        DefaultTheme theme = (DefaultTheme) DefaultTheme.INSTANCE;
+        assertEquals(theme.getDisabledButtonColor(), boutonTutoriel.getBackground(), "La couleur du bouton tutoriel devrait être celle du thème par défaut");
+        assertEquals(theme.getButtonTextColor(), boutonTutoriel.getForeground(), "La couleur du texte du bouton tutoriel devrait être celle du thème par défaut");
+
         System.out.println("Le test du bouton tutoriel réussi");
     }
 
@@ -130,6 +149,11 @@ class MenuTest {
         assertNotNull(boutonModeLibre, "Le bouton mode libre ne devrait pas être null");
         assertTrue(boutonModeLibre.isEnabled(), "Le bouton mode libre devrait être activé");
         assertEquals("Mode libre", boutonModeLibre.getText(), "Le texte du bouton mode libre devrait être 'Mode libre'");
+        // Vérifie si le text du bouton ainsi que tu text du bouton est bien de la bonne couleur selon le thème actuel ( getButtonColor() et getButtonTextColor() )
+        DefaultTheme theme = (DefaultTheme) DefaultTheme.INSTANCE;
+        assertEquals(theme.getButtonColor(), boutonModeLibre.getBackground(), "La couleur du bouton mode libre devrait être celle du thème par défaut");
+        assertEquals(theme.getButtonTextColor(), boutonModeLibre.getForeground(), "La couleur du texte du bouton mode libre devrait être celle du thème par défaut");
+
         System.out.println("Le test du bouton mode libre réussi");
     }
 
@@ -140,6 +164,11 @@ class MenuTest {
         assertNotNull(boutonMulti, "Le bouton multijoueur ne devrait pas être null");
         assertFalse(boutonMulti.isEnabled(), "Le bouton multijoueur devrait être désactivé");
         assertEquals("Multijoueur", boutonMulti.getText(), "Le texte du bouton multijoueur devrait être 'Multijoueur'");
+        // Vérifie si le text du bouton ainsi que tu text du bouton est bien de la bonne couleur selon le thème actuel ( getDisabledButtonColor() et getButtonTextColor() )
+        DefaultTheme theme = (DefaultTheme) DefaultTheme.INSTANCE;
+        assertEquals(theme.getDisabledButtonColor(), boutonMulti.getBackground(), "La couleur du bouton multijoueur devrait être celle du thème par défaut");
+        assertEquals(theme.getButtonTextColor(), boutonMulti.getForeground(), "La couleur du texte du bouton multijoueur devrait être celle du thème par défaut");
+
         System.out.println("Le test du bouton multijoueur réussi");
     }
 
@@ -150,6 +179,11 @@ class MenuTest {
         assertNotNull(boutonTechnique, "Le bouton technique ne devrait pas être null");
         assertTrue(boutonTechnique.isEnabled(), "Le bouton technique devrait être activé");
         assertEquals("Technique", boutonTechnique.getText(), "Le texte du bouton technique devrait être 'Technique'");
+        // Vérifie si le text du bouton ainsi que tu text du bouton est bien de la bonne couleur selon le thème actuel ( getButtonColor() et getButtonTextColor() )
+        DefaultTheme theme = (DefaultTheme) DefaultTheme.INSTANCE;
+        assertEquals(theme.getButtonColor(), boutonTechnique.getBackground(), "La couleur du bouton technique devrait être celle du thème par défaut");
+        assertEquals(theme.getButtonTextColor(), boutonTechnique.getForeground(), "La couleur du texte du bouton technique devrait être celle du thème par défaut");
+
         System.out.println("Le test du bouton technique réussi");
     }
 
@@ -160,6 +194,11 @@ class MenuTest {
         assertNotNull(boutonProfils, "Le bouton profils ne devrait pas être null");
         assertTrue(boutonProfils.isEnabled(), "Le bouton profils devrait être activé");
         assertEquals("Profils", boutonProfils.getText(), "Le texte du bouton profils devrait être 'Profils'");
+        // Vérifie si le text du bouton ainsi que tu text du bouton est bien de la bonne couleur selon le thème actuel ( getButtonColor() et getButtonTextColor() )
+        DefaultTheme theme = (DefaultTheme) DefaultTheme.INSTANCE;
+        assertEquals(theme.getButtonColor(), boutonProfils.getBackground(), "La couleur du bouton profils devrait être celle du thème par défaut");
+        assertEquals(theme.getButtonTextColor(), boutonProfils.getForeground(), "La couleur du texte du bouton profils devrait être celle du thème par défaut");
+
         System.out.println("Le test du bouton profils réussi");
     }
 
