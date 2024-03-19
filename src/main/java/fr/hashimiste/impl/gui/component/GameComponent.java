@@ -91,12 +91,13 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
         super.paintComponent(g);
 
         double factor = Math.min((getSize().getWidth() - 5) / getGrille().getDimension().width, (getSize().getHeight() - 5) / getGrille().getDimension().height);
+        System.out.println("factor: " + factor);
         int zeroX = (int) ((getSize().width / 2d) - ((getGrille().getDimension().width * factor) / 2));
         int zeroY = (int) ((getSize().height / 2d) - ((getGrille().getDimension().height * factor) / 2));
-        int cell_size = (this.getWidth() - zeroX - zeroX) / getGrille().getDimension().width;
-
+        float cell_size = (this.getWidth() - zeroX - zeroX) / getGrille().getDimension().width;
         Graphics2D g2 = (Graphics2D) g;
         g2.setStroke(new BasicStroke(5));
+        cell_size=(float)factor;
 
         // Espacement entre les deux lignes d'un pont double
         int bridgeSpacing = 4;

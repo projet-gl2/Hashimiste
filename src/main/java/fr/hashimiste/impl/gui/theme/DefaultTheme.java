@@ -78,6 +78,6 @@ public class DefaultTheme implements Theme {
 
     @Override
     public Color getPotentialBridgeColor() {
-        return Color.PINK;
+        return BOUTON;
     }
 }
