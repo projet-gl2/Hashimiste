@@ -66,7 +66,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
     private List<Bridge> potentialsBridges;
 
     /**
-     * Liste des ponts à afficher
+     * Liste des ponts réels à afficher
      */
     private List<Bridge> bridges;
 
@@ -122,21 +122,19 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
         // Dessiner les ponts
         for (Bridge bridge : bridges) {
             g2.setColor(Color.BLACK);
-            if (bridge.duo) {
+            if (bridge.duo) { // si pont double
                 if (bridge.hor) {
-                    // Dessiner deux lignes pour un pont double horizontal avec un petit espacement
                     g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2 - bridgeSpacing,
                             zeroX + cell_size * bridge.ile2.getX(), zeroY + cell_size * bridge.ile1.getY() + cell_size / 2 - bridgeSpacing));
                     g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2 + bridgeSpacing,
                             zeroX + cell_size * bridge.ile2.getX(), zeroY + cell_size * bridge.ile1.getY() + cell_size / 2 + bridgeSpacing));
                 } else {
-                    // Dessiner deux lignes pour un pont double vertical avec un petit espacement
                     g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size / 2 - bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size,
                             zeroX + cell_size * bridge.ile2.getX() + cell_size / 2 - bridgeSpacing, zeroY + cell_size * bridge.ile2.getY()));
                     g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size / 2 + bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size,
                             zeroX + cell_size * bridge.ile2.getX() + cell_size / 2 + bridgeSpacing, zeroY + cell_size * bridge.ile2.getY()));
                 }
-            } else {
+            } else { // sinon si pont simple
                 if (bridge.hor) {
                     g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2,
                             zeroX + cell_size * bridge.ile2.getX(), zeroY + cell_size * bridge.ile1.getY() + cell_size / 2));

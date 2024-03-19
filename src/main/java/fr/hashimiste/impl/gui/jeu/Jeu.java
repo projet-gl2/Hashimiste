@@ -59,6 +59,8 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
         }
         add(panelButtons, constraints);
 
+        this.setMinimumSize(new Dimension(700, 400));
+
         // Create the game panel
         JPanel game = new JPanel(new BorderLayout());
 
