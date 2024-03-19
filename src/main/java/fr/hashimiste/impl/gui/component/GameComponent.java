@@ -5,6 +5,7 @@ import fr.hashimiste.core.jeu.Direction;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Ile;
 import fr.hashimiste.impl.gui.theme.DefaultTheme;
+import fr.hashimiste.impl.jeu.GrilleImpl;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -96,6 +97,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
         int zeroY = (int) ((getSize().height / 2d) - ((getGrille().getDimension().height * factor) / 2));
         float cell_size = (this.getWidth() - zeroX - zeroX) / getGrille().getDimension().width;
         Graphics2D g2 = (Graphics2D) g;
+        float line_thickness = cell_size/10;
         g2.setStroke(new BasicStroke(cell_size/10));
         cell_size=(float)factor;
 
@@ -114,6 +116,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
                             zeroX + cell_size * bridge.ile2.getX() + cell_size / 2, zeroY + cell_size * bridge.ile2.getY()));
                 }
             }
+
         }
 
         // Dessiner les ponts
@@ -295,6 +298,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
             if (index < 0) {
                 // Ajouter le pont à la liste des ponts
                 bridges.add(selectedBridge);
+                ((GrilleImpl) getGrille()).poserPont(selectedBridge.ile1, selectedBridge.ile2, 1);
             } else {
                 Bridge currentBridge = bridges.get(index);
 
@@ -305,6 +309,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
                 } else {
                     // Rendre le pont double
                     currentBridge.duo = true;
+                    ((GrilleImpl) getGrille()).poserPont(selectedBridge.ile1, selectedBridge.ile2, 2);
                 }
             }
 
