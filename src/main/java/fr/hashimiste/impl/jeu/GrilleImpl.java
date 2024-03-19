@@ -74,6 +74,25 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     }
 
     /**
+     * Cette méthode est utilisée pour enlever une île de la grille aux coordonnées indiquées. Utilisée pour les tests unitaires.
+     *
+     * @param x coordonnées en x de l'espace à vider.
+     * @param y coordonnées en x de l'espace à vider.
+     */
+    public void oterIle(int x, int y){ iles[x][y] = null;}
+
+    /**
+     * Cette méthode est utilisée pour vider une grille de toutes ses îles. Utilisée pour les tests unitaires.
+     */
+    public void viderGrille(){
+        for(int i=0;i<dimension.width;i++){
+            for(int j=0;j<dimension.height;j++){
+                oterIle(i,j);
+            }
+        }
+    }
+
+    /**
      * Cette méthode est utilisée pour poser un pont entre deux îles.
      *
      * @param ile1 la première île.
