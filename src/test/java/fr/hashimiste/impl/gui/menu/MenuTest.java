@@ -1,12 +1,10 @@
 package fr.hashimiste.impl.gui.menu;
 
-import static jdk.javadoc.internal.doclets.toolkit.util.DocPath.parent;
 import static org.junit.jupiter.api.Assertions.*;
 
 import fr.hashimiste.core.data.Filter;
 import fr.hashimiste.core.data.Join;
 import fr.hashimiste.core.data.Stockage;
-import fr.hashimiste.impl.data.sql.filter.EqFilter;
 import fr.hashimiste.impl.joueur.ProfilImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +13,6 @@ import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
@@ -28,7 +25,6 @@ class MenuTest {
     // TODO: write tests for Menu class
 
     private Menu menu;
-    private Profil profil;
 
     @BeforeEach
     void testMenuInitialisation() throws IOException {
