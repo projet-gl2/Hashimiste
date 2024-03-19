@@ -22,7 +22,18 @@ public class DarkTheme implements Theme {
     /**
      * La couleur du texte des boutons dans le thème par défaut.
      */
-    private static final Color TEXTE_BOUTON = new Color(255, 255, 255);
+    private static final Color TEXTE_BOUTON;
+
+    static {
+        String osName = System.getProperty("os.name").toLowerCase();
+        if (osName.contains("mac")) {
+            // Mac
+            TEXTE_BOUTON = Color.BLACK;
+        } else {
+            // Autres systèmes (Linux, etc.)
+            TEXTE_BOUTON = new Color(251, 250, 242); // Couleur par défaut
+        }
+    }
 
     /**
      * La couleur des boutons désactivés dans le thème par défaut.
@@ -32,7 +43,7 @@ public class DarkTheme implements Theme {
     /**
      * La couleur de fond dans le thème par défaut.
      */
-    private static final Color FOND = new Color(56, 37, 68);
+    private static final Color FOND = new Color(110, 30, 82);
 
     /**
      * La couleur transparente dans le thème par défaut.

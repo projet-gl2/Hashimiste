@@ -29,9 +29,9 @@ public class DefaultTheme implements Theme {
         String osName = System.getProperty("os.name").toLowerCase();
         if (osName.contains("mac")) {
             // Mac
-            TEXTE_BOUTON = Color.BLACK; // Pour Mac, mettez en noir
+            TEXTE_BOUTON = Color.BLACK;
         } else {
-            // Autres systèmes (Linux, etc.), vous pouvez ajuster cela selon vos besoins
+            // Autres systèmes (Linux, etc.)
             TEXTE_BOUTON = new Color(251, 250, 242); // Couleur par défaut
         }
     }

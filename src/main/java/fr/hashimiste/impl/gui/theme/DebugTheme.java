@@ -23,7 +23,18 @@ public class DebugTheme implements Theme {
     /**
      * La couleur du texte des boutons dans le thème de débogage.
      */
-    private static final Color TEXTE_BOUTON = new Color(251, 250, 242);
+    private static final Color TEXTE_BOUTON;
+
+    static {
+        String osName = System.getProperty("os.name").toLowerCase();
+        if (osName.contains("mac")) {
+            // Mac
+            TEXTE_BOUTON = Color.BLACK; // Pour Mac
+        } else {
+            // Autres systèmes (Linux, etc.)
+            TEXTE_BOUTON = new Color(251, 250, 242); // Couleur par défaut
+        }
+    }
 
     /**
      * La couleur des boutons désactivés dans le thème de débogage.
