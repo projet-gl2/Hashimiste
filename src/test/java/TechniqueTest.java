@@ -6,6 +6,7 @@ import fr.hashimiste.impl.jeu.IleImpl;
 import org.junit.jupiter.api.*;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TechniqueTest {
 
     static GrilleImpl g;
+    static ArrayList<IleImpl> listeIle;
 
     /***
      * Création de la grille utilisée avant le lancement des tests
@@ -22,6 +24,7 @@ public class TechniqueTest {
     @BeforeAll
     public static void initAll(){
         g = new GrilleImpl(new Dimension(6,6),Difficulte.MOYEN);
+        listeIle = new ArrayList<IleImpl>();
     }
 
     /**
@@ -30,6 +33,7 @@ public class TechniqueTest {
     @AfterEach
     public void vide(){
         g.viderGrille();
+        while(listeIle.isEmpty()) listeIle.remove(0);
     }
 
     /**
@@ -42,19 +46,75 @@ public class TechniqueTest {
     }
 
     /**
-     * Test de la technique "Technique 1 bordure"
+     * Test de la technique "Technique Bordure" avec des nombres paires
      */
     @Test
     public void TestTechniqueBordure1(){
 
-        IleImpl i1 = new IleImpl(0,0,4,g);
-        IleImpl i2 = new IleImpl(2,2,8,g);
+        listeIle.add(new IleImpl(0,0,4,g));
+        listeIle.add(new IleImpl(0,3,6,g));
+        listeIle.add(new IleImpl(2,2,8,g));
+        listeIle.add(new IleImpl(2,5,6,g));
+        listeIle.add(new IleImpl(2,4,6,g));
 
-        g.poserIle(i1);
-        g.poserIle(i2);
+        for(IleImpl i : listeIle)
+            g.poserIle(i);
 
-        assertTrue(Technique.TECH_DEP_1.test(i1));
-        assertFalse(Technique.TECH_DEP_1.test(i2));
+        assertTrue(Technique.TECH_DEP_1.test(listeIle.get(0)));
+        assertTrue(Technique.TECH_DEP_1.test(listeIle.get(1)));
+        assertFalse(Technique.TECH_DEP_1.test(listeIle.get(2)));
+        assertTrue(Technique.TECH_DEP_1.test(listeIle.get(3)));
+        assertFalse(Technique.TECH_DEP_1.test(listeIle.get(4)));
+    }
+
+    /**
+     * Test de la technique "Technique Bordure" avec des nombres impaires
+     */
+    @Test
+    public void TestTechniqueBordure2(){
+
+        listeIle.add(new IleImpl(0,0,3,g));
+        listeIle.add(new IleImpl(0,3,5,g));
+        listeIle.add(new IleImpl(2,2,7,g));
+        listeIle.add(new IleImpl(2,5,4,g));
+        listeIle.add(new IleImpl(2,4,3,g));
+
+        for(IleImpl i : listeIle)
+            g.poserIle(i);
+
+        assertFalse(Technique.TECH_DEP_1.test(listeIle.get(0)));
+        assertFalse(Technique.TECH_DEP_1.test(listeIle.get(1)));
+        assertFalse(Technique.TECH_DEP_1.test(listeIle.get(2)));
+        assertFalse(Technique.TECH_DEP_1.test(listeIle.get(3)));
+        assertFalse(Technique.TECH_DEP_1.test(listeIle.get(4)));
+    }
+
+    /**
+     * Test de la technique "Technique Parité"
+     */
+    @Test
+    public void TestTechniqueParite1(){
+
+        listeIle.add(new IleImpl(0,0,1,g));
+        listeIle.add(new IleImpl(0,2,4,g));
+        listeIle.add(new IleImpl(0,4,1,g));
+        listeIle.add(new IleImpl(1,3,1,g));
+        listeIle.add(new IleImpl(1,4,8,g));
+        listeIle.add(new IleImpl(1,5,1,g));
+        listeIle.add(new IleImpl(2,2,4,g));
+        listeIle.add(new IleImpl(2,4,1,g));
+        listeIle.add(new IleImpl(3,3,1,g));
+        listeIle.add(new IleImpl(4,1,1,g));
+        listeIle.add(new IleImpl(4,3,6,g));
+        listeIle.add(new IleImpl(4,5,1,g));
+
+        for(IleImpl i : listeIle)
+            g.poserIle(i);
+
+        assertFalse(Technique.TECH_DEP_2.test(listeIle.get(1)));
+        assertTrue(Technique.TECH_DEP_2.test(listeIle.get(4)));
+        assertTrue(Technique.TECH_DEP_2.test(listeIle.get(6)));
+        assertTrue(Technique.TECH_DEP_2.test(listeIle.get(10)));
     }
 
 }
