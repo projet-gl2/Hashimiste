@@ -35,7 +35,7 @@ public interface Ile extends Identifiable {
      *
      * @return true si l'ile est complète, false sinon.
      */
-    public boolean isComplete();
+    boolean isComplete();
 
     /**
      * Récupère le nombre de voisins de l'île.
