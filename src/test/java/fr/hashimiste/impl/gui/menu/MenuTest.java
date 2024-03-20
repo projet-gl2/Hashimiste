@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import fr.hashimiste.core.data.Filter;
 import fr.hashimiste.core.data.Join;
 import fr.hashimiste.core.data.Stockage;
-import fr.hashimiste.impl.gui.theme.DefaultTheme;
 import fr.hashimiste.impl.joueur.ProfilImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,16 +15,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.List;
-import java.util.function.Predicate;
 
 import fr.hashimiste.core.joueur.Profil;
 import fr.hashimiste.core.gui.JFrameTemplate;
-import org.opentest4j.AssertionFailedError;
 
-class MenuTest {
-    // TODO: write tests for Menu class
+class MenuTest extends fr.hashimiste.impl.gui.menu.Test {
 
     private Menu menu;
+
+    @Override
+    protected Container getTestContainer() {
+        return menu;
+    }
 
     @BeforeEach
     void testMenuInitialisation() throws IOException {
@@ -71,160 +72,35 @@ class MenuTest {
 
     @Test
     void testMenu() {
-        // Teste si les composants ne sont pas null
-        assertNotNull(menu, "Le menu ne devrait pas être null");
+        testerMenu(menu, "Hashimiste", new Dimension(800, 600));
 
-        // Teste si le menu est activé
-        assertTrue(menu.isEnabled(), "Le menu devrait être activé");
+        assertEquals("default", menu.getProperties().getProperty("theme"), "Le thème devrait être '" + "default" + "'");
 
-        // Teste si la dimension par défaut est appliquée
-        assertEquals(new Dimension(800, 600), menu.getSize(), "La dimension par défaut devrait être 800x600");
-
-        // Teste si le titre est appliqué
-        assertEquals("Hashimiste", menu.getTitle(), "Le titre devrait être 'Hashimiste'");
-
-        // Teste si le thème est appliqué
-        assertEquals("default", menu.getProperties().getProperty("theme"), "Le thème devrait être 'default'");
-
-        // Teste d'un autre thème
+        // Test d'un autre thème
         menu.getProperties().setProperty("theme", "candy");
         assertEquals("candy", menu.getProperties().getProperty("theme"), "Le thème devrait être 'candy'");
 
         // Test de repassé au thème par défaut
         menu.getProperties().setProperty("theme", "default");
-        assertEquals("default", menu.getProperties().getProperty("theme"), "Le thème devrait être 'default'");
+        assertEquals("default", menu.getProperties().getProperty("theme"), "Le thème devrait être '" + "default" + "'");
 
-        System.out.println("Le test des composants du menu réussi");
+        System.out.println("Le test du changement de thème réussi");
     }
 
     @Test
-    void testBoutonParametre() {
-        JButton boutonParametre = getComponentByName(JButton.class, c -> "Paramètre".equals(c.getText()))
-                .orElseThrow(() -> new AssertionFailedError("Le bouton paramètre n'a pas été trouvé"));
-        assertNotNull(boutonParametre, "Le bouton paramètre ne devrait pas être null");
-        assertTrue(boutonParametre.isEnabled(), "Le bouton paramètre devrait être activé");
-        assertEquals("Paramètre", boutonParametre.getText(), "Le texte du bouton paramètre devrait être 'Paramètre'");
-        // Vérifie si le text du bouton ainsi que tu text du bouton est bien de la bonne couleur selon le thème actuel ( getButtonColor() et getButtonTextColor() )
-        DefaultTheme theme = (DefaultTheme) DefaultTheme.INSTANCE;
-        assertEquals(theme.getButtonColor(), boutonParametre.getBackground(), "La couleur du bouton paramètre devrait être celle du thème par défaut");
-        assertEquals(theme.getButtonTextColor(), boutonParametre.getForeground(), "La couleur du texte du bouton paramètre devrait être celle du thème par défaut");
+    void testTousLesBoutons() {
+        // Création d'une carte pour mapper le nom du bouton à son état attendu (true pour actif, false pour inactif)
+        Map<String, Boolean> boutonsEtEtats = new HashMap<>();
+        boutonsEtEtats.put("Paramètre", true);
+        boutonsEtEtats.put("Aventure", true);
+        boutonsEtEtats.put("Tutoriel", false);
+        boutonsEtEtats.put("Mode libre", true);
+        boutonsEtEtats.put("Multijoueur", false);
+        boutonsEtEtats.put("Technique", true);
+        boutonsEtEtats.put("Profils", true);
 
-        System.out.println("Le test du bouton paramètre réussi");
-    }
-
-    @Test
-    void testBoutonAventure(){
-        JButton boutonAventure = getComponentByName(JButton.class, c -> "Aventure".equals(c.getText()))
-                .orElseThrow(() -> new AssertionFailedError("Le bouton aventure n'a pas été trouvé"));
-        assertNotNull(boutonAventure, "Le bouton aventure ne devrait pas être null");
-        assertTrue(boutonAventure.isEnabled(), "Le bouton aventure devrait être activé");
-        assertEquals("Aventure", boutonAventure.getText(), "Le texte du bouton aventure devrait être 'Aventure'");
-        // Vérifie si le text du bouton ainsi que tu text du bouton est bien de la bonne couleur selon le thème actuel ( getButtonColor() et getButtonTextColor() )
-        DefaultTheme theme = (DefaultTheme) DefaultTheme.INSTANCE;
-        assertEquals(theme.getButtonColor(), boutonAventure.getBackground(), "La couleur du bouton aventure devrait être celle du thème par défaut");
-        assertEquals(theme.getButtonTextColor(), boutonAventure.getForeground(), "La couleur du texte du bouton aventure devrait être celle du thème par défaut");
-
-        System.out.println("Le test du bouton aventure réussi");
-    }
-
-    @Test
-    void testBoutonTutoriel(){
-        JButton boutonTutoriel = getComponentByName(JButton.class, c -> "Tutoriel".equals(c.getText()))
-                .orElseThrow(() -> new AssertionFailedError("Le bouton tutoriel n'a pas été trouvé"));
-        assertNotNull(boutonTutoriel, "Le bouton tutoriel ne devrait pas être null");
-        assertFalse(boutonTutoriel.isEnabled(), "Le bouton tutoriel devrait être désactivé");
-        assertEquals("Tutoriel", boutonTutoriel.getText(), "Le texte du bouton tutoriel devrait être 'Tutoriel'");
-        // Vérifie si le text du bouton ainsi que tu text du bouton est bien de la bonne couleur selon le thème actuel ( getDisabledButtonColor() et getButtonTextColor() )
-        DefaultTheme theme = (DefaultTheme) DefaultTheme.INSTANCE;
-        assertEquals(theme.getDisabledButtonColor(), boutonTutoriel.getBackground(), "La couleur du bouton tutoriel devrait être celle du thème par défaut");
-        assertEquals(theme.getButtonTextColor(), boutonTutoriel.getForeground(), "La couleur du texte du bouton tutoriel devrait être celle du thème par défaut");
-
-        System.out.println("Le test du bouton tutoriel réussi");
-    }
-
-    @Test
-    void testBoutonModeLibre(){
-        JButton boutonModeLibre = getComponentByName(JButton.class, c -> "Mode libre".equals(c.getText()))
-                .orElseThrow(() -> new AssertionFailedError("Le bouton mode libre n'a pas été trouvé"));
-        assertNotNull(boutonModeLibre, "Le bouton mode libre ne devrait pas être null");
-        assertTrue(boutonModeLibre.isEnabled(), "Le bouton mode libre devrait être activé");
-        assertEquals("Mode libre", boutonModeLibre.getText(), "Le texte du bouton mode libre devrait être 'Mode libre'");
-        // Vérifie si le text du bouton ainsi que tu text du bouton est bien de la bonne couleur selon le thème actuel ( getButtonColor() et getButtonTextColor() )
-        DefaultTheme theme = (DefaultTheme) DefaultTheme.INSTANCE;
-        assertEquals(theme.getButtonColor(), boutonModeLibre.getBackground(), "La couleur du bouton mode libre devrait être celle du thème par défaut");
-        assertEquals(theme.getButtonTextColor(), boutonModeLibre.getForeground(), "La couleur du texte du bouton mode libre devrait être celle du thème par défaut");
-
-        System.out.println("Le test du bouton mode libre réussi");
-    }
-
-    @Test
-    void testBoutonMulti(){
-        JButton boutonMulti = getComponentByName(JButton.class, c -> "Multijoueur".equals(c.getText()))
-                .orElseThrow(() -> new AssertionFailedError("Le bouton multijoueur n'a pas été trouvé"));
-        assertNotNull(boutonMulti, "Le bouton multijoueur ne devrait pas être null");
-        assertFalse(boutonMulti.isEnabled(), "Le bouton multijoueur devrait être désactivé");
-        assertEquals("Multijoueur", boutonMulti.getText(), "Le texte du bouton multijoueur devrait être 'Multijoueur'");
-        // Vérifie si le text du bouton ainsi que tu text du bouton est bien de la bonne couleur selon le thème actuel ( getDisabledButtonColor() et getButtonTextColor() )
-        DefaultTheme theme = (DefaultTheme) DefaultTheme.INSTANCE;
-        assertEquals(theme.getDisabledButtonColor(), boutonMulti.getBackground(), "La couleur du bouton multijoueur devrait être celle du thème par défaut");
-        assertEquals(theme.getButtonTextColor(), boutonMulti.getForeground(), "La couleur du texte du bouton multijoueur devrait être celle du thème par défaut");
-
-        System.out.println("Le test du bouton multijoueur réussi");
-    }
-
-    @Test
-    void testBoutonTechnique(){
-        JButton boutonTechnique = getComponentByName(JButton.class, c -> "Technique".equals(c.getText()))
-                .orElseThrow(() -> new AssertionFailedError("Le bouton technique n'a pas été trouvé"));
-        assertNotNull(boutonTechnique, "Le bouton technique ne devrait pas être null");
-        assertTrue(boutonTechnique.isEnabled(), "Le bouton technique devrait être activé");
-        assertEquals("Technique", boutonTechnique.getText(), "Le texte du bouton technique devrait être 'Technique'");
-        // Vérifie si le text du bouton ainsi que tu text du bouton est bien de la bonne couleur selon le thème actuel ( getButtonColor() et getButtonTextColor() )
-        DefaultTheme theme = (DefaultTheme) DefaultTheme.INSTANCE;
-        assertEquals(theme.getButtonColor(), boutonTechnique.getBackground(), "La couleur du bouton technique devrait être celle du thème par défaut");
-        assertEquals(theme.getButtonTextColor(), boutonTechnique.getForeground(), "La couleur du texte du bouton technique devrait être celle du thème par défaut");
-
-        System.out.println("Le test du bouton technique réussi");
-    }
-
-    @Test
-    void testBoutonProfils(){
-        JButton boutonProfils = getComponentByName(JButton.class, c -> "Profils".equals(c.getText()))
-                .orElseThrow(() -> new AssertionFailedError("Le bouton profils n'a pas été trouvé"));
-        assertNotNull(boutonProfils, "Le bouton profils ne devrait pas être null");
-        assertTrue(boutonProfils.isEnabled(), "Le bouton profils devrait être activé");
-        assertEquals("Profils", boutonProfils.getText(), "Le texte du bouton profils devrait être 'Profils'");
-        // Vérifie si le text du bouton ainsi que tu text du bouton est bien de la bonne couleur selon le thème actuel ( getButtonColor() et getButtonTextColor() )
-        DefaultTheme theme = (DefaultTheme) DefaultTheme.INSTANCE;
-        assertEquals(theme.getButtonColor(), boutonProfils.getBackground(), "La couleur du bouton profils devrait être celle du thème par défaut");
-        assertEquals(theme.getButtonTextColor(), boutonProfils.getForeground(), "La couleur du texte du bouton profils devrait être celle du thème par défaut");
-
-        System.out.println("Le test du bouton profils réussi");
-    }
-
-    private <T extends Component> Optional<T> getComponentByName(Class<T> clazz, Predicate<T> filtre) {
-        return getComponentByName(clazz, menu, filtre);
-    }
-
-    private <T extends Component> Optional<T> getComponentByName(Class<T> clazz, Container parent, Predicate<T> filtre) {
-        Optional<T> t = Arrays.stream(parent.getComponents())
-                .filter(clazz::isInstance)
-                .map(clazz::cast)
-                .filter(filtre)
-                .findFirst();
-        if (t.isPresent()) {
-            return t;
-        }
-        for (Component c : parent.getComponents()) {
-            if (!(c instanceof Container)) {
-                continue;
-            }
-            t = getComponentByName(clazz, (Container) c, filtre);
-            if (t.isPresent()) {
-                return t;
-            }
-        }
-        return Optional.empty();
+        // Itération sur chaque entrée de la carte pour vérifier chaque bouton
+        boutonsEtEtats.forEach(this::verifierEtatBouton);
     }
 
 }
