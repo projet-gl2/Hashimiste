@@ -20,8 +20,6 @@ public abstract class Test {
     protected abstract Container getTestContainer();
 
     protected void testerMenu(JFrame menu, String titreAttendu, Dimension dimensionAttendue) {
-
-
         // Test si les composants ne sont pas null
         assertNotNull(menu, "Le menu ne devrait pas être null");
 
