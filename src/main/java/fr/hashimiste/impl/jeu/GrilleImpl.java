@@ -2,11 +2,7 @@ package fr.hashimiste.impl.jeu;
 
 import fr.hashimiste.core.data.Stockage;
 import fr.hashimiste.core.data.sql.Identifiable;
-import fr.hashimiste.core.jeu.Difficulte;
-import fr.hashimiste.core.jeu.Grille;
-import fr.hashimiste.core.jeu.Ile;
-import fr.hashimiste.core.jeu.Sauvegarde;
-import fr.hashimiste.core.jeu.Technique;
+import fr.hashimiste.core.jeu.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -21,7 +17,7 @@ import java.util.stream.Collectors;
  */
 public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     private final Dimension dimension;
-    private final Ile[][] iles;
+    private final Case[][] iles;
     private final Difficulte difficulte;
     private List<Sauvegarde> sauvegardes;
 
@@ -59,7 +55,12 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     public GrilleImpl(int id, Dimension dimension, Difficulte difficulte, List<Sauvegarde> sauvegardes) {
         this.id = id;
         this.dimension = dimension;
-        this.iles = new Ile[dimension.width][dimension.height];
+        this.iles = new Case[dimension.width][dimension.height];
+        for(int i=0; i<dimension.width; i++){
+            for(int j=0; j<dimension.height; j++){
+                this.iles[i][j] = new CaseVideImpl(i,j,this);
+            }
+        }
         this.difficulte = difficulte;
         this.sauvegardes = sauvegardes;
     }
@@ -79,7 +80,9 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
      * @param x coordonnées en x de l'espace à vider.
      * @param y coordonnées en x de l'espace à vider.
      */
-    public void oterIle(int x, int y){ iles[x][y] = null;}
+    public void oterIle(int x, int y){
+        iles[x][y] = null;
+    }
 
     /**
      * Cette méthode est utilisée pour vider une grille de toutes ses îles. Utilisée pour les tests unitaires.
@@ -100,16 +103,16 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
      * @param n    le nombre de ponts à poser.
      */
     public void poserPont(Ile ile1, Ile ile2, int n) {
-//        iles[x1][y1].poserPont(iles[x2][y2], n); TODO
+//        iles[x1][y1].poserPont(iles[x2][y2], n); TODO ajouter des ponts sur les cases où il faut
     }
 
     @Override
-    public Ile getIle(int x, int y) {
+    public Case getIle(int x, int y) {
         return iles[x][y];
     }
 
     @Override
-    public List<Ile> getIles() {
+    public List<Case> getIles() {
         return Arrays.asList(iles).stream().flatMap(Arrays::stream).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
@@ -151,14 +154,19 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
             //elles prennent en paramètre une île, et renvoient vrai si la technique s'applique à l'île
 
             Ile aideIle = null; //l'île sur laquelle on peut avancer à l'aide des techniques
-
+            Case tempCase = null;
+            Ile tempIle = null;
             for (int i = 0; i < this.dimension.getWidth(); i++) { //parcours colonnes
-                for (int j = 0; j < this.dimension.getHeight(); j++) { //parcours lignes
-                    if (this.getIle(i, j) != null && !(this.getIle(i, j).isComplete())) { //si l'île existe et n'est pas complète
-                        for (int fInd = 0; fInd < fIndMin; fInd++) { //parcours techniques
-                            if (lTech[fInd].test(this.getIle(i, j))) { //si la technique s'applique à l'île
-                                aideIle = this.getIle(i, j);
-                                fIndMin = fInd; //on ne vérifie que les techniques de plus bas niveau que celles trouvées précédemments
+                for (int j = 0; j < this.dimension.getHeight(); j++) { //parcours
+                    tempCase = this.getIle(i,j);
+                    if (tempCase instanceof IleImpl){
+                        tempIle = (IleImpl)tempCase;
+                        if(!(tempIle.isComplete())) { //si l'île existe et n'est pas complète
+                            for (int fInd = 0; fInd < fIndMin; fInd++) { //parcours techniques
+                                if (lTech[fInd].test(tempIle)) { //si la technique s'applique à l'île
+                                    aideIle = tempIle;
+                                    fIndMin = fInd; //on ne vérifie que les techniques de plus bas niveau que celles trouvées précédemments
+                                }
                             }
                         }
                     }
