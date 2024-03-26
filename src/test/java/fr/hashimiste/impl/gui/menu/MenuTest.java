@@ -79,7 +79,7 @@ class MenuTest extends fr.hashimiste.impl.gui.menu.Test {
     }
 
     /**
-     * Teste le menu Paramètre
+     * Teste le menu principal
      */
     @Test
     void testMenu() {

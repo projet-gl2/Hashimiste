@@ -32,7 +32,7 @@ class ModeLibreTest extends fr.hashimiste.impl.gui.menu.Test{
     }
 
     /**
-     * Teste le menu Paramètre
+     * Teste le menu mode libre
      */
     @Test
     void TestMenuModeLibre(){
