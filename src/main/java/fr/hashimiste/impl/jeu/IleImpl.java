@@ -64,6 +64,24 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
     }
 
     public boolean isVoisinDirection(Direction direction){
+        switch (direction){
+            case NORD:
+                if(x < 1)
+                    return false;
+                break;
+            case EST:
+                if(y > grille.getDimension().getWidth()-1)
+                    return false;
+                break;
+            case SUD:
+                if(x > grille.getDimension().getHeight()-1)
+                    return false;
+                break;
+            case OUEST:
+                if(y < 1)
+                    return false;
+                break;
+        }
         return(opParcours(direction) > 0);
     };
 
