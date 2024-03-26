@@ -35,7 +35,16 @@ public interface Case {
      *
      * @return le voisin de la case dans la direction d.
      */
-    Case getVoisin(Direction d);
+    Case getVoisinCase(Direction d);
+
+    /**
+     * Renvoie l'île dans la direction indiquée.
+     *
+     * @param d la direction du voisin cherché.
+     *
+     * @return l'île voisine de la case dans la direction d.
+     */
+    Ile getVoisinIle(Direction d);
 
     /**
      * Indique si on peut traverser la case dans la direction donnée.

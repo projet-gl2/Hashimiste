@@ -6,9 +6,10 @@ import fr.hashimiste.core.jeu.Direction;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Ile;
 
-import java.awt.*;
 import java.util.Arrays;
 import java.util.function.Predicate;
+
+import static java.lang.Integer.min;
 
 /**
  * Cette classe représente une île dans le jeu.
@@ -63,6 +64,7 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
         return getNbPont() == this.n;
     }
 
+    @Override
     public boolean isVoisinDirection(Direction direction){
         switch (direction){
             case NORD:
@@ -83,7 +85,7 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
                 break;
         }
         return(opParcours(direction) > 0);
-    };
+    }
 
     @Override
     public int getNbVoisin() {
@@ -106,7 +108,7 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
         int nbTotal = 0;
 
         for(Direction value: Direction.values()){
-            nbTotal += getVoisin(value) instanceof PontImpl ? ((PontImpl)getVoisin(value)).getN() : 0;
+            nbTotal += getVoisinCase(value) instanceof PontImpl ? ((PontImpl)getVoisinCase(value)).getN() : 0;
         }
 
         return nbTotal;
@@ -117,7 +119,7 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
         int nbTotal = 0;
 
         for(Direction value: Direction.values()){
-            nbTotal += isVoisinDirection(value) ? opParcours(value) : 0;
+            nbTotal += isVoisinDirection(value) ? min(opParcours(value),2) : 0;
         }
 
         return nbTotal;
@@ -125,7 +127,7 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
 
     @Override
     public int getNbPontsDirections(Direction direction) {
-        return (getVoisin(direction) instanceof PontImpl ? ((PontImpl)getVoisin(direction)).getN() : 0);
+        return (getVoisinCase(direction) instanceof PontImpl ? ((PontImpl)getVoisinCase(direction)).getN() : 0);
     }
 
     @Override
@@ -139,19 +141,27 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
     }
 
     @Override
-    public Case getVoisin(Direction d){
+    public Case getVoisinCase(Direction d){
         Case c = null;
         switch (d){
             case NORD:
                 c = (grille.getIle(x-1,y));
+                break;
             case EST:
                 c = (grille.getIle(x,y+1));
+                break;
             case SUD:
                 c = (grille.getIle(x+1,y));
+                break;
             case OUEST:
                 c = (grille.getIle(x,y-1));
         }
         return c;
+    }
+
+    @Override
+    public Ile getVoisinIle(Direction d){
+        return this;
     }
 
     @Override

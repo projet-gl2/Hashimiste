@@ -1,9 +1,6 @@
 package fr.hashimiste.impl.jeu;
 
-import fr.hashimiste.core.jeu.Case;
-import fr.hashimiste.core.jeu.Direction;
-import fr.hashimiste.core.jeu.Grille;
-import fr.hashimiste.core.jeu.Pont;
+import fr.hashimiste.core.jeu.*;
 
 public class PontImpl implements Pont {
 
@@ -37,7 +34,7 @@ public class PontImpl implements Pont {
     }
 
     @Override
-    public Case getVoisin(Direction d){
+    public Case getVoisinCase(Direction d){
         Case c = null;
         switch (d){
             case NORD:
@@ -53,13 +50,18 @@ public class PontImpl implements Pont {
     }
 
     @Override
+    public Ile getVoisinIle(Direction d){
+        return getVoisinCase(d).getVoisinIle(d);
+    }
+
+    @Override
     public int opParcours(Direction d){
         if(direction == Direction.NORD || direction == Direction.SUD)
             if(d == Direction.NORD || d == Direction.SUD)
-                return (getVoisin(d).opParcours(d));
+                return (getVoisinCase(d).opParcours(d));
         if(direction == Direction.EST || direction == Direction.OUEST)
             if(d == Direction.EST || d == Direction.OUEST)
-                return (getVoisin(d).opParcours(d));
+                return (getVoisinCase(d).opParcours(d));
         return -1;
     }
 
