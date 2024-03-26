@@ -146,7 +146,7 @@ public class Editor extends JFrameTemplate {
         for (int x = 0; x < grille.getDimension().getHeight(); x++) {
             for (int y = 0; y < grille.getDimension().getWidth(); y++) {
                 Case ile = grille.getIle(x, y);
-                if (!(ile instanceof CaseVideImpl)) {
+                if (!(ile instanceof CaseVideImpl) && ile != null) {
                     gridPanel.add(new Cell((Ile)ile, grille));
                 } else {
                     gridPanel.add(new Cell(x, y, grille));
