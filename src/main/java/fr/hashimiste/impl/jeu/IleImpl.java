@@ -1,10 +1,12 @@
 package fr.hashimiste.impl.jeu;
 
 import fr.hashimiste.core.data.sql.Identifiable;
+import fr.hashimiste.core.jeu.Case;
 import fr.hashimiste.core.jeu.Direction;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Ile;
 
+import java.awt.*;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
@@ -61,8 +63,13 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
         return getNbPont() == this.n;
     }
 
+    public boolean isVoisinDirection(Direction direction){
+        return(opParcours(direction) > 0);
+    };
+
     @Override
     public int getNbVoisin() {
+
         return 0;
     }
 
@@ -94,6 +101,29 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
     @Override
     public Grille getGrille() {
         return grille;
+    }
+
+    @Override
+    public Case getVoisin(Direction d){
+        Case c = null;
+        switch (d){
+            case NORD:
+                c = (grille.getIle(x-1,y));
+            case EST:
+                c = (grille.getIle(x,y+1));
+            case SUD:
+                c = (grille.getIle(x+1,y));
+            case OUEST:
+                c = (grille.getIle(x,y-1));
+        }
+        return c;
+    }
+
+    @Override
+    public int opParcours(Direction d){
+        if(isComplete())
+            return -1;
+        return n-getNbPont();
     }
 
     @Override

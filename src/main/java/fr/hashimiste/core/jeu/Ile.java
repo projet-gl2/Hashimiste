@@ -8,7 +8,7 @@ import java.util.function.Predicate;
  * L'interface Ile représente une île dans le jeu.
  * Elle est identifiable et contient des méthodes pour obtenir des informations sur l'île et la grille de jeu.
  */
-public interface Ile extends Identifiable {
+public interface Ile extends Identifiable, Case {
     /**
      * Récupère le nombre N de l'île.
      *
@@ -17,25 +17,19 @@ public interface Ile extends Identifiable {
     int getN();
 
     /**
-     * Récupère la position x de l'île.
+     * Vérifie si l'île est complète (nb de ponts égal au nombre N de l'île).
      *
-     * @return la position x de l'île.
-     */
-    int getX();
-
-    /**
-     * Récupère la position y de l'île.
-     *
-     * @return la position y de l'île.
-     */
-    int getY();
-
-    /**
-     * Vérifie si l'ile est complète (nb de ponts égal au nombre N de l'île).
-     *
-     * @return true si l'ile est complète, false sinon.
+     * @return true si l'île est complète, false sinon.
      */
     boolean isComplete();
+
+    /**
+     * Vérifie si l'île a un voisin accessible dans la direction donnée.
+     *
+     * @param direction la direction à vérifier.
+     * @return true si l'île a un voisin dans la direction donnée, false sinon.
+     */
+    boolean isVoisinDirection(Direction direction);
 
     /**
      * Récupère le nombre de voisins de l'île.
@@ -81,11 +75,4 @@ public interface Ile extends Identifiable {
      * @return la valeur de l'île dans la direction spécifiée.
      */
     int getValeurIleDirection(Direction direction);
-
-    /**
-     * Récupère la grille de jeu de l'île.
-     *
-     * @return la grille de jeu de l'île.
-     */
-    Grille getGrille();
 }

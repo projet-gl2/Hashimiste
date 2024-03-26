@@ -1,5 +1,6 @@
 package fr.hashimiste.impl.jeu;
 
+import fr.hashimiste.core.jeu.Case;
 import fr.hashimiste.core.jeu.CaseVide;
 import fr.hashimiste.core.jeu.Direction;
 import fr.hashimiste.core.jeu.Grille;
@@ -32,7 +33,41 @@ public class CaseVideImpl implements CaseVide {
     }
 
     @Override
+    public Case getVoisin(Direction d){
+        Case c = null;
+        switch (d){
+            case NORD:
+                c = (grille.getIle(x-1,y));
+            case EST:
+                c = (grille.getIle(x,y+1));
+            case SUD:
+                c = (grille.getIle(x+1,y));
+            case OUEST:
+                c = (grille.getIle(x,y-1));
+        }
+        return c;
+    }
+
+    @Override
     public int opParcours(Direction d) {
-        return 0;
+        switch (d){
+            case NORD:
+                if(x < 1)
+                    return -1;
+                break;
+            case EST:
+                if(y > grille.getDimension().getWidth()-1)
+                    return -1;
+                break;
+            case SUD:
+                if(x > grille.getDimension().getHeight()-1)
+                    return -1;
+                break;
+            case OUEST:
+                if(y < 1)
+                    return -1;
+                break;
+        }
+        return (getVoisin(d).opParcours(d));
     }
 }
