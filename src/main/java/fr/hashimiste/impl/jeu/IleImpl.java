@@ -7,6 +7,7 @@ import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Ile;
 
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 
 import static java.lang.Integer.min;
@@ -72,11 +73,11 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
                     return false;
                 break;
             case EST:
-                if(y > grille.getDimension().getWidth()-1)
+                if(y > grille.getDimension().getWidth()-2)
                     return false;
                 break;
             case SUD:
-                if(x > grille.getDimension().getHeight()-1)
+                if(x > grille.getDimension().getHeight()-2)
                     return false;
                 break;
             case OUEST:
@@ -84,7 +85,7 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
                     return false;
                 break;
         }
-        return(opParcours(direction) > 0);
+        return(getVoisinCase(direction).opParcours(direction) > 0);
     }
 
     @Override
@@ -92,6 +93,7 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
         int nbTotal = 0;
 
         for(Direction value: Direction.values()){
+            System.out.println(value.toString());
             nbTotal += isVoisinDirection(value) ? 1 : 0;
         }
 
@@ -125,7 +127,7 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
         int nbTotal = 0;
 
         for(Direction value: Direction.values()){
-            nbTotal += isVoisinDirection(value) ? min(opParcours(value),2) : 0;
+            nbTotal += isVoisinDirection(value) ? min(getVoisinCase(value).opParcours(value),2) : 0;
         }
 
         return nbTotal;
@@ -138,7 +140,7 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
 
     @Override
     public int getValeurIleDirection(Direction direction) {
-        return opParcours(direction);
+        return getVoisinCase(direction).opParcours(direction);
     }
 
     @Override
@@ -151,15 +153,19 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
         Case c = null;
         switch (d){
             case NORD:
+                if(x<1) return c;
                 c = (grille.getIle(x-1,y));
                 break;
             case EST:
+                if(y > grille.getDimension().getWidth()-2) return c;
                 c = (grille.getIle(x,y+1));
                 break;
             case SUD:
+                if(x > grille.getDimension().getHeight()-2) return c;
                 c = (grille.getIle(x+1,y));
                 break;
             case OUEST:
+                if(y < 1) return c;
                 c = (grille.getIle(x,y-1));
         }
         return c;

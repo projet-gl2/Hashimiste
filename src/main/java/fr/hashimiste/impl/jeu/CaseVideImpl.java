@@ -35,10 +35,13 @@ public class CaseVideImpl implements CaseVide {
         switch (d){
             case NORD:
                 c = (grille.getIle(x-1,y));
+                break;
             case EST:
                 c = (grille.getIle(x,y+1));
+                break;
             case SUD:
                 c = (grille.getIle(x+1,y));
+                break;
             case OUEST:
                 c = (grille.getIle(x,y-1));
         }
@@ -58,11 +61,11 @@ public class CaseVideImpl implements CaseVide {
                     return -1;
                 break;
             case EST:
-                if(y > grille.getDimension().getWidth()-1)
+                if(y > grille.getDimension().getWidth()-2)
                     return -1;
                 break;
             case SUD:
-                if(x > grille.getDimension().getHeight()-1)
+                if(x > grille.getDimension().getHeight()-2)
                     return -1;
                 break;
             case OUEST:
