@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="Création de classes pour créer la grille de jeu">
+    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="modif nom method &quot;get&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_02_2024_13_53_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_02_2024_13_53__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/hashimiste/impl/gui/theme/DebugTheme.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/hashimiste/impl/gui/theme/DebugTheme.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/hashimiste/core/jeu/Ile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/hashimiste/core/jeu/Ile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/hashimiste/impl/jeu/GrilleImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/hashimiste/impl/jeu/GrilleImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,10 +43,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
-        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -60,23 +55,10 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="damien" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GithubProjectSettings">
-    <option name="branchProtectionPatterns">
-      <list>
-        <option value="master" />
-      </list>
-    </option>
-  </component>
-  <component name="KubernetesApiProvider">{
-  &quot;isMigrated&quot;: true
-}</component>
-  <component name="ProjectCodeStyleSettingsMigration">
-    <option name="version" value="2" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -91,169 +73,28 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.Editor.executor": "Run",
-    "Application.Main.executor": "Profiler#1",
-    "Gradle.AppImageImplTest.executor": "Run",
-    "Gradle.AppImageImplTest.getIcon.executor": "Run",
-    "Gradle.Build Hashimiste.executor": "Run",
-    "Gradle.Hashimiste [:DebugFrame.main()].executor": "Run",
-    "Gradle.Hashimiste [:Editor.main()].executor": "Run",
     "Gradle.Hashimiste [:Main.main()].executor": "Run",
-    "Gradle.Hashimiste [:ModeLibre.main()].executor": "Run",
-    "Gradle.Hashimiste [sonar].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "imp/restructure",
-    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_directory_selection": "D:/projects/IdeaProjects/Hashimiste/src/main/java/fr/hashimiste/core/utils",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
-  },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "sqlite"
-    ]
+    "settings.editor.selected.configurable": "Errors"
   }
 }]]></component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="fr.hashimiste.impl.data" />
-      <recent name="fr.hashimiste.core.data" />
-      <recent name="fr.hashimiste.impl.jeu" />
-      <recent name="fr.hashimiste.core.jeu" />
-      <recent name="fr.hashimiste.core.gui" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\projects\IdeaProjects\Hashimiste\src\main\resources\fonts" />
-      <recent name="D:\projects\IdeaProjects\Hashimiste\src\test\resources\images" />
-      <recent name="D:\projects\IdeaProjects\Hashimiste\src\test\resources" />
-    </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
-    <key name="MoveInnerDialog.RECENTS_KEY">
-      <recent name="fr.hashimiste.core.utils.swing" />
-      <recent name="fr.hashimiste.core.utils" />
-    </key>
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="fr.hashimiste.impl.image" />
-    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="fr.hashimiste.impl.data.sql.encoder" />
-      <recent name="fr.hashimiste.impl.data.sql.decoder" />
-      <recent name="fr.hashimiste.impl.gui.menu" />
-      <recent name="fr.hashimiste.impl.gui" />
       <recent name="fr.hashimiste.maps" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Hashimiste [sonar]">
-    <configuration name="Aventure (Antoine S.)" type="Application" factoryName="Application" folderName="Antoine S.">
-      <option name="MAIN_CLASS_NAME" value="fr.hashimiste.impl.Main" />
-      <module name="Hashimiste.main" />
-      <option name="VM_PARAMETERS" value="-Dprofil=&quot;Antoine S.&quot; -Dframe=Aventure" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="fr.hashimiste.impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Aventure (Antoine T.)" type="Application" factoryName="Application" folderName="Antoine T.">
-      <option name="MAIN_CLASS_NAME" value="fr.hashimiste.impl.Main" />
-      <module name="Hashimiste.main" />
-      <option name="VM_PARAMETERS" value="-Dprofil=&quot;Antoine T.&quot; -Dframe=Aventure" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="fr.hashimiste.impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DebugFrame" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="fr.hashimiste.impl.gui.dev.DebugFrame" />
-      <module name="Hashimiste.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="fr.hashimiste.impl.gui.dev.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Jeu (Antoine S.) (1)" type="Application" factoryName="Application" folderName="Antoine S.">
-      <option name="MAIN_CLASS_NAME" value="fr.hashimiste.impl.Main" />
-      <module name="Hashimiste.main" />
-      <option name="VM_PARAMETERS" value="-Dprofil=&quot;Antoine S.&quot; -Dframe=Jeu -Dgrille=1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="fr.hashimiste.impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application">
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="fr.hashimiste.impl.Main" />
       <module name="Hashimiste.main" />
       <extension name="coverage">
@@ -262,262 +103,22 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Menu (Antoine S.)" type="Application" factoryName="Application" folderName="Antoine S.">
-      <option name="MAIN_CLASS_NAME" value="fr.hashimiste.impl.Main" />
-      <module name="Hashimiste.main" />
-      <option name="VM_PARAMETERS" value="-Dprofil=&quot;Antoine S.&quot;" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="fr.hashimiste.impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Menu (Antoine T.)" type="Application" factoryName="Application" folderName="Antoine T.">
-      <option name="MAIN_CLASS_NAME" value="fr.hashimiste.impl.Main" />
-      <module name="Hashimiste.main" />
-      <option name="VM_PARAMETERS" value="-Dprofil=&quot;Antoine T.&quot;" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="fr.hashimiste.impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Mode Libre (Antoine S.)" type="Application" factoryName="Application" folderName="Antoine S.">
-      <option name="MAIN_CLASS_NAME" value="fr.hashimiste.impl.Main" />
-      <module name="Hashimiste.main" />
-      <option name="VM_PARAMETERS" value="-Dprofil=&quot;Antoine S.&quot; -Dframe=ModeLibre" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="fr.hashimiste.impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Mode Libre (Antoine T.)" type="Application" factoryName="Application" folderName="Antoine T.">
-      <option name="MAIN_CLASS_NAME" value="fr.hashimiste.impl.Main" />
-      <module name="Hashimiste.main" />
-      <option name="VM_PARAMETERS" value="-Dprofil=&quot;Antoine T.&quot; -Dframe=ModeLibre" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="fr.hashimiste.impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Parametre (Antoine S.)" type="Application" factoryName="Application" folderName="Antoine S.">
-      <option name="MAIN_CLASS_NAME" value="fr.hashimiste.impl.Main" />
-      <module name="Hashimiste.main" />
-      <option name="VM_PARAMETERS" value="-Dprofil=&quot;Antoine S.&quot; -Dframe=Parametre" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="fr.hashimiste.impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Parametre (Antoine T.)" type="Application" factoryName="Application" folderName="Antoine T.">
-      <option name="MAIN_CLASS_NAME" value="fr.hashimiste.impl.Main" />
-      <module name="Hashimiste.main" />
-      <option name="VM_PARAMETERS" value="-Dprofil=&quot;Antoine T.&quot; -Dframe=Parametre" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="fr.hashimiste.impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Technique (Antoine S.)" type="Application" factoryName="Application" folderName="Antoine S.">
-      <option name="MAIN_CLASS_NAME" value="fr.hashimiste.impl.Main" />
-      <module name="Hashimiste.main" />
-      <option name="VM_PARAMETERS" value="-Dprofil=&quot;Antoine S.&quot; -Dframe=Technique" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="fr.hashimiste.impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Technique (Antoine T.)" type="Application" factoryName="Application" folderName="Antoine T.">
-      <option name="MAIN_CLASS_NAME" value="fr.hashimiste.impl.Main" />
-      <module name="Hashimiste.main" />
-      <option name="VM_PARAMETERS" value="-Dprofil=&quot;Antoine T.&quot; -Dframe=Technique" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="fr.hashimiste.impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Hashimiste [sonar]" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="sonar" />
-          </list>
-        </option>
-        <option name="vmOptions" value="-Dsonar.host.url=https://sonarqube.enimaloc.fr -Dsonar.login=sqp_307b41067dc37d350c068d99c74ce5fa410fa274" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <EXTENSION ID="com.intellij.execution.ExternalSystemRunConfigurationJavaExtension">
-        <extension name="net.ashald.envfile">
-          <option name="IS_ENABLED" value="false" />
-          <option name="IS_SUBST" value="false" />
-          <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-          <option name="IS_IGNORE_MISSING_FILES" value="false" />
-          <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-          <ENTRIES>
-            <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-          </ENTRIES>
-        </extension>
-      </EXTENSION>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <list>
-      <item itemvalue="Application.Menu (Antoine T.)" />
-      <item itemvalue="Application.Aventure (Antoine T.)" />
-      <item itemvalue="Application.Mode Libre (Antoine T.)" />
-      <item itemvalue="Application.Parametre (Antoine T.)" />
-      <item itemvalue="Application.Technique (Antoine T.)" />
-      <item itemvalue="Application.Menu (Antoine S.)" />
-      <item itemvalue="Application.Aventure (Antoine S.)" />
-      <item itemvalue="Application.Mode Libre (Antoine S.)" />
-      <item itemvalue="Application.Parametre (Antoine S.)" />
-      <item itemvalue="Application.Technique (Antoine S.)" />
-      <item itemvalue="Application.Jeu (Antoine S.) (1)" />
-      <item itemvalue="Application.Main" />
-      <item itemvalue="Application.DebugFrame" />
-      <item itemvalue="Gradle.Hashimiste [sonar]" />
-    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-16.0.2-temurin-16.0.2-4caba194b151-93269615" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -528,9 +129,6 @@
       <option name="presentableId" value="Default" />
       <updated>1706175482167</updated>
       <workItem from="1706175483939" duration="300000" />
-      <workItem from="1708531199805" duration="85400000" />
-      <workItem from="1709583624311" duration="904000" />
-      <workItem from="1710057416742" duration="29770000" />
     </task>
     <task id="LOCAL-00001" summary="Fix manque d'import et de déclaration de package&#10;Fusion de fichiers&#10;TODO: adapter la classe Technique&#10;&#10;(cherry picked from commit 989c8193f7d010ef69863c80df84757a94007c0b)">
       <option name="closed" value="true" />
@@ -589,21 +187,5 @@
     <MESSAGE value="Fix manque d'import et de déclaration de package&#10;Fusion de fichiers&#10;TODO: adapter la classe Technique&#10;&#10;(cherry picked from commit 989c8193f7d010ef69863c80df84757a94007c0b)" />
     <MESSAGE value="Création de classes pour créer la grille de jeu" />
     <option name="LAST_COMMIT_MESSAGE" value="Création de classes pour créer la grille de jeu" />
-  </component>
-  <component name="WfRunsListSearchHistory"><![CDATA[{
-  "history": [
-    {
-    },
-    {
-    },
-    {
-    }
-  ],
-  "lastFilter": {
-  }
-}]]></component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
 </project>

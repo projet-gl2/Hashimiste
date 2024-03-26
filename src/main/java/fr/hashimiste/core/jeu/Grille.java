@@ -17,13 +17,13 @@ public interface Grille extends Identifiable {
      * @param y la position y de l'île.
      * @return l'île à la position spécifiée.
      */
-    Ile getIle(int x, int y);
+    Case getIle(int x, int y);
 
     /**
      * Récupère la liste de toutes les îles.
      * @return la liste de toutes les îles.
      */
-    List<Ile> getIles();
+    List<Case> getIles();
 
     /**
      * Récupère les dimensions de la grille.
