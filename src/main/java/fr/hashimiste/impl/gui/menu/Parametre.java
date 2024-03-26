@@ -18,7 +18,7 @@ public class Parametre extends JFrameTemplateProfil {
 
     private final JButton butMenu = creerBoutton("Menu", fenetreParente);
     private final JLabel labTheme = new JLabel("Thème : ");
-    private final JComboBox<String> themes = new JComboBox<>(new String[]{"default", "debug"});
+    private final JComboBox<String> themes = new JComboBox<>(new String[]{"default", "debug", "candy", "dark"});
     private final JButton butSave = creerBoutton("Sauvegarder", this::sauvegarder);
 
     /**
