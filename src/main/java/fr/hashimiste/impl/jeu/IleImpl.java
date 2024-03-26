@@ -7,7 +7,6 @@ import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Ile;
 
 import java.util.Arrays;
-import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 
 import static java.lang.Integer.min;
