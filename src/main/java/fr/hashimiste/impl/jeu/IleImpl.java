@@ -69,8 +69,13 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
 
     @Override
     public int getNbVoisin() {
+        int nbTotal = 0;
 
-        return 0;
+        for(Direction value: Direction.values()){
+            nbTotal += isVoisinDirection(value) ? 1 : 0;
+        }
+
+        return nbTotal;
     }
 
     @Override
@@ -85,17 +90,23 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
 
     @Override
     public int getNbPontPossible() {
-        return 0;
+        int nbTotal = 0;
+
+        for(Direction value: Direction.values()){
+            nbTotal += opParcours(value) > 0 ? opParcours(value) : 0;
+        }
+
+        return nbTotal;
     }
 
     @Override
     public int getNbPontsDirections(Direction direction) {
-        return 0;
+        return (opParcours(direction) > 0 ? opParcours(direction) : 0);
     }
 
     @Override
     public int getValeurIleDirection(Direction direction) {
-        return 0;
+        return opParcours(direction);
     }
 
     @Override
