@@ -117,7 +117,7 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
         int nbTotal = 0;
 
         for(Direction value: Direction.values()){
-            nbTotal += opParcours(value) > 0 ? opParcours(value) : 0;
+            nbTotal += isVoisinDirection(value) ? opParcours(value) : 0;
         }
 
         return nbTotal;
@@ -125,7 +125,7 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
 
     @Override
     public int getNbPontsDirections(Direction direction) {
-        return (opParcours(direction) > 0 ? opParcours(direction) : 0);
+        return (getVoisin(direction) instanceof PontImpl ? ((PontImpl)getVoisin(direction)).getN() : 0);
     }
 
     @Override
