@@ -92,7 +92,6 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
         int nbTotal = 0;
 
         for(Direction value: Direction.values()){
-            System.out.println(value.toString());
             nbTotal += isVoisinDirection(value) ? 1 : 0;
         }
 
@@ -152,19 +151,19 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
         Case c = null;
         switch (d){
             case NORD:
-                if(x<1) return c;
+                if(x<1) return null;
                 c = (grille.getIle(x-1,y));
                 break;
             case EST:
-                if(y > grille.getDimension().getWidth()-2) return c;
+                if(y > grille.getDimension().getWidth()-2) return null;
                 c = (grille.getIle(x,y+1));
                 break;
             case SUD:
-                if(x > grille.getDimension().getHeight()-2) return c;
+                if(x > grille.getDimension().getHeight()-2) return null;
                 c = (grille.getIle(x+1,y));
                 break;
             case OUEST:
-                if(y < 1) return c;
+                if(y < 1) return null;
                 c = (grille.getIle(x,y-1));
         }
         return c;

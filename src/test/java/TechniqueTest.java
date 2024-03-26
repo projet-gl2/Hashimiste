@@ -1,15 +1,17 @@
 import fr.hashimiste.core.jeu.Difficulte;
-import fr.hashimiste.core.jeu.Ile;
 import fr.hashimiste.core.jeu.Technique;
 import fr.hashimiste.impl.jeu.GrilleImpl;
 import fr.hashimiste.impl.jeu.IleImpl;
-
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Tests unitaires pour les techniques

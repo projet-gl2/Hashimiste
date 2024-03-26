@@ -39,10 +39,13 @@ public class PontImpl implements Pont {
         switch (d){
             case NORD:
                 c = (grille.getIle(x-1,y));
+                break;
             case EST:
                 c = (grille.getIle(x,y+1));
+                break;
             case SUD:
                 c = (grille.getIle(x+1,y));
+                break;
             case OUEST:
                 c = (grille.getIle(x,y-1));
         }
