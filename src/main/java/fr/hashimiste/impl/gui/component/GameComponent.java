@@ -97,12 +97,13 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
         int zeroY = (int) ((getSize().height / 2d) - ((getGrille().getDimension().height * factor) / 2));
         float cell_size = (this.getWidth() - zeroX - zeroX) / getGrille().getDimension().width;
         Graphics2D g2 = (Graphics2D) g;
-        float line_thickness = cell_size/10;
-        g2.setStroke(new BasicStroke(cell_size/10));
+
+        float lineThickness = cell_size / 12; // Ajustez le dénominateur selon vos besoins
+        g2.setStroke(new BasicStroke(lineThickness));
         cell_size=(float)factor;
 
         // Espacement entre les deux lignes d'un pont double
-        int bridgeSpacing = 4;
+        int bridgeSpacing = (int) (cell_size/12);
 
         // Dessiner les ponts potentiels
         for (Bridge bridge : potentialsBridges) {
