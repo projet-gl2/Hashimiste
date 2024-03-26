@@ -1,9 +1,12 @@
 package fr.hashimiste.impl.gui.menu;
 
 import fr.hashimiste.core.gui.JFrameTemplateProfil;
+import fr.hashimiste.core.jeu.Grille;
+import fr.hashimiste.impl.gui.jeu.Jeu;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 /**
  * Cette classe représente le mode Aventure du jeu.
@@ -18,9 +21,11 @@ public class Aventure extends JFrameTemplateProfil {
 
     private final JLabel labAventure = new JLabel("Mode Aventure");
 
+    private final transient List<Grille> grilles = stockage.charger(Grille.class)/*rajouter le filtre pour le booléen du mode aventure */;
+
     // Niveau as affiché avec la classe fr.hashimiste.impl.gui.jeu.Jeu [new Jeu(this, laGrille)]
     private final JFrame[] niveaux = new JFrame[]{
-            null,
+            new Jeu(this,grilles.get(0)),
             null,
             null,
             null,
