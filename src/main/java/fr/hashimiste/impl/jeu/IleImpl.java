@@ -103,7 +103,13 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
 
     @Override
     public int getNbPont() {
-        return 0;
+        int nbTotal = 0;
+
+        for(Direction value: Direction.values()){
+            nbTotal += getVoisin(value) instanceof PontImpl ? ((PontImpl)getVoisin(value)).getN() : 0;
+        }
+
+        return nbTotal;
     }
 
     @Override
