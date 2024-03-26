@@ -24,7 +24,7 @@ public class TechniqueTest {
     @BeforeAll
     public static void initAll(){
         g = new GrilleImpl(new Dimension(6,6),Difficulte.MOYEN);
-        listeIle = new ArrayList<IleImpl>();
+        listeIle = new ArrayList<>();
     }
 
     /**
@@ -33,7 +33,7 @@ public class TechniqueTest {
     @AfterEach
     public void vide(){
         g.viderGrille();
-        while(listeIle.isEmpty()) listeIle.remove(0);
+        while(!listeIle.isEmpty()) listeIle.remove(0);
     }
 
     /**
