@@ -66,4 +66,28 @@ public class AideTest {
 
         assertSame(ileAide, listeIle.get(0));
     }
+
+    @Test
+    public void TestAideParite1(){
+
+        listeIle.add(new IleImpl(0,0,1,g));
+        listeIle.add(new IleImpl(0,2,4,g));
+        listeIle.add(new IleImpl(0,4,1,g));
+        listeIle.add(new IleImpl(1,3,1,g));
+        listeIle.add(new IleImpl(1,4,8,g));
+        listeIle.add(new IleImpl(1,5,1,g));
+        listeIle.add(new IleImpl(2,2,4,g));
+        listeIle.add(new IleImpl(2,4,1,g));
+        listeIle.add(new IleImpl(3,3,1,g));
+        listeIle.add(new IleImpl(4,1,1,g));
+        listeIle.add(new IleImpl(4,3,6,g));
+        listeIle.add(new IleImpl(4,5,1,g));
+
+        for(IleImpl i : listeIle)
+            g.poserIle(i);
+
+        Ile ileAide = g.aide();
+
+        assertSame(ileAide, listeIle.get(4));
+    }
 }
