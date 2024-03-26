@@ -147,21 +147,21 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     @Override
     public Ile aide() {
 
-        if (!this.verification()) return null;
+        if (this.verification()) return null; //TODO quand verification sera fait correctement, remettre le not au début
         else {
             Technique[] lTech = Technique.values();
             int fIndMin = lTech.length; //une liste des fonctions qui appliquent une technique
             //elles prennent en paramètre une île, et renvoient vrai si la technique s'applique à l'île
 
             Ile aideIle = null; //l'île sur laquelle on peut avancer à l'aide des techniques
-            Case tempCase = null;
-            Ile tempIle = null;
+            Case tempCase;
+            Ile tempIle;
             for (int i = 0; i < this.dimension.getWidth(); i++) { //parcours colonnes
                 for (int j = 0; j < this.dimension.getHeight(); j++) { //parcours
                     tempCase = this.getIle(i,j);
-                    if (tempCase instanceof IleImpl){
+                    if (tempCase instanceof IleImpl){   //si l'île existe
                         tempIle = (IleImpl)tempCase;
-                        if(!(tempIle.isComplete())) { //si l'île existe et n'est pas complète
+                        if(!(tempIle.isComplete())) { //si l'île n'est pas complète
                             for (int fInd = 0; fInd < fIndMin; fInd++) { //parcours techniques
                                 if (lTech[fInd].test(tempIle)) { //si la technique s'applique à l'île
                                     aideIle = tempIle;

@@ -1,4 +1,5 @@
 import fr.hashimiste.core.jeu.Difficulte;
+import fr.hashimiste.core.jeu.Ile;
 import fr.hashimiste.core.jeu.Technique;
 import fr.hashimiste.impl.jeu.GrilleImpl;
 import fr.hashimiste.impl.jeu.IleImpl;
@@ -60,11 +61,14 @@ public class TechniqueTest {
         for(IleImpl i : listeIle)
             g.poserIle(i);
 
+        Ile ileAide = g.aide();
+
         assertTrue(Technique.TECH_DEP_1.test(listeIle.get(0)));
         assertTrue(Technique.TECH_DEP_1.test(listeIle.get(1)));
         assertFalse(Technique.TECH_DEP_1.test(listeIle.get(2)));
         assertTrue(Technique.TECH_DEP_1.test(listeIle.get(3)));
         assertFalse(Technique.TECH_DEP_1.test(listeIle.get(4)));
+        assertSame(ileAide, listeIle.get(0));
     }
 
     /**
