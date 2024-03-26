@@ -81,7 +81,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
      * @param y coordonnées en x de l'espace à vider.
      */
     public void oterIle(int x, int y){
-        iles[x][y] = null;
+        iles[x][y] = new CaseVideImpl(x,y,this);
     }
 
     /**
