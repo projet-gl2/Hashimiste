@@ -31,15 +31,8 @@ class ProfilSelectionTest extends fr.hashimiste.impl.gui.menu.Test{
     void testMenuProfilSelection(){
         testerMenu(profilSelection, "Hashimiste", new Dimension(500, 300));
 
-        assertEquals("default", profilSelection.getProperties().getProperty("theme"), "Le thème devrait être '" + "default" + "'");
-
-        // Test d'un autre thème
-        profilSelection.getProperties().setProperty("theme", "candy");
-        assertEquals("candy", profilSelection.getProperties().getProperty("theme"), "Le thème devrait être 'candy'");
-
-        // Test de repassé au thème par défaut
-        profilSelection.getProperties().setProperty("theme", "default");
-        assertEquals("default", profilSelection.getProperties().getProperty("theme"), "Le thème devrait être '" + "default" + "'");
+        testThemeMenu(profilSelection, "default");
+        testThemeMenu(profilSelection, "candy");
 
         System.out.println("Le test du changement de thème réussi");
     }
