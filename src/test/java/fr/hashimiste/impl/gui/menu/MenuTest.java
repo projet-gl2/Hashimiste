@@ -23,11 +23,19 @@ class MenuTest extends fr.hashimiste.impl.gui.menu.Test {
 
     private Menu menu;
 
+    /**
+     * Renvoie le conteneur à tester
+     * @return le conteneur à tester
+     */
     @Override
     protected Container getTestContainer() {
         return menu;
     }
 
+    /**
+     * Teste l'initialisation du menu
+     * @throws IOException si une erreur d'entrée/sortie survient
+     */
     @BeforeEach
     void testMenuInitialisation() throws IOException {
         ProfilImpl test = new ProfilImpl("test");
@@ -70,23 +78,23 @@ class MenuTest extends fr.hashimiste.impl.gui.menu.Test {
         System.out.println("L'initialisation du menu réussi");
     }
 
+    /**
+     * Teste le menu Paramètre
+     */
     @Test
     void testMenu() {
+
         testerMenu(menu, "Hashimiste", new Dimension(800, 600));
 
-        assertEquals("default", menu.getProperties().getProperty("theme"), "Le thème devrait être '" + "default" + "'");
+        testThemeMenu(menu, "default");
+        testThemeMenu(menu, "candy");
 
-        // Test d'un autre thème
-        menu.getProperties().setProperty("theme", "candy");
-        assertEquals("candy", menu.getProperties().getProperty("theme"), "Le thème devrait être 'candy'");
-
-        // Test de repassé au thème par défaut
-        menu.getProperties().setProperty("theme", "default");
-        assertEquals("default", menu.getProperties().getProperty("theme"), "Le thème devrait être '" + "default" + "'");
-
-        System.out.println("Le test du changement de thème réussi");
+        System.out.println("Le test du menu est réussi");
     }
 
+    /**
+     * Teste tous les boutons du menu
+     */
     @Test
     void testTousLesBoutons() {
         // Création d'une carte pour mapper le nom du bouton à son état attendu (true pour actif, false pour inactif)
