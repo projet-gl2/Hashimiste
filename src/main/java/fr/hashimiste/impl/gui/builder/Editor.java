@@ -140,8 +140,8 @@ public class Editor extends JFrameTemplate {
     private void updateLayout() {
         gridPanel.setLayout(new GridLayout((int) grille.getDimension().getHeight(), (int) grille.getDimension().getWidth()));
         gridPanel.removeAll();
-        for (int x = 0; x < grille.getDimension().getHeight(); x++) {
-            for (int y = 0; y < grille.getDimension().getWidth(); y++) {
+        for (int x = 0; x < grille.getDimension().getWidth(); x++) {
+            for (int y = 0; y < grille.getDimension().getHeight(); y++) {
                 Ile ile = grille.getIle(x, y);
                 if (ile != null) {
                     gridPanel.add(new Cell(ile, grille));

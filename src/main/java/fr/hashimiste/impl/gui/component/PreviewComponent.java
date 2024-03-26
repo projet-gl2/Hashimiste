@@ -38,7 +38,7 @@ public class PreviewComponent extends JComponent {
         double factor = Math.min((getSize().getWidth() - 5) / grille.getDimension().width, (getSize().getHeight() - 5) / grille.getDimension().height);
         int zeroX = (int) ((getSize().width / 2d) - ((grille.getDimension().width * factor) / 2));
         int zeroY = (int) ((getSize().height / 2d) - ((grille.getDimension().height * factor) / 2));
-        Font font = new Font("Futura", Font.PLAIN, (int) (factor));
+        Font font = new Font("Arial", Font.PLAIN, (int) (factor));
         g.drawRect(zeroX, zeroY, (int) (grille.getDimension().width * factor), (int) (grille.getDimension().height * factor));
         for (Ile ile : grille.getIles()) {
             g.setColor(Color.BLACK);

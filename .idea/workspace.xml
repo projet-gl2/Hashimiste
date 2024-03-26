@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="Création de classes pour créer la grille de jeu">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_02_2024_13_53_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_02_2024_13_53__Changes_.xml" beforeDir="false" />
+    <list default="true" id="e29c0059-5eeb-44eb-be8c-5a66edbf6aec" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/hashimiste/impl/gui/theme/DebugTheme.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/hashimiste/impl/gui/theme/DebugTheme.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/hashimiste/impl/gui/component/GameComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/hashimiste/impl/gui/component/GameComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/hashimiste/impl/gui/jeu/Jeu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/hashimiste/impl/gui/jeu/Jeu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,17 +57,13 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="Interface" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GithubProjectSettings">
-    <option name="branchProtectionPatterns">
-      <list>
-        <option value="master" />
-      </list>
-    </option>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/fr/hashimiste/impl/gui/component/GameComponent.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -89,43 +82,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Editor.executor": "Run",
-    "Application.Main.executor": "Profiler#1",
-    "Gradle.AppImageImplTest.executor": "Run",
-    "Gradle.AppImageImplTest.getIcon.executor": "Run",
-    "Gradle.Build Hashimiste.executor": "Run",
-    "Gradle.Hashimiste [:DebugFrame.main()].executor": "Run",
-    "Gradle.Hashimiste [:Editor.main()].executor": "Run",
-    "Gradle.Hashimiste [:Main.main()].executor": "Run",
-    "Gradle.Hashimiste [:ModeLibre.main()].executor": "Run",
-    "Gradle.Hashimiste [sonar].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "imp/restructure",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_directory_selection": "D:/projects/IdeaProjects/Hashimiste/src/main/java/fr/hashimiste/core/utils",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Editor.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Profiler#1&quot;,
+    &quot;Gradle.AppImageImplTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.AppImageImplTest.getIcon.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build Hashimiste.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Hashimiste [:DebugFrame.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Hashimiste [:Editor.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Hashimiste [:Main.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Hashimiste [:ModeLibre.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Hashimiste [sonar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.mode-libre [:Main.main()].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;elie&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;D:/projects/IdeaProjects/Hashimiste/src/main/java/fr/hashimiste/core/utils&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.General&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "sqlite"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="fr.hashimiste.impl.data" />
@@ -157,7 +153,7 @@
       <recent name="fr.hashimiste.maps" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Hashimiste [sonar]">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Aventure (Antoine S.)" type="Application" factoryName="Application" folderName="Antoine S.">
       <option name="MAIN_CLASS_NAME" value="fr.hashimiste.impl.Main" />
       <module name="Hashimiste.main" />
@@ -503,21 +499,29 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Application.Menu (Antoine T.)" />
-      <item itemvalue="Application.Aventure (Antoine T.)" />
-      <item itemvalue="Application.Mode Libre (Antoine T.)" />
-      <item itemvalue="Application.Parametre (Antoine T.)" />
-      <item itemvalue="Application.Technique (Antoine T.)" />
       <item itemvalue="Application.Menu (Antoine S.)" />
       <item itemvalue="Application.Aventure (Antoine S.)" />
       <item itemvalue="Application.Mode Libre (Antoine S.)" />
       <item itemvalue="Application.Parametre (Antoine S.)" />
       <item itemvalue="Application.Technique (Antoine S.)" />
       <item itemvalue="Application.Jeu (Antoine S.) (1)" />
+      <item itemvalue="Application.Menu (Antoine T.)" />
+      <item itemvalue="Application.Aventure (Antoine T.)" />
+      <item itemvalue="Application.Mode Libre (Antoine T.)" />
+      <item itemvalue="Application.Parametre (Antoine T.)" />
+      <item itemvalue="Application.Technique (Antoine T.)" />
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.DebugFrame" />
       <item itemvalue="Gradle.Hashimiste [sonar]" />
     </list>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-53826d6a" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-322ed176" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -531,6 +535,8 @@
       <workItem from="1708531199805" duration="85400000" />
       <workItem from="1709583624311" duration="904000" />
       <workItem from="1710057416742" duration="29770000" />
+      <workItem from="1710790013069" duration="6127000" />
+      <workItem from="1710844637592" duration="885000" />
     </task>
     <task id="LOCAL-00001" summary="Fix manque d'import et de déclaration de package&#10;Fusion de fichiers&#10;TODO: adapter la classe Technique&#10;&#10;(cherry picked from commit 989c8193f7d010ef69863c80df84757a94007c0b)">
       <option name="closed" value="true" />
@@ -556,7 +562,23 @@
       <option name="project" value="LOCAL" />
       <updated>1708520541207</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fixing bugs">
+      <option name="closed" value="true" />
+      <created>1710798244689</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1710798244689</updated>
+    </task>
+    <task id="LOCAL-00005" summary="ajout graphique des doubles ponts">
+      <option name="closed" value="true" />
+      <created>1710798747111</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1710798747111</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -588,10 +610,12 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fix manque d'import et de déclaration de package&#10;Fusion de fichiers&#10;TODO: adapter la classe Technique&#10;&#10;(cherry picked from commit 989c8193f7d010ef69863c80df84757a94007c0b)" />
     <MESSAGE value="Création de classes pour créer la grille de jeu" />
-    <option name="LAST_COMMIT_MESSAGE" value="Création de classes pour créer la grille de jeu" />
+    <MESSAGE value="fixing bugs" />
+    <MESSAGE value="ajout graphique des doubles ponts" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajout graphique des doubles ponts" />
   </component>
-  <component name="WfRunsListSearchHistory"><![CDATA[{
-  "history": [
+  <component name="WfRunsListSearchHistory">{
+  &quot;history&quot;: [
     {
     },
     {
@@ -599,9 +623,9 @@
     {
     }
   ],
-  "lastFilter": {
+  &quot;lastFilter&quot;: {
   }
-}]]></component>
+}</component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
