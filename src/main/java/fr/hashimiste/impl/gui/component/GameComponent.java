@@ -26,7 +26,7 @@ import java.util.Map;
 public class GameComponent extends PreviewComponent implements MouseMotionListener, MouseListener {
 
     /**
-     * Cette classe représente des ponts potentiels
+     * Cette classe représente des ponts
      *
      * @author elie
      */
@@ -35,7 +35,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
         Ile ile1; // première ile du pont
         Ile ile2; // deuxième ile du pont
 
-        boolean duo = false;
+        boolean duo = false; // pont double
         boolean hor; // disposition du pont true: horizontal & false: vertical
 
         /**
@@ -83,7 +83,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
     }
 
     /**
-     * Cette méthode est utilisée pour dessiner le composant de prévisualisation avec effet de survêtement.
+     * Cette méthode est utilisée pour dessiner le composant de prévisualisation avec effet de survolement.
      *
      * @param g l'instance de Graphics utilisée pour dessiner le composant.
      */
@@ -119,7 +119,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
 
         }
 
-        // Dessiner les ponts
+        // Dessiner les ponts réels
         for (Bridge bridge : bridges) {
             g2.setColor(Color.BLACK);
             if (bridge.duo) { // si pont double
@@ -147,20 +147,21 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
     }
 
 
-
-
     /**
-     * récupère la position du curseur et complète la liste des ponts potentiels
-     *
+     * Evenement de mouvement de la souris
      * @param e the event to be processed
      */
     @Override
     public void mouseMoved(MouseEvent e) {
 
         refreshBridge(e.getX(), e.getY());
-        //System.out.println("size: " + potentialsBridges.size());
     }
 
+    /**
+     * rafraichit la liste des ponts potentiels en fonction de la position de la souris
+     * @param souris_x
+     * @param souris_y
+     */
     public void refreshBridge(int souris_x, int souris_y) {
         potentialsBridges.clear();
         double factor = Math.min((getSize().getWidth() - 5) / getGrille().getDimension().width, (getSize().getHeight() - 5) / getGrille().getDimension().height);
@@ -208,8 +209,6 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
                 }
             }
         }
-
-        // Repaint the component to reflect changes
         repaint();
     }
 
@@ -224,7 +223,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
     }
 
     /**
-     * Retourne l'ile de la grille correspondant au coordonnées
+     * Retourne l'ile de la grille correspondant au coordonnées, null sinon
      *
      * @param x position x
      * @param y position y
@@ -238,7 +237,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
     }
 
     /**
-     * Retourne l'ile la plus proche dans la direction passé un paramètre
+     * Retourne l'ile la plus proche dans la direction passé en paramètre, null sinon
      *
      * @param dir direction
      * @param x   position x de l'ile de départ
@@ -285,6 +284,10 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
 
     }
 
+    /**
+     * Evenement de clique de la souris
+     * @param e the event to be processed
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         // Si des ponts potentiels sont détectés
@@ -321,8 +324,11 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
     }
 
 
-
-
+    /**
+     * methode qui retourne si le pont passer en paramètre existe déjà et retourne sont index ou -1 sinon
+     * @param bridge
+     * @return index
+     */
     private int BridgeAlreadyExists(Bridge bridge) {
         for (int i = 0; i < bridges.size(); i++) {
             Bridge b = bridges.get(i);
