@@ -100,7 +100,13 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
 
     @Override
     public int getNbVoisinFiltre(Predicate<Ile> filtre) {
-        return 0;
+        int nbTotal = 0;
+
+        for(Direction value: Direction.values()){
+            nbTotal += filtre.test(getVoisinIle(value)) ? 1 : 0;
+        }
+
+        return nbTotal;
     }
 
     @Override
