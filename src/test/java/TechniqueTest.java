@@ -229,4 +229,30 @@ public class TechniqueTest {
         assertFalse(Technique.TECH_BAS_4.test(listeIle.get(6)));
     }
 
+    /**
+     * Test de la technique "Technique Unité (valeur 6)" TODO Test avec les ponts
+     */
+    @Test
+    public void TestTechniqueUniteSix1(){
+
+        listeIle.add(new IleImpl(0,0,1,g));
+        listeIle.add(new IleImpl(0,2,1,g));
+        listeIle.add(new IleImpl(2,0,3,g));
+        listeIle.add(new IleImpl(2,2,6,g));
+        listeIle.add(new IleImpl(2,4,4,g));
+        listeIle.add(new IleImpl(4,0,2,g));
+        listeIle.add(new IleImpl(4,2,6,g));
+        listeIle.add(new IleImpl(4,4,4,g));
+        listeIle.add(new IleImpl(6,0,1,g));
+        listeIle.add(new IleImpl(6,2,2,g));
+
+        for(IleImpl i : listeIle)
+            g.poserIle(i);
+
+        assertTrue(Technique.TECH_BAS_5.test(listeIle.get(3)));
+        assertFalse(Technique.TECH_BAS_5.test(listeIle.get(4)));
+        assertFalse(Technique.TECH_BAS_5.test(listeIle.get(5)));
+        assertFalse(Technique.TECH_BAS_5.test(listeIle.get(6)));
+    }
+
 }
