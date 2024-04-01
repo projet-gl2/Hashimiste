@@ -106,6 +106,9 @@ public class TechniqueTest {
         assertTrue(Technique.TECH_DEP_2.test(listeIle.get(10)));
     }
 
+    /**
+     * Test de la technique "Technique Imparité" TODO (manque le test de vérification de ponts)
+     */
     @Test
     public void TestTechniqueImparite1(){
 
@@ -132,6 +135,9 @@ public class TechniqueTest {
 
     }
 
+    /**
+     * Test de la technique "Technique Imparité + Unité"
+     */
     @Test
     public void TestTechniqueImpariteUnite1(){
 
@@ -161,6 +167,38 @@ public class TechniqueTest {
         assertEquals(1,ileTest.getNbVoisinFiltre(i -> i.getN() == 1));
         assertTrue(Technique.TECH_BAS_2.test(listeIle.get(7)));
         assertTrue(Technique.TECH_BAS_2.test(listeIle.get(9)));
+
+    }
+
+    /**
+     * Test de la technique "Technique Unité (valeur 1 et 2)"
+     */
+    @Test
+    public void TestTechniqueUniteUnDeux1(){
+
+        listeIle.add(new IleImpl(0,0,2,g));
+        listeIle.add(new IleImpl(0,2,3,g));
+        listeIle.add(new IleImpl(1,6,1,g));
+        listeIle.add(new IleImpl(2,2,3,g));
+        listeIle.add(new IleImpl(2,4,3,g));
+        listeIle.add(new IleImpl(2,6,2,g));
+        listeIle.add(new IleImpl(4,1,3,g));
+        listeIle.add(new IleImpl(4,2,3,g));
+        listeIle.add(new IleImpl(4,4,4,g));
+        listeIle.add(new IleImpl(6,1,2,g));
+        listeIle.add(new IleImpl(6,4,3,g));
+        listeIle.add(new IleImpl(6,6,1,g));
+
+        for(IleImpl i : listeIle)
+            g.poserIle(i);
+
+        assertTrue(Technique.TECH_BAS_3.test(listeIle.get(0)));
+        assertTrue(Technique.TECH_BAS_3.test(listeIle.get(2)));
+        assertFalse(Technique.TECH_BAS_3.test(listeIle.get(3)));
+        assertFalse(Technique.TECH_BAS_3.test(listeIle.get(4)));
+        assertFalse(Technique.TECH_BAS_3.test(listeIle.get(6)));
+        assertFalse(Technique.TECH_BAS_3.test(listeIle.get(9)));
+        assertFalse(Technique.TECH_BAS_3.test(listeIle.get(11)));
 
     }
 
