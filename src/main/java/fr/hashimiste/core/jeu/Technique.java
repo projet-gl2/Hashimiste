@@ -66,7 +66,7 @@ public enum Technique {
                     for (i = 0; i < 4; i++) {
                         verif = (o.getNbPontsDirections(lD[i]) == 0) || verif;
                     }
-                return false;
+                return verif;
             }),
     /**
      * Technique vérifiant si une île est un 3 avec deux voisins, un 5 avec trois voisins, ou un 7.

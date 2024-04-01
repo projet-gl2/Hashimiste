@@ -26,7 +26,7 @@ public class TechniqueTest {
      */
     @BeforeAll
     public static void initAll(){
-        g = new GrilleImpl(new Dimension(6,6),Difficulte.MOYEN);
+        g = new GrilleImpl(new Dimension(8,8),Difficulte.MOYEN);
         listeIle = new ArrayList<>();
     }
 
@@ -100,24 +100,37 @@ public class TechniqueTest {
 
         listeIle.add(new IleImpl(0,0,1,g));
         listeIle.add(new IleImpl(0,2,4,g));
-        listeIle.add(new IleImpl(0,4,1,g));
-        listeIle.add(new IleImpl(1,3,1,g));
-        listeIle.add(new IleImpl(1,4,8,g));
-        listeIle.add(new IleImpl(1,5,1,g));
-        listeIle.add(new IleImpl(2,2,4,g));
-        listeIle.add(new IleImpl(2,4,1,g));
-        listeIle.add(new IleImpl(3,3,1,g));
-        listeIle.add(new IleImpl(4,1,1,g));
-        listeIle.add(new IleImpl(4,3,6,g));
-        listeIle.add(new IleImpl(4,5,1,g));
-
-        for(IleImpl i : listeIle)
-            g.poserIle(i);
 
         assertFalse(Technique.TECH_DEP_2.test(listeIle.get(1)));
         assertTrue(Technique.TECH_DEP_2.test(listeIle.get(4)));
         assertTrue(Technique.TECH_DEP_2.test(listeIle.get(6)));
         assertTrue(Technique.TECH_DEP_2.test(listeIle.get(10)));
+    }
+
+    @Test
+    public void TestTechniqueImparite1(){
+
+        listeIle.add(new IleImpl(0,0,2,g));
+        listeIle.add(new IleImpl(0,2,3,g));
+        listeIle.add(new IleImpl(2,0,3,g));
+        listeIle.add(new IleImpl(2,2,7,g));
+        listeIle.add(new IleImpl(2,4,3,g));
+        listeIle.add(new IleImpl(4,0,1,g));
+        listeIle.add(new IleImpl(4,2,5,g));
+        listeIle.add(new IleImpl(4,4,5,g));
+        listeIle.add(new IleImpl(5,2,1,g));
+        listeIle.add(new IleImpl(6,4,2,g));
+
+        for(IleImpl i : listeIle)
+            g.poserIle(i);
+
+        assertFalse(Technique.TECH_BAS_1.test(listeIle.get(0)));
+        assertFalse(Technique.TECH_BAS_1.test(listeIle.get(2)));
+        assertTrue(Technique.TECH_BAS_1.test(listeIle.get(3)));
+        assertTrue(Technique.TECH_BAS_1.test(listeIle.get(4)));
+        assertFalse(Technique.TECH_BAS_1.test(listeIle.get(6)));
+        assertTrue(Technique.TECH_BAS_1.test(listeIle.get(7)));
+
     }
 
 }
