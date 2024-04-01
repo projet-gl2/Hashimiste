@@ -167,7 +167,6 @@ public class TechniqueTest {
         assertEquals(1,ileTest.getNbVoisinFiltre(i -> i.getN() == 1));
         assertTrue(Technique.TECH_BAS_2.test(listeIle.get(7)));
         assertTrue(Technique.TECH_BAS_2.test(listeIle.get(9)));
-
     }
 
     /**
@@ -199,7 +198,35 @@ public class TechniqueTest {
         assertFalse(Technique.TECH_BAS_3.test(listeIle.get(6)));
         assertFalse(Technique.TECH_BAS_3.test(listeIle.get(9)));
         assertFalse(Technique.TECH_BAS_3.test(listeIle.get(11)));
+    }
 
+    /**
+     * Test de la technique "Technique Unité (valeur 4 et 5)"
+     */
+    @Test
+    public void TestTechniqueUniteQuatreCinq1(){
+
+        listeIle.add(new IleImpl(0,0,1,g));
+        listeIle.add(new IleImpl(0,2,4,g));
+        listeIle.add(new IleImpl(0,4,1,g));
+        listeIle.add(new IleImpl(1,5,3,g));
+        listeIle.add(new IleImpl(1,6,2,g));
+        listeIle.add(new IleImpl(2,2,5,g));
+        listeIle.add(new IleImpl(2,5,4,g));
+        listeIle.add(new IleImpl(2,7,1,g));
+        listeIle.add(new IleImpl(4,0,1,g));
+        listeIle.add(new IleImpl(4,2,5,g));
+        listeIle.add(new IleImpl(4,4,1,g));
+        listeIle.add(new IleImpl(6,2,1,g));
+
+        for(IleImpl i : listeIle)
+            g.poserIle(i);
+
+        assertTrue(Technique.TECH_BAS_4.test(listeIle.get(1)));
+        assertTrue(Technique.TECH_BAS_4.test(listeIle.get(9)));
+        assertFalse(Technique.TECH_BAS_4.test(listeIle.get(3)));
+        assertFalse(Technique.TECH_BAS_4.test(listeIle.get(5)));
+        assertFalse(Technique.TECH_BAS_4.test(listeIle.get(6)));
     }
 
 }
