@@ -255,4 +255,37 @@ public class TechniqueTest {
         assertFalse(Technique.TECH_BAS_5.test(listeIle.get(6)));
     }
 
+    /**
+     * Test des techniques "Technique Isolation (valeur 1)" et  "Technique Isolation (valeur 2)"
+     */
+    @Test
+    public void TestTechniqueIsolation1(){
+
+        listeIle.add(new IleImpl(0,0,1,g));
+        listeIle.add(new IleImpl(0,2,1,g));
+        listeIle.add(new IleImpl(0,4,1,g));
+        listeIle.add(new IleImpl(0,6,2,g));
+        listeIle.add(new IleImpl(2,0,3,g));
+        listeIle.add(new IleImpl(2,2,6,g));
+        listeIle.add(new IleImpl(2,4,6,g));
+        listeIle.add(new IleImpl(2,6,3,g));
+        listeIle.add(new IleImpl(4,0,2,g));
+        listeIle.add(new IleImpl(4,2,6,g));
+        listeIle.add(new IleImpl(4,4,4,g));
+        listeIle.add(new IleImpl(6,0,1,g));
+        listeIle.add(new IleImpl(6,2,2,g));
+        listeIle.add(new IleImpl(6,4,2,g));
+
+        for(IleImpl i : listeIle)
+            g.poserIle(i);
+
+        assertTrue(Technique.TECH_ISO_1.test(listeIle.get(0)));
+        assertTrue(Technique.TECH_ISO_1.test(listeIle.get(1)));
+        assertFalse(Technique.TECH_ISO_1.test(listeIle.get(2)));
+        assertFalse(Technique.TECH_ISO_1.test(listeIle.get(11)));
+        assertTrue(Technique.TECH_ISO_2.test(listeIle.get(13)));
+        assertFalse(Technique.TECH_ISO_2.test(listeIle.get(8)));
+        assertFalse(Technique.TECH_ISO_2.test(listeIle.get(12)));
+    }
+
 }
