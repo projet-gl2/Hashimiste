@@ -7,7 +7,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.*;
 
-class ModeLibreTest extends fr.hashimiste.impl.gui.menu.Test{
+class ModeLibreTest extends TestMenu{
 
     private ModeLibre modeLibre;
 
@@ -35,7 +35,7 @@ class ModeLibreTest extends fr.hashimiste.impl.gui.menu.Test{
      * Teste le menu mode libre
      */
     @Test
-    void TestMenuModeLibre(){
+    void testMenuModeLibre(){
         testerMenu(modeLibre, "Hashimiste", new Dimension(800, 600));
 
         testThemeMenu(modeLibre, "default");

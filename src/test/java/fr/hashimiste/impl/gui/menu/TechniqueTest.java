@@ -7,7 +7,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.*;
 
-class TechniqueTest extends fr.hashimiste.impl.gui.menu.Test{
+class TechniqueTest extends TestMenu{
     private Technique technique;
 
     /**
@@ -34,7 +34,7 @@ class TechniqueTest extends fr.hashimiste.impl.gui.menu.Test{
      * Teste le menu technique
      */
     @Test
-    void TestMenuParametre(){
+    void testMenuParametre(){
         testerMenu(technique, "Hashimiste", new Dimension(800, 600));
 
         testThemeMenu(technique, "default");

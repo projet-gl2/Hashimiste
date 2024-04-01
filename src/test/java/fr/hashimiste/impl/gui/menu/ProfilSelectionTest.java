@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
-class ProfilSelectionTest extends fr.hashimiste.impl.gui.menu.Test{
+class ProfilSelectionTest extends TestMenu{
     private ProfilSelection profilSelection;
 
     @Override

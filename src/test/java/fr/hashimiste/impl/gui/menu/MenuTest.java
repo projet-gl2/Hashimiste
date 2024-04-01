@@ -19,7 +19,7 @@ import java.util.List;
 import fr.hashimiste.core.joueur.Profil;
 import fr.hashimiste.core.gui.JFrameTemplate;
 
-class MenuTest extends fr.hashimiste.impl.gui.menu.Test {
+class MenuTest extends TestMenu {
 
     private Menu menu;
 

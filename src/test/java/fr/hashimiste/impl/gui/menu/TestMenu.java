@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import fr.hashimiste.core.gui.JFrameTemplate;
 
-public abstract class Test {
+public abstract class TestMenu {
 
     protected abstract Container getTestContainer();
 

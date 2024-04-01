@@ -7,7 +7,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.*;
 
-class ParametreTest extends fr.hashimiste.impl.gui.menu.Test{
+class ParametreTest extends TestMenu{
 
     private Parametre parametre;
 
@@ -35,7 +35,7 @@ class ParametreTest extends fr.hashimiste.impl.gui.menu.Test{
      * Teste le menu Paramètre
      */
     @Test
-    void TestMenuParametre(){
+    void testMenuParametre(){
         testerMenu(parametre, "Hashimiste", new Dimension(800, 600));
 
         testThemeMenu(parametre, "default");
