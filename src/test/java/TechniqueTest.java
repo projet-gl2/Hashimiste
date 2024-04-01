@@ -10,8 +10,7 @@ import org.junit.jupiter.api.TestInfo;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests unitaires pour les techniques
@@ -130,6 +129,38 @@ public class TechniqueTest {
         assertTrue(Technique.TECH_BAS_1.test(listeIle.get(4)));
         assertFalse(Technique.TECH_BAS_1.test(listeIle.get(6)));
         assertTrue(Technique.TECH_BAS_1.test(listeIle.get(7)));
+
+    }
+
+    @Test
+    public void TestTechniqueImpariteUnite1(){
+
+        listeIle.add(new IleImpl(0,0,2,g));
+        listeIle.add(new IleImpl(0,2,3,g));
+        listeIle.add(new IleImpl(2,0,3,g));
+        listeIle.add(new IleImpl(2,2,5,g));
+        listeIle.add(new IleImpl(2,4,1,g));
+        listeIle.add(new IleImpl(4,0,1,g));
+        listeIle.add(new IleImpl(4,2,5,g));
+        listeIle.add(new IleImpl(4,4,5,g));
+        listeIle.add(new IleImpl(5,2,1,g));
+        listeIle.add(new IleImpl(6,4,3,g));
+        listeIle.add(new IleImpl(6,6,1,g));
+
+        for(IleImpl i : listeIle)
+            g.poserIle(i);
+
+        assertFalse(Technique.TECH_BAS_2.test(listeIle.get(0)));
+        assertFalse(Technique.TECH_BAS_2.test(listeIle.get(2)));
+        assertFalse(Technique.TECH_BAS_2.test(listeIle.get(3)));
+        assertFalse(Technique.TECH_BAS_2.test(listeIle.get(4)));
+        assertFalse(Technique.TECH_BAS_2.test(listeIle.get(6)));
+        IleImpl ileTest = listeIle.get(7);
+        assertEquals(5,ileTest.getN());
+        assertEquals(3,ileTest.getNbVoisin());
+        assertEquals(1,ileTest.getNbVoisinFiltre(i -> i.getN() == 1));
+        assertTrue(Technique.TECH_BAS_2.test(listeIle.get(7)));
+        assertTrue(Technique.TECH_BAS_2.test(listeIle.get(9)));
 
     }
 

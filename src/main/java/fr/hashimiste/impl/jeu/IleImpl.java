@@ -103,7 +103,9 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
         int nbTotal = 0;
 
         for(Direction value: Direction.values()){
-            nbTotal += filtre.test(getVoisinIle(value)) ? 1 : 0;
+            if(isVoisinDirection(value)) {
+                nbTotal += filtre.test(getVoisinCase(value).getVoisinIle(value)) ? 1 : 0;
+            }
         }
 
         return nbTotal;
