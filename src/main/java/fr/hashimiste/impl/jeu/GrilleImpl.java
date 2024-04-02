@@ -114,9 +114,12 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
         Case temp = ile1;
 
         for(Direction value: Direction.values()){
-            if(ile1.getVoisinIle(value) == ile2){
-                d = value;
-                break;
+
+            if(ile1.isVoisinDirection(value)) {
+                if (ile1.getVoisinCase(value).getVoisinIle(value) == ile2) {
+                    d = value;
+                    break;
+                }
             }
         }
 

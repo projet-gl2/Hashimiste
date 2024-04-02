@@ -1,6 +1,7 @@
 package fr.hashimiste.impl.jeu;
 
 import fr.hashimiste.core.jeu.Difficulte;
+import fr.hashimiste.core.jeu.Direction;
 import fr.hashimiste.core.jeu.Technique;
 import fr.hashimiste.impl.jeu.GrilleImpl;
 import fr.hashimiste.impl.jeu.IleImpl;
@@ -109,7 +110,7 @@ public class TechniqueTest {
     }
 
     /**
-     * Test de la technique "Technique Imparité" TODO (manque le test de vérification de ponts)
+     * Test de la technique "Technique Imparité"
      */
     @Test
     public void testTechniqueImparite1(){
@@ -134,6 +135,41 @@ public class TechniqueTest {
         assertTrue(Technique.TECH_BAS_1.test(listeIle.get(4)));
         assertFalse(Technique.TECH_BAS_1.test(listeIle.get(6)));
         assertTrue(Technique.TECH_BAS_1.test(listeIle.get(7)));
+
+    }
+
+    /**
+     * Test de la technique "Technique Imparité" avec les ponts
+     */
+    @Test
+    public void testTechniqueImparite2(){
+
+        listeIle.add(new IleImpl(0,0,2,g));
+        listeIle.add(new IleImpl(0,2,3,g));
+        listeIle.add(new IleImpl(2,0,3,g));
+        listeIle.add(new IleImpl(2,2,7,g));
+        listeIle.add(new IleImpl(2,4,3,g));
+        listeIle.add(new IleImpl(4,0,1,g));
+        listeIle.add(new IleImpl(4,2,5,g));
+        listeIle.add(new IleImpl(4,4,5,g));
+        listeIle.add(new IleImpl(5,2,1,g));
+        listeIle.add(new IleImpl(6,4,2,g));
+
+        for(IleImpl i : listeIle)
+            g.poserIle(i);
+
+        g.poserPont(listeIle.get(4), listeIle.get(7), 1);
+        g.poserPont(listeIle.get(6), listeIle.get(7), 1);
+        g.poserPont(listeIle.get(9), listeIle.get(7), 1);
+
+        assertFalse(Technique.TECH_BAS_1.test(listeIle.get(0)));
+        assertFalse(Technique.TECH_BAS_1.test(listeIle.get(2)));
+        assertTrue(Technique.TECH_BAS_1.test(listeIle.get(3)));
+        assertTrue(Technique.TECH_BAS_1.test(listeIle.get(4)));
+        assertFalse(Technique.TECH_BAS_1.test(listeIle.get(6)));
+        assertInstanceOf(PontImpl.class, listeIle.get(7).getVoisinCase(Direction.NORD));
+        assertEquals(3,listeIle.get(7).getNbPont());
+        assertFalse(Technique.TECH_BAS_1.test(listeIle.get(7)));
 
     }
 
