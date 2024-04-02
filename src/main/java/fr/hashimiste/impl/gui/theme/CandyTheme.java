@@ -86,4 +86,7 @@ public class CandyTheme implements Theme {
     public Color getTextColor() {
         return Color.BLACK;
     }
+
+    @Override
+    public Color getPotentialBridgeColor() { return Color.CYAN; }
 }

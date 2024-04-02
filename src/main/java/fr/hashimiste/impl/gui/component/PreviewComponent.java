@@ -1,5 +1,6 @@
 package fr.hashimiste.impl.gui.component;
 
+import fr.hashimiste.core.jeu.Case;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Ile;
 
@@ -40,12 +41,15 @@ public class PreviewComponent extends JComponent {
         int zeroY = (int) ((getSize().height / 2d) - ((grille.getDimension().height * factor) / 2));
         Font font = new Font("Arial", Font.PLAIN, (int) (factor));
         g.drawRect(zeroX, zeroY, (int) (grille.getDimension().width * factor), (int) (grille.getDimension().height * factor));
-        for (Ile ile : grille.getIles()) {
-            g.setColor(Color.BLACK);
-            g.drawOval((int) (zeroX + ile.getX() * factor), (int) (zeroY + ile.getY() * factor), (int) (factor), (int) (factor));
-            g.setFont(font);
-            Rectangle2D d = g.getFontMetrics().getStringBounds(String.valueOf(ile.getN()), g);
-            g.drawString(String.valueOf(ile.getN()), (int) (zeroX + ile.getX() * factor + d.getCenterX()), (int) (zeroY + ile.getY() * factor + (d.getMaxY() * 3.5)));
+        for (Case c : grille.getIles()) {
+            if (c instanceof Ile) {
+                Ile ile = (Ile)c;
+                g.setColor(Color.BLACK);
+                g.drawOval((int) (zeroX + ile.getX() * factor), (int) (zeroY + ile.getY() * factor), (int) (factor), (int) (factor));
+                g.setFont(font);
+                Rectangle2D d = g.getFontMetrics().getStringBounds(String.valueOf(ile.getN()), g);
+                g.drawString(String.valueOf(ile.getN()), (int) (zeroX + ile.getX() * factor + d.getCenterX()), (int) (zeroY + ile.getY() * factor + (d.getMaxY() * 3.5)));
+            }
         }
     }
 
