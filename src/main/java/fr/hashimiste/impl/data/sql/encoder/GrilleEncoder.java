@@ -62,6 +62,7 @@ public class GrilleEncoder implements SQLEncoder<Grille> {
             preparedStatement.setInt(3, object.getDifficulte().ordinal());
             preparedStatement.setInt(4, (int) object.getDimension().getWidth());
             preparedStatement.setInt(5, (int) object.getDimension().getHeight());
+            preparedStatement.setBoolean(6, object.estAventure());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class ModeLibre extends JFrameTemplateProfil implements Debuggable {
 
-    public static final PreviewComponent GRILLE_VIDE_PREVIEW = new PreviewComponent(new GrilleImpl(-1, new Dimension(7, 7), Difficulte.FACILE, new ArrayList<>())) {
+    public static final PreviewComponent GRILLE_VIDE_PREVIEW = new PreviewComponent(new GrilleImpl(-1, new Dimension(7, 7), Difficulte.FACILE, false, new ArrayList<>())) {
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
