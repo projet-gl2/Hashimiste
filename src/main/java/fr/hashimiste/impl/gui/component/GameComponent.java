@@ -286,6 +286,12 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
 
     }
 
+    /**
+     * Retourne l'index du pont potentiel le plus proche
+     * @param souris_x
+     * @param souris_y
+     * @return index
+     */
     public int getNearestBridge(int souris_x, int souris_y)
     {
         double factor = Math.min((getSize().getWidth() - 5) / getGrille().getDimension().width, (getSize().getHeight() - 5) / getGrille().getDimension().height);
