@@ -3,6 +3,7 @@ package fr.hashimiste.impl.jeu;
 import fr.hashimiste.core.data.Stockage;
 import fr.hashimiste.core.data.sql.Identifiable;
 import fr.hashimiste.core.jeu.*;
+import fr.hashimiste.core.utils.UnionIleTechnique;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -20,6 +21,10 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     private final Case[][] iles;
     private final Difficulte difficulte;
     private List<Sauvegarde> sauvegardes;
+    /**
+     * Indique le nombre de fois que l'utilisateur à cliqué sur le bouton d'aide d'affilée.
+     */
+    private int nbClicSurAide = 0;
 
     private int id;
 
@@ -168,7 +173,15 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     }
 
     @Override
-    public Ile aide() {
+    public void aide(){
+        UnionIleTechnique uIT = this.chercherIle();
+
+        if(nbClicSurAide == 0) System.out.println(uIT.getTechU());
+
+    }
+
+    @Override
+    public UnionIleTechnique chercherIle() {
 
         if (this.verification()) return null; //TODO quand verification sera fait correctement, remettre le not au début
         else {
@@ -196,7 +209,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
                 }
             }
 
-            return aideIle;
+            return new UnionIleTechnique(aideIle,lTech[fIndMin]);
 
         }
     }

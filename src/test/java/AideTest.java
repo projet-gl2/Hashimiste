@@ -62,7 +62,7 @@ public class AideTest {
         for (IleImpl i : listeIle)
             g.poserIle(i);
 
-        Ile ileAide = g.aide();
+        Ile ileAide = g.chercherIle().getIleU();
 
         assertSame(ileAide, listeIle.get(0));
     }
@@ -86,7 +86,7 @@ public class AideTest {
         for(IleImpl i : listeIle)
             g.poserIle(i);
 
-        Ile ileAide = g.aide();
+        Ile ileAide = g.chercherIle().getIleU();
 
         assertSame(ileAide, listeIle.get(4));
     }
