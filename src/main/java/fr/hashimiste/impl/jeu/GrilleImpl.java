@@ -133,6 +133,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
                     temp = temp.getVoisinCase(d);
                 }
             }
+            nbClicSurAide = 0; //si un pont a été posé, on réinitialise le compteur de clic sur aide
         }
     }
 
