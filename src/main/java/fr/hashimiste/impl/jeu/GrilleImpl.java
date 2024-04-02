@@ -122,11 +122,11 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
 
         if(d != null){
             temp = temp.getVoisinCase(d);
-            if(!(temp instanceof PontImpl)){
-                while(temp != ile2){
-                    temp = temp.getVoisinCase(d);
-                }
+            while(temp != ile2 && !(temp instanceof PontImpl)){
+                temp = temp.getVoisinCase(d);
+            }
 
+            if(!(temp instanceof PontImpl)){
                 temp = ile1.getVoisinCase(d);
                 while(temp != ile2){
                     iles[temp.getX()][temp.getY()] = new PontImpl(temp.getX(), temp.getY(), n, this, d);
