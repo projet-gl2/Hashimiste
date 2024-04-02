@@ -51,7 +51,7 @@ public class AideTest {
      * Test de la technique "Technique Bordure" avec des nombres paires
      */
     @Test
-    public void TestAideBordure1() {
+    public void testAideBordure1() {
 
         listeIle.add(new IleImpl(0, 0, 4, g));
         listeIle.add(new IleImpl(0, 3, 6, g));
@@ -73,7 +73,7 @@ public class AideTest {
     }
 
     @Test
-    public void TestAideParite1(){
+    public void testAideParite1(){
 
         listeIle.add(new IleImpl(0,0,1,g));
         listeIle.add(new IleImpl(0,2,4,g));
