@@ -48,12 +48,14 @@ public class GrilleDecoder implements SQLDecoder<Grille> {
     @Override
     public Grille creer(ResultSet input) {
         try {
+
             int id = input.getInt("id_map");
             String nom = input.getString("nom");
             Difficulte difficulte = Difficulte.values()[input.getInt("difficulte")];
             int largeur = input.getInt("largeur");
             int hauteur = input.getInt("hauteur");
-            GrilleImpl grille = new GrilleImpl(id, new Dimension(largeur, hauteur), difficulte);
+            boolean estAventure = input.getBoolean("aventure");
+            GrilleImpl grille = new GrilleImpl(id, new Dimension(largeur, hauteur), difficulte, estAventure);
             List<Ile> iles = stockage.charger(Ile.class, new EqFilter("id_map", id));
             iles.forEach(grille::poserIle);
             return grille;
