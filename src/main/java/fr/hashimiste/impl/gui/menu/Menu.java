@@ -27,8 +27,8 @@ public class Menu extends JFrameTemplateProfil {
     private final JButton butTutoriel = creerBoutton("Tutoriel", (JFrame) null);
     private final JButton butModeLibre;
     private final JButton butMulti = creerBoutton("Multijoueur", (JFrame) null);
-    private final JButton butTechnique = creerBoutton("Technique", new Technique(this));
-    private final JButton butParametre = creerBoutton("Paramètre", new Parametre(this));
+    private final JButton butTechnique = creerBoutton("Techniques", new Technique(this));
+    private final JButton butParametre = creerBoutton("Paramètres", new Parametre(this));
     private final JButton butProfils = creerBoutton("Profils", fenetreParente);
 
     private final Dimension defaultButtonSize;

@@ -6,9 +6,12 @@ import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Historique;
 import fr.hashimiste.core.jeu.Sauvegarde;
 import fr.hashimiste.core.utils.CollectionsUtils;
+import fr.hashimiste.impl.gui.component.GameComponent;
+import fr.hashimiste.impl.gui.component.PreviewComponent;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,7 +21,7 @@ import java.util.List;
  * Cette classe représente le jeu.
  * Elle hérite de JFrameTemplateProfil et implémente Debuggable.
  */
-public class Jeu extends JFrameTemplateProfil implements Debuggable {
+public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotionListener {
 
     private final transient Grille grille;
     private final JButton butMenu = creerBoutton("Menu", fenetreParente);
@@ -31,6 +34,7 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable {
     private transient Historique precedent;
     private transient List<Sauvegarde> sauvegardes;
 
+
     /**
      * Constructeur de la classe Jeu.
      *
@@ -41,24 +45,40 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable {
         super(parent);
         this.grille = grille;
 
+
         setLayout(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.weighty = 0; // Set weighty to 0 for the buttons
+
         JPanel panelButtons = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+
         for (JButton button : new JButton[]{butMenu, butVerifier, butCharger, butSauvegarder, butCheckpoint, butPrecedent, butAide}) {
             panelButtons.add(button);
         }
-
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.BOTH;
-        constraints.weighty = 1;
         add(panelButtons, constraints);
 
-        chargerHistorique(new Historique(grille, null, null, Historique.Action.NOUVELLE_GRILLE));
+        this.setMinimumSize(new Dimension(700, 400));
 
-        sauvegardes = CollectionsUtils.listeDe(grille.getSauvegardes(stockage).stream().filter(s -> s.getProfil().equals(profil)).toArray(Sauvegarde[]::new));
-        Collections.sort(sauvegardes, (o1, o2) -> o2.getReference().getTimestamp().compareTo(o1.getReference().getTimestamp()));
-        setActive(!sauvegardes.isEmpty(), butCharger);
+        // Create the game panel
+        JPanel game = new JPanel(new BorderLayout());
+
+
+        // Add the PreviewComponent to the center of the game panel
+        GameComponent gameComponent = new GameComponent(grille);
+        game.add(gameComponent, BorderLayout.CENTER);
+
+
+
+        // Add the game panel to the frame
+        constraints.gridy = 1; // Set the gridy to 1 to place it below the buttons
+        constraints.weighty = 1; // Set weighty to 1 to make it fill the remaining space
+        add(game, constraints);
+
+        game.addMouseMotionListener(gameComponent);
+        game.addMouseListener(gameComponent);
     }
-
     /**
      * Cette méthode est utilisée pour vérifier le jeu.
      */
@@ -173,4 +193,13 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable {
     }
 
 
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        System.out.println("Mouse moved");
+    }
 }

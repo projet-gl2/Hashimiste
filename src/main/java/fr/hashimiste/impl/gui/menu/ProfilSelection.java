@@ -97,7 +97,7 @@ public class ProfilSelection extends JFrameTemplate {
         but.setHorizontalTextPosition(SwingConstants.CENTER);
         but.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e) && clickGauche != null) {
                     clickGauche.accept(e);
                 } else if (SwingUtilities.isRightMouseButton(e) && clickDroit != null) {
