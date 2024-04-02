@@ -94,7 +94,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     /**
      * Cette méthode est utilisée pour vider une grille de toutes ses îles. Utilisée pour les tests unitaires.
      */
-    public void viderGrille(){
+    protected void viderGrille(){
         for(int i=0;i<dimension.width;i++){
             for(int j=0;j<dimension.height;j++){
                 oterIle(i,j);

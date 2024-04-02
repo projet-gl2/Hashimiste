@@ -1,3 +1,5 @@
+package fr.hashimiste.impl.jeu;
+
 import fr.hashimiste.core.jeu.Difficulte;
 import fr.hashimiste.core.jeu.Technique;
 import fr.hashimiste.impl.jeu.GrilleImpl;
