@@ -185,7 +185,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
 
         if(nbClicSurAide == 0) System.out.println("La "+uIT.getTechU().getNom()+" peut être utilisée !");
         if(nbClicSurAide == 1) System.out.println("La "+uIT.getTechU().getNom()+" peut être utilisée : "+uIT.getTechU().getDescription());
-        if(nbClicSurAide == 2) System.out.println("La "+uIT.getTechU().getNom()+" peut être utilisée dans la région "); //TODO
+        if(nbClicSurAide == 2) System.out.println("La "+uIT.getTechU().getNom()+" peut être utilisée dans la région "+uIT.getIleU().getRegion()); //TODO
         if(nbClicSurAide > 2) System.out.println("La "+uIT.getTechU().getNom()+" peut être utilisée en x = "+uIT.getIleU().getX()+" et en y = "+uIT.getIleU().getY());
 
         nbClicSurAide ++;

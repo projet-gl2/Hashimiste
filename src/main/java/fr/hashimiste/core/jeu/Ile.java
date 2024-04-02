@@ -75,4 +75,10 @@ public interface Ile extends Identifiable, Case {
      * @return la valeur de l'île dans la direction spécifiée.
      */
     int getValeurIleDirection(Direction direction);
+
+    /**
+     * Récupère la région de la grille dans laquelle se trouve l'île.
+     * @return Un string contenant la région (Nord, Sud...)
+     */
+    String getRegion();
 }
