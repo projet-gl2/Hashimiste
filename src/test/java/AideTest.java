@@ -89,5 +89,9 @@ public class AideTest {
         Ile ileAide = g.chercherIle().getIleU();
 
         assertSame(ileAide, listeIle.get(4));
+
+        g.aide();
+        g.aide();
+        g.aide();
     }
 }
