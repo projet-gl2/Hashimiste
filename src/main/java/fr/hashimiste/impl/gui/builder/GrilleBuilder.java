@@ -23,6 +23,7 @@ public class GrilleBuilder implements Grille, Identifiable.UNSAFE {
     private Case[][] iles = new Case[dimension.width][dimension.height];
     private Difficulte difficulte = Difficulte.FACILE;
     private int id = -1;
+    private boolean aventure = false;
 
     /**
      * Constructeur de la classe GrilleBuilder.
@@ -34,6 +35,7 @@ public class GrilleBuilder implements Grille, Identifiable.UNSAFE {
         this.iles = new Case[dimension.width][dimension.height];
         grille.getIles().forEach(ile -> iles[ile.getX()][ile.getY()] = ile);
         this.difficulte = grille.getDifficulte();
+        this.aventure = grille.estAventure();
     }
 
     /**
@@ -73,6 +75,15 @@ public class GrilleBuilder implements Grille, Identifiable.UNSAFE {
     @Override
     public Dimension getDimension() {
         return dimension;
+    }
+
+    @Override
+    public boolean estAventure() {
+        return aventure;
+    }
+
+    public void setAventure(boolean aventure) {
+        this.aventure = aventure;
     }
 
     /**

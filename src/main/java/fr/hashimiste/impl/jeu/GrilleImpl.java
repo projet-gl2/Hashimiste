@@ -20,6 +20,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     private final Dimension dimension;
     private final Case[][] iles;
     private final Difficulte difficulte;
+    private final boolean estAventure;
     private List<Sauvegarde> sauvegardes;
     /**
      * Indique le nombre de fois que l'utilisateur à cliqué sur le bouton d'aide d'affilée.
@@ -34,8 +35,8 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
      * @param dimension  la dimension de la grille.
      * @param difficulte la difficulté de la grille.
      */
-    public GrilleImpl(Dimension dimension, Difficulte difficulte) {
-        this(-1, dimension, difficulte, new ArrayList<>());
+    public GrilleImpl(Dimension dimension, Difficulte difficulte, boolean estAventure) {
+        this(-1, dimension, difficulte, estAventure, new ArrayList<>());
     }
 
     /**
@@ -45,8 +46,8 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
      * @param dimension  la dimension de la grille.
      * @param difficulte la difficulté de la grille.
      */
-    public GrilleImpl(int id, Dimension dimension, Difficulte difficulte) {
-        this(id, dimension, difficulte, null);
+    public GrilleImpl(int id, Dimension dimension, Difficulte difficulte, boolean estAventure) {
+        this(id, dimension, difficulte, estAventure, null);
     }
 
     /**
@@ -57,7 +58,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
      * @param difficulte  la difficulté de la grille.
      * @param sauvegardes la liste des sauvegardes de la grille.
      */
-    public GrilleImpl(int id, Dimension dimension, Difficulte difficulte, List<Sauvegarde> sauvegardes) {
+    public GrilleImpl(int id, Dimension dimension, Difficulte difficulte, boolean estAventure, List<Sauvegarde> sauvegardes) {
         this.id = id;
         this.dimension = dimension;
         this.iles = new Case[dimension.width][dimension.height];
@@ -67,6 +68,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
             }
         }
         this.difficulte = difficulte;
+        this.estAventure = estAventure;
         this.sauvegardes = sauvegardes;
     }
 
@@ -152,6 +154,11 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     @Override
     public Difficulte getDifficulte() {
         return difficulte;
+    }
+
+    @Override
+    public boolean estAventure() {
+        return estAventure;
     }
 
     @Override

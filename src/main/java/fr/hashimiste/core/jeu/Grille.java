@@ -33,6 +33,12 @@ public interface Grille extends Identifiable {
     Dimension getDimension();
 
     /**
+     * Si une île doit figurer dans l'écran aventure
+     * @return vrai si l'île doit figurer dans l'écran aventure, faux sinon.
+     */
+    boolean estAventure();
+
+    /**
      * Récupère la liste de toutes les sauvegardes.
      * @param stockage le système de stockage des données.
      * @return la liste de toutes les sauvegardes.
