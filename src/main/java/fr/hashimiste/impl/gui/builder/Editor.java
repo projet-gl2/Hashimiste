@@ -39,6 +39,8 @@ public class Editor extends JFrameTemplate {
     );
     private final JButton butCharger = new JButton("Charger");
     private final JButton butSauvegarder = new JButton("Sauvegarder");
+//    private final JLabel labEstAventure = new JLabel("Aventure");
+    private final JCheckBox checkEstAventure = new JCheckBox("Aventure");
 
     private transient GrilleBuilder grille = new GrilleBuilder();
 
@@ -110,6 +112,10 @@ public class Editor extends JFrameTemplate {
         optionsPanel.add(difficulty, constraints);
 
         constraints.gridy = 3;
+        checkEstAventure.addChangeListener(e -> grille.setAventure(checkEstAventure.isSelected()));
+        optionsPanel.add(checkEstAventure, constraints);
+
+        constraints.gridy = 4;
         constraints.gridx = 0;
         optionsPanel.add(butCharger, constraints);
         constraints.gridx = 1;
@@ -180,6 +186,10 @@ public class Editor extends JFrameTemplate {
                     .filter(g -> Integer.toString(g.getId()).equals(id))
                     .findFirst()
                     .orElseThrow(IllegalStateException::new));
+            difficulty.setSelectedItem(grille.getDifficulte().name().toLowerCase());
+            widthField.setText(((int) grille.getDimension().getWidth()) + "");
+            heightField.setText(((int) grille.getDimension().getHeight()) + "");
+            checkEstAventure.setSelected(grille.estAventure());
         }
         updateLayout();
     }
