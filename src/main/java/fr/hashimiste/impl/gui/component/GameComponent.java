@@ -4,6 +4,7 @@ import fr.hashimiste.core.gui.Theme;
 import fr.hashimiste.core.jeu.Direction;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Ile;
+import fr.hashimiste.core.jeu.Historique.Action;
 import fr.hashimiste.core.jeu.Case;
 import fr.hashimiste.impl.gui.theme.DefaultTheme;
 import fr.hashimiste.impl.jeu.GrilleImpl;
@@ -24,7 +25,7 @@ import java.util.Map;
  *
  * @author elie
  */
-public class GameComponent extends PreviewComponent implements MouseMotionListener, MouseListener {
+public abstract class GameComponent extends PreviewComponent implements MouseMotionListener, MouseListener {
 
     /**
      * Cette classe représente des ponts
@@ -301,18 +302,21 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
             if (index < 0) {
                 // Ajouter le pont à la liste des ponts
                 bridges.add(selectedBridge);
-                ((GrilleImpl) getGrille()).poserPont(selectedBridge.ile1, selectedBridge.ile2, 1);
+//                ((GrilleImpl) getGrille()).poserPont(selectedBridge.ile1, selectedBridge.ile2, 1);
+                onNewBridge(selectedBridge.ile1, selectedBridge.ile2, Action.UN_PONT);
             } else {
                 Bridge currentBridge = bridges.get(index);
 
                 // Le pont est déjà dans la liste, le rendre double ou le supprimer
                 if (currentBridge.duo) {
                     // Supprimer le pont
+                    onNewBridge(selectedBridge.ile1, selectedBridge.ile2, Action.AUCUN_PONT);
                     bridges.remove(index);
                 } else {
                     // Rendre le pont double
                     currentBridge.duo = true;
-                    ((GrilleImpl) getGrille()).poserPont(selectedBridge.ile1, selectedBridge.ile2, 2);
+                    onNewBridge(selectedBridge.ile1, selectedBridge.ile2, Action.DEUX_PONTS);
+//                    ((GrilleImpl) getGrille()).poserPont(selectedBridge.ile1, selectedBridge.ile2, 2);
                 }
             }
 
@@ -324,6 +328,8 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
             System.out.println("b: " + bridges.size());
         }
     }
+
+    public abstract void onNewBridge(Ile ile1, Ile ile2, Action action);
 
 
     /**

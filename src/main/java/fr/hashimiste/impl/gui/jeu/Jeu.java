@@ -4,7 +4,9 @@ import fr.hashimiste.core.dev.Debuggable;
 import fr.hashimiste.core.gui.JFrameTemplateProfil;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Historique;
+import fr.hashimiste.core.jeu.Ile;
 import fr.hashimiste.core.jeu.Sauvegarde;
+import fr.hashimiste.core.jeu.Historique.Action;
 import fr.hashimiste.core.utils.CollectionsUtils;
 import fr.hashimiste.impl.gui.component.GameComponent;
 import fr.hashimiste.impl.gui.component.PreviewComponent;
@@ -33,6 +35,7 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
     private final List<Historique> historiques = new ArrayList<>();
     private transient Historique precedent;
     private transient List<Sauvegarde> sauvegardes;
+    private transient GameComponent gameComponent;
 
 
     /**
@@ -66,7 +69,13 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
 
 
         // Add the PreviewComponent to the center of the game panel
-        GameComponent gameComponent = new GameComponent(grille);
+        gameComponent = new GameComponent(grille) {
+            @Override
+            public void onNewBridge(Ile ile1, Ile ile2, Action action) {
+                precedent = precedent.creerSuivant(ile1, ile2, action);
+            }
+        };
+    
         game.add(gameComponent, BorderLayout.CENTER);
 
 
