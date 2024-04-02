@@ -86,4 +86,9 @@ public class DarkTheme implements Theme {
     public Color getTextColor() {
         return Color.WHITE;
     }
+
+    @Override
+    public Color getPotentialBridgeColor() {
+        return Color.BLACK;
+    }
 }
