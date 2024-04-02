@@ -73,8 +73,8 @@ public class DebugFrame extends JFrame {
         panels.addTab("Runtime", panRuntime);
         configurerRuntimePanel();
         Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(() -> {
-            if (valFenetreActive instanceof Debuggable) {
-                info.setText(((Debuggable) valFenetreActive).getDebugInfo());
+            if (fenetreActive instanceof Debuggable) {
+                info.setText(((Debuggable) fenetreActive).getDebugInfo());
             } else {
                 info.setText("");
             }
@@ -108,7 +108,7 @@ public class DebugFrame extends JFrame {
      * Cette méthode est utilisée pour configurer le panneau Runtime.
      */
     private void configurerRuntimePanel() {
-        panels.setEnabledAt(0, valFenetreActive != null);
+        panels.setEnabledAt(0, fenetreActive != null);
         if (fenetreActive == null) {
             return;
         }
@@ -185,8 +185,8 @@ public class DebugFrame extends JFrame {
         contrainte.gridy++;
         contrainte.gridx = 0;
         rafraichirInfo.addActionListener(e -> {
-            if (valFenetreActive instanceof Debuggable) {
-                info.setText(((Debuggable) valFenetreActive).getDebugInfo());
+            if (fenetreActive instanceof Debuggable) {
+                info.setText(((Debuggable) fenetreActive).getDebugInfo());
             } else {
                 info.setText("");
             }
