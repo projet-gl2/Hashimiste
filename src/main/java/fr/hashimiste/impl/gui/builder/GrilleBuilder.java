@@ -2,6 +2,8 @@ package fr.hashimiste.impl.gui.builder;
 
 import fr.hashimiste.core.data.Stockage;
 import fr.hashimiste.core.data.sql.Identifiable;
+import fr.hashimiste.core.jeu.*;
+import fr.hashimiste.core.utils.UnionIleTechnique;
 import fr.hashimiste.core.jeu.Difficulte;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Ile;
@@ -23,7 +25,7 @@ public class GrilleBuilder implements Grille, Identifiable.UNSAFE {
     public static final UnsupportedOperationException UNSUPPORTED_OPERATION_EXCEPTION = new UnsupportedOperationException("Not implemented");
 
     private Dimension dimension = new Dimension(10, 10);
-    private Ile[][] iles = new Ile[dimension.width][dimension.height];
+    private Case[][] iles = new Case[dimension.width][dimension.height];
     private Difficulte difficulte = Difficulte.FACILE;
     private int id = -1;
     private boolean aventure = false;
@@ -35,7 +37,7 @@ public class GrilleBuilder implements Grille, Identifiable.UNSAFE {
      */
     public GrilleBuilder(Grille grille) {
         this.dimension = grille.getDimension();
-        this.iles = new Ile[dimension.width][dimension.height];
+        this.iles = new Case[dimension.width][dimension.height];
         grille.getIles().forEach(ile -> iles[ile.getX()][ile.getY()] = ile);
         this.difficulte = grille.getDifficulte();
         this.aventure = grille.estAventure();
@@ -66,12 +68,12 @@ public class GrilleBuilder implements Grille, Identifiable.UNSAFE {
     }
 
     @Override
-    public Ile getIle(int x, int y) {
+    public Case getIle(int x, int y) {
         return iles[x][y];
     }
 
     @Override
-    public List<Ile> getIles() {
+    public List<Case> getIles() {
         return Arrays.asList(iles).stream().flatMap(Arrays::stream).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
@@ -117,7 +119,12 @@ public class GrilleBuilder implements Grille, Identifiable.UNSAFE {
     }
 
     @Override
-    public Ile aide() {
+    public String aide() {
+        throw UNSUPPORTED_OPERATION_EXCEPTION;
+    }
+
+    @Override
+    public UnionIleTechnique chercherIle() {
         throw UNSUPPORTED_OPERATION_EXCEPTION;
     }
 

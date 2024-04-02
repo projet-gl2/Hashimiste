@@ -6,7 +6,8 @@ import java.awt.*;
 
 /**
  * La classe DefaultTheme implémente l'interface Theme.
- * Elle définit un thème par défaut avec des couleurs spécifiques pour les différents éléments de l'interface utilisateur.
+ * Elle définit un thème par défaut avec des couleurs spécifiques pour les
+ * différents éléments de l'interface utilisateur.
  */
 public class DarkTheme implements Theme {
     /**
@@ -89,6 +90,6 @@ public class DarkTheme implements Theme {
 
     @Override
     public Color getPotentialBridgeColor() {
-        return BOUTON;
+        return Color.WHITE;
     }
 }

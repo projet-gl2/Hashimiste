@@ -73,8 +73,8 @@ public class DebugFrame extends JFrame {
         panels.addTab("Runtime", panRuntime);
         configurerRuntimePanel();
         Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(() -> {
-            if (valFenetreActive instanceof Debuggable) {
-                info.setText(((Debuggable) valFenetreActive).getDebugInfo());
+            if (fenetreActive instanceof Debuggable) {
+                info.setText(((Debuggable) fenetreActive).getDebugInfo());
             } else {
                 info.setText("");
             }
@@ -91,12 +91,16 @@ public class DebugFrame extends JFrame {
      * @param frame la nouvelle fenêtre active.
      */
     public static void setFenetreActive(JFrameTemplate frame) {
+        JFrameTemplate old = fenetreActive;
         fenetreActive = frame;
         if (!fenetreCharger.contains(frame)) {
             fenetreCharger.add(frame);
         }
         if (instance != null) {
             instance.frameChanged();
+            if (old == null) {
+                instance.configurerRuntimePanel();
+            }
         }
     }
 
@@ -104,7 +108,7 @@ public class DebugFrame extends JFrame {
      * Cette méthode est utilisée pour configurer le panneau Runtime.
      */
     private void configurerRuntimePanel() {
-        panels.setEnabledAt(0, valFenetreActive != null);
+        panels.setEnabledAt(0, fenetreActive != null);
         if (fenetreActive == null) {
             return;
         }
@@ -114,7 +118,7 @@ public class DebugFrame extends JFrame {
         contrainte.weightx = 1;
         contrainte.gridx = 0;
         contrainte.gridy = 0;
-        allerAFenetre.setRenderer(new ListRenderer(JFrameTemplate.class, frame -> frame.getClass().getSimpleName()));
+        allerAFenetre.setRenderer(new ListRenderer(JFrameTemplate.class, frame -> frame == null ? "Void" : frame.getClass().getSimpleName()));
         allerAFenetre.addActionListener(e -> fenetreActive.changerFenetre((JFrameTemplate) allerAFenetre.getSelectedItem()));
         panRuntime.add(allerAFenetre, contrainte);
 
@@ -181,8 +185,8 @@ public class DebugFrame extends JFrame {
         contrainte.gridy++;
         contrainte.gridx = 0;
         rafraichirInfo.addActionListener(e -> {
-            if (valFenetreActive instanceof Debuggable) {
-                info.setText(((Debuggable) valFenetreActive).getDebugInfo());
+            if (fenetreActive instanceof Debuggable) {
+                info.setText(((Debuggable) fenetreActive).getDebugInfo());
             } else {
                 info.setText("");
             }
