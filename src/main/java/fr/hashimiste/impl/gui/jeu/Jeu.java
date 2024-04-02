@@ -45,7 +45,6 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
         super(parent);
         this.grille = grille;
 
-
         setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.BOTH;
@@ -75,6 +74,8 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
         constraints.gridy = 1; // Set the gridy to 1 to place it below the buttons
         constraints.weighty = 1; // Set weighty to 1 to make it fill the remaining space
         add(game, constraints);
+
+        appliquerTheme(game, butMenu, butVerifier, butAide, butCharger, butSauvegarder, butCheckpoint, butPrecedent);
 
         game.addMouseMotionListener(gameComponent);
         game.addMouseListener(gameComponent);
