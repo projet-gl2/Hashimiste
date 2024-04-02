@@ -21,8 +21,20 @@ public class DefaultTheme implements Theme {
 
     /**
      * La couleur du texte des boutons dans le thème par défaut.
+     * Si windows, alors 251, 250, 242, sur mac, 0, 0, 0
      */
-    private static final Color TEXTE_BOUTON = new Color(251, 250, 242);
+    private static final Color TEXTE_BOUTON;
+
+    static {
+        String osName = System.getProperty("os.name").toLowerCase();
+        if (osName.contains("mac")) {
+            // Mac
+            TEXTE_BOUTON = Color.BLACK;
+        } else {
+            // Autres systèmes (Linux, etc.)
+            TEXTE_BOUTON = new Color(251, 250, 242); // Couleur par défaut
+        }
+    }
 
     /**
      * La couleur des boutons désactivés dans le thème par défaut.
