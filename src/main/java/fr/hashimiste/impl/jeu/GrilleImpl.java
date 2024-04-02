@@ -108,30 +108,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
      * @param n    le nombre de ponts à poser.
      */
     public void poserPont(Ile ile1, Ile ile2, int n) {
-        Direction d = null;
-        Case temp = ile1;
-
-        for(Direction value: Direction.values()){
-            if(ile1.getVoisinIle(value) == ile2){
-                d = value;
-                break;
-            }
-        }
-
-        if(d != null){
-            temp = temp.getVoisinCase(d);
-            if(!(temp instanceof PontImpl)){
-                while(temp != ile2){
-                    temp = temp.getVoisinCase(d);
-                }
-
-                temp = ile1.getVoisinCase(d);
-                while(temp != ile2){
-                    iles[temp.getX()][temp.getY()] = new PontImpl(temp.getX(), temp.getY(), n, this, d);
-                    temp = temp.getVoisinCase(d);
-                }
-            }
-        }
+        
     }
 
     @Override
