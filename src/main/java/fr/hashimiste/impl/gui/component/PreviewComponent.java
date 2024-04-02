@@ -42,6 +42,7 @@ public class PreviewComponent extends JComponent {
         g.drawRect(zeroX, zeroY, (int) (grille.getDimension().width * factor), (int) (grille.getDimension().height * factor));
         for (Ile ile : grille.getIles()) {
             g.setColor(Color.BLACK);
+            //System.out.println(ile.getX() + " : " + ile.getY());
             g.drawOval((int) (zeroX + ile.getX() * factor), (int) (zeroY + ile.getY() * factor), (int) (factor), (int) (factor));
             g.setFont(font);
             Rectangle2D d = g.getFontMetrics().getStringBounds(String.valueOf(ile.getN()), g);
