@@ -1,3 +1,5 @@
+package fr.hashimiste.impl.jeu;
+
 import fr.hashimiste.core.jeu.Difficulte;
 import fr.hashimiste.core.jeu.Ile;
 import fr.hashimiste.impl.jeu.GrilleImpl;
@@ -25,7 +27,7 @@ public class AideTest {
      */
     @BeforeAll
     public static void initAll(){
-        g = new GrilleImpl(new Dimension(6,6), Difficulte.MOYEN);
+        g = new GrilleImpl(new Dimension(6,6), Difficulte.MOYEN,false);
         listeIle = new ArrayList<>();
     }
 
@@ -51,7 +53,7 @@ public class AideTest {
      * Test de la technique "Technique Bordure" avec des nombres paires
      */
     @Test
-    public void TestAideBordure1() {
+    public void testAideBordure1() {
 
         listeIle.add(new IleImpl(0, 0, 4, g));
         listeIle.add(new IleImpl(0, 3, 6, g));
@@ -65,10 +67,15 @@ public class AideTest {
         Ile ileAide = g.chercherIle().getIleU();
 
         assertSame(ileAide, listeIle.get(0));
+
+        g.aide();
+        g.aide();
+        g.aide();
+        g.aide();
     }
 
     @Test
-    public void TestAideParite1(){
+    public void testAideParite1(){
 
         listeIle.add(new IleImpl(0,0,1,g));
         listeIle.add(new IleImpl(0,2,4,g));

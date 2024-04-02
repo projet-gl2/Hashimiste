@@ -1,3 +1,5 @@
+package fr.hashimiste.impl.jeu;
+
 import fr.hashimiste.core.jeu.Difficulte;
 import fr.hashimiste.core.jeu.Technique;
 import fr.hashimiste.impl.jeu.GrilleImpl;
@@ -25,7 +27,7 @@ public class TechniqueTest {
      */
     @BeforeAll
     public static void initAll(){
-        g = new GrilleImpl(new Dimension(8,8),Difficulte.MOYEN);
+        g = new GrilleImpl(new Dimension(8,8),Difficulte.MOYEN,false);
         listeIle = new ArrayList<>();
     }
 
@@ -51,7 +53,7 @@ public class TechniqueTest {
      * Test de la technique "Technique Bordure" avec des nombres paires
      */
     @Test
-    public void TestTechniqueBordure1(){
+    public void testTechniqueBordure1(){
 
         listeIle.add(new IleImpl(0,0,4,g));
         listeIle.add(new IleImpl(0,3,6,g));
@@ -73,7 +75,7 @@ public class TechniqueTest {
      * Test de la technique "Technique Bordure" avec des nombres impaires
      */
     @Test
-    public void TestTechniqueBordure2(){
+    public void testTechniqueBordure2(){
 
         listeIle.add(new IleImpl(0,0,3,g));
         listeIle.add(new IleImpl(0,3,5,g));
@@ -95,7 +97,7 @@ public class TechniqueTest {
      * Test de la technique "Technique Parité"
      */
     @Test
-    public void TestTechniqueParite1(){
+    public void testTechniqueParite1(){
 
         listeIle.add(new IleImpl(0,0,1,g));
         listeIle.add(new IleImpl(0,2,4,g));
@@ -110,7 +112,7 @@ public class TechniqueTest {
      * Test de la technique "Technique Imparité" TODO (manque le test de vérification de ponts)
      */
     @Test
-    public void TestTechniqueImparite1(){
+    public void testTechniqueImparite1(){
 
         listeIle.add(new IleImpl(0,0,2,g));
         listeIle.add(new IleImpl(0,2,3,g));
@@ -139,7 +141,7 @@ public class TechniqueTest {
      * Test de la technique "Technique Imparité + Unité"
      */
     @Test
-    public void TestTechniqueImpariteUnite1(){
+    public void testTechniqueImpariteUnite1(){
 
         listeIle.add(new IleImpl(0,0,2,g));
         listeIle.add(new IleImpl(0,2,3,g));
@@ -173,7 +175,7 @@ public class TechniqueTest {
      * Test de la technique "Technique Unité (valeur 1 et 2)"
      */
     @Test
-    public void TestTechniqueUniteUnDeux1(){
+    public void testTechniqueUniteUnDeux1(){
 
         listeIle.add(new IleImpl(0,0,2,g));
         listeIle.add(new IleImpl(0,2,3,g));
@@ -204,7 +206,7 @@ public class TechniqueTest {
      * Test de la technique "Technique Unité (valeur 4 et 5)"
      */
     @Test
-    public void TestTechniqueUniteQuatreCinq1(){
+    public void testTechniqueUniteQuatreCinq1(){
 
         listeIle.add(new IleImpl(0,0,1,g));
         listeIle.add(new IleImpl(0,2,4,g));
@@ -233,7 +235,7 @@ public class TechniqueTest {
      * Test de la technique "Technique Unité (valeur 6)" TODO Test avec les ponts
      */
     @Test
-    public void TestTechniqueUniteSix1(){
+    public void testTechniqueUniteSix1(){
 
         listeIle.add(new IleImpl(0,0,1,g));
         listeIle.add(new IleImpl(0,2,1,g));
@@ -259,7 +261,7 @@ public class TechniqueTest {
      * Test des techniques "Technique Isolation (valeur 1)" et  "Technique Isolation (valeur 2)"
      */
     @Test
-    public void TestTechniqueIsolation1(){
+    public void testTechniqueIsolation1(){
 
         listeIle.add(new IleImpl(0,0,1,g));
         listeIle.add(new IleImpl(0,2,1,g));

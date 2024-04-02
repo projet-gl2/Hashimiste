@@ -144,6 +144,25 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
     }
 
     @Override
+    public String getRegion() {
+        String reg;
+        int w = (int) this.grille.getDimension().getWidth();
+        int h = (int) this.grille.getDimension().getHeight();
+
+        if(this.x < h/3) reg = "NORD";
+        else if(this.x > (h/3)*2) reg = "SUD";
+        else reg = "CENTRE";
+
+        reg = reg+"-";
+
+        if(this.y < w/3) reg = reg+"OUEST";
+        else if(this.y > 2*(w/3)) reg = reg+"EST";
+        else reg = reg+"CENTRE";
+
+        return reg;
+    }
+
+    @Override
     public Grille getGrille() {
         return grille;
     }

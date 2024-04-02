@@ -20,6 +20,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     private final Dimension dimension;
     private final Case[][] iles;
     private final Difficulte difficulte;
+    private final boolean estAventure;
     private List<Sauvegarde> sauvegardes;
     /**
      * Indique le nombre de fois que l'utilisateur à cliqué sur le bouton d'aide d'affilée.
@@ -34,8 +35,8 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
      * @param dimension  la dimension de la grille.
      * @param difficulte la difficulté de la grille.
      */
-    public GrilleImpl(Dimension dimension, Difficulte difficulte) {
-        this(-1, dimension, difficulte, new ArrayList<>());
+    public GrilleImpl(Dimension dimension, Difficulte difficulte, boolean estAventure) {
+        this(-1, dimension, difficulte, estAventure, new ArrayList<>());
     }
 
     /**
@@ -45,8 +46,8 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
      * @param dimension  la dimension de la grille.
      * @param difficulte la difficulté de la grille.
      */
-    public GrilleImpl(int id, Dimension dimension, Difficulte difficulte) {
-        this(id, dimension, difficulte, null);
+    public GrilleImpl(int id, Dimension dimension, Difficulte difficulte, boolean estAventure) {
+        this(id, dimension, difficulte, estAventure, null);
     }
 
     /**
@@ -57,7 +58,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
      * @param difficulte  la difficulté de la grille.
      * @param sauvegardes la liste des sauvegardes de la grille.
      */
-    public GrilleImpl(int id, Dimension dimension, Difficulte difficulte, List<Sauvegarde> sauvegardes) {
+    public GrilleImpl(int id, Dimension dimension, Difficulte difficulte, boolean estAventure, List<Sauvegarde> sauvegardes) {
         this.id = id;
         this.dimension = dimension;
         this.iles = new Case[dimension.width][dimension.height];
@@ -67,6 +68,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
             }
         }
         this.difficulte = difficulte;
+        this.estAventure = estAventure;
         this.sauvegardes = sauvegardes;
     }
 
@@ -85,14 +87,14 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
      * @param x coordonnées en x de l'espace à vider.
      * @param y coordonnées en x de l'espace à vider.
      */
-    public void oterIle(int x, int y){
+    protected void oterIle(int x, int y){
         iles[x][y] = new CaseVideImpl(x,y,this);
     }
 
     /**
      * Cette méthode est utilisée pour vider une grille de toutes ses îles. Utilisée pour les tests unitaires.
      */
-    public void viderGrille(){
+    protected void viderGrille(){
         for(int i=0;i<dimension.width;i++){
             for(int j=0;j<dimension.height;j++){
                 oterIle(i,j);
@@ -108,7 +110,31 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
      * @param n    le nombre de ponts à poser.
      */
     public void poserPont(Ile ile1, Ile ile2, int n) {
-        
+        Direction d = null;
+        Case temp = ile1;
+
+        for(Direction value: Direction.values()){
+            if(ile1.getVoisinIle(value) == ile2){
+                d = value;
+                break;
+            }
+        }
+
+        if(d != null){
+            temp = temp.getVoisinCase(d);
+            if(!(temp instanceof PontImpl)){
+                while(temp != ile2){
+                    temp = temp.getVoisinCase(d);
+                }
+
+                temp = ile1.getVoisinCase(d);
+                while(temp != ile2){
+                    iles[temp.getX()][temp.getY()] = new PontImpl(temp.getX(), temp.getY(), n, this, d);
+                    temp = temp.getVoisinCase(d);
+                }
+            }
+            nbClicSurAide = 0; //si un pont a été posé, on réinitialise le compteur de clic sur aide
+        }
     }
 
     @Override
@@ -129,6 +155,11 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     @Override
     public Difficulte getDifficulte() {
         return difficulte;
+    }
+
+    @Override
+    public boolean estAventure() {
+        return estAventure;
     }
 
     @Override
@@ -155,7 +186,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
 
         if(nbClicSurAide == 0) System.out.println("La "+uIT.getTechU().getNom()+" peut être utilisée !");
         if(nbClicSurAide == 1) System.out.println("La "+uIT.getTechU().getNom()+" peut être utilisée : "+uIT.getTechU().getDescription());
-        if(nbClicSurAide == 2) System.out.println("La "+uIT.getTechU().getNom()+" peut être utilisée dans la région "); //TODO
+        if(nbClicSurAide == 2) System.out.println("La "+uIT.getTechU().getNom()+" peut être utilisée dans la région "+uIT.getIleU().getRegion()); //TODO
         if(nbClicSurAide > 2) System.out.println("La "+uIT.getTechU().getNom()+" peut être utilisée en x = "+uIT.getIleU().getX()+" et en y = "+uIT.getIleU().getY());
 
         nbClicSurAide ++;
