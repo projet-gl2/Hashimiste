@@ -83,7 +83,8 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
      * Cette méthode est utilisée pour vérifier le jeu.
      */
     private void verifier() {
-        // TODO
+        JOptionPane.showMessageDialog(this, "Verifier", "Verifier", JOptionPane.INFORMATION_MESSAGE);
+        // TODO : Implementer la vérification
     }
 
     /**
@@ -167,7 +168,8 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
      * Cette méthode est utilisée pour obtenir de l'aide dans le jeu.
      */
     private void aide() {
-        // TODO
+        JOptionPane.showMessageDialog(this, "Aide", "Aide", JOptionPane.INFORMATION_MESSAGE);
+        // TODO : Implementer l'aide
     }
 
     /**
