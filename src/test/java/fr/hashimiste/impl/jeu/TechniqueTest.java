@@ -3,8 +3,6 @@ package fr.hashimiste.impl.jeu;
 import fr.hashimiste.core.jeu.Difficulte;
 import fr.hashimiste.core.jeu.Direction;
 import fr.hashimiste.core.jeu.Technique;
-import fr.hashimiste.impl.jeu.GrilleImpl;
-import fr.hashimiste.impl.jeu.IleImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -268,7 +266,7 @@ public class TechniqueTest {
     }
 
     /**
-     * Test de la technique "Technique Unité (valeur 6)" TODO Test avec les ponts
+     * Test de la technique "Technique Unité (valeur 6)"
      */
     @Test
     public void testTechniqueUniteSix1(){
@@ -288,6 +286,36 @@ public class TechniqueTest {
             g.poserIle(i);
 
         assertTrue(Technique.TECH_BAS_5.test(listeIle.get(3)));
+        assertFalse(Technique.TECH_BAS_5.test(listeIle.get(4)));
+        assertFalse(Technique.TECH_BAS_5.test(listeIle.get(5)));
+        assertFalse(Technique.TECH_BAS_5.test(listeIle.get(6)));
+    }
+
+    /**
+     * Test de la technique "Technique Unité (valeur 6)" avec les ponts
+     */
+    @Test
+    public void testTechniqueUniteSix2(){
+
+        listeIle.add(new IleImpl(0,0,1,g));
+        listeIle.add(new IleImpl(0,2,1,g));
+        listeIle.add(new IleImpl(2,0,3,g));
+        listeIle.add(new IleImpl(2,2,6,g));
+        listeIle.add(new IleImpl(2,4,4,g));
+        listeIle.add(new IleImpl(4,0,2,g));
+        listeIle.add(new IleImpl(4,2,6,g));
+        listeIle.add(new IleImpl(4,4,4,g));
+        listeIle.add(new IleImpl(6,0,1,g));
+        listeIle.add(new IleImpl(6,2,2,g));
+
+        for(IleImpl i : listeIle)
+            g.poserIle(i);
+
+        g.poserPont(listeIle.get(3), listeIle.get(2), 1);
+        g.poserPont(listeIle.get(3), listeIle.get(4), 1);
+        g.poserPont(listeIle.get(3), listeIle.get(6), 1);
+
+        assertFalse(Technique.TECH_BAS_5.test(listeIle.get(3)));
         assertFalse(Technique.TECH_BAS_5.test(listeIle.get(4)));
         assertFalse(Technique.TECH_BAS_5.test(listeIle.get(5)));
         assertFalse(Technique.TECH_BAS_5.test(listeIle.get(6)));
