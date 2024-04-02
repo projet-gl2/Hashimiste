@@ -83,6 +83,7 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
      * Cette méthode est utilisée pour vérifier le jeu.
      */
     private void verifier() {
+        System.out.println(grille.verification(precedent));
         JOptionPane.showMessageDialog(this, "Verifier", "Verifier", JOptionPane.INFORMATION_MESSAGE);
         // TODO : Implementer la vérification
     }

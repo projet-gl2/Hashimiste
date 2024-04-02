@@ -6,6 +6,7 @@ import fr.hashimiste.core.jeu.Difficulte;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Ile;
 import fr.hashimiste.core.jeu.Sauvegarde;
+import fr.hashimiste.core.jeu.Historique;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -111,7 +112,7 @@ public class GrilleBuilder implements Grille, Identifiable.UNSAFE {
     }
 
     @Override
-    public boolean verification() {
+    public boolean verification(Historique historique) {
         throw UNSUPPORTED_OPERATION_EXCEPTION;
     }
 

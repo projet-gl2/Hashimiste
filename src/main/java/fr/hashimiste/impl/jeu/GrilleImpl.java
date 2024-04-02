@@ -6,6 +6,8 @@ import fr.hashimiste.core.jeu.Difficulte;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Ile;
 import fr.hashimiste.core.jeu.Sauvegarde;
+import fr.hashimiste.core.jeu.Historique;
+import fr.hashimiste.core.jeu.Historique.Action;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -124,40 +126,38 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     }
 
     @Override
-    public boolean verification(Sauvegarde save) {
-        List<Ile> res=parcoursGrille(save);
-        return save.getReference().getGrille().removeIf(ile -> res.contains(ile)).isEmpty();
+    public boolean verification(Historique histo) {
+        List<Ile> res=parcoursGrille(histo);
+        List<Ile> tmp = getIles();
+        tmp.removeIf(ile -> res.contains(ile));
+        return tmp.isEmpty();
     }
     
   
-    private List<Ile> parcoursGrille(Sauvegarde save){
-        List<Ile> tmp = [];
-        Grille grille=save.reference().getGrille().getIles()
-        explorer(ile,save.getReference(),grille);
-        return tmp;
+    private List<Ile> parcoursGrille(Historique histo){
+        return explorer(new ArrayList<>(),histo.getIle1(),histo);
     }
-    
-    private void explorer( Ile ile ,Historique histo,Grille grille){
-        if(h.getAction()!=NOUVELLE_GRILLE){
-            if(h.getAction()==UN_PONT || h.getAction()==DEUX_PONTS){
-                if(h.getIle1().equals(ile)){
-                    if((tmp.indexOf(h.getIle2())==-1)&& ile.isComplete()){
-                        explorer(h.getIle2(),histo.getAvant(),grille);
+
+    private List<Ile> explorer(List<Ile> tmp, Ile ile, Historique histo){
+        if(histo.getAction()!=Action.NOUVELLE_GRILLE){
+            if(histo.getAction()==Action.UN_PONT || histo.getAction()==Action.DEUX_PONTS){
+                if(histo.getIle1().equals(ile)){
+                    if((tmp.indexOf(histo.getIle2())==-1)){
                         tmp.add(ile);
+                        tmp = explorer(tmp, histo.getIle2(),histo.getAvant());
                     }
                 }else{
-                    if(h.getIle2().equals(ile)){
-                        if((tmp.indexOf(h.getIle1())==-1)&& ile.isComplete()){
-                            explorer(h.getIle1(),histo.getAvant(),grille);
+                    if(histo.getIle2().equals(ile)){
+                        if((tmp.indexOf(histo.getIle1())==-1)){
                             tmp.add(ile);
+                            tmp = explorer(tmp, histo.getIle1(),histo.getAvant());
                         }
                     }
                 }
 
             }  
-        }else{
-            return;
         }
+        return tmp;
     }
     
     @Override

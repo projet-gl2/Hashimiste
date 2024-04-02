@@ -54,7 +54,7 @@ public interface Grille extends Identifiable {
      * Vérifie si la grille est correcte.
      * @return vrai si la grille est correcte, faux sinon.
      */
-    boolean verification();
+    boolean verification(Historique historique);
 
     /**
      * Fournit une aide pour résoudre la grille.
