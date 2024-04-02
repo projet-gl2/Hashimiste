@@ -114,7 +114,7 @@ public class GrilleBuilder implements Grille, Identifiable.UNSAFE {
     }
 
     @Override
-    public void aide() {
+    public String aide() {
         throw UNSUPPORTED_OPERATION_EXCEPTION;
     }
 

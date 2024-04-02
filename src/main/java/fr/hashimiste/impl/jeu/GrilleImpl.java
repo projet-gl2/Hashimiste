@@ -181,16 +181,17 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     }
 
     @Override
-    public void aide(){ //TODO faire un affichage dans l'appli, pas juste dans le terminal
+    public String aide(){ //TODO faire un affichage dans l'appli, pas juste dans le terminal
         UnionIleTechnique uIT = this.chercherIle();
-
-        if(nbClicSurAide == 0) System.out.println("La "+uIT.getTechU().getNom()+" peut être utilisée !");
-        if(nbClicSurAide == 1) System.out.println("La "+uIT.getTechU().getNom()+" peut être utilisée : "+uIT.getTechU().getDescription());
-        if(nbClicSurAide == 2) System.out.println("La "+uIT.getTechU().getNom()+" peut être utilisée dans la région "+uIT.getIleU().getRegion()); //TODO
-        if(nbClicSurAide > 2) System.out.println("La "+uIT.getTechU().getNom()+" peut être utilisée en x = "+uIT.getIleU().getX()+" et en y = "+uIT.getIleU().getY());
+        String mess = "";
+        if(nbClicSurAide == 0) mess = "La "+uIT.getTechU().getNom()+" peut être utilisée !";
+        if(nbClicSurAide == 1) mess = "La "+uIT.getTechU().getNom()+" peut être utilisée : "+uIT.getTechU().getDescription();
+        if(nbClicSurAide == 2) mess = "La "+uIT.getTechU().getNom()+" peut être utilisée dans la région "+uIT.getIleU().getRegion();
+        if(nbClicSurAide > 2) mess = "La "+uIT.getTechU().getNom()+" peut être utilisée en x = "+uIT.getIleU().getX()+" et en y = "+uIT.getIleU().getY();
 
         nbClicSurAide ++;
 
+        return mess;
     }
 
     @Override

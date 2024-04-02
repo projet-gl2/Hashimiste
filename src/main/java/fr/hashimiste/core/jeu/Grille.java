@@ -59,8 +59,9 @@ public interface Grille extends Identifiable {
 
     /**
      * Fournit une aide pour résoudre la grille.
+     * @return Un message d'aide pour résoudre la grille.
      */
-    void aide();
+    String aide();
 
     /**
      * Parcourt la grille à la recherche de l'île sur laquelle on peut appliquer une technique.
