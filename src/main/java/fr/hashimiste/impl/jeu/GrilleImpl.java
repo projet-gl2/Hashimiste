@@ -117,10 +117,42 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     }
 
     @Override
-    public boolean verification() {
-        return false;
+    public boolean verification(Sauvegarde save) {
+        List<Ile> res=parcoursGrille(save);
+        return save.getReference().getGrille().removeIf(ile -> res.contains(ile)).isEmpty();
     }
+    
+  
+    private List<Ile> parcoursGrille(Sauvegarde save){
+        List<Ile> tmp = [];
+        Grille grille=save.reference().getGrille().getIles()
+        explorer(ile,save.getReference(),grille);
+        return tmp;
+    }
+    
+    private void explorer( Ile ile ,Historique histo,Grille grille){
+        if(h.getAction()!=NOUVELLE_GRILLE){
+            if(h.getAction()==UN_PONT || h.getAction()==DEUX_PONTS){
+                if(h.getIle1().equals(ile)){
+                    if((tmp.indexOf(h.getIle2())==-1)&& ile.isComplete()){
+                        explorer(h.getIle2(),histo.getAvant(),grille);
+                        tmp.add(ile);
+                    }
+                }else{
+                    if(h.getIle2().equals(ile)){
+                        if((tmp.indexOf(h.getIle1())==-1)&& ile.isComplete()){
+                            explorer(h.getIle1(),histo.getAvant(),grille);
+                            tmp.add(ile);
+                        }
+                    }
+                }
 
+            }  
+        }else{
+            return;
+        }
+    }
+    
     @Override
     public Ile aide() {
         return null;
