@@ -81,5 +81,5 @@ public interface Grille extends Identifiable {
      * Parcourt un historique pour créer une liste de ponts
      * @return une Liste de ponts.
      */
-    List<Ponts> HistoriqueVersPonts(List<Ponts> res,List<Ponts> exclu,Historique histo);
+    List<Ponts> historiqueVersPonts(List<Ponts> res,List<Ponts> exclu,Historique histo);
 }

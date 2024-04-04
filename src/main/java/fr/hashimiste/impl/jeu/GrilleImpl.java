@@ -194,7 +194,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
 
     
     @Override
-    public Ile aide() {
+    public String aide() {
         return null;
     }
 
@@ -225,27 +225,32 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
                 ", iles=" + Arrays.toString(iles) +
                 '}';
     }
+
+
+    //Peut-être ajouter une méthode pour récupérer l'historique courant.
     @Override
-    public  List<Ponts> HistoriqueVersPonts(List<Ponts> res,List<Ponts> exclu,Historique histo){
-        if(histo.getAction()==Action.NOUVELLE_GRILLE){
-            return res;
-        }else{
-            if(histo.getAction()==Action.UN_PONT || histo.getAction()==Action.DEUX_PONTS){
-                Ponts tmp=new Ponts(histo.getIle1(),histo.getIle2());
-                if(!exclu.contains(tmp)){
-                    res.add(tmp);
+    public  List<Ponts> historiqueVersPonts(List<Ponts> res,List<Ponts> exclu,Historique histo){
+        if(this.equals(histo.getGrille())) {
+            if (histo.getAction() == Action.NOUVELLE_GRILLE) {
+                return res;
+            } else {
+                if (histo.getAction() == Action.UN_PONT || histo.getAction() == Action.DEUX_PONTS) {
+                    Ponts tmp = new Ponts(histo.getIle1(), histo.getIle2());
+                    if (!exclu.contains(tmp)) {
+                        res.add(tmp);
+                    }
+                    res = historiqueVersPonts(res, exclu, histo.getAvant());
+                } else {
+                    exclu.add(new Ponts(histo.getIle1(), histo.getIle2()));
+                    exclu.add(new Ponts(histo.getIle2(), histo.getIle1()));
+                    res = historiqueVersPonts(res, exclu, histo.getAvant());
                 }
-                res=HistoriqueVersPonts(res,exclu,histo.getAvant());
-            }else{
-                exclu.add(new Ponts(histo.getIle1(),histo.getIle2()));
-                exclu.add(new Ponts(histo.getIle2(),histo.getIle1()));
-                res=HistoriqueVersPonts(res,exclu,histo.getAvant());
             }
         }
         return res;
     }
     private List<Ile> parcoursGrille(Historique histo){
-        List<Ponts> ponts=HistoriqueVersPonts(new ArrayList<Ponts>(),new ArrayList<Ponts>(),histo);
+        List<Ponts> ponts=historiqueVersPonts(new ArrayList<>(),new ArrayList<>(),histo);
         return explorer(new ArrayList<>(),histo.getIle1(),ponts);
     }
 
