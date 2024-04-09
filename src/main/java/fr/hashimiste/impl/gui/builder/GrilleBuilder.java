@@ -3,6 +3,7 @@ package fr.hashimiste.impl.gui.builder;
 import fr.hashimiste.core.data.Stockage;
 import fr.hashimiste.core.data.sql.Identifiable;
 import fr.hashimiste.core.jeu.*;
+import fr.hashimiste.core.utils.UnionIleString;
 import fr.hashimiste.core.utils.UnionIleTechnique;
 
 import java.awt.*;
@@ -114,7 +115,7 @@ public class GrilleBuilder implements Grille, Identifiable.UNSAFE {
     }
 
     @Override
-    public String aide() {
+    public UnionIleString aide() {
         throw UNSUPPORTED_OPERATION_EXCEPTION;
     }
 

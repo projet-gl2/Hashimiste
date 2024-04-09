@@ -177,7 +177,7 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
      * Cette méthode est utilisée pour obtenir de l'aide dans le jeu.
      */
     private void aide() {
-        // TODO
+        JOptionPane.showMessageDialog(this, grille.aide().getStrU(), "Aide", JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**

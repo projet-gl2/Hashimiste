@@ -66,7 +66,7 @@ public class TechniqueTest {
         assertTrue(Technique.TECH_DEP_1.test(listeIle.get(0)));
         assertTrue(Technique.TECH_DEP_1.test(listeIle.get(1)));
         assertFalse(Technique.TECH_DEP_1.test(listeIle.get(2)));
-        assertTrue(Technique.TECH_DEP_1.test(listeIle.get(3)));
+        assertFalse(Technique.TECH_DEP_1.test(listeIle.get(3)));
         assertFalse(Technique.TECH_DEP_1.test(listeIle.get(4)));
     }
 
@@ -98,8 +98,22 @@ public class TechniqueTest {
     @Test
     public void testTechniqueParite1(){
 
-        listeIle.add(new IleImpl(0,0,1,g));
+
+        listeIle.add(new IleImpl(0,0,3,g));
         listeIle.add(new IleImpl(0,2,4,g));
+        listeIle.add(new IleImpl(0,4,7,g));
+        listeIle.add(new IleImpl(1,3,4,g));
+        listeIle.add(new IleImpl(1,4,8,g));
+        listeIle.add(new IleImpl(1,5,1,g));
+        listeIle.add(new IleImpl(2,2,4,g));
+        listeIle.add(new IleImpl(2,4,4,g));
+        listeIle.add(new IleImpl(3,3,3,g));
+        listeIle.add(new IleImpl(4,1,1,g));
+        listeIle.add(new IleImpl(4,3,6,g));
+        listeIle.add(new IleImpl(4,5,4,g));
+
+        for(IleImpl i : listeIle)
+            g.poserIle(i);
 
         assertFalse(Technique.TECH_DEP_2.test(listeIle.get(1)));
         assertTrue(Technique.TECH_DEP_2.test(listeIle.get(4)));

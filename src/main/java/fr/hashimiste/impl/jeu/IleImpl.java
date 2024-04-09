@@ -5,6 +5,7 @@ import fr.hashimiste.core.jeu.Case;
 import fr.hashimiste.core.jeu.Direction;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Ile;
+import org.python.antlr.ast.Raise;
 
 import java.util.Arrays;
 import java.util.function.Predicate;

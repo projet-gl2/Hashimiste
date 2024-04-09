@@ -3,6 +3,7 @@ package fr.hashimiste.impl.jeu;
 import fr.hashimiste.core.data.Stockage;
 import fr.hashimiste.core.data.sql.Identifiable;
 import fr.hashimiste.core.jeu.*;
+import fr.hashimiste.core.utils.UnionIleString;
 import fr.hashimiste.core.utils.UnionIleTechnique;
 
 import java.awt.*;
@@ -185,7 +186,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     }
 
     @Override
-    public String aide(){ //TODO faire un affichage dans l'appli, pas juste dans le terminal
+    public UnionIleString aide(){ //TODO faire un affichage dans l'appli, pas juste dans le terminal
         UnionIleTechnique uIT = this.chercherIle();
         String mess = "";
         if(nbClicSurAide == 0) mess = "La "+uIT.getTechU().getNom()+" peut être utilisée !";
@@ -197,7 +198,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
 
         nbClicSurAide ++;
 
-        return mess;
+        return new UnionIleString(uIT.getIleU(), mess);
     }
 
     @Override
