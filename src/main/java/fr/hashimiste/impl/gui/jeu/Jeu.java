@@ -77,6 +77,7 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
         };
     
         game.add(gameComponent, BorderLayout.CENTER);
+        chargerHistorique(new Historique(grille, null, null, Historique.Action.NOUVELLE_GRILLE));
 
 
 
