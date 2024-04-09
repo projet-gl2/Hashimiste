@@ -109,7 +109,6 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
         // Dessiner les ponts potentiels
         for (Bridge bridge : potentialsBridges) {
             g2.setColor(DefaultTheme.INSTANCE.getPotentialBridgeColor());
-            if(true) {
                 if (bridge.hor) {
                     g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size + bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2,
                             zeroX + cell_size * bridge.ile2.getX() - bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2));
@@ -117,7 +116,6 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
                     g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size / 2, zeroY + cell_size * bridge.ile1.getY() + cell_size + bridgeSpacing,
                             zeroX + cell_size * bridge.ile2.getX() + cell_size / 2, zeroY + cell_size * bridge.ile2.getY() - bridgeSpacing));
                 }
-            }
 
         }
 
