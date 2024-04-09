@@ -159,9 +159,13 @@ public abstract class JFrameTemplate extends JFrame {
                     button.setBackground(theme.getDisabledButtonColor());
                 }
                 button.setForeground(theme.getButtonTextColor());
-            } else if (component instanceof JLabel) {
+            } else if (component instanceof JLabel ) {
                 JLabel label = (JLabel) component;
                 label.setForeground(theme.getTextColor());
+            } else if (component instanceof  JTextArea)
+            {
+                JTextArea textArea = (JTextArea) component;
+                textArea.setForeground(theme.getTextColor());
             }
         }
     }
