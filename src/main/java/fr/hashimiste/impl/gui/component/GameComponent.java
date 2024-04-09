@@ -176,7 +176,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
             int y = (souris_y - zeroY) / i;
             Ile ile = getIsle(x, y);
             boolean isOnIsle = ile != null;
-            System.out.println(isOnIsle);
+            //System.out.println(isOnIsle);
 
             Ile ileOuest = checkNearIsle(Direction.OUEST, x, y);
             Ile ileEst = checkNearIsle(Direction.EST, x, y);
@@ -311,7 +311,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
         {
             double sy = souris_y-(zeroY + y*factor);
             double quarter = factor/4;
-            System.out.println("x: " + x + " y:" + y + " sx:" + souris_x + " sy" + (sy));
+            //System.out.println("x: " + x + " y:" + y + " sx:" + souris_x + " sy" + (sy));
             if(sy < quarter || sy > quarter*3)
             {
                 return 1;
@@ -337,8 +337,20 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
             System.out.println("index: " + index);
             if (index < 0) {
                 // Ajouter le pont à la liste des ponts
-                bridges.add(selectedBridge);
-                ((GrilleImpl) getGrille()).poserPont(selectedBridge.ile1, selectedBridge.ile2, 1);
+                boolean pose = true;
+                for(Bridge b : bridges)
+                {
+                    if(isCrossing(selectedBridge, b))
+                    {
+                        pose = false;
+                        break;
+                    }
+                }
+                if(pose){
+                    bridges.add(selectedBridge);
+                    ((GrilleImpl) getGrille()).poserPont(selectedBridge.ile1, selectedBridge.ile2, 1);
+                }
+
             } else {
                 Bridge currentBridge = bridges.get(index);
 
@@ -378,6 +390,34 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
         }
         return -1; // Retourner -1 si le pont n'existe pas
     }
+
+    /**
+     *
+     * Fonction retournant si 2 ponts se croisent
+     * @param bridge1
+     * @param bridge2
+     * @return boolean
+     */
+    private boolean isCrossing(Bridge bridge1, Bridge bridge2) {
+        if (bridge1.hor && !bridge2.hor) {
+            int y1 = bridge1.getIle1().getY();
+            int y2 = bridge1.getIle2().getY();
+            int y3 = bridge2.getIle1().getY();
+            int y4 = bridge2.getIle2().getY();
+
+            if (y1 < y4 && y2 > y3) {
+                int x1 = bridge1.getIle1().getX();
+                int x2 = bridge1.getIle2().getX();
+                int x3 = bridge2.getIle1().getX();
+                int x4 = bridge2.getIle2().getX();
+                return x1 <= x4 && x2 >= x3;
+            }
+        } else if (!bridge1.hor && bridge2.hor) {
+            return isCrossing(bridge2, bridge1);
+        }
+        return false;
+    }
+
 
 
 
