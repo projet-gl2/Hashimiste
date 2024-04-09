@@ -86,7 +86,7 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
     private void verifier() {
         System.out.println(grille.verification(precedent));
         JOptionPane.showMessageDialog(this, "Verifier", "Verifier", JOptionPane.INFORMATION_MESSAGE);
-        // TODO : Implementer la vérification
+        
     }
 
     /**
@@ -170,8 +170,8 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
      * Cette méthode est utilisée pour obtenir de l'aide dans le jeu.
      */
     private void aide() {
-        JOptionPane.showMessageDialog(this, "Aide", "Aide", JOptionPane.INFORMATION_MESSAGE);
-        // TODO : Implementer l'aide
+        JOptionPane.showMessageDialog(this, grille.aide(), "Aide", JOptionPane.INFORMATION_MESSAGE);
+        
     }
 
     /**
@@ -206,4 +206,14 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
     public void mouseMoved(MouseEvent e) {
         System.out.println("Mouse moved");
     }
+
+    /**
+     * Cette méthode est utilisée pour obtenir L'Historique courant 
+     *
+     * @return L'historique courant 
+     */
+    public Historique getHistoriqueCourant(){
+        return this.precedent;
+    }
+
 }

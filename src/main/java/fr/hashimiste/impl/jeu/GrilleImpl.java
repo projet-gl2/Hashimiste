@@ -2,6 +2,14 @@ package fr.hashimiste.impl.jeu;
 
 import fr.hashimiste.core.data.Stockage;
 import fr.hashimiste.core.data.sql.Identifiable;
+
+import fr.hashimiste.core.jeu.Difficulte;
+import fr.hashimiste.core.jeu.Grille;
+import fr.hashimiste.core.jeu.Ile;
+import fr.hashimiste.core.jeu.Sauvegarde;
+import fr.hashimiste.core.jeu.Historique;
+import fr.hashimiste.core.jeu.Historique.Action;
+
 import fr.hashimiste.core.jeu.*;
 import fr.hashimiste.core.utils.UnionIleTechnique;
 
@@ -184,52 +192,10 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     }
     
 
+    
     @Override
-    public String aide(){ //TODO faire un affichage dans l'appli, pas juste dans le terminal
-        UnionIleTechnique uIT = this.chercherIle();
-        String mess = "";
-        if(nbClicSurAide == 0) mess = "La "+uIT.getTechU().getNom()+" peut être utilisée !";
-        if(nbClicSurAide == 1) mess = "La "+uIT.getTechU().getNom()+" peut être utilisée : "+uIT.getTechU().getDescription();
-        if(nbClicSurAide == 2) mess = "La "+uIT.getTechU().getNom()+" peut être utilisée dans la région "+uIT.getIleU().getRegion();
-        if(nbClicSurAide > 2) mess = "La "+uIT.getTechU().getNom()+" peut être utilisée en x = "+uIT.getIleU().getX()+" et en y = "+uIT.getIleU().getY();
-
-        nbClicSurAide ++;
-
-        return mess;
-    }
-
-    @Override
-    public UnionIleTechnique chercherIle() {
-
-        if (this.verification()) return null; //TODO quand verification sera fait correctement, remettre le not au début
-        else {
-            Technique[] lTech = Technique.values();
-            int fIndMin = lTech.length; //une liste des fonctions qui appliquent une technique
-            //elles prennent en paramètre une île, et renvoient vrai si la technique s'applique à l'île
-
-            Ile aideIle = null; //l'île sur laquelle on peut avancer à l'aide des techniques
-            Case tempCase;
-            Ile tempIle;
-            for (int i = 0; i < this.dimension.getWidth(); i++) { //parcours colonnes
-                for (int j = 0; j < this.dimension.getHeight(); j++) { //parcours
-                    tempCase = this.getIle(i,j);
-                    if (tempCase instanceof IleImpl){   //si l'île existe
-                        tempIle = (IleImpl)tempCase;
-                        if(!(tempIle.isComplete())) { //si l'île n'est pas complète
-                            for (int fInd = 0; fInd < fIndMin; fInd++) { //parcours techniques
-                                if (lTech[fInd].test(tempIle)) { //si la technique s'applique à l'île
-                                    aideIle = tempIle;
-                                    fIndMin = fInd; //on ne vérifie que les techniques de plus bas niveau que celles trouvées précédemments
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            return new UnionIleTechnique(aideIle,lTech[fIndMin]);
-
-        }
+    public String aide() {
+        return "test";
     }
 
     @Override
@@ -288,12 +254,14 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
         }
         return res;
     }
+
     private List<Ile> parcoursGrille(Historique histo){
         List<Ponts> ponts=historiqueVersPonts(new ArrayList<>(),new ArrayList<>(),histo);
         return explorer(new ArrayList<>(),histo.getIle1(),ponts);
     }
 
-    private List<Ile> explorer(List<Ile> tmp, Ile ile,List<Ponts> ponts){
+    @Override
+    public List<Ile> explorer(List<Ile> tmp, Ile ile,List<Ponts> ponts){
         for (Ponts p : ponts){
                 if(p.getIle1().equals(ile)){
                     if(!tmp.contains(p.getIle2())) {
@@ -311,7 +279,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
         }
         return tmp;
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         return obj instanceof GrilleImpl && ((GrilleImpl) obj).getId() == id;

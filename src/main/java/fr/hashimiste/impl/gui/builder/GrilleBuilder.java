@@ -139,6 +139,11 @@ public class GrilleBuilder implements Grille, Identifiable.UNSAFE {
         throw UNSUPPORTED_OPERATION_EXCEPTION;
     }
 
+    @Override
+    public List<Ile> explorer(List<Ile> tmp, Ile ile,List<Ponts> ponts) {
+        throw UNSUPPORTED_OPERATION_EXCEPTION;
+    }
+
     /**
      * Cette méthode est utilisée pour définir la difficulté de la grille.
      *

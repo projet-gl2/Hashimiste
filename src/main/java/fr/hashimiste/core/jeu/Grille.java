@@ -82,4 +82,10 @@ public interface Grille extends Identifiable {
      * @return une Liste de ponts.
      */
     List<Ponts> historiqueVersPonts(List<Ponts> res,List<Ponts> exclu,Historique histo);
+
+    /**
+     * Parcourt une grille en partant d'une ile 
+     * @return une Liste d'Ile parcourue.
+     */
+    List<Ile> explorer(List<Ile> tmp, Ile ile,List<Ponts> ponts);
 }
