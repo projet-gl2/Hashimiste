@@ -19,6 +19,7 @@ public class Technique extends JFrameTemplateProfil {
     private final JList<String> list = new JList<>(listModel);
     private final JScrollPane scroll = new JScrollPane(list);
     private final JTextArea description = new JTextArea();
+    private final JLabel exemple_image = new JLabel();
 
     /**
      * Constructeur de la classe Technique.
@@ -44,6 +45,8 @@ public class Technique extends JFrameTemplateProfil {
             if (!e.getValueIsAdjusting()) {
                 fr.hashimiste.core.jeu.Technique technique = fr.hashimiste.core.jeu.Technique.values()[list.getSelectedIndex()];
                 description.setText(technique.getDescription());
+                /*L'image ne s'affiche pas jsp pourquoi */
+                //exemple_image.setIcon(new ImageIcon(technique.getUrl()));
             }
         });
         description.setLineWrap(true);
@@ -53,5 +56,6 @@ public class Technique extends JFrameTemplateProfil {
         add(haut, BorderLayout.NORTH);
         add(scroll, BorderLayout.WEST);
         add(description, BorderLayout.CENTER);
+        //add(exemple_image, BorderLayout.SOUTH);
     }
 }
