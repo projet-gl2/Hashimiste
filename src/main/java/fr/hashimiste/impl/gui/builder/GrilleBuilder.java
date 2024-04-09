@@ -9,6 +9,7 @@ import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Ile;
 import fr.hashimiste.core.jeu.Sauvegarde;
 import fr.hashimiste.core.jeu.Historique;
+import fr.hashimiste.impl.jeu.Ponts;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -131,6 +132,11 @@ public class GrilleBuilder implements Grille, Identifiable.UNSAFE {
     @Override
     public Difficulte getDifficulte() {
         return difficulte;
+    }
+
+    @Override
+    public List<Ponts> historiqueVersPonts(List<Ponts> res, List<Ponts> exclu, Historique histo) {
+        throw UNSUPPORTED_OPERATION_EXCEPTION;
     }
 
     /**

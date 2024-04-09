@@ -233,6 +233,11 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     }
 
     @Override
+    public UnionIleTechnique chercherIle() {
+        return null;
+    }
+
+    @Override
     public int getId() {
         if (id == -1) {
             throw new IllegalStateException("L'id n'a pas été défini, impossible de le récupérer.");
