@@ -179,7 +179,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     }
 
     @Override
-    public boolean verification() {
+    public boolean verification() { //TODO à implémenter
         return false;
     }
 
