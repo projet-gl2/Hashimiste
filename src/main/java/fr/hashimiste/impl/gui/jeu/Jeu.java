@@ -176,7 +176,7 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
     /**
      * Cette méthode est utilisée pour obtenir de l'aide dans le jeu.
      */
-    private void aide() {
+    private void aide() { //TODO comprendre pourquoi grille peut être nul sur certaines îles
         JOptionPane.showMessageDialog(this, grille.aide().getStrU(), "Aide", JOptionPane.INFORMATION_MESSAGE);
     }
 

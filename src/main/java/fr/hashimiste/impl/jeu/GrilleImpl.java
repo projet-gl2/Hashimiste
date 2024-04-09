@@ -186,7 +186,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     }
 
     @Override
-    public UnionIleString aide(){ //TODO faire un affichage dans l'appli, pas juste dans le terminal
+    public UnionIleString aide(){
         UnionIleTechnique uIT = this.chercherIle();
         String mess = "";
         if(nbClicSurAide == 0) mess = "La "+uIT.getTechU().getNom()+" peut être utilisée !";
