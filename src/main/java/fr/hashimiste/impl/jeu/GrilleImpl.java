@@ -95,6 +95,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
      * Cette méthode est utilisée pour vider une grille de toutes ses îles. Utilisée pour les tests unitaires.
      */
     protected void viderGrille(){
+        nbClicSurAide = 0;
         for(int i=0;i<dimension.width;i++){
             for(int j=0;j<dimension.height;j++){
                 oterIle(i,j);
@@ -191,6 +192,8 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
         if(nbClicSurAide == 1) mess = "La "+uIT.getTechU().getNom()+" peut être utilisée : "+uIT.getTechU().getDescription();
         if(nbClicSurAide == 2) mess = "La "+uIT.getTechU().getNom()+" peut être utilisée dans la région "+uIT.getIleU().getRegion();
         if(nbClicSurAide > 2) mess = "La "+uIT.getTechU().getNom()+" peut être utilisée en x = "+uIT.getIleU().getX()+" et en y = "+uIT.getIleU().getY();
+
+        System.out.println(mess);
 
         nbClicSurAide ++;
 
