@@ -4,6 +4,7 @@ import fr.hashimiste.core.gui.Theme;
 import fr.hashimiste.core.jeu.Direction;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Ile;
+import fr.hashimiste.core.jeu.Case;
 import fr.hashimiste.impl.gui.theme.DefaultTheme;
 import fr.hashimiste.impl.jeu.GrilleImpl;
 
@@ -232,8 +233,8 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
      * @return Ile
      */
     public Ile getIsle(int x, int y) {
-        for (Ile ile : getGrille().getIles()) {
-            if (ile.getX() == x && ile.getY() == y) return ile;
+        for (Case ile : getGrille().getIles()) {
+            if (ile instanceof Ile && ile.getX() == x && ile.getY() == y) return (Ile)ile;
         }
         return null;
     }
