@@ -227,4 +227,13 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
     public String getColonneId() {
         return "id_ile";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Ile) {
+            Ile ile = (Ile) obj;
+            return ile.getX() == x && ile.getY() == y && ile.getN() == n;
+        }
+        return false;
+    }
 }

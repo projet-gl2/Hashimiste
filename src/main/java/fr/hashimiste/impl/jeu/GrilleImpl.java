@@ -272,4 +272,9 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
         }
         return tmp;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof GrilleImpl && ((GrilleImpl) obj).getId() == id;
+    }
 }
