@@ -45,7 +45,7 @@ public class Technique extends JFrameTemplateProfil {
             if (!e.getValueIsAdjusting()) {
                 fr.hashimiste.core.jeu.Technique technique = fr.hashimiste.core.jeu.Technique.values()[list.getSelectedIndex()];
                 description.setText(technique.getDescription());
-                /*L'image ne s'affiche pas jsp pourquoi */
+                /*TODO L'image ne s'affiche pas jsp pourquoi */
                 //exemple_image.setIcon(new ImageIcon(technique.getUrl()));
             }
         });
