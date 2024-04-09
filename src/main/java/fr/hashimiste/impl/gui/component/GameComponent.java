@@ -191,6 +191,12 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
                 if (ileNord != null && ileSud != null) {
                     potentialsBridges.add(new Bridge(ileNord, ileSud, false));
                 }
+                if(potentialsBridges.size() >= 2) {
+                    int t = getNearestBridge(souris_x, souris_y);
+                    Bridge b = potentialsBridges.get(t);
+                    potentialsBridges.clear();
+                    potentialsBridges.add(b);
+                }
             } else {
                 for (Bridge bridge : bridges) {
                     if ((bridge.ile1 == ile || bridge.ile2 == ile) && !bridge.duo) {
