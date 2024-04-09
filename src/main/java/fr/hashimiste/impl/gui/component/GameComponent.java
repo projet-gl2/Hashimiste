@@ -94,7 +94,7 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
         super.paintComponent(g);
 
         double factor = Math.min((getSize().getWidth() - 5) / getGrille().getDimension().width, (getSize().getHeight() - 5) / getGrille().getDimension().height);
-        System.out.println("factor: " + factor);
+        //System.out.println("factor: " + factor);
         int zeroX = (int) ((getSize().width / 2d) - ((getGrille().getDimension().width * factor) / 2));
         int zeroY = (int) ((getSize().height / 2d) - ((getGrille().getDimension().height * factor) / 2));
         float cell_size = (this.getWidth() - zeroX - zeroX) / getGrille().getDimension().width;
@@ -177,6 +177,7 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
             int y = (souris_y - zeroY) / i;
             Ile ile = getIsle(x, y);
             boolean isOnIsle = ile != null;
+            System.out.println(isOnIsle);
 
             Ile ileOuest = checkNearIsle(Direction.OUEST, x, y);
             Ile ileEst = checkNearIsle(Direction.EST, x, y);
@@ -288,6 +289,36 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
     }
 
     /**
+     * Retourne l'index du pont potentiel le plus proche
+     * @param souris_x
+     * @param souris_y
+     * @return index
+     */
+    public int getNearestBridge(int souris_x, int souris_y)
+    {
+        double factor = Math.min((getSize().getWidth() - 5) / getGrille().getDimension().width, (getSize().getHeight() - 5) / getGrille().getDimension().height);
+        int zeroX = (int) ((getSize().width / 2d) - ((getGrille().getDimension().width * factor) / 2));
+        int zeroY = (int) ((getSize().height / 2d) - ((getGrille().getDimension().height * factor) / 2));
+        int i = (this.getWidth() - zeroX - zeroX) / getGrille().getDimension().width;
+        int x = (souris_x - zeroX) / i;
+        int y = (souris_y - zeroY) / i;
+        if(potentialsBridges.size() > 1 && getIsle(x,y) == null)
+        {
+            double sy = souris_y-(zeroY + y*factor);
+            double quarter = factor/4;
+            System.out.println("x: " + x + " y:" + y + " sx:" + souris_x + " sy" + (sy));
+            if(sy < quarter || sy > quarter*3)
+            {
+                return 1;
+            }else{
+                return 0;
+            }
+            //System.out.println(factor);
+        }
+        return 0;
+    }
+
+    /**
      * Evenement de clique de la souris
      * @param e the event to be processed
      */
@@ -295,7 +326,7 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
     public void mousePressed(MouseEvent e) {
         // Si des ponts potentiels sont détectés
         if (isBridgeHover()) {
-            Bridge selectedBridge = potentialsBridges.get(0);
+            Bridge selectedBridge = potentialsBridges.get(getNearestBridge(e.getX(), e.getY()));
             int index = BridgeAlreadyExists(selectedBridge);
 
             System.out.println("index: " + index);
@@ -324,8 +355,8 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
             refreshBridge(e.getX(), e.getY());
 
             repaint();
-            System.out.println("pb: " + potentialsBridges.size());
-            System.out.println("b: " + bridges.size());
+            //System.out.println("pb: " + potentialsBridges.size());
+            //System.out.println("b: " + bridges.size());
         }
     }
 
