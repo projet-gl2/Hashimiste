@@ -100,7 +100,7 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
         Graphics2D g2 = (Graphics2D) g;
 
         float lineThickness = cell_size / 12; // Ajustez le dénominateur selon vos besoins
-        g2.setStroke(new BasicStroke(lineThickness));
+        g2.setStroke(new BasicStroke(lineThickness*4));
         cell_size=(float)factor;
 
         // Espacement entre les deux lignes d'un pont double
@@ -109,17 +109,19 @@ public class GameComponent extends PreviewComponent implements MouseMotionListen
         // Dessiner les ponts potentiels
         for (Bridge bridge : potentialsBridges) {
             g2.setColor(DefaultTheme.INSTANCE.getPotentialBridgeColor());
-            if(BridgeAlreadyExists(bridge) == -1) {
+            if(true) {
                 if (bridge.hor) {
-                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2,
-                            zeroX + cell_size * bridge.ile2.getX(), zeroY + cell_size * bridge.ile1.getY() + cell_size / 2));
+                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size + bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2,
+                            zeroX + cell_size * bridge.ile2.getX() - bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2));
                 } else {
-                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size / 2, zeroY + cell_size * bridge.ile1.getY() + cell_size,
-                            zeroX + cell_size * bridge.ile2.getX() + cell_size / 2, zeroY + cell_size * bridge.ile2.getY()));
+                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size / 2, zeroY + cell_size * bridge.ile1.getY() + cell_size + bridgeSpacing,
+                            zeroX + cell_size * bridge.ile2.getX() + cell_size / 2, zeroY + cell_size * bridge.ile2.getY() - bridgeSpacing));
                 }
             }
 
         }
+
+        g2.setStroke(new BasicStroke(lineThickness));
 
         // Dessiner les ponts réels
         for (Bridge bridge : bridges) {
