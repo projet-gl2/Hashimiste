@@ -368,4 +368,84 @@ public class TechniqueTest {
         assertFalse(Technique.TECH_ISO_2.test(listeIle.get(12)));
     }
 
+    /**
+     * Test de la technique "Complétion" sans pont
+     */
+    @Test
+    public void testTechniqueCompletion1(){
+
+        listeIle.add(new IleImpl(0,0,2,g));
+        listeIle.add(new IleImpl(0,2,4,g));
+        listeIle.add(new IleImpl(0,4,2,g));
+        listeIle.add(new IleImpl(2,0,1,g));
+        listeIle.add(new IleImpl(2,2,3,g));
+        listeIle.add(new IleImpl(2,6,2,g));
+        listeIle.add(new IleImpl(4,2,3,g));
+        listeIle.add(new IleImpl(4,4,4,g));
+        listeIle.add(new IleImpl(4,6,3,g));
+
+        for(IleImpl i : listeIle)
+            g.poserIle(i);
+
+        assertFalse(Technique.TECH_COMPL.test(listeIle.get(0)));
+        assertFalse(Technique.TECH_COMPL.test(listeIle.get(2)));
+        assertFalse(Technique.TECH_COMPL.test(listeIle.get(5)));
+        assertFalse(Technique.TECH_COMPL.test(listeIle.get(7)));
+    }
+
+    /**
+     * Test de la technique "Complétion" avec pont
+     */
+    @Test
+    public void testTechniqueCompletion2(){
+
+        listeIle.add(new IleImpl(0,0,2,g));
+        listeIle.add(new IleImpl(0,2,4,g));
+        listeIle.add(new IleImpl(0,4,2,g));
+        listeIle.add(new IleImpl(2,0,1,g));
+        listeIle.add(new IleImpl(2,2,3,g));
+        listeIle.add(new IleImpl(2,6,2,g));
+        listeIle.add(new IleImpl(4,2,3,g));
+        listeIle.add(new IleImpl(4,4,4,g));
+        listeIle.add(new IleImpl(4,6,3,g));
+
+        for(IleImpl i : listeIle)
+            g.poserIle(i);
+
+        g.poserPont(listeIle.get(4), listeIle.get(5), 1);
+
+        assertFalse(Technique.TECH_COMPL.test(listeIle.get(0)));
+        assertTrue(Technique.TECH_COMPL.test(listeIle.get(2)));
+        assertFalse(Technique.TECH_COMPL.test(listeIle.get(5)));
+        assertTrue(Technique.TECH_COMPL.test(listeIle.get(7)));
+    }
+
+    /**
+     * Test de la technique "Complétion" avec plus de ponts encore
+     */
+    @Test
+    public void testTechniqueCompletion3(){
+
+        listeIle.add(new IleImpl(0,0,2,g));
+        listeIle.add(new IleImpl(0,2,4,g));
+        listeIle.add(new IleImpl(0,4,2,g));
+        listeIle.add(new IleImpl(2,0,1,g));
+        listeIle.add(new IleImpl(2,2,3,g));
+        listeIle.add(new IleImpl(2,6,2,g));
+        listeIle.add(new IleImpl(4,2,3,g));
+        listeIle.add(new IleImpl(4,4,4,g));
+        listeIle.add(new IleImpl(4,6,3,g));
+
+        for(IleImpl i : listeIle)
+            g.poserIle(i);
+
+        g.poserPont(listeIle.get(4), listeIle.get(5), 1);
+        g.poserPont(listeIle.get(4), listeIle.get(1), 1);
+        g.poserPont(listeIle.get(4), listeIle.get(6), 1);
+
+        assertFalse(Technique.TECH_COMPL.test(listeIle.get(0)));
+        assertTrue(Technique.TECH_COMPL.test(listeIle.get(2)));
+        assertTrue(Technique.TECH_COMPL.test(listeIle.get(5)));
+        assertTrue(Technique.TECH_COMPL.test(listeIle.get(7)));
+    }
 }
