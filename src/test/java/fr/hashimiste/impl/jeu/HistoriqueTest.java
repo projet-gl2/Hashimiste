@@ -8,7 +8,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
-import fr.hashimiste.impl.POnts;
+import fr.hashimiste.impl.jeu.Ponts;
+import fr.hashimiste.core.jeu.Historique;
+import fr.hashimiste.core.jeu.Historique.Action;
+import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Tests unitaires pour la méthodE HistoriqueVersPonts
@@ -54,11 +58,12 @@ public class HistoriqueTest{
         for (IleImpl i : listeIle)
             g.poserIle(i);
 
-        Historique h=Historique(g,listeIle.get(0), listeIle.get(1), Action.UN_PONT);
+        Historique h=new Historique(g,listeIle.get(0), listeIle.get(1), Action.NOUVELLE_GRILLE);
+        h.creerSuivant(listeIle.get(0), listeIle.get(1),Action.UN_PONT);
         h.creerSuivant(listeIle.get(1),listeIle.get(2),Action.UN_PONT);
         h.creerSuivant(listeIle.get(2),listeIle.get(3),Action.UN_PONT);
         h.creerSuivant(listeIle.get(3),listeIle.get(4),Action.UN_PONT);
-        List<Ponts> res=new ArrayList<POnts>();
+        List<Ponts> res=new ArrayList<Ponts>();
         res.add(new Ponts(listeIle.get(0), listeIle.get(1)));
         res.add(new Ponts(listeIle.get(1),listeIle.get(2)));
         res.add(new Ponts(listeIle.get(2),listeIle.get(3)));
