@@ -74,6 +74,9 @@ public class AideTest {
         g.aide();
     }
 
+    /**
+     * Test de la technique "Technique Parité"
+     */
     @Test
     public void testAideParite1(){
 
