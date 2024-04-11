@@ -89,6 +89,6 @@ public class CandyTheme implements Theme {
 
     @Override
     public Color getPotentialBridgeColor() {
-        return null;
+        return getButtonColor();
     }
 }
