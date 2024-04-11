@@ -133,13 +133,13 @@ public enum Technique {
      */
     TECH_COMPL("Technique Égalité",
             "Si le nombre de ponts possibles de l'île est égale à sa valeur," +
-                    " alors il faut ajouter tous ces ponts possibles.", 
+                    " alors il faut ajouter tous ces ponts possibles.",
             o -> {
                 int n = o.getN();
                 int nbPoss = o.getNbPontPossible();
                 return n == nbPoss;
             },
-        "../../../../../resources/images/logo_atlas.png"),
+            "../../../../../resources/images/logo_atlas.png"),
     /**
      * Technique vérifiant si une île est un 1 possédant uniquement un voisin qui n'est pas non plus un 1.
      */
@@ -218,7 +218,7 @@ public enum Technique {
 
     /**
      * Récupère l'url de l'image montrant un exemple de cette technique
-     * 
+     *
      * @return l'url de l'image
      */
     public String getUrl() {

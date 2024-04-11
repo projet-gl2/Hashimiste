@@ -10,7 +10,7 @@ public class PontImpl implements Pont {
     private final Grille grille;
     private final Direction direction;
 
-    public PontImpl(int x, int y, int n, Grille g, Direction d){
+    public PontImpl(int x, int y, int n, Grille g, Direction d) {
         this.x = x;
         this.y = y;
         this.n = n;
@@ -34,36 +34,36 @@ public class PontImpl implements Pont {
     }
 
     @Override
-    public Case getVoisinCase(Direction d){
+    public Case getVoisinCase(Direction d) {
         Case c = null;
-        switch (d){
+        switch (d) {
             case NORD:
-                c = (grille.getIle(x-1,y));
+                c = (grille.getIle(x - 1, y));
                 break;
             case EST:
-                c = (grille.getIle(x,y+1));
+                c = (grille.getIle(x, y + 1));
                 break;
             case SUD:
-                c = (grille.getIle(x+1,y));
+                c = (grille.getIle(x + 1, y));
                 break;
             case OUEST:
-                c = (grille.getIle(x,y-1));
+                c = (grille.getIle(x, y - 1));
         }
         return c;
     }
 
     @Override
-    public Ile getVoisinIle(Direction d){
+    public Ile getVoisinIle(Direction d) {
         return getVoisinCase(d).getVoisinIle(d);
     }
 
     @Override
-    public int opParcours(Direction d){
-        if(direction == Direction.NORD || direction == Direction.SUD)
-            if(d == Direction.NORD || d == Direction.SUD)
+    public int opParcours(Direction d) {
+        if (direction == Direction.NORD || direction == Direction.SUD)
+            if (d == Direction.NORD || d == Direction.SUD)
                 return (getVoisinCase(d).opParcours(d));
-        if(direction == Direction.EST || direction == Direction.OUEST)
-            if(d == Direction.EST || d == Direction.OUEST)
+        if (direction == Direction.EST || direction == Direction.OUEST)
+            if (d == Direction.EST || d == Direction.OUEST)
                 return (getVoisinCase(d).opParcours(d));
         return -1;
     }
@@ -74,7 +74,7 @@ public class PontImpl implements Pont {
     }
 
     @Override
-    public Direction getDirection(){
+    public Direction getDirection() {
         return this.direction;
     }
 }

@@ -17,9 +17,9 @@ public class InnerJoin implements Join {
     /**
      * Constructeur de InnerJoin.
      *
-     * @param source       le nom de la table source.
+     * @param source        le nom de la table source.
      * @param colonneSource le nom de la colonne dans la table source.
-     * @param dest         le nom de la table de destination.
+     * @param dest          le nom de la table de destination.
      * @param colonneDest   le nom de la colonne dans la table de destination.
      */
     public InnerJoin(String source, String colonneSource, String dest, String colonneDest) {
@@ -29,11 +29,11 @@ public class InnerJoin implements Join {
     /**
      * Constructeur de InnerJoin.
      *
-     * @param source       le nom de la table source.
-     * @param sourceAlias  l'alias de la table source.
+     * @param source        le nom de la table source.
+     * @param sourceAlias   l'alias de la table source.
      * @param colonneSource le nom de la colonne dans la table source.
-     * @param dest         le nom de la table de destination.
-     * @param destAlias    l'alias de la table de destination.
+     * @param dest          le nom de la table de destination.
+     * @param destAlias     l'alias de la table de destination.
      * @param colonneDest   le nom de la colonne dans la table de destination.
      */
     public InnerJoin(String source, String sourceAlias, String colonneSource, String dest, String destAlias, String colonneDest) {

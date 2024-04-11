@@ -26,16 +26,16 @@ public class Aventure extends JFrameTemplateProfil {
 
     // Niveau as affiché avec la classe fr.hashimiste.impl.gui.jeu.Jeu [new Jeu(this, laGrille)]
     private final JFrame[] niveaux = new JFrame[]{
-            new Jeu(this,grilles.get(1)),
-            new Jeu(this,grilles.get(2)),
-            new Jeu(this,grilles.get(3)),
-            new Jeu(this,grilles.get(0)),
-            new Jeu(this,grilles.get(4)),
-            new Jeu(this,grilles.get(5)),
-            new Jeu(this,grilles.get(6)),
-            new Jeu(this,grilles.get(7)),
-            new Jeu(this,grilles.get(8)),
-            new Jeu(this,grilles.get(9))
+            new Jeu(this, grilles.get(1)),
+            new Jeu(this, grilles.get(2)),
+            new Jeu(this, grilles.get(3)),
+            new Jeu(this, grilles.get(0)),
+            new Jeu(this, grilles.get(4)),
+            new Jeu(this, grilles.get(5)),
+            new Jeu(this, grilles.get(6)),
+            new Jeu(this, grilles.get(7)),
+            new Jeu(this, grilles.get(8)),
+            new Jeu(this, grilles.get(9))
     };
 
     /**

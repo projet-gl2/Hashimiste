@@ -63,9 +63,9 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
         this.id = id;
         this.dimension = dimension;
         this.iles = new Case[dimension.width][dimension.height];
-        for(int i=0; i<dimension.width; i++){
-            for(int j=0; j<dimension.height; j++){
-                this.iles[i][j] = new CaseVideImpl(i,j,this);
+        for (int i = 0; i < dimension.width; i++) {
+            for (int j = 0; j < dimension.height; j++) {
+                this.iles[i][j] = new CaseVideImpl(i, j, this);
             }
         }
         this.difficulte = difficulte;
@@ -88,18 +88,18 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
      * @param x coordonnées en x de l'espace à vider.
      * @param y coordonnées en x de l'espace à vider.
      */
-    protected void oterIle(int x, int y){
-        iles[x][y] = new CaseVideImpl(x,y,this);
+    protected void oterIle(int x, int y) {
+        iles[x][y] = new CaseVideImpl(x, y, this);
     }
 
     /**
      * Cette méthode est utilisée pour vider une grille de toutes ses îles. Utilisée pour les tests unitaires.
      */
-    protected void viderGrille(){
+    protected void viderGrille() {
         nbClicSurAide = 0;
-        for(int i=0;i<dimension.width;i++){
-            for(int j=0;j<dimension.height;j++){
-                oterIle(i,j);
+        for (int i = 0; i < dimension.width; i++) {
+            for (int j = 0; j < dimension.height; j++) {
+                oterIle(i, j);
             }
         }
     }
@@ -115,9 +115,9 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
         Direction d = null;
         Case temp = ile1;
 
-        for(Direction value: Direction.values()){
+        for (Direction value : Direction.values()) {
 
-            if(ile1.isVoisinDirection(value)) {
+            if (ile1.isVoisinDirection(value)) {
                 if (ile1.getVoisinCase(value).getVoisinIle(value) == ile2) {
                     d = value;
                     break;
@@ -125,15 +125,15 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
             }
         }
 
-        if(d != null){
+        if (d != null) {
             temp = temp.getVoisinCase(d);
-            while(temp != ile2 && !(temp instanceof PontImpl)){
+            while (temp != ile2 && !(temp instanceof PontImpl)) {
                 temp = temp.getVoisinCase(d);
             }
 
-            if(!(temp instanceof PontImpl)){
+            if (!(temp instanceof PontImpl)) {
                 temp = ile1.getVoisinCase(d);
-                while(temp != ile2){
+                while (temp != ile2) {
                     iles[temp.getX()][temp.getY()] = new PontImpl(temp.getX(), temp.getY(), n, this, d);
                     temp = temp.getVoisinCase(d);
                 }
@@ -186,17 +186,20 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     }
 
     @Override
-    public UnionIleString aide(){
+    public UnionIleString aide() {
         UnionIleTechnique uIT = this.chercherIle();
         String mess = "";
-        if(nbClicSurAide == 0) mess = "La "+uIT.getTechU().getNom()+" peut être utilisée !";
-        if(nbClicSurAide == 1) mess = "La "+uIT.getTechU().getNom()+" peut être utilisée : "+uIT.getTechU().getDescription();
-        if(nbClicSurAide == 2) mess = "La "+uIT.getTechU().getNom()+" peut être utilisée dans la région "+uIT.getIleU().getRegion();
-        if(nbClicSurAide > 2) mess = "La "+uIT.getTechU().getNom()+" peut être utilisée en x = "+uIT.getIleU().getX()+" et en y = "+uIT.getIleU().getY();
+        if (nbClicSurAide == 0) mess = "La " + uIT.getTechU().getNom() + " peut être utilisée !";
+        if (nbClicSurAide == 1)
+            mess = "La " + uIT.getTechU().getNom() + " peut être utilisée : " + uIT.getTechU().getDescription();
+        if (nbClicSurAide == 2)
+            mess = "La " + uIT.getTechU().getNom() + " peut être utilisée dans la région " + uIT.getIleU().getRegion();
+        if (nbClicSurAide > 2)
+            mess = "La " + uIT.getTechU().getNom() + " peut être utilisée en x = " + uIT.getIleU().getX() + " et en y = " + uIT.getIleU().getY();
 
         System.out.println(mess);
 
-        nbClicSurAide ++;
+        nbClicSurAide++;
 
         return new UnionIleString(uIT.getIleU(), mess);
     }
@@ -215,10 +218,10 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
             Ile tempIle;
             for (int i = 0; i < this.dimension.getWidth(); i++) { //parcours colonnes
                 for (int j = 0; j < this.dimension.getHeight(); j++) { //parcours
-                    tempCase = this.getIle(i,j);
-                    if (tempCase instanceof IleImpl){   //si l'île existe
-                        tempIle = (IleImpl)tempCase;
-                        if(!(tempIle.isComplete())) { //si l'île n'est pas complète
+                    tempCase = this.getIle(i, j);
+                    if (tempCase instanceof IleImpl) {   //si l'île existe
+                        tempIle = (IleImpl) tempCase;
+                        if (!(tempIle.isComplete())) { //si l'île n'est pas complète
                             for (int fInd = 0; fInd < fIndMin; fInd++) { //parcours techniques
                                 if (lTech[fInd].test(tempIle)) { //si la technique s'applique à l'île
                                     aideIle = tempIle;
@@ -230,7 +233,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
                 }
             }
 
-            return new UnionIleTechnique(aideIle,lTech[fIndMin]);
+            return new UnionIleTechnique(aideIle, lTech[fIndMin]);
 
         }
     }

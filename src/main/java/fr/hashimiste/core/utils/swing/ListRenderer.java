@@ -15,7 +15,7 @@ public class ListRenderer extends DefaultListCellRenderer {
     /**
      * Constructeur de ListRenderer.
      *
-     * @param clazz    la classe des éléments de la liste.
+     * @param clazz          la classe des éléments de la liste.
      * @param transformateur une fonction pour convertir les éléments de la liste en chaînes de caractères.
      */
     public <T> ListRenderer(Class<T> clazz, Function<T, String> transformateur) {

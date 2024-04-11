@@ -5,13 +5,15 @@ import org.junit.jupiter.api.Test;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-class TechniqueTest extends TestMenu{
+class TechniqueTest extends TestMenu {
     private Technique technique;
 
     /**
      * Renvoie le conteneur à tester
+     *
      * @return le conteneur à tester
      */
     @Override
@@ -21,6 +23,7 @@ class TechniqueTest extends TestMenu{
 
     /**
      * Teste l'initialisation du menu
+     *
      * @throws IOException si une erreur d'entrée/sortie survient
      */
     @BeforeEach
@@ -34,7 +37,7 @@ class TechniqueTest extends TestMenu{
      * Teste le menu technique
      */
     @Test
-    void testMenuParametre(){
+    void testMenuParametre() {
         testerMenu(technique, "Hashimiste", new Dimension(800, 600));
 
         testThemeMenu(technique, "default");

@@ -43,7 +43,7 @@ public class PreviewComponent extends JComponent {
         g.drawRect(zeroX, zeroY, (int) (grille.getDimension().width * factor), (int) (grille.getDimension().height * factor));
         for (Case c : grille.getIles()) {
             if (c instanceof Ile) {
-                Ile ile = (Ile)c;
+                Ile ile = (Ile) c;
                 g.setColor(Color.BLACK);
                 g.drawOval((int) (zeroX + ile.getX() * factor), (int) (zeroY + ile.getY() * factor), (int) (factor), (int) (factor));
                 g.setFont(font);

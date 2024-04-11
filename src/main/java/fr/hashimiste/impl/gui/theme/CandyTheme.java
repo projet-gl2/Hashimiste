@@ -23,6 +23,18 @@ public class CandyTheme implements Theme {
      * La couleur du texte des boutons dans le thème par défaut.
      */
     private static final Color TEXTE_BOUTON;
+    /**
+     * La couleur des boutons désactivés dans le thème par défaut.
+     */
+    private static final Color BOUTON_DESACTIVE = new Color(255, 92, 138);
+    /**
+     * La couleur de fond dans le thème par défaut.
+     */
+    private static final Color FOND = new Color(255, 153, 172);
+    /**
+     * La couleur transparente dans le thème par défaut.
+     */
+    private static final Color TRANSPARENT = new Color(0, 0, 0, 0);
 
     static {
         String osName = System.getProperty("os.name").toLowerCase();
@@ -34,21 +46,6 @@ public class CandyTheme implements Theme {
             TEXTE_BOUTON = new Color(251, 250, 242); // Couleur par défaut
         }
     }
-
-    /**
-     * La couleur des boutons désactivés dans le thème par défaut.
-     */
-    private static final Color BOUTON_DESACTIVE = new Color(255, 92, 138);
-
-    /**
-     * La couleur de fond dans le thème par défaut.
-     */
-    private static final Color FOND = new Color(255, 153, 172);
-
-    /**
-     * La couleur transparente dans le thème par défaut.
-     */
-    private static final Color TRANSPARENT = new Color(0, 0, 0, 0);
 
     /**
      * Le constructeur privé de la classe DefaultTheme.

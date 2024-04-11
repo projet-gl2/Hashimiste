@@ -6,6 +6,7 @@ package fr.hashimiste.core.dev;
 public interface Debuggable {
     /**
      * Récupère les informations de débogage.
+     *
      * @return les informations de débogage.
      */
     String getDebugInfo();

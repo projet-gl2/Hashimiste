@@ -24,9 +24,9 @@ public interface Stockage {
     /**
      * Charge une liste d'objets de type T à partir du stockage en utilisant des jointures et un filtre.
      *
-     * @param clazz la classe des objets à charger.
+     * @param clazz     la classe des objets à charger.
      * @param jointures la liste des jointures à utiliser.
-     * @param filtre le filtre à utiliser.
+     * @param filtre    le filtre à utiliser.
      * @return une liste d'objets de type T.
      */
     <T> List<T> charger(Class<T> clazz, List<Join> jointures, Filter filtre);
@@ -34,7 +34,7 @@ public interface Stockage {
     /**
      * Charge une liste d'objets de type T à partir du stockage en utilisant des jointures.
      *
-     * @param clazz la classe des objets à charger.
+     * @param clazz     la classe des objets à charger.
      * @param jointures la liste des jointures à utiliser.
      * @return une liste d'objets de type T.
      */
@@ -45,7 +45,7 @@ public interface Stockage {
     /**
      * Charge une liste d'objets de type T à partir du stockage en utilisant un filtre.
      *
-     * @param clazz la classe des objets à charger.
+     * @param clazz  la classe des objets à charger.
      * @param filtre le filtre à utiliser.
      * @return une liste d'objets de type T.
      */
@@ -66,7 +66,7 @@ public interface Stockage {
     /**
      * Récupère un objet de type T à partir du stockage en utilisant un filtre.
      *
-     * @param clazz la classe de l'objet à récupérer.
+     * @param clazz  la classe de l'objet à récupérer.
      * @param filtre le filtre à utiliser.
      * @return un objet de type T.
      */
@@ -84,7 +84,7 @@ public interface Stockage {
     /**
      * Supprime des objets de type T du stockage en utilisant un filtre.
      *
-     * @param clazz la classe des objets à supprimer.
+     * @param clazz  la classe des objets à supprimer.
      * @param filtre le filtre à utiliser.
      */
     <T> void supprimer(Class<T> clazz, Filter filtre);

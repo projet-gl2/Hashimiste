@@ -1,23 +1,23 @@
 package fr.hashimiste.impl.gui.menu;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import fr.hashimiste.core.data.Filter;
 import fr.hashimiste.core.data.Join;
 import fr.hashimiste.core.data.Stockage;
+import fr.hashimiste.core.gui.JFrameTemplate;
+import fr.hashimiste.core.joueur.Profil;
 import fr.hashimiste.impl.joueur.ProfilImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
-import fr.hashimiste.core.joueur.Profil;
-import fr.hashimiste.core.gui.JFrameTemplate;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MenuTest extends TestMenu {
 
@@ -25,6 +25,7 @@ class MenuTest extends TestMenu {
 
     /**
      * Renvoie le conteneur à tester
+     *
      * @return le conteneur à tester
      */
     @Override
@@ -34,6 +35,7 @@ class MenuTest extends TestMenu {
 
     /**
      * Teste l'initialisation du menu
+     *
      * @throws IOException si une erreur d'entrée/sortie survient
      */
     @BeforeEach

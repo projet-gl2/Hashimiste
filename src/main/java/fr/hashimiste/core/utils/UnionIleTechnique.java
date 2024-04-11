@@ -10,24 +10,26 @@ public class UnionIleTechnique {
     private final Ile ileU;
     private final Technique techU;
 
-    public UnionIleTechnique(Ile i, Technique t){
+    public UnionIleTechnique(Ile i, Technique t) {
         this.ileU = i;
         this.techU = t;
     }
 
     /**
      * Renvoie l'île de l'union
+     *
      * @return l'île de l'union
      */
-    public Ile getIleU(){
+    public Ile getIleU() {
         return this.ileU;
     }
 
     /**
      * Renvoie la technique de l'union
+     *
      * @return le technique de l'union
      */
-    public Technique getTechU(){
+    public Technique getTechU() {
         return this.techU;
     }
 

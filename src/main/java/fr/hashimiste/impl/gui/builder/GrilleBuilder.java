@@ -78,15 +78,6 @@ public class GrilleBuilder implements Grille, Identifiable.UNSAFE {
         return dimension;
     }
 
-    @Override
-    public boolean estAventure() {
-        return aventure;
-    }
-
-    public void setAventure(boolean aventure) {
-        this.aventure = aventure;
-    }
-
     /**
      * Cette méthode est utilisée pour définir la dimension de la grille.
      *
@@ -97,6 +88,15 @@ public class GrilleBuilder implements Grille, Identifiable.UNSAFE {
         this.dimension = dimension;
         this.iles = new Ile[dimension.width][dimension.height];
         return this;
+    }
+
+    @Override
+    public boolean estAventure() {
+        return aventure;
+    }
+
+    public void setAventure(boolean aventure) {
+        this.aventure = aventure;
     }
 
     @Override

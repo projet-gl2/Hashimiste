@@ -4,16 +4,15 @@ import fr.hashimiste.core.dev.Debuggable;
 import fr.hashimiste.core.gui.JFrameTemplateProfil;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Historique;
+import fr.hashimiste.core.jeu.Historique.Action;
 import fr.hashimiste.core.jeu.Ile;
 import fr.hashimiste.core.jeu.Sauvegarde;
-import fr.hashimiste.core.jeu.Historique.Action;
-import fr.hashimiste.core.utils.CollectionsUtils;
 import fr.hashimiste.impl.gui.component.GameComponent;
-import fr.hashimiste.impl.gui.component.PreviewComponent;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -29,15 +28,10 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
     private final JButton butMenu = creerBoutton("Menu", fenetreParente);
     private final JButton butVerifier = creerBoutton("Vérifier", this::verifier);
     private final JButton butAide = creerBoutton("Aide", this::aide);
-    private final JButton butCharger = creerBoutton("Charger", this::charger);
-    private final JButton butSauvegarder = creerBoutton("Sauvegarder", this::sauvegarder);
-    private final JButton butCheckpoint = creerBoutton("Checkpoint", this::checkpoint);
-    private final List<Historique> historiques = new ArrayList<>();
-    private transient Historique precedent;
-    private transient List<Sauvegarde> sauvegardes;
-    private transient GameComponent gameComponent;
-
-
+    private final List<Historique> historiques = new ArrayList<>();    private final JButton butCharger = creerBoutton("Charger", this::charger);
+    private transient Historique precedent;    private final JButton butSauvegarder = creerBoutton("Sauvegarder", this::sauvegarder);
+    private transient List<Sauvegarde> sauvegardes;    private final JButton butCheckpoint = creerBoutton("Checkpoint", this::checkpoint);
+    private final transient GameComponent gameComponent;
     /**
      * Constructeur de la classe Jeu.
      *
@@ -75,10 +69,9 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
                 precedent = precedent.creerSuivant(ile1, ile2, action);
             }
         };
-    
+
         game.add(gameComponent, BorderLayout.CENTER);
         chargerHistorique(new Historique(grille, null, null, Historique.Action.NOUVELLE_GRILLE));
-
 
 
         // Add the game panel to the frame
@@ -89,6 +82,7 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
         game.addMouseMotionListener(gameComponent);
         game.addMouseListener(gameComponent);
     }
+
     /**
      * Cette méthode est utilisée pour vérifier le jeu.
      */
@@ -150,8 +144,6 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
         }
     }
 
-    private final JButton butPrecedent = creerBoutton("Retour", this::precedent);
-
     /**
      * Cette méthode est utilisée pour créer un point de contrôle dans le jeu.
      */
@@ -200,8 +192,7 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
             sb.append(h).append("\n");
         }
         return sb.toString();
-    }
-
+    }    private final JButton butPrecedent = creerBoutton("Retour", this::precedent);
 
     @Override
     public void mouseDragged(MouseEvent e) {
@@ -212,4 +203,13 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
     public void mouseMoved(MouseEvent e) {
         System.out.println("Mouse moved");
     }
+
+
+
+
+
+
+
+
+
 }

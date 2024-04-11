@@ -1,23 +1,20 @@
 package fr.hashimiste.impl.gui.component;
 
-import fr.hashimiste.core.gui.Theme;
+import fr.hashimiste.core.jeu.Case;
 import fr.hashimiste.core.jeu.Direction;
 import fr.hashimiste.core.jeu.Grille;
-import fr.hashimiste.core.jeu.Ile;
 import fr.hashimiste.core.jeu.Historique.Action;
-import fr.hashimiste.core.jeu.Case;
+import fr.hashimiste.core.jeu.Ile;
 import fr.hashimiste.impl.gui.theme.DefaultTheme;
 import fr.hashimiste.impl.jeu.GrilleImpl;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Cette classe est une sous classe de previewComponent
@@ -28,49 +25,13 @@ import java.util.Map;
 public abstract class GameComponent extends PreviewComponent implements MouseMotionListener, MouseListener {
 
     /**
-     * Cette classe représente des ponts
-     *
-     * @author elie
-     */
-    public class Bridge {
-
-        Ile ile1; // première ile du pont
-        Ile ile2; // deuxième ile du pont
-
-        boolean duo = false; // pont double
-        boolean hor; // disposition du pont true: horizontal & false: vertical
-
-        /**
-         * Constructeur d'un pont potentiel
-         *
-         * @param ile1
-         * @param ile2
-         * @param hor
-         */
-        public Bridge(Ile ile1, Ile ile2, boolean hor) {
-            this.ile1 = ile1;
-            this.ile2 = ile2;
-            this.hor = hor;
-        }
-
-        public Ile getIle1() {
-            return ile1;
-        }
-
-        public Ile getIle2() {
-            return ile2;
-        }
-    }
-
-    /**
      * Liste des ponts potentiels à afficher
      */
-    private List<Bridge> potentialsBridges;
-
+    private final List<Bridge> potentialsBridges;
     /**
      * Liste des ponts réels à afficher
      */
-    private List<Bridge> bridges;
+    private final List<Bridge> bridges;
 
     /**
      * Constructeur de la classe GameComponent.
@@ -101,22 +62,22 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
         Graphics2D g2 = (Graphics2D) g;
 
         float lineThickness = cell_size / 12; // Ajustez le dénominateur selon vos besoins
-        g2.setStroke(new BasicStroke(lineThickness*4));
-        cell_size=(float)factor;
+        g2.setStroke(new BasicStroke(lineThickness * 4));
+        cell_size = (float) factor;
 
         // Espacement entre les deux lignes d'un pont double
-        int bridgeSpacing = (int) (cell_size/12);
+        int bridgeSpacing = (int) (cell_size / 12);
 
         // Dessiner les ponts potentiels
         for (Bridge bridge : potentialsBridges) {
             g2.setColor(DefaultTheme.INSTANCE.getPotentialBridgeColor());
-                if (bridge.hor) {
-                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size + bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2,
-                            zeroX + cell_size * bridge.ile2.getX() - bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2));
-                } else {
-                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size / 2, zeroY + cell_size * bridge.ile1.getY() + cell_size + bridgeSpacing,
-                            zeroX + cell_size * bridge.ile2.getX() + cell_size / 2, zeroY + cell_size * bridge.ile2.getY() - bridgeSpacing));
-                }
+            if (bridge.hor) {
+                g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size + bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2,
+                        zeroX + cell_size * bridge.ile2.getX() - bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2));
+            } else {
+                g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size / 2, zeroY + cell_size * bridge.ile1.getY() + cell_size + bridgeSpacing,
+                        zeroX + cell_size * bridge.ile2.getX() + cell_size / 2, zeroY + cell_size * bridge.ile2.getY() - bridgeSpacing));
+            }
 
         }
 
@@ -149,9 +110,9 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
         }
     }
 
-
     /**
      * Evenement de mouvement de la souris
+     *
      * @param e the event to be processed
      */
     @Override
@@ -162,6 +123,7 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
 
     /**
      * rafraichit la liste des ponts potentiels en fonction de la position de la souris
+     *
      * @param souris_x
      * @param souris_y
      */
@@ -192,7 +154,7 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
                 if (ileNord != null && ileSud != null) {
                     potentialsBridges.add(new Bridge(ileNord, ileSud, false));
                 }
-                if(potentialsBridges.size() >= 2) {
+                if (potentialsBridges.size() >= 2) {
                     int t = getNearestBridge(souris_x, souris_y);
                     Bridge b = potentialsBridges.get(t);
                     potentialsBridges.clear();
@@ -222,7 +184,6 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
         repaint();
     }
 
-
     /**
      * Retourne vrai si au moins un potentiel pont est survolé
      *
@@ -241,7 +202,7 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
      */
     public Ile getIsle(int x, int y) {
         for (Case ile : getGrille().getIles()) {
-            if (ile instanceof Ile && ile.getX() == x && ile.getY() == y) return (Ile)ile;
+            if (ile instanceof Ile && ile.getX() == x && ile.getY() == y) return (Ile) ile;
         }
         return null;
     }
@@ -296,27 +257,25 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
 
     /**
      * Retourne l'index du pont potentiel le plus proche
+     *
      * @param souris_x
      * @param souris_y
      * @return index
      */
-    public int getNearestBridge(int souris_x, int souris_y)
-    {
+    public int getNearestBridge(int souris_x, int souris_y) {
         double factor = Math.min((getSize().getWidth() - 5) / getGrille().getDimension().width, (getSize().getHeight() - 5) / getGrille().getDimension().height);
         int zeroX = (int) ((getSize().width / 2d) - ((getGrille().getDimension().width * factor) / 2));
         int zeroY = (int) ((getSize().height / 2d) - ((getGrille().getDimension().height * factor) / 2));
         int i = (this.getWidth() - zeroX - zeroX) / getGrille().getDimension().width;
         int x = (souris_x - zeroX) / i;
         int y = (souris_y - zeroY) / i;
-        if(potentialsBridges.size() > 1 && getIsle(x,y) == null)
-        {
-            double sy = souris_y-(zeroY + y*factor);
-            double quarter = factor/4;
+        if (potentialsBridges.size() > 1 && getIsle(x, y) == null) {
+            double sy = souris_y - (zeroY + y * factor);
+            double quarter = factor / 4;
             //System.out.println("x: " + x + " y:" + y + " sx:" + souris_x + " sy" + (sy));
-            if(sy < quarter || sy > quarter*3)
-            {
+            if (sy < quarter || sy > quarter * 3) {
                 return 1;
-            }else{
+            } else {
                 return 0;
             }
             //System.out.println(factor);
@@ -326,6 +285,7 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
 
     /**
      * Evenement de clique de la souris
+     *
      * @param e the event to be processed
      */
     @Override
@@ -339,15 +299,13 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
             if (index < 0) {
                 // Ajouter le pont à la liste des ponts
                 boolean pose = true;
-                for(Bridge b : bridges)
-                {
-                    if(isCrossing(selectedBridge, b))
-                    {
+                for (Bridge b : bridges) {
+                    if (isCrossing(selectedBridge, b)) {
                         pose = false;
                         break;
                     }
                 }
-                if(pose){
+                if (pose) {
                     bridges.add(selectedBridge);
                     ((GrilleImpl) getGrille()).poserPont(selectedBridge.ile1, selectedBridge.ile2, 1);
                     onNewBridge(selectedBridge.ile1, selectedBridge.ile2, Action.UN_PONT);
@@ -379,9 +337,9 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
 
     public abstract void onNewBridge(Ile ile1, Ile ile2, Action action);
 
-
     /**
      * methode qui retourne si le pont passer en paramètre existe déjà et retourne sont index ou -1 sinon
+     *
      * @param bridge
      * @return index
      */
@@ -397,8 +355,8 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
     }
 
     /**
-     *
      * Fonction retournant si 2 ponts se croisent
+     *
      * @param bridge1
      * @param bridge2
      * @return boolean
@@ -423,9 +381,6 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
         return false;
     }
 
-
-
-
     @Override
     public void mouseReleased(MouseEvent e) {
 
@@ -439,5 +394,40 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    /**
+     * Cette classe représente des ponts
+     *
+     * @author elie
+     */
+    public class Bridge {
+
+        Ile ile1; // première ile du pont
+        Ile ile2; // deuxième ile du pont
+
+        boolean duo = false; // pont double
+        boolean hor; // disposition du pont true: horizontal & false: vertical
+
+        /**
+         * Constructeur d'un pont potentiel
+         *
+         * @param ile1
+         * @param ile2
+         * @param hor
+         */
+        public Bridge(Ile ile1, Ile ile2, boolean hor) {
+            this.ile1 = ile1;
+            this.ile2 = ile2;
+            this.hor = hor;
+        }
+
+        public Ile getIle1() {
+            return ile1;
+        }
+
+        public Ile getIle2() {
+            return ile2;
+        }
     }
 }

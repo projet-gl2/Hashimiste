@@ -89,7 +89,7 @@ public class DebugFrame extends JFrame {
 
         panels.addTab("Editor", new JPanel());
         panels.addChangeListener(new ChangeListener() {
-            private JFrame builder = new Editor(new File("hashimiste.properties"), stockage, null);
+            private final JFrame builder = new Editor(new File("hashimiste.properties"), stockage, null);
 
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -289,7 +289,7 @@ public class DebugFrame extends JFrame {
      * Cette méthode est utilisée pour afficher ou cacher les boîtes de composants.
      *
      * @param component le composant à afficher ou cacher.
-     * @param afficher      vrai pour afficher les boîtes, faux pour les cacher.
+     * @param afficher  vrai pour afficher les boîtes, faux pour les cacher.
      */
     private void afficherBoites(JComponent component, boolean afficher) {
         if (afficher) {
