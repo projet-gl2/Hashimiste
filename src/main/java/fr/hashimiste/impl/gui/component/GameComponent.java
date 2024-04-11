@@ -101,7 +101,7 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
         Graphics2D g2 = (Graphics2D) g;
 
         float lineThickness = cell_size / 12; // Ajustez le dénominateur selon vos besoins
-        g2.setStroke(new BasicStroke(lineThickness));
+        g2.setStroke(new BasicStroke(lineThickness*4));
         cell_size=(float)factor;
 
         // Espacement entre les deux lignes d'un pont double
@@ -110,17 +110,17 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
         // Dessiner les ponts potentiels
         for (Bridge bridge : potentialsBridges) {
             g2.setColor(DefaultTheme.INSTANCE.getPotentialBridgeColor());
-            if(BridgeAlreadyExists(bridge) == -1) {
                 if (bridge.hor) {
-                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2,
-                            zeroX + cell_size * bridge.ile2.getX(), zeroY + cell_size * bridge.ile1.getY() + cell_size / 2));
+                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size + bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2,
+                            zeroX + cell_size * bridge.ile2.getX() - bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2));
                 } else {
-                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size / 2, zeroY + cell_size * bridge.ile1.getY() + cell_size,
-                            zeroX + cell_size * bridge.ile2.getX() + cell_size / 2, zeroY + cell_size * bridge.ile2.getY()));
+                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size / 2, zeroY + cell_size * bridge.ile1.getY() + cell_size + bridgeSpacing,
+                            zeroX + cell_size * bridge.ile2.getX() + cell_size / 2, zeroY + cell_size * bridge.ile2.getY() - bridgeSpacing));
                 }
-            }
 
         }
+
+        g2.setStroke(new BasicStroke(lineThickness));
 
         // Dessiner les ponts réels
         for (Bridge bridge : bridges) {
@@ -177,7 +177,7 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
             int y = (souris_y - zeroY) / i;
             Ile ile = getIsle(x, y);
             boolean isOnIsle = ile != null;
-            System.out.println(isOnIsle);
+            //System.out.println(isOnIsle);
 
             Ile ileOuest = checkNearIsle(Direction.OUEST, x, y);
             Ile ileEst = checkNearIsle(Direction.EST, x, y);
@@ -191,6 +191,12 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
 
                 if (ileNord != null && ileSud != null) {
                     potentialsBridges.add(new Bridge(ileNord, ileSud, false));
+                }
+                if(potentialsBridges.size() >= 2) {
+                    int t = getNearestBridge(souris_x, souris_y);
+                    Bridge b = potentialsBridges.get(t);
+                    potentialsBridges.clear();
+                    potentialsBridges.add(b);
                 }
             } else {
                 for (Bridge bridge : bridges) {
@@ -306,7 +312,7 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
         {
             double sy = souris_y-(zeroY + y*factor);
             double quarter = factor/4;
-            System.out.println("x: " + x + " y:" + y + " sx:" + souris_x + " sy" + (sy));
+            //System.out.println("x: " + x + " y:" + y + " sx:" + souris_x + " sy" + (sy));
             if(sy < quarter || sy > quarter*3)
             {
                 return 1;
@@ -332,9 +338,20 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
             System.out.println("index: " + index);
             if (index < 0) {
                 // Ajouter le pont à la liste des ponts
-                bridges.add(selectedBridge);
-//                ((GrilleImpl) getGrille()).poserPont(selectedBridge.ile1, selectedBridge.ile2, 1);
-                onNewBridge(selectedBridge.ile1, selectedBridge.ile2, Action.UN_PONT);
+                boolean pose = true;
+                for(Bridge b : bridges)
+                {
+                    if(isCrossing(selectedBridge, b))
+                    {
+                        pose = false;
+                        break;
+                    }
+                }
+                if(pose){
+                    bridges.add(selectedBridge);
+                    ((GrilleImpl) getGrille()).poserPont(selectedBridge.ile1, selectedBridge.ile2, 1);
+                    onNewBridge(selectedBridge.ile1, selectedBridge.ile2, Action.UN_PONT);
+                }
             } else {
                 Bridge currentBridge = bridges.get(index);
 
@@ -378,6 +395,34 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
         }
         return -1; // Retourner -1 si le pont n'existe pas
     }
+
+    /**
+     *
+     * Fonction retournant si 2 ponts se croisent
+     * @param bridge1
+     * @param bridge2
+     * @return boolean
+     */
+    private boolean isCrossing(Bridge bridge1, Bridge bridge2) {
+        if (bridge1.hor && !bridge2.hor) {
+            int y1 = bridge1.getIle1().getY();
+            int y2 = bridge1.getIle2().getY();
+            int y3 = bridge2.getIle1().getY();
+            int y4 = bridge2.getIle2().getY();
+
+            if (y1 < y4 && y2 > y3) {
+                int x1 = bridge1.getIle1().getX();
+                int x2 = bridge1.getIle2().getX();
+                int x3 = bridge2.getIle1().getX();
+                int x4 = bridge2.getIle2().getX();
+                return x1 <= x4 && x2 >= x3;
+            }
+        } else if (!bridge1.hor && bridge2.hor) {
+            return isCrossing(bridge2, bridge1);
+        }
+        return false;
+    }
+
 
 
 
