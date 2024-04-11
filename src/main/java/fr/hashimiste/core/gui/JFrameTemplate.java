@@ -5,6 +5,9 @@ import fr.hashimiste.core.image.AppImage;
 import fr.hashimiste.impl.gui.dev.DebugFrame;
 import fr.hashimiste.impl.gui.theme.DebugTheme;
 import fr.hashimiste.impl.gui.theme.DefaultTheme;
+import fr.hashimiste.impl.gui.theme.CandyTheme;
+import fr.hashimiste.impl.gui.theme.DarkTheme;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -156,9 +159,13 @@ public abstract class JFrameTemplate extends JFrame {
                     button.setBackground(theme.getDisabledButtonColor());
                 }
                 button.setForeground(theme.getButtonTextColor());
-            } else if (component instanceof JLabel) {
+            } else if (component instanceof JLabel ) {
                 JLabel label = (JLabel) component;
                 label.setForeground(theme.getTextColor());
+            } else if (component instanceof  JTextArea)
+            {
+                JTextArea textArea = (JTextArea) component;
+                textArea.setForeground(theme.getTextColor());
             }
         }
     }
@@ -182,6 +189,10 @@ public abstract class JFrameTemplate extends JFrame {
         this.theme = DefaultTheme.INSTANCE;
         if (properties.getProperty("theme").equals("debug")) {
             this.theme = DebugTheme.INSTANCE;
+        }else if(properties.getProperty("theme").equals("candy")){
+            this.theme = CandyTheme.INSTANCE;
+        }else if(properties.getProperty("theme").equals("dark")){
+            this.theme = DarkTheme.INSTANCE;
         }
         appliquerTheme(composantStylise.toArray(new JComponent[0]));
     }

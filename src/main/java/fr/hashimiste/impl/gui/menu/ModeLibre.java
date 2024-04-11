@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class ModeLibre extends JFrameTemplateProfil implements Debuggable {
 
-    public static final PreviewComponent GRILLE_VIDE_PREVIEW = new PreviewComponent(new GrilleImpl(-1, new Dimension(7, 7), Difficulte.FACILE, new ArrayList<>())) {
+    public static final PreviewComponent GRILLE_VIDE_PREVIEW = new PreviewComponent(new GrilleImpl(-1, new Dimension(7, 7), Difficulte.FACILE, false, new ArrayList<>())) {
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -64,6 +64,7 @@ public class ModeLibre extends JFrameTemplateProfil implements Debuggable {
         centre.setLayout(new BoxLayout(centre, BoxLayout.Y_AXIS));
 
         txtStats.setEditable(false);
+        txtStats.setFocusable(false);
         txtStats.setLineWrap(true);
         txtStats.setWrapStyleWord(true);
         appliquerTheme(txtStats, facile, moyen, difficile, preview, butMenu);
@@ -138,7 +139,7 @@ public class ModeLibre extends JFrameTemplateProfil implements Debuggable {
                 }
 
                 @Override
-                public void mouseClicked(MouseEvent e) {
+                public void mousePressed(MouseEvent e) {
                     ModeLibre.super.changerFenetre(new Jeu(ModeLibre.this, grille));
                     super.mouseClicked(e);
                 }

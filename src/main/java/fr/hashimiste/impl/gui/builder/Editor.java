@@ -2,10 +2,13 @@ package fr.hashimiste.impl.gui.builder;
 
 import fr.hashimiste.core.data.Stockage;
 import fr.hashimiste.core.gui.JFrameTemplate;
+import fr.hashimiste.core.jeu.Case;
 import fr.hashimiste.core.jeu.Difficulte;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Ile;
 import fr.hashimiste.impl.data.sql.SQLStockage;
+import fr.hashimiste.impl.jeu.CaseVideImpl;
+import fr.hashimiste.impl.jeu.IleImpl;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
@@ -39,6 +42,8 @@ public class Editor extends JFrameTemplate {
     );
     private final JButton butCharger = new JButton("Charger");
     private final JButton butSauvegarder = new JButton("Sauvegarder");
+//    private final JLabel labEstAventure = new JLabel("Aventure");
+    private final JCheckBox checkEstAventure = new JCheckBox("Aventure");
 
     private transient GrilleBuilder grille = new GrilleBuilder();
 
@@ -110,6 +115,10 @@ public class Editor extends JFrameTemplate {
         optionsPanel.add(difficulty, constraints);
 
         constraints.gridy = 3;
+        checkEstAventure.addChangeListener(e -> grille.setAventure(checkEstAventure.isSelected()));
+        optionsPanel.add(checkEstAventure, constraints);
+
+        constraints.gridy = 4;
         constraints.gridx = 0;
         optionsPanel.add(butCharger, constraints);
         constraints.gridx = 1;
@@ -142,9 +151,9 @@ public class Editor extends JFrameTemplate {
         gridPanel.removeAll();
         for (int x = 0; x < grille.getDimension().getHeight(); x++) {
             for (int y = 0; y < grille.getDimension().getWidth(); y++) {
-                Ile ile = grille.getIle(x, y);
-                if (ile != null) {
-                    gridPanel.add(new Cell(ile, grille));
+                Case ile = grille.getIle(x, y);
+                if (!(ile instanceof CaseVideImpl) && ile != null) {
+                    gridPanel.add(new Cell((Ile)ile, grille));
                 } else {
                     gridPanel.add(new Cell(x, y, grille));
                 }
@@ -180,6 +189,10 @@ public class Editor extends JFrameTemplate {
                     .filter(g -> Integer.toString(g.getId()).equals(id))
                     .findFirst()
                     .orElseThrow(IllegalStateException::new));
+            difficulty.setSelectedItem(grille.getDifficulte().name().toLowerCase());
+            widthField.setText(((int) grille.getDimension().getWidth()) + "");
+            heightField.setText(((int) grille.getDimension().getHeight()) + "");
+            checkEstAventure.setSelected(grille.estAventure());
         }
         updateLayout();
     }

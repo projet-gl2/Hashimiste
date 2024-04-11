@@ -47,4 +47,11 @@ public interface Theme {
      * @return une instance de Color représentant la couleur du texte.
      */
     Color getTextColor();
+
+    /**
+     * Renvoie la couleur des ponts potentiels.
+     *
+     * @return une instance de Color représentant la couleur des ponts potentiels.
+     */
+    Color getPotentialBridgeColor();
 }

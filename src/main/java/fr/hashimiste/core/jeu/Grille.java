@@ -2,6 +2,8 @@ package fr.hashimiste.core.jeu;
 
 import fr.hashimiste.core.data.Stockage;
 import fr.hashimiste.core.data.sql.Identifiable;
+import fr.hashimiste.core.utils.UnionIleString;
+import fr.hashimiste.core.utils.UnionIleTechnique;
 
 import java.awt.*;
 import java.util.List;
@@ -17,19 +19,25 @@ public interface Grille extends Identifiable {
      * @param y la position y de l'île.
      * @return l'île à la position spécifiée.
      */
-    Ile getIle(int x, int y);
+    Case getIle(int x, int y);
 
     /**
      * Récupère la liste de toutes les îles.
      * @return la liste de toutes les îles.
      */
-    List<Ile> getIles();
+    List<Case> getIles();
 
     /**
      * Récupère les dimensions de la grille.
      * @return les dimensions de la grille.
      */
     Dimension getDimension();
+
+    /**
+     * Si une île doit figurer dans l'écran aventure
+     * @return vrai si l'île doit figurer dans l'écran aventure, faux sinon.
+     */
+    boolean estAventure();
 
     /**
      * Récupère la liste de toutes les sauvegardes.
@@ -52,9 +60,16 @@ public interface Grille extends Identifiable {
 
     /**
      * Fournit une aide pour résoudre la grille.
-     * @return une île qui peut aider à résoudre la grille.
+     *
+     * @return L'île où l'aide peut s'appliquer et un message d'aide pour résoudre la grille.
      */
-    Ile aide();
+    UnionIleString aide();
+
+    /**
+     * Parcourt la grille à la recherche de l'île sur laquelle on peut appliquer une technique.
+     * @return une Ile avec la technique qui peut s'y appliquer.
+     */
+    UnionIleTechnique chercherIle();
 
     /**
      * Récupère la difficulté de la grille.

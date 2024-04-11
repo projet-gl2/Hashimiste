@@ -1,9 +1,13 @@
 package fr.hashimiste.impl.gui.menu;
 
 import fr.hashimiste.core.gui.JFrameTemplateProfil;
+import fr.hashimiste.core.jeu.Grille;
+import fr.hashimiste.impl.data.sql.filter.EqFilter;
+import fr.hashimiste.impl.gui.jeu.Jeu;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 /**
  * Cette classe représente le mode Aventure du jeu.
@@ -18,18 +22,20 @@ public class Aventure extends JFrameTemplateProfil {
 
     private final JLabel labAventure = new JLabel("Mode Aventure");
 
+    private final transient List<Grille> grilles = stockage.charger(Grille.class, new EqFilter("aventure", 1));
+
     // Niveau as affiché avec la classe fr.hashimiste.impl.gui.jeu.Jeu [new Jeu(this, laGrille)]
     private final JFrame[] niveaux = new JFrame[]{
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
+            new Jeu(this,grilles.get(1)),
+            new Jeu(this,grilles.get(2)),
+            new Jeu(this,grilles.get(3)),
+            new Jeu(this,grilles.get(0)),
+            new Jeu(this,grilles.get(4)),
+            new Jeu(this,grilles.get(5)),
+            new Jeu(this,grilles.get(6)),
+            new Jeu(this,grilles.get(7)),
+            new Jeu(this,grilles.get(8)),
+            new Jeu(this,grilles.get(9))
     };
 
     /**
