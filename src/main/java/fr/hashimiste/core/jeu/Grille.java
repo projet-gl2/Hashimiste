@@ -2,8 +2,7 @@ package fr.hashimiste.core.jeu;
 
 import fr.hashimiste.core.data.Stockage;
 import fr.hashimiste.core.data.sql.Identifiable;
-import fr.hashimiste.core.utils.UnionIleString;
-import fr.hashimiste.core.utils.UnionIleTechnique;
+import fr.hashimiste.core.utils.Union;
 
 import java.awt.*;
 import java.util.List;
@@ -70,14 +69,14 @@ public interface Grille extends Identifiable {
      *
      * @return L'île où l'aide peut s'appliquer et un message d'aide pour résoudre la grille.
      */
-    UnionIleString aide();
+    Union<Ile, String> aide();
 
     /**
      * Parcourt la grille à la recherche de l'île sur laquelle on peut appliquer une technique.
      *
      * @return une Ile avec la technique qui peut s'y appliquer.
      */
-    UnionIleTechnique chercherIle();
+    Union<Ile, Technique> chercherIle();
 
     /**
      * Récupère la difficulté de la grille.

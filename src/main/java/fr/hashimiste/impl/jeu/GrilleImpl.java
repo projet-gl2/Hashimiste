@@ -3,8 +3,7 @@ package fr.hashimiste.impl.jeu;
 import fr.hashimiste.core.data.Stockage;
 import fr.hashimiste.core.data.sql.Identifiable;
 import fr.hashimiste.core.jeu.*;
-import fr.hashimiste.core.utils.UnionIleString;
-import fr.hashimiste.core.utils.UnionIleTechnique;
+import fr.hashimiste.core.utils.Union;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -186,26 +185,26 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     }
 
     @Override
-    public UnionIleString aide() {
-        UnionIleTechnique uIT = this.chercherIle();
+    public Union<Ile, String> aide() {
+        Union<Ile, Technique> uIT = this.chercherIle();
         String mess = "";
-        if (nbClicSurAide == 0) mess = "La " + uIT.getTechU().getNom() + " peut être utilisée !";
+        if (nbClicSurAide == 0) mess = "La " + uIT.getDroite().getNom() + " peut être utilisée !";
         if (nbClicSurAide == 1)
-            mess = "La " + uIT.getTechU().getNom() + " peut être utilisée : " + uIT.getTechU().getDescription();
+            mess = "La " + uIT.getDroite().getNom() + " peut être utilisée : " + uIT.getDroite().getDescription();
         if (nbClicSurAide == 2)
-            mess = "La " + uIT.getTechU().getNom() + " peut être utilisée dans la région " + uIT.getIleU().getRegion();
+            mess = "La " + uIT.getDroite().getNom() + " peut être utilisée dans la région " + uIT.getGauche().getRegion();
         if (nbClicSurAide > 2)
-            mess = "La " + uIT.getTechU().getNom() + " peut être utilisée en x = " + uIT.getIleU().getX() + " et en y = " + uIT.getIleU().getY();
+            mess = "La " + uIT.getDroite().getNom() + " peut être utilisée en x = " + uIT.getGauche().getX() + " et en y = " + uIT.getGauche().getY();
 
         System.out.println(mess);
 
         nbClicSurAide++;
 
-        return new UnionIleString(uIT.getIleU(), mess);
+        return new Union<>(uIT.getGauche(), mess);
     }
 
     @Override
-    public UnionIleTechnique chercherIle() {
+    public Union<Ile, Technique> chercherIle() {
 
         if (this.verification()) return null; //TODO quand verification sera fait correctement, remettre le not au début
         else {
@@ -233,7 +232,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
                 }
             }
 
-            return new UnionIleTechnique(aideIle, lTech[fIndMin]);
+            return new Union<>(aideIle, lTech[fIndMin]);
 
         }
     }
