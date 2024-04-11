@@ -24,7 +24,8 @@ public enum Technique {
                         n == 6 && (x == 0 || y == 0 || x == l - 1 || y == c - 1))
                         || (n == 4 && ((x == 0 && (y == 0 || y == c - 1)) || (x == l - 1 && (y == 0 || y == c - 1)))
                 );
-            }),
+            },
+            "../../../../../resources/images/logo_atlas.png"),
     /**
      * Technique vérifiant si une île est un 4 avec deux voisin, un 6 avec trois voisins, ou un 8.
      */
@@ -34,7 +35,8 @@ public enum Technique {
                 int n = o.getN();
                 int nbV = o.getNbVoisin(); //fonction qui calcule le nombre de voisin possible d'une île
                 return (n == 8) || (n == 6 && nbV == 3) || (n == 4 && nbV == 2);
-            }),
+            },
+            "../../../../../resources/images/technique_parite.png"),
     /**
      * Technique vérifiant si une île est un 3 avec deux voisins, un 5 avec trois voisins, ou un 7.
      * Vérifie aussi si elle a au moins un pont avec chacun de ses voisins.
@@ -67,7 +69,8 @@ public enum Technique {
                         verif = (o.getNbPontsDirections(lD[i]) == 0) || verif;
                     }
                 return verif;
-            }),
+            },
+            "../../../../../resources/images/technique_imparite.png"),
     /**
      * Technique vérifiant si une île est un 3 avec deux voisins, un 5 avec trois voisins, ou un 7.
      * Vérifie en plus si l'un de ses voisins est un 1.
@@ -82,7 +85,8 @@ public enum Technique {
                 int nbV = o.getNbVoisin();
                 int nbV1 = o.getNbVoisinFiltre(i -> i.getN() == 1);
                 return (n == 7 && nbV1 == 1) || (n == 5 && nbV == 3 && nbV1 == 1) || (n == 3 && nbV == 2 && nbV1 == 1);
-            }),
+            },
+            "../../../../../resources/images/logo_atlas.png"),
     /**
      * Technique vérifiant si une île est un 1 ou un 2 avec un seul voisin.
      */
@@ -94,7 +98,8 @@ public enum Technique {
                 int n = o.getN();
                 int nbV = o.getNbVoisin();
                 return (n == 1 || n == 2) && nbV == 1;
-            }),
+            },
+            "../../../../../resources/images/logo_atlas.png"),
     /**
      * Technique vérifiant si une île est un 4 avec trois voisins dont deux d'entres eux sont des 1,
      * ou un 5 avec quatre voisins dont trois d'entre eux sont des 1.
@@ -104,7 +109,8 @@ public enum Technique {
                     "dont deux d'entre eux sont de valeurs 1, alors on peut la compléter. " +
                     "Même chose si une île est de valeur 5, avec trois voisins de valeur 1.",
             o -> (o.getN() == 4 && o.getNbVoisin() == 3 && o.getNbVoisinFiltre(i -> i.getN() == 1) == 2)
-                    || (o.getN() == 5 && o.getNbVoisin() == 4 && o.getNbVoisinFiltre(i -> i.getN() == 1) == 3)),
+                    || (o.getN() == 5 && o.getNbVoisin() == 4 && o.getNbVoisinFiltre(i -> i.getN() == 1) == 3),
+            "../../../../../resources/images/technique_unite_4.png"),
     /**
      * Technique vérifiant si une île est un 6 avec un 1 pour voisin, et si elle n'a pas de ponts avec ses voisins qui ne sont pas des 1.
      */
@@ -120,24 +126,28 @@ public enum Technique {
                     }
                 }
                 return verif;
-            }),
+            },
+            "../../../../../resources/images/technique_unite_6.png"),
     /**
      * Technique vérifiant si une île a autant de ponts possible que sa valeur.
      */
     TECH_COMPL("Technique Égalité",
             "Si le nombre de ponts possibles de l'île est égale à sa valeur," +
-                    " alors il faut ajouter tous ces ponts possibles.", o -> {
-        int n = o.getN();
-        int nbPoss = o.getNbPontPossible();
-        return n == nbPoss;
-    }),
+                    " alors il faut ajouter tous ces ponts possibles.", 
+            o -> {
+                int n = o.getN();
+                int nbPoss = o.getNbPontPossible();
+                return n == nbPoss;
+            },
+        "../../../../../resources/images/logo_atlas.png"),
     /**
      * Technique vérifiant si une île est un 1 possédant uniquement un voisin qui n'est pas non plus un 1.
      */
     TECH_ISO_1("Technique Isolation (valeur 1)",
             "Si une île de valeur 1 est voisin avec un 1, il ne peut pas y avoir de pont " +
                     "entre eux, car cela brise la règle d'isolation.",
-            o -> o.getN() == 1 && (o.getNbVoisin() - o.getNbVoisinFiltre(i -> i.getN() == 1) == 1)),
+            o -> o.getN() == 1 && (o.getNbVoisin() - o.getNbVoisinFiltre(i -> i.getN() == 1) == 1),
+            "../../../../../resources/images/technique_isolement_1_2.png"),
     /**
      * Technique vérifiant si une île est un 2 possédant deux voisin dont l'un est aussi un 2
      * et dont l'autre n'est relié par aucun pont.
@@ -156,11 +166,13 @@ public enum Technique {
                     }
                 }
                 return (verifVoisin2 && verifPont0);
-            });
+            },
+            "../../../../../resources/images/technique_isolement_1_2.png");
 
     private final String nom;
     private final String description;
     private final Predicate<Ile> predicate;
+    private final String url;
 
     /**
      * Constructeur de Technique.
@@ -169,10 +181,11 @@ public enum Technique {
      * @param description la description de la technique.
      * @param predicate   le prédicat pour tester une condition spécifique sur une île.
      */
-    Technique(String nom, String description, Predicate<Ile> predicate) {
+    Technique(String nom, String description, Predicate<Ile> predicate, String url) {
         this.nom = nom;
         this.description = description;
         this.predicate = predicate;
+        this.url = url;
     }
 
     /**
@@ -201,5 +214,14 @@ public enum Technique {
      */
     public boolean test(Ile ile) {
         return this.predicate.test(ile);
+    }
+
+    /**
+     * Récupère l'url de l'image montrant un exemple de cette technique
+     * 
+     * @return l'url de l'image
+     */
+    public String getUrl() {
+        return this.url;
     }
 }

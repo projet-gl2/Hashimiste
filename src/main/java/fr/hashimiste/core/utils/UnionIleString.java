@@ -4,15 +4,15 @@ import fr.hashimiste.core.jeu.Ile;
 import fr.hashimiste.core.jeu.Technique;
 
 /**
- * Union d'une île et d'une technique
+ * union d'une île et d'un string
  */
-public class UnionIleTechnique {
+public class UnionIleString {
     private final Ile ileU;
-    private final Technique techU;
+    private final String strU;
 
-    public UnionIleTechnique(Ile i, Technique t){
+    public UnionIleString(Ile i, String s){
         this.ileU = i;
-        this.techU = t;
+        this.strU = s;
     }
 
     /**
@@ -24,11 +24,11 @@ public class UnionIleTechnique {
     }
 
     /**
-     * Renvoie la technique de l'union
-     * @return le technique de l'union
+     * Renvoie le string de l'union
+     * @return le string de l'union
      */
-    public Technique getTechU(){
-        return this.techU;
+    public String getStrU(){
+        return this.strU;
     }
 
 

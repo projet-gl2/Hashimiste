@@ -3,6 +3,7 @@ package fr.hashimiste.impl.jeu;
 import fr.hashimiste.core.data.Stockage;
 import fr.hashimiste.core.data.sql.Identifiable;
 import fr.hashimiste.core.jeu.*;
+import fr.hashimiste.core.utils.UnionIleString;
 import fr.hashimiste.core.utils.UnionIleTechnique;
 
 import java.awt.*;
@@ -95,6 +96,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
      * Cette méthode est utilisée pour vider une grille de toutes ses îles. Utilisée pour les tests unitaires.
      */
     protected void viderGrille(){
+        nbClicSurAide = 0;
         for(int i=0;i<dimension.width;i++){
             for(int j=0;j<dimension.height;j++){
                 oterIle(i,j);
@@ -114,19 +116,22 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
         Case temp = ile1;
 
         for(Direction value: Direction.values()){
-            if(ile1.getVoisinIle(value) == ile2){
-                d = value;
-                break;
+
+            if(ile1.isVoisinDirection(value)) {
+                if (ile1.getVoisinCase(value).getVoisinIle(value) == ile2) {
+                    d = value;
+                    break;
+                }
             }
         }
 
         if(d != null){
             temp = temp.getVoisinCase(d);
-            if(!(temp instanceof PontImpl)){
-                while(temp != ile2){
-                    temp = temp.getVoisinCase(d);
-                }
+            while(temp != ile2 && !(temp instanceof PontImpl)){
+                temp = temp.getVoisinCase(d);
+            }
 
+            if(!(temp instanceof PontImpl)){
                 temp = ile1.getVoisinCase(d);
                 while(temp != ile2){
                     iles[temp.getX()][temp.getY()] = new PontImpl(temp.getX(), temp.getY(), n, this, d);
@@ -176,12 +181,12 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     }
 
     @Override
-    public boolean verification() {
+    public boolean verification() { //TODO à implémenter
         return false;
     }
 
     @Override
-    public String aide(){ //TODO faire un affichage dans l'appli, pas juste dans le terminal
+    public UnionIleString aide(){
         UnionIleTechnique uIT = this.chercherIle();
         String mess = "";
         if(nbClicSurAide == 0) mess = "La "+uIT.getTechU().getNom()+" peut être utilisée !";
@@ -189,9 +194,11 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
         if(nbClicSurAide == 2) mess = "La "+uIT.getTechU().getNom()+" peut être utilisée dans la région "+uIT.getIleU().getRegion();
         if(nbClicSurAide > 2) mess = "La "+uIT.getTechU().getNom()+" peut être utilisée en x = "+uIT.getIleU().getX()+" et en y = "+uIT.getIleU().getY();
 
+        System.out.println(mess);
+
         nbClicSurAide ++;
 
-        return mess;
+        return new UnionIleString(uIT.getIleU(), mess);
     }
 
     @Override
