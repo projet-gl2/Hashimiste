@@ -34,16 +34,16 @@ public class CaseVideImpl implements CaseVide {
         Case c = null;
         switch (d) {
             case NORD:
-                c = (grille.getIle(x - 1, y));
+                c = (grille.getIle(x, y - 1));
                 break;
             case EST:
-                c = (grille.getIle(x, y + 1));
-                break;
-            case SUD:
                 c = (grille.getIle(x + 1, y));
                 break;
+            case SUD:
+                c = (grille.getIle(x, y + 1));
+                break;
             case OUEST:
-                c = (grille.getIle(x, y - 1));
+                c = (grille.getIle(x - 1, y));
         }
         return c;
     }
@@ -57,19 +57,19 @@ public class CaseVideImpl implements CaseVide {
     public int opParcours(Direction d) {
         switch (d) {
             case NORD:
-                if (x < 1)
+                if (y < 1)
                     return -1;
                 break;
             case EST:
-                if (y > grille.getDimension().getWidth() - 2)
+                if (x > grille.getDimension().getWidth() - 2)
                     return -1;
                 break;
             case SUD:
-                if (x > grille.getDimension().getHeight() - 2)
+                if (y > grille.getDimension().getHeight() - 2)
                     return -1;
                 break;
             case OUEST:
-                if (y < 1)
+                if (x < 1)
                     return -1;
                 break;
         }

@@ -7,8 +7,6 @@ import fr.hashimiste.core.jeu.*;
  */
 public class PontImpl implements Pont {
 
-    //todo java doc :)
-
     private final int x;
     private final int y;
     private final int n;
@@ -58,16 +56,16 @@ public class PontImpl implements Pont {
         Case c = null;
         switch (d) {
             case NORD:
-                c = (grille.getIle(x - 1, y));
+                c = (grille.getIle(x, y - 1));
                 break;
             case EST:
-                c = (grille.getIle(x, y + 1));
-                break;
-            case SUD:
                 c = (grille.getIle(x + 1, y));
                 break;
+            case SUD:
+                c = (grille.getIle(x, y + 1));
+                break;
             case OUEST:
-                c = (grille.getIle(x, y - 1));
+                c = (grille.getIle(x - 1, y));
         }
         return c;
     }

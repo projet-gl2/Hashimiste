@@ -69,19 +69,19 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
     public boolean isVoisinDirection(Direction direction) {
         switch (direction) {
             case NORD:
-                if (x < 1)
+                if (y < 1)
                     return false;
                 break;
             case EST:
-                if (y > grille.getDimension().getWidth() - 2)
+                if (x > grille.getDimension().getWidth() - 2)
                     return false;
                 break;
             case SUD:
-                if (x > grille.getDimension().getHeight() - 2)
+                if (y > grille.getDimension().getHeight() - 2)
                     return false;
                 break;
             case OUEST:
-                if (y < 1)
+                if (x < 1)
                     return false;
                 break;
         }
@@ -173,13 +173,13 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
     public Case getVoisinCase(Direction d) {
         switch (d) {
             case NORD:
-                return x < 1 ? null : grille.getIle(x - 1, y);
-            case EST:
-                return y > grille.getDimension().getWidth() - 2 ? null : grille.getIle(x, y + 1);
-            case SUD:
-                return x > grille.getDimension().getHeight() - 2 ? null : grille.getIle(x + 1, y);
-            case OUEST:
                 return y < 1 ? null : grille.getIle(x, y - 1);
+            case EST:
+                return x > grille.getDimension().getWidth() - 2 ? null : grille.getIle(x + 1, y);
+            case SUD:
+                return y > grille.getDimension().getHeight() - 2 ? null : grille.getIle(x, y + 1);
+            case OUEST:
+                return x < 1 ? null : grille.getIle(x - 1, y );
             default:
                 return null;
         }
