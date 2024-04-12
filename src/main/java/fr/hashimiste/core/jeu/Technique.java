@@ -24,8 +24,8 @@ public enum Technique {
                         n == 6 && (x == 0 || y == 0 || x == l - 1 || y == c - 1))
                         || (n == 4 && ((x == 0 && (y == 0 || y == c - 1)) || (x == l - 1 && (y == 0 || y == c - 1)))
                 );
-            },
-            "../../../../../resources/images/logo_atlas.png"),
+            }
+    ),
     /**
      * Technique vérifiant si une île est un 4 avec deux voisin, un 6 avec trois voisins, ou un 8.
      */
@@ -36,7 +36,7 @@ public enum Technique {
                 int nbV = o.getNbVoisin(); //fonction qui calcule le nombre de voisin possible d'une île
                 return (n == 8) || (n == 6 && nbV == 3) || (n == 4 && nbV == 2);
             },
-            "../../../../../resources/images/technique_parite.png"),
+            1002, 1712865050344L),
     /**
      * Technique vérifiant si une île est un 3 avec deux voisins, un 5 avec trois voisins, ou un 7.
      * Vérifie aussi si elle a au moins un pont avec chacun de ses voisins.
@@ -70,7 +70,7 @@ public enum Technique {
                     }
                 return verif;
             },
-            "../../../../../resources/images/technique_imparite.png"),
+            1000, 1712863733130L),
     /**
      * Technique vérifiant si une île est un 3 avec deux voisins, un 5 avec trois voisins, ou un 7.
      * Vérifie en plus si l'un de ses voisins est un 1.
@@ -85,8 +85,8 @@ public enum Technique {
                 int nbV = o.getNbVoisin();
                 int nbV1 = o.getNbVoisinFiltre(i -> i.getN() == 1);
                 return (n == 7 && nbV1 == 1) || (n == 5 && nbV == 3 && nbV1 == 1) || (n == 3 && nbV == 2 && nbV1 == 1);
-            },
-            "../../../../../resources/images/logo_atlas.png"),
+            }
+    ),
     /**
      * Technique vérifiant si une île est un 1 ou un 2 avec un seul voisin.
      */
@@ -98,8 +98,8 @@ public enum Technique {
                 int n = o.getN();
                 int nbV = o.getNbVoisin();
                 return (n == 1 || n == 2) && nbV == 1;
-            },
-            "../../../../../resources/images/logo_atlas.png"),
+            }
+    ),
     /**
      * Technique vérifiant si une île est un 4 avec trois voisins dont deux d'entres eux sont des 1,
      * ou un 5 avec quatre voisins dont trois d'entre eux sont des 1.
@@ -110,7 +110,7 @@ public enum Technique {
                     "Même chose si une île est de valeur 5, avec trois voisins de valeur 1.",
             o -> (o.getN() == 4 && o.getNbVoisin() == 3 && o.getNbVoisinFiltre(i -> i.getN() == 1) == 2)
                     || (o.getN() == 5 && o.getNbVoisin() == 4 && o.getNbVoisinFiltre(i -> i.getN() == 1) == 3),
-            "../../../../../resources/images/technique_unite_4.png"),
+            1003, 1712865272868L),
     /**
      * Technique vérifiant si une île est un 6 avec un 1 pour voisin, et si elle n'a pas de ponts avec ses voisins qui ne sont pas des 1.
      */
@@ -127,7 +127,7 @@ public enum Technique {
                 }
                 return verif;
             },
-            "../../../../../resources/images/technique_unite_6.png"),
+            1004, 1712865498683L),
     /**
      * Technique vérifiant si une île a autant de ponts possible que sa valeur.
      */
@@ -138,8 +138,8 @@ public enum Technique {
                 int n = o.getN();
                 int nbPoss = o.getNbPontPossible();
                 return n == nbPoss;
-            },
-            "../../../../../resources/images/logo_atlas.png"),
+            }
+    ),
     /**
      * Technique vérifiant si une île est un 1 possédant uniquement un voisin qui n'est pas non plus un 1.
      */
@@ -147,7 +147,7 @@ public enum Technique {
             "Si une île de valeur 1 est voisin avec un 1, il ne peut pas y avoir de pont " +
                     "entre eux, car cela brise la règle d'isolation.",
             o -> o.getN() == 1 && (o.getNbVoisin() - o.getNbVoisinFiltre(i -> i.getN() == 1) == 1),
-            "../../../../../resources/images/technique_isolement_1_2.png"),
+            1001, 1712864038574L),
     /**
      * Technique vérifiant si une île est un 2 possédant deux voisin dont l'un est aussi un 2
      * et dont l'autre n'est relié par aucun pont.
@@ -167,12 +167,13 @@ public enum Technique {
                 }
                 return (verifVoisin2 && verifPont0);
             },
-            "../../../../../resources/images/technique_isolement_1_2.png");
+            1001, 1712864038574L);
 
     private final String nom;
     private final String description;
     private final Predicate<Ile> predicate;
-    private final String url;
+    private final int grilleId;
+    private final long sauvegardeTimestamp;
 
     /**
      * Constructeur de Technique.
@@ -181,11 +182,35 @@ public enum Technique {
      * @param description la description de la technique.
      * @param predicate   le prédicat pour tester une condition spécifique sur une île.
      */
-    Technique(String nom, String description, Predicate<Ile> predicate, String url) {
+    Technique(String nom, String description, Predicate<Ile> predicate) {
+        this(nom, description, predicate, 0);
+    }
+
+    /**
+     * Constructeur de Technique.
+     *
+     * @param nom         le nom de la technique.
+     * @param description la description de la technique.
+     * @param predicate   le prédicat pour tester une condition spécifique sur une île.
+     * @param grilleId
+     */
+    Technique(String nom, String description, Predicate<Ile> predicate, int grilleId) {
+        this(nom, description, predicate, grilleId, 0L);
+    }
+
+    /**
+     * Constructeur de Technique.
+     *
+     * @param nom         le nom de la technique.
+     * @param description la description de la technique.
+     * @param predicate   le prédicat pour tester une condition spécifique sur une île.
+     */
+    Technique(String nom, String description, Predicate<Ile> predicate, int grilleId, long sauvegardeTimestamp) {
         this.nom = nom;
         this.description = description;
         this.predicate = predicate;
-        this.url = url;
+        this.grilleId = grilleId;
+        this.sauvegardeTimestamp = sauvegardeTimestamp;
     }
 
     /**
@@ -216,12 +241,11 @@ public enum Technique {
         return this.predicate.test(ile);
     }
 
-    /**
-     * Récupère l'url de l'image montrant un exemple de cette technique
-     *
-     * @return l'url de l'image
-     */
-    public String getUrl() {
-        return this.url;
+    public int getGrilleId() {
+        return grilleId;
+    }
+
+    public long getSauvegardeTimestamp() {
+        return sauvegardeTimestamp;
     }
 }
