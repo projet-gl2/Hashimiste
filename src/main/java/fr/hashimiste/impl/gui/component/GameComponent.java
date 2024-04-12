@@ -1,10 +1,7 @@
 package fr.hashimiste.impl.gui.component;
 
-import fr.hashimiste.core.jeu.Case;
-import fr.hashimiste.core.jeu.Direction;
-import fr.hashimiste.core.jeu.Grille;
+import fr.hashimiste.core.jeu.*;
 import fr.hashimiste.core.jeu.Historique.Action;
-import fr.hashimiste.core.jeu.Ile;
 import fr.hashimiste.impl.gui.theme.DefaultTheme;
 import fr.hashimiste.impl.jeu.GrilleImpl;
 
@@ -14,6 +11,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -53,6 +51,7 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        if (getGrille() == null) return;
 
         double factor = Math.min((getSize().getWidth() - 5) / getGrille().getDimension().width, (getSize().getHeight() - 5) / getGrille().getDimension().height);
         //System.out.println("factor: " + factor);
@@ -71,7 +70,7 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
         // Dessiner les ponts potentiels
         for (Bridge bridge : potentialsBridges) {
             g2.setColor(DefaultTheme.INSTANCE.getPotentialBridgeColor());
-            if (bridge.hor) {
+            if (estHorizontal(bridge)) {
                 g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size + bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2,
                         zeroX + cell_size * bridge.ile2.getX() - bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2));
             } else {
@@ -86,8 +85,8 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
         // Dessiner les ponts réels
         for (Bridge bridge : bridges) {
             g2.setColor(Color.BLACK);
-            if (bridge.duo) { // si pont double
-                if (bridge.hor) {
+            if (bridge.n == 2) { // si pont double
+                if (estHorizontal(bridge)) {
                     g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2 - bridgeSpacing,
                             zeroX + cell_size * bridge.ile2.getX(), zeroY + cell_size * bridge.ile1.getY() + cell_size / 2 - bridgeSpacing));
                     g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2 + bridgeSpacing,
@@ -99,7 +98,7 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
                             zeroX + cell_size * bridge.ile2.getX() + cell_size / 2 + bridgeSpacing, zeroY + cell_size * bridge.ile2.getY()));
                 }
             } else { // sinon si pont simple
-                if (bridge.hor) {
+                if (estHorizontal(bridge)) {
                     g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2,
                             zeroX + cell_size * bridge.ile2.getX(), zeroY + cell_size * bridge.ile1.getY() + cell_size / 2));
                 } else {
@@ -117,7 +116,6 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
      */
     @Override
     public void mouseMoved(MouseEvent e) {
-
         refreshBridge(e.getX(), e.getY());
     }
 
@@ -148,11 +146,11 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
 
             if (!isOnIsle) {
                 if (ileOuest != null && ileEst != null) {
-                    potentialsBridges.add(new Bridge(ileOuest, ileEst, true));
+                    potentialsBridges.add(new Bridge(ileOuest, ileEst, -1));
                 }
 
                 if (ileNord != null && ileSud != null) {
-                    potentialsBridges.add(new Bridge(ileNord, ileSud, false));
+                    potentialsBridges.add(new Bridge(ileNord, ileSud, -1));
                 }
                 if (potentialsBridges.size() >= 2) {
                     int t = getNearestBridge(souris_x, souris_y);
@@ -162,22 +160,22 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
                 }
             } else {
                 for (Bridge bridge : bridges) {
-                    if ((bridge.ile1 == ile || bridge.ile2 == ile) && !bridge.duo) {
+                    if ((bridge.ile1 == ile || bridge.ile2 == ile) && bridge.n != 2) {
                         potentialsBridges.add(bridge);
                         break;
                     }
                 }
                 if (ileOuest != null) {
-                    potentialsBridges.add(new Bridge(ileOuest, ile, true));
+                    potentialsBridges.add(new Bridge(ileOuest, ile, -1));
                 }
                 if (ileEst != null) {
-                    potentialsBridges.add(new Bridge(ile, ileEst, true));
+                    potentialsBridges.add(new Bridge(ile, ileEst, -1));
                 }
                 if (ileSud != null) {
-                    potentialsBridges.add(new Bridge(ile, ileSud, false));
+                    potentialsBridges.add(new Bridge(ile, ileSud, -1));
                 }
                 if (ileNord != null) {
-                    potentialsBridges.add(new Bridge(ileNord, ile, false));
+                    potentialsBridges.add(new Bridge(ileNord, ile, -1));
                 }
             }
         }
@@ -295,7 +293,6 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
             Bridge selectedBridge = potentialsBridges.get(getNearestBridge(e.getX(), e.getY()));
             int index = BridgeAlreadyExists(selectedBridge);
 
-            System.out.println("index: " + index);
             if (index < 0) {
                 // Ajouter le pont à la liste des ponts
                 boolean pose = true;
@@ -308,21 +305,22 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
                 if (pose) {
                     bridges.add(selectedBridge);
                     ((GrilleImpl) getGrille()).poserPont(selectedBridge.ile1, selectedBridge.ile2, 1);
-                    onNewBridge(selectedBridge.ile1, selectedBridge.ile2, Action.UN_PONT);
+                    onNewAction(selectedBridge.ile1, selectedBridge.ile2, Action.UN_PONT);
                 }
             } else {
                 Bridge currentBridge = bridges.get(index);
 
                 // Le pont est déjà dans la liste, le rendre double ou le supprimer
-                if (currentBridge.duo) {
+                if (currentBridge.n == 2) {
                     // Supprimer le pont
-                    onNewBridge(selectedBridge.ile1, selectedBridge.ile2, Action.AUCUN_PONT);
+                    onNewAction(selectedBridge.ile1, selectedBridge.ile2, Action.AUCUN_PONT);
+                    ((GrilleImpl) getGrille()).supprimerPont(selectedBridge.ile1, selectedBridge.ile2);
                     bridges.remove(index);
                 } else {
                     // Rendre le pont double
-                    currentBridge.duo = true;
-                    onNewBridge(selectedBridge.ile1, selectedBridge.ile2, Action.DEUX_PONTS);
-//                    ((GrilleImpl) getGrille()).poserPont(selectedBridge.ile1, selectedBridge.ile2, 2);
+                    currentBridge.n = 2;
+                    onNewAction(selectedBridge.ile1, selectedBridge.ile2, Action.DEUX_PONTS);
+                    ((GrilleImpl) getGrille()).poserPont(selectedBridge.ile1, selectedBridge.ile2, 2);
                 }
             }
 
@@ -335,7 +333,7 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
         }
     }
 
-    public abstract void onNewBridge(Ile ile1, Ile ile2, Action action);
+    public abstract void onNewAction(Ile ile1, Ile ile2, Action action);
 
     /**
      * methode qui retourne si le pont passer en paramètre existe déjà et retourne sont index ou -1 sinon
@@ -357,12 +355,27 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
     /**
      * Fonction retournant si 2 ponts se croisent
      *
-     * @param bridge1
-     * @param bridge2
-     * @return boolean
+     * @param bridge1 premier pont
+     * @param bridge2 deuxième pont
+     * @return boolean si les ponts se croisent
      */
     private boolean isCrossing(Bridge bridge1, Bridge bridge2) {
-        if (bridge1.hor && !bridge2.hor) {
+        return isCrossing(bridge1, bridge2, 2);
+    }
+
+    /**
+     * Fonction retournant si 2 ponts se croisent
+     *
+     * @param bridge1   premier pont
+     * @param bridge2   deuxième pont
+     * @param recursion nombre de récursion restant
+     * @return boolean si les ponts se croisent
+     */
+    private boolean isCrossing(Bridge bridge1, Bridge bridge2, int recursion) {
+        if (recursion == 0) {
+            return false;
+        }
+        if (estHorizontal(bridge1) && !estHorizontal(bridge2)) {
             int y1 = bridge1.getIle1().getY();
             int y2 = bridge1.getIle2().getY();
             int y3 = bridge2.getIle1().getY();
@@ -375,8 +388,8 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
                 int x4 = bridge2.getIle2().getX();
                 return x1 <= x4 && x2 >= x3;
             }
-        } else if (!bridge1.hor && bridge2.hor) {
-            return isCrossing(bridge2, bridge1);
+        } else {
+            return isCrossing(bridge2, bridge1, recursion - 1);
         }
         return false;
     }
@@ -396,6 +409,39 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
 
     }
 
+    private boolean estHorizontal(Bridge bridge) {
+        return bridge.ile1.getY() == bridge.ile2.getY();
+    }
+
+    public void loadSave(Sauvegarde sauvegarde) {
+        bridges.clear();
+        getGrille().chargerSauvegarde(sauvegarde);
+        if (sauvegarde == null) {
+            repaint();
+            return;
+        }
+        Historique historique = sauvegarde.getReference();
+        List<Historique> historiques = new ArrayList<>();
+        while (historique.getAction() != Action.NOUVELLE_GRILLE) {
+            historiques.add(historique);
+            historique = historique.getAvant();
+        }
+        historiques.sort(Comparator.comparing(Historique::getTimestamp));
+        for (Historique histo : historiques) {
+            if (histo.getAction() == Action.UN_PONT) {
+                bridges.add(new Bridge(histo.getIle1(), histo.getIle2(), 1));
+            } else if (histo.getAction() == Action.DEUX_PONTS) {
+                bridges.stream()
+                        .filter(b -> b.ile1 == histo.getIle1() && b.ile2 == histo.getIle2())
+                        .findFirst()
+                        .ifPresent(b -> b.n = 2);
+            } else {
+                bridges.removeIf(b -> b.ile1 == histo.getIle1() && b.ile2 == histo.getIle2());
+            }
+        }
+        repaint();
+    }
+
     /**
      * Cette classe représente des ponts
      *
@@ -406,20 +452,20 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
         Ile ile1; // première ile du pont
         Ile ile2; // deuxième ile du pont
 
-        boolean duo = false; // pont double
-        boolean hor; // disposition du pont true: horizontal & false: vertical
+        //boolean duo = false; // pont double
+        int n; // disposition du pont true: horizontal & false: vertical
 
         /**
          * Constructeur d'un pont potentiel
          *
          * @param ile1
          * @param ile2
-         * @param hor
+         * @param n
          */
-        public Bridge(Ile ile1, Ile ile2, boolean hor) {
+        public Bridge(Ile ile1, Ile ile2, int n) {
             this.ile1 = ile1;
             this.ile2 = ile2;
-            this.hor = hor;
+            this.n = n;
         }
 
         public Ile getIle1() {
@@ -428,6 +474,15 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
 
         public Ile getIle2() {
             return ile2;
+        }
+
+        @Override
+        public String toString() {
+            return "Bridge{" +
+                    "ile1=" + ile1 +
+                    ", ile2=" + ile2 +
+                    ", n=" + n +
+                    '}';
         }
     }
 }
