@@ -2,6 +2,9 @@ package fr.hashimiste.impl.jeu;
 
 import fr.hashimiste.core.jeu.*;
 
+/**
+ * Cette classe représente un case avec un pont dessus dans le jeu.
+ */
 public class PontImpl implements Pont {
 
     //todo java doc :)
@@ -14,6 +17,17 @@ public class PontImpl implements Pont {
     private final Ile ile1;
     private final Ile ile2;
 
+    /**
+     * Constructeur de la classe PontImpl
+     *
+     * @param x coordonée en x de la case avec le pont
+     * @param y coordonée en y de la case avec le pont
+     * @param n nombre de pont sur la case (1 ou 2)
+     * @param g grille où se trouve la case
+     * @param d direction dans lequel vont les ponts de la case
+     * @param ile1 première île reliée par le pont
+     * @param ile2 deuxième île reliée par le pont
+     */
     public PontImpl(int x, int y, int n, Grille g, Direction d, Ile ile1, Ile ile2) {
         this.x = x;
         this.y = y;
@@ -84,14 +98,27 @@ public class PontImpl implements Pont {
         return this.direction;
     }
 
+    /**
+     * Renvoie la première île que relie le pont
+     * @return la première île que relie le pont
+     */
     public Ile getIle1() {
         return ile1;
     }
 
+    /**
+     * Renvoie la deuxième île que relie le pont
+     * @return la deuxième île que relie le pont
+     */
     public Ile getIle2() {
         return ile2;
     }
 
+    /**
+     * Indique si le pont connecte l'île en paramètre
+     * @param ile île dont on veut vérifier la connection avec le pont
+     * @return vrai si le pont est relié à l'île, faux sinon
+     */
     public boolean estConnecte(Ile ile) {
         return ile.equals(ile1) || ile.equals(ile2);
     }
