@@ -2,6 +2,7 @@ package fr.hashimiste.core.utils;
 
 /**
  * Représente une union de deux objets.
+ *
  * @param <G> objet gauche
  * @param <D> objet droit
  */
@@ -11,6 +12,7 @@ public class Union<G, D> {
 
     /**
      * Crée une union.
+     *
      * @param gauche l'objet gauche
      * @param droite l'objet droit
      */
@@ -21,6 +23,7 @@ public class Union<G, D> {
 
     /**
      * Renvoie l'objet gauche.
+     *
      * @return l'objet gauche
      */
     public G getGauche() {
@@ -29,6 +32,7 @@ public class Union<G, D> {
 
     /**
      * Renvoie l'objet droit.
+     *
      * @return l'objet droit
      */
     public D getDroite() {

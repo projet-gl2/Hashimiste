@@ -5,7 +5,6 @@ import fr.hashimiste.core.data.sql.SQLDecoder;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Historique;
 import fr.hashimiste.core.jeu.Ile;
-import fr.hashimiste.core.utils.DevUtils;
 import fr.hashimiste.impl.data.sql.SQLStockage;
 import fr.hashimiste.impl.data.sql.filter.EqFilter;
 
