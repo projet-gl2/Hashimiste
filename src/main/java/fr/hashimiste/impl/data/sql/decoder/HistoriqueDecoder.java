@@ -39,6 +39,11 @@ public class HistoriqueDecoder implements SQLDecoder<Historique> {
         return "historique";
     }
 
+    @Override
+    public String getIdColonne() {
+        return "date";
+    }
+
     /**
      * Crée un Historique à partir d'un ResultSet SQL.
      *

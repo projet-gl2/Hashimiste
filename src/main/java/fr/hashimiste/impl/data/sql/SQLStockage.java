@@ -5,6 +5,7 @@ import fr.hashimiste.core.data.Filter;
 import fr.hashimiste.core.data.Join;
 import fr.hashimiste.core.data.Stockage;
 import fr.hashimiste.core.data.sql.Identifiable;
+import fr.hashimiste.core.data.sql.SQLDecoder;
 import fr.hashimiste.core.data.sql.SQLEncoder;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Historique;
@@ -30,7 +31,7 @@ public class SQLStockage implements Stockage {
     private final Connection connection;
     private final Map<Class<?>, Decoder<ResultSet, ?>> decoders = new HashMap<>();
     private final Map<Class<?>, SQLEncoder<?>> encoders = new HashMap<>();
-    private final Map<Class<?>, List<Object>> caches = new HashMap<>();
+    private final Map<Class<?>, List<? extends Identifiable>> caches = new HashMap<>();
 
     /**
      * Constructeur de SQLStockage.
@@ -177,18 +178,26 @@ public class SQLStockage implements Stockage {
         List<T> cache = getCache(clazz);
         try (ResultSet rs = executeQuery("SELECT * FROM " + decoder.getNomContaineur() + (extra == null ? "" : " " + extra))) {
             while (rs.next()) {
-                T t = decoder.creer(rs);
-                if (!cache.contains(t)) {
-                    list.add(t);
-                T t = decoder.creer(rs, args);
+                if (decoder.getIdColonne() != null) {
+                    int id = rs.getInt(decoder.getIdColonne());
+                    Optional<T> optional = cache.stream().filter(t -> t instanceof Identifiable && ((Identifiable) t).getId() == id).findFirst();
+                    if (optional.isPresent()) {
+                        list.add(optional.get());
+                        continue;
+                    }
                 }
+                T t = decoder.creer(rs, args);
+                list.add(t);
+                if (t instanceof Identifiable) {
+                    cache.add(t);
+                }
+                ((SQLDecoder) decoder).apresCreation(t, rs);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        cache.clear();
         cache.addAll(list);
-        return cache;
+        return list;
     }
 
     /**
@@ -319,7 +328,7 @@ public class SQLStockage implements Stockage {
             throwNonGerer(clazz);
         }
         List<T> cache = getCache(clazz);
-        return cache.stream().filter(filtre).findFirst();
+        return cache.stream().filter(Objects::nonNull).filter(filtre).findFirst();
     }
 
     /**

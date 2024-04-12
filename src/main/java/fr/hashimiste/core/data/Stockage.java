@@ -5,6 +5,7 @@ import fr.hashimiste.impl.data.sql.filter.EqFilter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 /**

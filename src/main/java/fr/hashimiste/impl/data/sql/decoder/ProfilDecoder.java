@@ -34,6 +34,11 @@ public class ProfilDecoder implements SQLDecoder<Profil> {
         return "profil";
     }
 
+    @Override
+    public String getIdColonne() {
+        return "id_profil";
+    }
+
     /**
      * Crée un Profil à partir d'un ResultSet SQL.
      *

@@ -36,6 +36,11 @@ public class IleDecoder implements SQLDecoder<Ile> {
         return "ile";
     }
 
+    @Override
+    public String getIdColonne() {
+        return "id_ile";
+    }
+
     /**
      * Crée une Ile à partir d'un ResultSet SQL.
      *

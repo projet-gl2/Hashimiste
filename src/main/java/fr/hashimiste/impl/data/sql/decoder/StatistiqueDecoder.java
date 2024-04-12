@@ -34,6 +34,11 @@ public class StatistiqueDecoder implements SQLDecoder<Statistique> {
         return "statistique";
     }
 
+    @Override
+    public String getIdColonne() {
+        return "id_stat";
+    }
+
     /**
      * Crée une Statistique à partir d'un ResultSet SQL.
      *
