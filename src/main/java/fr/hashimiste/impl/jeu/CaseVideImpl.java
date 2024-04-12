@@ -50,6 +50,7 @@ public class CaseVideImpl implements CaseVide {
 
     @Override
     public Ile getVoisinIle(Direction d) {
+        if(getVoisinCase(d) == null) return null;
         return getVoisinCase(d).getVoisinIle(d);
     }
 
@@ -58,19 +59,19 @@ public class CaseVideImpl implements CaseVide {
         switch (d) {
             case NORD:
                 if (y < 1)
-                    return -1;
+                    return -2;
                 break;
             case EST:
                 if (x > grille.getDimension().getWidth() - 2)
-                    return -1;
+                    return -2;
                 break;
             case SUD:
                 if (y > grille.getDimension().getHeight() - 2)
-                    return -1;
+                    return -2;
                 break;
             case OUEST:
                 if (x < 1)
-                    return -1;
+                    return -2;
                 break;
         }
         return (getVoisinCase(d).opParcours(d));

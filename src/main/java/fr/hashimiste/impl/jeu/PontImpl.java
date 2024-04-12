@@ -72,6 +72,7 @@ public class PontImpl implements Pont {
 
     @Override
     public Ile getVoisinIle(Direction d) {
+        if(getVoisinCase(d) == null) return null;
         return getVoisinCase(d).getVoisinIle(d);
     }
 

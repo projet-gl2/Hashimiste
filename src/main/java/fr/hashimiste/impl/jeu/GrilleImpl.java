@@ -246,19 +246,24 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     @Override
     public Union<Ile, String> aide() {
         Union<Ile, Technique> uIT = this.chercherIle();
+
         String mess = "";
-        if (nbClicSurAide == 0) mess = "La " + uIT.getDroite().getNom() + " peut être utilisée !";
-        if (nbClicSurAide == 1)
-            mess = "La " + uIT.getDroite().getNom() + " peut être utilisée : " + uIT.getDroite().getDescription();
-        if (nbClicSurAide == 2)
-            mess = "La " + uIT.getDroite().getNom() + " peut être utilisée dans la région " + uIT.getGauche().getRegion();
-        if (nbClicSurAide > 2)
-            mess = "La " + uIT.getDroite().getNom() + " peut être utilisée en x = " + uIT.getGauche().getX() + " et en y = " + uIT.getGauche().getY() + "\n\n(avec x la coordonnée de gauche à droite en partant de 0\net y la coordonnées de haut en bas en partant de 0)";
+        if(uIT.getGauche() != null) {
+            if (nbClicSurAide == 0) mess = "La " + uIT.getDroite().getNom() + " peut être utilisée !";
+            if (nbClicSurAide == 1)
+                mess = "La " + uIT.getDroite().getNom() + " peut être utilisée : " + uIT.getDroite().getDescription();
+            if (nbClicSurAide == 2)
+                mess = "La " + uIT.getDroite().getNom() + " peut être utilisée dans la région " + uIT.getGauche().getRegion();
+            if (nbClicSurAide > 2)
+                mess = "La " + uIT.getDroite().getNom() + " peut être utilisée en x = " + uIT.getGauche().getX() + " et en y = " + uIT.getGauche().getY() + "\n\n(avec x la coordonnée de gauche à droite en partant de 0\net y la coordonnées de haut en bas en partant de 0)";
 
-        System.out.println(mess);
+            System.out.println(mess);
 
-        nbClicSurAide++;
-
+            nbClicSurAide++;
+        }
+        else{
+            mess = "Aucune technique trouvée. Force.";
+        }
         return new Union<>(uIT.getGauche(), mess);
     }
 

@@ -85,7 +85,7 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
                     return false;
                 break;
         }
-        return (getVoisinCase(direction).opParcours(direction) > 0);
+        return (getVoisinCase(direction).opParcours(direction) > -2);
     }
 
     @Override
@@ -104,7 +104,7 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
         int nbTotal = 0;
 
         for (Direction value : Direction.values()) {
-            if (isVoisinDirection(value)) {
+            if (isVoisinDirection(value) && getVoisinCase(value).getVoisinIle(value) != null) {
                 nbTotal += filtre.test(getVoisinCase(value).getVoisinIle(value)) ? 1 : 0;
             }
         }
@@ -142,6 +142,8 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
 
     @Override
     public int getValeurIleDirection(Direction direction) {
+        Case c = getVoisinCase(direction);
+        if(c == null) return 0;
         return getVoisinCase(direction).opParcours(direction);
     }
 
@@ -192,8 +194,6 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
 
     @Override
     public int opParcours(Direction d) {
-        if (isComplete())
-            return -1;
         return n - getNbPont();
     }
 
