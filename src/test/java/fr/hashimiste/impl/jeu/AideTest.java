@@ -25,7 +25,7 @@ public class AideTest {
      */
     @BeforeAll
     public static void initAll() {
-        g = new GrilleImpl(new Dimension(6, 6), Difficulte.MOYEN, false);
+        g = new GrilleImpl(new Dimension(6, 6), Difficulte.MOYEN, false, false, null);
         listeIle = new ArrayList<>();
     }
 
@@ -63,7 +63,7 @@ public class AideTest {
         for (IleImpl i : listeIle)
             g.poserIle(i);
 
-        Ile ileAide = g.chercherIle().getIleU();
+        Ile ileAide = g.chercherIle().getGauche();
 
         assertSame(ileAide, listeIle.get(0));
 
@@ -95,7 +95,7 @@ public class AideTest {
         for (IleImpl i : listeIle)
             g.poserIle(i);
 
-        Ile ileAide = g.chercherIle().getIleU();
+        Ile ileAide = g.chercherIle().getGauche();
 
         assertSame(ileAide, listeIle.get(4));
 

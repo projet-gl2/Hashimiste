@@ -26,7 +26,7 @@ public class TechniqueTest {
      */
     @BeforeAll
     public static void initAll() {
-        g = new GrilleImpl(new Dimension(8, 8), Difficulte.MOYEN, false);
+        g = new GrilleImpl(new Dimension(8, 8), Difficulte.MOYEN, false, false, null);
         listeIle = new ArrayList<>();
     }
 
