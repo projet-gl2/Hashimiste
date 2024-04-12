@@ -63,4 +63,15 @@ public class GrilleDecoder implements SQLDecoder<Grille> {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void apresCreation(Grille grille, ResultSet statement) {
+        List<Ile> iles = stockage.charger(Ile.class, new EqFilter("id_map", grille.getId()));
+        iles.forEach(((GrilleImpl) grille)::poserIle);
+        try {
+            ((GrilleImpl) grille).fetchSolution(stockage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

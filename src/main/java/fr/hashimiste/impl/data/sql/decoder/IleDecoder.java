@@ -43,7 +43,7 @@ public class IleDecoder implements SQLDecoder<Ile> {
      * @return l'Ile créée.
      */
     @Override
-    public Ile creer(ResultSet input) {
+    public Ile creer(ResultSet input, Object... args) {
         try {
             int id = input.getInt("id_ile");
             int idMap = input.getInt("id_map");

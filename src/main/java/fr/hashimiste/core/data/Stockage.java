@@ -19,7 +19,7 @@ public interface Stockage {
      * @param extra un paramètre supplémentaire pour la requête.
      * @return une liste d'objets de type T.
      */
-    <T> List<T> charger(Class<T> clazz, String extra);
+    <T> List<T> charger(Class<T> clazz, String extra, Object... args);
 
     /**
      * Charge une liste d'objets de type T à partir du stockage en utilisant des jointures et un filtre.
@@ -29,7 +29,7 @@ public interface Stockage {
      * @param filtre    le filtre à utiliser.
      * @return une liste d'objets de type T.
      */
-    <T> List<T> charger(Class<T> clazz, List<Join> jointures, Filter filtre);
+    <T> List<T> charger(Class<T> clazz, List<Join> jointures, Filter filtre, Object... args);
 
     /**
      * Charge une liste d'objets de type T à partir du stockage en utilisant des jointures.
@@ -38,8 +38,8 @@ public interface Stockage {
      * @param jointures la liste des jointures à utiliser.
      * @return une liste d'objets de type T.
      */
-    default <T> List<T> charger(Class<T> clazz, List<Join> jointures) {
-        return charger(clazz, jointures, null);
+    default <T> List<T> charger(Class<T> clazz, List<Join> jointures, Object... args) {
+        return charger(clazz, jointures, null, args);
     }
 
     /**
@@ -49,8 +49,8 @@ public interface Stockage {
      * @param filtre le filtre à utiliser.
      * @return une liste d'objets de type T.
      */
-    default <T> List<T> charger(Class<T> clazz, Filter filtre) {
-        return charger(clazz, null, filtre);
+    default <T> List<T> charger(Class<T> clazz, Filter filtre, Object... args) {
+        return charger(clazz, null, filtre, args);
     }
 
     /**
@@ -59,8 +59,8 @@ public interface Stockage {
      * @param clazz la classe des objets à charger.
      * @return une liste d'objets de type T.
      */
-    default <T> List<T> charger(Class<T> clazz) {
-        return charger(clazz, null, null);
+    default <T> List<T> charger(Class<T> clazz, Object... args) {
+        return charger(clazz, null, null, args);
     }
 
     /**
@@ -70,8 +70,8 @@ public interface Stockage {
      * @param filtre le filtre à utiliser.
      * @return un objet de type T.
      */
-    default <T> T get(Class<T> clazz, Filter filtre) {
-        return charger(clazz, null, filtre).stream().findFirst().orElse(null);
+    default <T> T get(Class<T> clazz, Filter filtre, Object... args) {
+        return charger(clazz, null, filtre, args).stream().filter(Objects::nonNull).findFirst().orElse(null);
     }
 
     /**

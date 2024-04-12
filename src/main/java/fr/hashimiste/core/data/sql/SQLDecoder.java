@@ -11,4 +11,7 @@ import java.sql.ResultSet;
  * @param <T> le type d'objet à décoder.
  */
 public interface SQLDecoder<T> extends Decoder<ResultSet, T> {
+
+    default void apresCreation(T object, ResultSet statement) {
+    }
 }

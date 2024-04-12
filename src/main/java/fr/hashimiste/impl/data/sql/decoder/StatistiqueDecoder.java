@@ -41,7 +41,7 @@ public class StatistiqueDecoder implements SQLDecoder<Statistique> {
      * @return la Statistique créée.
      */
     @Override
-    public Statistique creer(ResultSet input) {
+    public Statistique creer(ResultSet input, Object... args) {
         try {
             return new StatistiqueImpl(
                     stockage,

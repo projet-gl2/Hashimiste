@@ -20,5 +20,5 @@ public interface Decoder<I, T> {
      * @param input les données en entrée.
      * @return un nouvel objet de type T.
      */
-    T creer(I input);
+    T creer(I input, Object... args);
 }

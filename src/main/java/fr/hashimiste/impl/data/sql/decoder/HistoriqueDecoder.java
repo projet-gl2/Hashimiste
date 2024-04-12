@@ -5,10 +5,12 @@ import fr.hashimiste.core.data.sql.SQLDecoder;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Historique;
 import fr.hashimiste.core.jeu.Ile;
+import fr.hashimiste.core.utils.DevUtils;
 import fr.hashimiste.impl.data.sql.SQLStockage;
 import fr.hashimiste.impl.data.sql.filter.EqFilter;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
 /**
@@ -44,7 +46,7 @@ public class HistoriqueDecoder implements SQLDecoder<Historique> {
      * @return l'Historique créé.
      */
     @Override
-    public Historique creer(ResultSet input) {
+    public Historique creer(ResultSet input, Object... args) {
         try {
             Timestamp date = input.getTimestamp("date");
             Historique avant = null;
@@ -70,7 +72,7 @@ public class HistoriqueDecoder implements SQLDecoder<Historique> {
             }
             Historique.Action action = Historique.Action.values()[input.getInt("action")];
             return new Historique(date, avant, map, ile1, ile2, action);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

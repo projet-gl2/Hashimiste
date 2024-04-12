@@ -167,7 +167,7 @@ public class SQLStockage implements Stockage {
      * @throws RuntimeException         si une erreur de base de données se produit.
      */
     @Override
-    public <T> List<T> charger(Class<T> clazz, String extra) {
+    public <T> List<T> charger(Class<T> clazz, String extra, Object... args) {
         Assert.nonNull(clazz);
         if (!decoders.containsKey(clazz)) {
             throwNonGerer(clazz);
@@ -180,6 +180,7 @@ public class SQLStockage implements Stockage {
                 T t = decoder.creer(rs);
                 if (!cache.contains(t)) {
                     list.add(t);
+                T t = decoder.creer(rs, args);
                 }
             }
         } catch (SQLException e) {
@@ -200,7 +201,7 @@ public class SQLStockage implements Stockage {
      * @return une liste d'objets de la classe spécifiée, chargés à partir de la base de données.
      */
     @Override
-    public <T> List<T> charger(Class<T> clazz, List<Join> jointures, Filter filtre) {
+    public <T> List<T> charger(Class<T> clazz, List<Join> jointures, Filter filtre, Object... args) {
         String extra = "";
         if (jointures != null) {
             extra += " " + String.join(" ", jointures.stream().map(Join::getJointure).toArray(String[]::new));
@@ -208,7 +209,7 @@ public class SQLStockage implements Stockage {
         if (filtre != null) {
             extra += " WHERE " + filtre.getFiltre();
         }
-        return charger(clazz, extra);
+        return charger(clazz, extra, args);
     }
 
     /**
