@@ -264,10 +264,9 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
 
     @Override
     public Union<Ile, Technique> chercherIle() {
-        if (this.verification()) return null; //TODO quand verification sera fait correctement, remettre le not au début
-        else {
+        {
             Technique[] lTech = Technique.values();
-            int fIndMin = lTech.length; //une liste des fonctions qui appliquent une technique
+            int fIndMin = lTech.length - 1; //une liste des fonctions qui appliquent une technique
             //elles prennent en paramètre une île, et renvoient vrai si la technique s'applique à l'île
 
             Ile aideIle = null; //l'île sur laquelle on peut avancer à l'aide des techniques
@@ -279,7 +278,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
                     if (tempCase instanceof IleImpl) {   //si l'île existe
                         tempIle = (IleImpl) tempCase;
                         if (!(tempIle.isComplete())) { //si l'île n'est pas complète
-                            for (int fInd = 0; fInd < fIndMin; fInd++) { //parcours techniques
+                            for (int fInd = 0; fInd <= fIndMin; fInd++) { //parcours techniques
                                 if (lTech[fInd].test(tempIle)) { //si la technique s'applique à l'île
                                     aideIle = tempIle;
                                     fIndMin = fInd; //on ne vérifie que les techniques de plus bas niveau que celles trouvées précédemments
