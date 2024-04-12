@@ -82,8 +82,22 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
 
         g2.setStroke(new BasicStroke(lineThickness));
 
+
+        g2.setColor(Color.BLACK);
+
         // Dessiner les ponts réels
         for (Bridge bridge : bridges) {
+
+            // barrer les iles complètes
+            if(bridge.getIle1().getNbPont() >= bridge.getIle1().getN())
+            {
+                g2.draw(new Line2D.Float(zeroX + cell_size * bridge.getIle1().getX()+cell_size/5, zeroY +cell_size *bridge.getIle1().getY()+cell_size/5, zeroX + cell_size * bridge.getIle1().getX()+cell_size-cell_size/5, zeroY +cell_size *bridge.getIle1().getY()+cell_size-cell_size/5));
+            }
+            if(bridge.getIle2().getNbPont() >= bridge.getIle2().getN())
+            {
+                g2.draw(new Line2D.Float(zeroX + cell_size * bridge.getIle2().getX()+cell_size/5, zeroY +cell_size *bridge.getIle2().getY()+cell_size/5, zeroX + cell_size * bridge.getIle2().getX()+cell_size-cell_size/5, zeroY +cell_size *bridge.getIle2().getY()+cell_size-cell_size/5));
+            }
+
             g2.setColor(Color.BLACK);
             if (bridge.n == 2) { // si pont double
                 if (estHorizontal(bridge)) {
@@ -320,6 +334,7 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
                     // Rendre le pont double
                     currentBridge.n = 2;
                     onNewAction(selectedBridge.ile1, selectedBridge.ile2, Action.DEUX_PONTS);
+                    ((GrilleImpl) getGrille()).supprimerPont(selectedBridge.ile1, selectedBridge.ile2);
                     ((GrilleImpl) getGrille()).poserPont(selectedBridge.ile1, selectedBridge.ile2, 2);
                 }
             }

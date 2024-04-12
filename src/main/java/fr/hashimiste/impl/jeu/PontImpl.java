@@ -4,6 +4,8 @@ import fr.hashimiste.core.jeu.*;
 
 public class PontImpl implements Pont {
 
+    //todo java doc :)
+
     private final int x;
     private final int y;
     private final int n;
