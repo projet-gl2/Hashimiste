@@ -73,12 +73,15 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
             Color color = isCrossing(bridge) ? new Color(237,0,16, 80) : DefaultTheme.INSTANCE.getPotentialBridgeColor();
             g2.setColor(color);
 
-            if (estHorizontal(bridge)) {
-                g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size + bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2,
-                        zeroX + cell_size * bridge.ile2.getX() - bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2));
-            } else {
-                g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size / 2, zeroY + cell_size * bridge.ile1.getY() + cell_size + bridgeSpacing,
-                        zeroX + cell_size * bridge.ile2.getX() + cell_size / 2, zeroY + cell_size * bridge.ile2.getY() - bridgeSpacing));
+            if(!isIsleFull(bridge.getIle1()) && !isIsleFull(bridge.getIle2())) {
+
+                if (estHorizontal(bridge)) {
+                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size + bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2,
+                            zeroX + cell_size * bridge.ile2.getX() - bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2));
+                } else {
+                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size / 2, zeroY + cell_size * bridge.ile1.getY() + cell_size + bridgeSpacing,
+                            zeroX + cell_size * bridge.ile2.getX() + cell_size / 2, zeroY + cell_size * bridge.ile2.getY() - bridgeSpacing));
+                }
             }
 
         }
