@@ -61,7 +61,8 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
 
     @Override
     public boolean isComplete() {
-        return getNbPont() == this.n;
+        int nbPont = getNbPont();
+        return nbPont == this.n;
     }
 
     @Override
@@ -116,7 +117,8 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
         int nbTotal = 0;
 
         for (Direction value : Direction.values()) {
-            nbTotal += getVoisinCase(value) instanceof PontImpl ? ((PontImpl) getVoisinCase(value)).getN() : 0;
+            Case voisinCase = getVoisinCase(value);
+            nbTotal += voisinCase instanceof PontImpl && ((PontImpl) voisinCase).estConnecte(this) ? ((PontImpl) voisinCase).getN() : 0;
         }
 
         return nbTotal;
@@ -169,25 +171,18 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
 
     @Override
     public Case getVoisinCase(Direction d) {
-        Case c = null;
         switch (d) {
             case NORD:
-                if (x < 1) return null;
-                c = (grille.getIle(x - 1, y));
-                break;
+                return x < 1 ? null : grille.getIle(x - 1, y);
             case EST:
-                if (y > grille.getDimension().getWidth() - 2) return null;
-                c = (grille.getIle(x, y + 1));
-                break;
+                return y > grille.getDimension().getWidth() - 2 ? null : grille.getIle(x, y + 1);
             case SUD:
-                if (x > grille.getDimension().getHeight() - 2) return null;
-                c = (grille.getIle(x + 1, y));
-                break;
+                return x > grille.getDimension().getHeight() - 2 ? null : grille.getIle(x + 1, y);
             case OUEST:
-                if (y < 1) return null;
-                c = (grille.getIle(x, y - 1));
+                return y < 1 ? null : grille.getIle(x, y - 1);
+            default:
+                return null;
         }
-        return c;
     }
 
     @Override
@@ -211,6 +206,15 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
                 ", n=" + n +
                 ", grille(id)=" + (grille == null ? "null" : grille.getId()) +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Ile) {
+            Ile ile = (Ile) obj;
+            return ile.getX() == this.x && ile.getY() == this.y && ile.getN() == this.n && ile.getGrille().getId() == this.grille.getId();
+        }
+        return false;
     }
 
     @Override

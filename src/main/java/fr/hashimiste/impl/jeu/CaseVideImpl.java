@@ -75,4 +75,13 @@ public class CaseVideImpl implements CaseVide {
         }
         return (getVoisinCase(d).opParcours(d));
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof CaseVide) {
+            CaseVide c = (CaseVide) obj;
+            return c.getX() == this.x && c.getY() == this.y && c.getGrille().getId() == this.grille.getId();
+        }
+        return false;
+    }
 }
