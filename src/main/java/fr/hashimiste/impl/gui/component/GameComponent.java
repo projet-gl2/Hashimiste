@@ -69,7 +69,10 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
 
         // Dessiner les ponts potentiels
         for (Bridge bridge : potentialsBridges) {
-            g2.setColor(DefaultTheme.INSTANCE.getPotentialBridgeColor());
+
+            Color color = isCrossing(bridge) ? new Color(237,0,16, 80) : DefaultTheme.INSTANCE.getPotentialBridgeColor();
+            g2.setColor(color);
+
             if (estHorizontal(bridge)) {
                 g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size + bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2,
                         zeroX + cell_size * bridge.ile2.getX() - bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2));
@@ -398,6 +401,19 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
      */
     private boolean isCrossing(Bridge bridge1, Bridge bridge2) {
         return isCrossing(bridge1, bridge2, 2);
+    }
+
+    private boolean isCrossing(Bridge bridge)
+    {
+        boolean cross = false;
+        for(Bridge b : bridges)
+        {
+            if(!b.equals(bridge))
+            {
+                if(isCrossing(b,bridge)) cross = true;
+            }
+        }
+        return cross;
     }
 
     /**
