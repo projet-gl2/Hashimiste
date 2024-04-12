@@ -44,6 +44,7 @@ public class SQLStockage implements Stockage {
         enregistrerDecodeurs();
         try {
             miseEnPlaceTable();
+            miseEnPlaceDonnee();
         } catch (SQLException e) {
             System.err.println("Erreur lors de la création des tables");
             e.printStackTrace();
@@ -71,6 +72,7 @@ public class SQLStockage implements Stockage {
         enregistrerDecodeurs();
         try {
             miseEnPlaceTable();
+            miseEnPlaceDonnee();
         } catch (SQLException e) {
             System.err.println("Erreur lors de la création des tables");
             throw new RuntimeException(e);
@@ -86,7 +88,7 @@ public class SQLStockage implements Stockage {
     private void miseEnPlaceTable() throws SQLException {
         creerTable("profil", "id_profil INTEGER PRIMARY KEY AUTOINCREMENT", "nom TEXT");
         creerTable("statistique", new String[]{"id_stat INTEGER PRIMARY KEY AUTOINCREMENT", "id_profil INTEGER REFERENCES profil", "nom TEXT", "id_entity INTEGER", "valeur INTEGER"}, null, new String[]{"id_stat", "id_profil", "nom", "id_entity"});
-        creerTable("map", "id_map INTEGER PRIMARY KEY AUTOINCREMENT", "nom TEXT", "difficulte INTEGER", "largeur INTEGER", "hauteur INTEGER", "aventure INTEGER");
+        creerTable("map", "id_map INTEGER PRIMARY KEY AUTOINCREMENT", "difficulte INTEGER", "largeur INTEGER", "hauteur INTEGER", "aventure INTEGER DEFAULT 0", "jouable INTEGER DEFAULT 1");
         creerTable("ile", "id_ile INTEGER PRIMARY KEY AUTOINCREMENT", "id_map INTEGER REFERENCES map", "x INTEGER", "y INTEGER", "n INTEGER");
         creerTable("historique", new String[]{"date TIMESTAMP", "id_map INTEGER REFERENCES map", "id_ile1 INTEGER REFERENCES ile", "id_ile2 INTEGER REFERENCES ile", "action INTEGER", "avant TIMESTAMP NULL REFERENCES historique(date)"}, new String[]{"date"}, null);
         creerTable("sauvegarde", new String[]{"id_profil INTEGER REFERENCES profil", "nom TEXT", "reference TIMESTAMP REFERENCES historique(date)"}, new String[]{"id_profil", "nom"}, new String[]{"id_profil", "nom"});
@@ -128,6 +130,34 @@ public class SQLStockage implements Stockage {
         try (Statement stmt = connection.createStatement()) {
             logQuery(sb.toString(), 1);
             stmt.execute(sb.toString());
+        }
+    }
+
+    /**
+     * Cette méthode privée est utilisée pour charger les données de démarrage dans la base de données.
+     *
+     * @throws SQLException si une erreur de base de données se produit.
+     */
+    private void miseEnPlaceDonnee() throws SQLException {
+        try (InputStream is = getClass().getResourceAsStream("/sql/startup.sql");
+             BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(is)))) {
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+            for (String query : sb.toString().split("\n")) {
+                query = query.trim();
+                if (query.isEmpty() || query.startsWith("--")) {
+                    continue;
+                }
+                try (Statement stmt = connection.createStatement()) {
+                    logQuery(query, 1);
+                    stmt.execute(query);
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
