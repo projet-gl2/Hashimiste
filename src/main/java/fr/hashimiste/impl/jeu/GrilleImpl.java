@@ -139,6 +139,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
                 consumer = consumer.andThen(v -> iles[fI][ile1.getY()] = new PontImpl(fI, ile1.getY(), n, this, Direction.EST, ile1, ile2));
             }
         }
+        this.nbClicSurAide = 0;
         consumer.accept(null);
     }
 
