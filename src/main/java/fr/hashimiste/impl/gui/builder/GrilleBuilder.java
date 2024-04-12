@@ -157,4 +157,19 @@ public class GrilleBuilder implements Grille, Identifiable.UNSAFE {
     public void clear() {
         this.iles = new Ile[dimension.width][dimension.height];
     }
+
+    @Override
+    public boolean estJouable() {
+        return false;
+    }
+
+    @Override
+    public void reset() {
+        throw UNSUPPORTED_OPERATION_EXCEPTION;
+    }
+
+    @Override
+    public void chargerSauvegarde(Sauvegarde sauvegarde) {
+        throw UNSUPPORTED_OPERATION_EXCEPTION;
+    }
 }

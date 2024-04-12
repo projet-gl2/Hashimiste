@@ -59,8 +59,8 @@ public class GrilleDecoder implements SQLDecoder<Grille> {
             int largeur = input.getInt("largeur");
             int hauteur = input.getInt("hauteur");
             boolean estAventure = input.getBoolean("aventure");
-            GrilleImpl grille = new GrilleImpl(id, new Dimension(largeur, hauteur), difficulte, estAventure);
-            List<Ile> iles = stockage.charger(Ile.class, new EqFilter("id_map", id));
+            boolean estJouable = input.getBoolean("jouable");
+            GrilleImpl grille = new GrilleImpl(id, new Dimension(largeur, hauteur), difficulte, estAventure, estJouable, stockage);
             return grille;
         } catch (SQLException e) {
             throw new RuntimeException(e);

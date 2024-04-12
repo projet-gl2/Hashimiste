@@ -84,4 +84,23 @@ public interface Grille extends Identifiable {
      * @return la difficulté de la grille.
      */
     Difficulte getDifficulte();
+
+    /**
+     * Indique si la grille est jouable.
+     *
+     * @return vrai si la grille est jouable, faux sinon.
+     */
+    boolean estJouable();
+
+    /**
+     * Réinitialise la grille.
+     */
+    void reset();
+
+    /**
+     * Charge une sauvegarde.
+     *
+     * @param sauvegarde la sauvegarde a chargé.
+     */
+    void chargerSauvegarde(Sauvegarde sauvegarde);
 }
