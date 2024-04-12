@@ -205,22 +205,24 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     public boolean verification() { // TODO: a réadapter
         if (solution == null) {
             DevUtils.debug("No solution found for this map. Verifying with n of islands.");
+            boolean isComplete = true;
             for (Case[] ile : iles) {
                 for (Case aCase : ile) {
                     if (aCase instanceof Ile) {
                         Ile ile1 = (Ile) aCase;
                         if (!ile1.isComplete()) {
                             DevUtils.debug("L'île en x = " + ile1.getX() + " et y = " + ile1.getY() + " n'est pas complète. {" + ile1 + "}");
-                            return false;
+                            DevUtils.debug("ile1.getNbPont() = " + ile1.getNbPont());
+                            isComplete = false;
                         }
                     }
                 }
             }
+            return isComplete;
         } else {
             DevUtils.debug("Solution found for this map. Verifying with solution.");
             return equals(solution);
         }
-        return true;
     }
 
     @Override
@@ -367,6 +369,9 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
      * @param stockage le stockage à utiliser pour charger les données.
      */
     public void fetchSolution(Stockage stockage) {
+        if (id >= 1000) {
+            return;
+        }
         Sauvegarde sauvegarde = getSauvegardes(stockage)
                 .stream()
                 .filter(s -> s.getProfil().getId() == 1 && s.getNom().equals("Solution " + id))
