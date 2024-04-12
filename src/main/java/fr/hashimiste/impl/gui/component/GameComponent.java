@@ -69,7 +69,10 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
 
         // Dessiner les ponts potentiels
         for (Bridge bridge : potentialsBridges) {
-            g2.setColor(DefaultTheme.INSTANCE.getPotentialBridgeColor());
+
+            Color color = isCrossing(bridge) ? new Color(237,0,16, 80) : DefaultTheme.INSTANCE.getPotentialBridgeColor();
+            g2.setColor(color);
+
             if (estHorizontal(bridge)) {
                 g2.draw(new Line2D.Float(zeroX + cell_size * bridge.ile1.getX() + cell_size + bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2,
                         zeroX + cell_size * bridge.ile2.getX() - bridgeSpacing, zeroY + cell_size * bridge.ile1.getY() + cell_size / 2));
@@ -89,11 +92,11 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
         for (Bridge bridge : bridges) {
 
             // barrer les iles complètes
-            if(bridge.getIle1().getNbPont() >= bridge.getIle1().getN())
+            if(isIsleFull(bridge.getIle1()))
             {
                 g2.draw(new Line2D.Float(zeroX + cell_size * bridge.getIle1().getX()+cell_size/5, zeroY +cell_size *bridge.getIle1().getY()+cell_size/5, zeroX + cell_size * bridge.getIle1().getX()+cell_size-cell_size/5, zeroY +cell_size *bridge.getIle1().getY()+cell_size-cell_size/5));
             }
-            if(bridge.getIle2().getNbPont() >= bridge.getIle2().getN())
+            if(isIsleFull(bridge.getIle2()))
             {
                 g2.draw(new Line2D.Float(zeroX + cell_size * bridge.getIle2().getX()+cell_size/5, zeroY +cell_size *bridge.getIle2().getY()+cell_size/5, zeroX + cell_size * bridge.getIle2().getX()+cell_size-cell_size/5, zeroY +cell_size *bridge.getIle2().getY()+cell_size-cell_size/5));
             }
@@ -296,14 +299,31 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
     }
 
     /**
+     * Retourne si le nombre de pont relié à l'île est superieur ou égal à sa capacité
+     * @param ile
+     * @return boolean
+     */
+    private boolean isIsleFull(Ile ile)
+    {
+        return ile.getNbPont() >= ile.getN();
+    }
+
+    /**
      * Evenement de clique de la souris
      *
      * @param e the event to be processed
      */
     @Override
     public void mousePressed(MouseEvent e) {
+        double factor = Math.min((getSize().getWidth() - 5) / getGrille().getDimension().width, (getSize().getHeight() - 5) / getGrille().getDimension().height);
+        int zeroX = (int) ((getSize().width / 2d) - ((getGrille().getDimension().width * factor) / 2));
+        int zeroY = (int) ((getSize().height / 2d) - ((getGrille().getDimension().height * factor) / 2));
+        int i = (this.getWidth() - zeroX - zeroX) / getGrille().getDimension().width;
+        int x = (e.getX() - zeroX) / i;
+        int y = (e.getY() - zeroY) / i;
         // Si des ponts potentiels sont détectés
-        if (isBridgeHover()) {
+        if (isBridgeHover() && getIsle(x,y) == null) {
+
             Bridge selectedBridge = potentialsBridges.get(getNearestBridge(e.getX(), e.getY()));
             int index = BridgeAlreadyExists(selectedBridge);
 
@@ -316,7 +336,12 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
                         break;
                     }
                 }
+
+                if(isIsleFull(selectedBridge.getIle1()) || isIsleFull(selectedBridge.getIle2())) pose = false;
+
+
                 if (pose) {
+
                     bridges.add(selectedBridge);
                     ((GrilleImpl) getGrille()).poserPont(selectedBridge.ile1, selectedBridge.ile2, 1);
                     onNewAction(selectedBridge.ile1, selectedBridge.ile2, Action.UN_PONT);
@@ -325,7 +350,7 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
                 Bridge currentBridge = bridges.get(index);
 
                 // Le pont est déjà dans la liste, le rendre double ou le supprimer
-                if (currentBridge.n == 2) {
+                if (currentBridge.n == 2 || (isIsleFull(currentBridge.getIle1()) || isIsleFull(currentBridge.getIle2()))) {
                     // Supprimer le pont
                     onNewAction(selectedBridge.ile1, selectedBridge.ile2, Action.AUCUN_PONT);
                     ((GrilleImpl) getGrille()).supprimerPont(selectedBridge.ile1, selectedBridge.ile2);
@@ -376,6 +401,19 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
      */
     private boolean isCrossing(Bridge bridge1, Bridge bridge2) {
         return isCrossing(bridge1, bridge2, 2);
+    }
+
+    private boolean isCrossing(Bridge bridge)
+    {
+        boolean cross = false;
+        for(Bridge b : bridges)
+        {
+            if(!b.equals(bridge))
+            {
+                if(isCrossing(b,bridge)) cross = true;
+            }
+        }
+        return cross;
     }
 
     /**
