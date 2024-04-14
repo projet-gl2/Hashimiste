@@ -288,6 +288,9 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
         int x = (souris_x - zeroX) / i;
         int y = (souris_y - zeroY) / i;
         if (potentialsBridges.size() > 1 && getIsle(x, y) == null) {
+            if(isIsleFull(potentialsBridges.get(0).getIle1()) || isIsleFull(potentialsBridges.get(0).getIle2())) {
+                return 1;
+            }
             double sy = souris_y - (zeroY + y * factor);
             double quarter = factor / 4;
             //System.out.println("x: " + x + " y:" + y + " sx:" + souris_x + " sy" + (sy));
