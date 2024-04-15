@@ -253,7 +253,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
         if(uIT.getGauche() != null) {
             if (nbClicSurAide == 0) mess = "La " + uIT.getDroite().getNom() + " peut être utilisée !";
             if (nbClicSurAide == 1)
-                mess = "La " + uIT.getDroite().getNom() + " peut être utilisée : " + uIT.getDroite().getDescription();
+                mess = "La " + uIT.getDroite().getNom() + " peut être utilisée : \n" + uIT.getDroite().getDescription();
             if (nbClicSurAide == 2)
                 mess = "La " + uIT.getDroite().getNom() + " peut être utilisée dans la région " + uIT.getGauche().getRegion();
             if (nbClicSurAide > 2)

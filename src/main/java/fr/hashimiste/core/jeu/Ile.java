@@ -61,6 +61,13 @@ public interface Ile extends Identifiable, Case {
     int getNbPontPossible();
 
     /**
+     * Récupère le nombre de direction possibles où ajouter un pont pour l'île.
+     *
+     * @return le nombre de direction possibles.
+     */
+    int getNbDirectionPossible();
+
+    /**
      * Récupère le nombre de ponts de l'île dans une certaine direction.
      *
      * @param direction la direction à vérifier.

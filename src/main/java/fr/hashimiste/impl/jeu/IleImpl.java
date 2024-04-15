@@ -130,7 +130,18 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
         int nbTotal = 0;
 
         for (Direction value : Direction.values()) {
-            nbTotal += isVoisinDirection(value) ? min(max(0,getVoisinCase(value).opParcours(value)), 2) : 0;
+            nbTotal += isVoisinDirection(value) ? max(0,getVoisinCase(value).opParcours(value)) : 0;
+        }
+
+        return nbTotal;
+    }
+
+    @Override
+    public int getNbDirectionPossible() {
+        int nbTotal = 0;
+
+        for (Direction value : Direction.values()) {
+            nbTotal += isVoisinDirection(value) ? min(max(0,getVoisinCase(value).opParcours(value)),1) : 0;
         }
 
         return nbTotal;
@@ -195,7 +206,7 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
 
     @Override
     public int opParcours(Direction d) {
-        return n - getNbPont();
+        return min(n - getNbPont(),2-getNbPontsDirections(d.oppose()));
     }
 
     @Override
