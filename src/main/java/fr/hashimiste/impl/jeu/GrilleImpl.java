@@ -357,6 +357,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
             if (histo.getAction() == Historique.Action.UN_PONT) {
                 poserPont(histo.getIle1(), histo.getIle2(), 1);
             } else if (histo.getAction() == Historique.Action.DEUX_PONTS) {
+                supprimerPont(histo.getIle1(), histo.getIle2());
                 poserPont(histo.getIle1(), histo.getIle2(), 2);
             } else {
                 supprimerPont(histo.getIle1(), histo.getIle2());

@@ -330,7 +330,7 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
      */
     private boolean isIsleFull(Ile ile)
     {
-        return ile.getNbPont() >= ile.getN();
+        return ile.isComplete();
     }
 
     /**
