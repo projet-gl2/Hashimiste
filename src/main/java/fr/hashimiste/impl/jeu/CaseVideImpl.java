@@ -30,49 +30,58 @@ public class CaseVideImpl implements CaseVide {
     }
 
     @Override
-    public Case getVoisinCase(Direction d){
+    public Case getVoisinCase(Direction d) {
         Case c = null;
-        switch (d){
+        switch (d) {
             case NORD:
-                c = (grille.getIle(x-1,y));
+                c = (grille.getIle(x - 1, y));
                 break;
             case EST:
-                c = (grille.getIle(x,y+1));
+                c = (grille.getIle(x, y + 1));
                 break;
             case SUD:
-                c = (grille.getIle(x+1,y));
+                c = (grille.getIle(x + 1, y));
                 break;
             case OUEST:
-                c = (grille.getIle(x,y-1));
+                c = (grille.getIle(x, y - 1));
         }
         return c;
     }
 
     @Override
-    public Ile getVoisinIle(Direction d){
+    public Ile getVoisinIle(Direction d) {
         return getVoisinCase(d).getVoisinIle(d);
     }
 
     @Override
     public int opParcours(Direction d) {
-        switch (d){
+        switch (d) {
             case NORD:
-                if(x < 1)
+                if (x < 1)
                     return -1;
                 break;
             case EST:
-                if(y > grille.getDimension().getWidth()-2)
+                if (y > grille.getDimension().getWidth() - 2)
                     return -1;
                 break;
             case SUD:
-                if(x > grille.getDimension().getHeight()-2)
+                if (x > grille.getDimension().getHeight() - 2)
                     return -1;
                 break;
             case OUEST:
-                if(y < 1)
+                if (y < 1)
                     return -1;
                 break;
         }
         return (getVoisinCase(d).opParcours(d));
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof CaseVide) {
+            CaseVide c = (CaseVide) obj;
+            return c.getX() == this.x && c.getY() == this.y && c.getGrille().getId() == this.grille.getId();
+        }
+        return false;
     }
 }

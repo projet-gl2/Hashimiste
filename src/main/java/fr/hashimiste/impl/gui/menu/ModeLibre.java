@@ -2,11 +2,11 @@ package fr.hashimiste.impl.gui.menu;
 
 import fr.hashimiste.core.dev.Debuggable;
 import fr.hashimiste.core.gui.JFrameTemplateProfil;
-import fr.hashimiste.core.image.AppImage;
 import fr.hashimiste.core.jeu.Difficulte;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.joueur.StatistiqueKey;
 import fr.hashimiste.core.utils.SizeComponentAdapter;
+import fr.hashimiste.impl.Main;
 import fr.hashimiste.impl.gui.component.PreviewComponent;
 import fr.hashimiste.impl.gui.jeu.Jeu;
 import fr.hashimiste.impl.jeu.GrilleImpl;
@@ -15,8 +15,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,17 +24,8 @@ import java.util.List;
  */
 public class ModeLibre extends JFrameTemplateProfil implements Debuggable {
 
-    public static final PreviewComponent GRILLE_VIDE_PREVIEW = new PreviewComponent(new GrilleImpl(-1, new Dimension(7, 7), Difficulte.FACILE, false, new ArrayList<>())) {
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            BufferedImage logo = AppImage.INSTANCE.getLogo(true);
-            double factor = Math.min((getSize().getWidth() - 5) / logo.getWidth(), (getSize().getHeight() - 5) / logo.getHeight());
-            int zeroX = (int) ((getSize().width / 2d) - ((logo.getWidth() * factor) / 2));
-            int zeroY = (int) ((getSize().height / 2d) - ((logo.getHeight() * factor) / 2));
-            g.drawImage(logo, zeroX, zeroY, (int) (logo.getWidth() * factor), (int) (logo.getHeight() * factor), null);
-        }
-    };
+    public static final PreviewComponent GRILLE_VIDE_PREVIEW = new PreviewComponent(null);
+    public static final Grille GRILLE_VIDE = new GrilleImpl(new Dimension(0, 0), Difficulte.FACILE, false, false, null);
 
     private final JPanel centre = new JPanel();
     private final JPanel bas = new JPanel();
@@ -88,6 +77,9 @@ public class ModeLibre extends JFrameTemplateProfil implements Debuggable {
         }
 
         for (Grille grille : grilles) {
+            if (!grille.estJouable() && !Main.DEVELOPMENT) {
+                continue;
+            }
             JPanel panel;
             switch (grille.getDifficulte()) {
                 case FACILE:
@@ -147,7 +139,7 @@ public class ModeLibre extends JFrameTemplateProfil implements Debuggable {
         }
         for (JPanel panel : panelDifficulte) {
             for (int i = panel.getComponentCount(); i < 10; i++) {
-                panel.add(new PreviewComponent(null));
+                panel.add(new PreviewComponent(GRILLE_VIDE));
             }
         }
 
@@ -192,7 +184,7 @@ public class ModeLibre extends JFrameTemplateProfil implements Debuggable {
                         .filter(PreviewComponent.class::isInstance)
                         .map(PreviewComponent.class::cast)
                         .map(PreviewComponent::getGrille)
-                        .map(c -> !c.estEnregistre() || c.getId() == -1 ? "EMPTY" : c.toString())
+                        .map(c -> c == null || !c.estEnregistre() || c.getId() == -1 ? "EMPTY" : c.toString())
                         .findFirst()
                         .orElse(null)
         );

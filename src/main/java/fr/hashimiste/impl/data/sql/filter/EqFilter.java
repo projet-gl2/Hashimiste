@@ -13,7 +13,7 @@ public class EqFilter implements SQLFilter {
      * Constructeur de EqFilter.
      *
      * @param colonne le nom de la colonne sur laquelle appliquer le filtre.
-     * @param value  la valeur à laquelle la colonne doit être égale.
+     * @param value   la valeur à laquelle la colonne doit être égale.
      */
     public EqFilter(String colonne, Object value) {
         this.colonne = colonne;

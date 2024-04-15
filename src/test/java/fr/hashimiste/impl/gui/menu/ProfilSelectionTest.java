@@ -1,4 +1,5 @@
 package fr.hashimiste.impl.gui.menu;
+
 import fr.hashimiste.core.data.Filter;
 import fr.hashimiste.core.data.Join;
 import fr.hashimiste.core.data.Stockage;
@@ -15,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
-class ProfilSelectionTest extends TestMenu{
+class ProfilSelectionTest extends TestMenu {
     private ProfilSelection profilSelection;
 
     @Override
@@ -25,6 +26,7 @@ class ProfilSelectionTest extends TestMenu{
 
     /**
      * Teste l'initialisation du menu
+     *
      * @throws IOException si une erreur d'entrée/sortie survient
      */
     @BeforeEach
@@ -67,7 +69,7 @@ class ProfilSelectionTest extends TestMenu{
      * Teste le menu de selection de profil
      */
     @Test
-    void testMenuProfilSelection(){
+    void testMenuProfilSelection() {
         testerMenu(profilSelection, "Hashimiste", new Dimension(500, 300));
 
         testThemeMenu(profilSelection, "default");

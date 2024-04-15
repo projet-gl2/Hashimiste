@@ -3,6 +3,7 @@ package fr.hashimiste.impl.gui.menu;
 import fr.hashimiste.core.data.Filter;
 import fr.hashimiste.core.data.Join;
 import fr.hashimiste.core.data.Stockage;
+import fr.hashimiste.core.gui.JFrameTemplate;
 import fr.hashimiste.core.gui.JFrameTemplateProfil;
 import fr.hashimiste.core.joueur.Profil;
 import fr.hashimiste.impl.gui.theme.DefaultTheme;
@@ -10,24 +11,15 @@ import fr.hashimiste.impl.joueur.ProfilImpl;
 import org.opentest4j.AssertionFailedError;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.Properties;
+import java.util.*;
 import java.util.function.Predicate;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import fr.hashimiste.core.gui.JFrameTemplate;
+import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class TestMenu {
 
@@ -36,8 +28,8 @@ public abstract class TestMenu {
     /**
      * Teste le menu
      *
-     * @param menu le menu à tester
-     * @param titreAttendu le titre attendu
+     * @param menu              le menu à tester
+     * @param titreAttendu      le titre attendu
      * @param dimensionAttendue la dimension attendue
      */
     protected void testerMenu(JFrame menu, String titreAttendu, Dimension dimensionAttendue) {
@@ -59,8 +51,8 @@ public abstract class TestMenu {
     /**
      * Teste le thème du menu
      *
-     * @param menu          le menu à tester
-     * @param themeAttendu  le thème attendu
+     * @param menu         le menu à tester
+     * @param themeAttendu le thème attendu
      */
     protected void testThemeMenu(JFrameTemplate menu, String themeAttendu) {
 
@@ -93,7 +85,7 @@ public abstract class TestMenu {
     /**
      * Initialise le menu et vérifie que le profil passé en paramètre est bien le profil du menu
      *
-     * @param menu le menu à initialiser
+     * @param menu    le menu à initialiser
      * @param nomMenu le nom du menu
      * @return le menu initialisé
      */
@@ -128,30 +120,30 @@ public abstract class TestMenu {
         };
         JFrameTemplate frame = new ProfilSelection(tempFile.toFile(), stockage);
         frame = new Menu(frame, test);
-            switch (nomMenu) {
-                case "Aventure":
-                    menu = new Aventure((JFrameTemplateProfil) frame);
-                    break;
-                case "ModeLibre":
-                    menu = new ModeLibre((JFrameTemplateProfil) frame);
-                    break;
-                case "Parametre":
-                    menu = new Parametre((JFrameTemplateProfil) frame);
-                    break;
-                case "Technique":
-                    menu = new Technique((JFrameTemplateProfil) frame);
-                    break;
-                default:
-                    break;
+        switch (nomMenu) {
+            case "Aventure":
+                menu = new Aventure((JFrameTemplateProfil) frame);
+                break;
+            case "ModeLibre":
+                menu = new ModeLibre((JFrameTemplateProfil) frame);
+                break;
+            case "Parametre":
+                menu = new Parametre((JFrameTemplateProfil) frame);
+                break;
+            case "Technique":
+                menu = new Technique((JFrameTemplateProfil) frame);
+                break;
+            default:
+                break;
 
 
-            }
+        }
 
-            assertEquals(test, menu.getProfil(), "Le profil devrait être le profil passé en paramètre");
+        assertEquals(test, menu.getProfil(), "Le profil devrait être le profil passé en paramètre");
 
-            System.out.println("L'initialisation du menu réussi");
+        System.out.println("L'initialisation du menu réussi");
 
-            return menu;
+        return menu;
     }
 
     /**

@@ -1,6 +1,11 @@
 package fr.hashimiste.impl.gui.menu;
 
 import fr.hashimiste.core.gui.JFrameTemplateProfil;
+import fr.hashimiste.core.jeu.Grille;
+import fr.hashimiste.core.jeu.Historique;
+import fr.hashimiste.core.jeu.Ile;
+import fr.hashimiste.impl.data.sql.filter.EqFilter;
+import fr.hashimiste.impl.gui.component.GameComponent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +24,12 @@ public class Technique extends JFrameTemplateProfil {
     private final JList<String> list = new JList<>(listModel);
     private final JScrollPane scroll = new JScrollPane(list);
     private final JTextArea description = new JTextArea();
-    private final JLabel exemple_image = new JLabel();
+    private final GameComponent demo = new GameComponent(null) {
+        @Override
+        public void onNewAction(Ile ile1, Ile ile2, Historique.Action action) {
+            // Ne rien faire
+        }
+    };
 
     /**
      * Constructeur de la classe Technique.
@@ -45,17 +55,29 @@ public class Technique extends JFrameTemplateProfil {
             if (!e.getValueIsAdjusting()) {
                 fr.hashimiste.core.jeu.Technique technique = fr.hashimiste.core.jeu.Technique.values()[list.getSelectedIndex()];
                 description.setText(technique.getDescription());
-                /*TODO L'image ne s'affiche pas jsp pourquoi */
-                //exemple_image.setIcon(new ImageIcon(technique.getUrl()));
+                Grille grille = stockage.charger(Grille.class, new EqFilter("id_map", technique.getGrilleId())).stream().findFirst().orElse(null);
+                demo.setGrille(grille);
+                if (grille != null) {
+                    demo.loadSave(grille.getSauvegardes(stockage)
+                            .stream()
+                            .filter(s -> s.getSauvegardeTimestamp().getTime() == technique.getSauvegardeTimestamp()
+                                    && s.getProfil().getId() == 1)
+                            .findFirst().orElse(null)
+                    );
+                }
             }
         });
         description.setLineWrap(true);
         description.setWrapStyleWord(true);
         description.setEditable(false);
 
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(0, 1));
+        panel.add(description);
+        panel.add(demo);
+
         add(haut, BorderLayout.NORTH);
         add(scroll, BorderLayout.WEST);
-        add(description, BorderLayout.CENTER);
-        //add(exemple_image, BorderLayout.SOUTH);
+        add(panel, BorderLayout.CENTER);
     }
 }

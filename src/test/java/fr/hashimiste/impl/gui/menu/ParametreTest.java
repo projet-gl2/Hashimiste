@@ -5,14 +5,16 @@ import org.junit.jupiter.api.Test;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-class ParametreTest extends TestMenu{
+class ParametreTest extends TestMenu {
 
     private Parametre parametre;
 
     /**
      * Renvoie le conteneur à tester
+     *
      * @return le conteneur à tester
      */
     @Override
@@ -22,6 +24,7 @@ class ParametreTest extends TestMenu{
 
     /**
      * Teste l'initialisation du menu
+     *
      * @throws IOException si une erreur d'entrée/sortie survient
      */
     @BeforeEach
@@ -35,7 +38,7 @@ class ParametreTest extends TestMenu{
      * Teste le menu Paramètre
      */
     @Test
-    void testMenuParametre(){
+    void testMenuParametre() {
         testerMenu(parametre, "Hashimiste", new Dimension(800, 600));
 
         testThemeMenu(parametre, "default");

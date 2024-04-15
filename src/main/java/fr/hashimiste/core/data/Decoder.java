@@ -14,11 +14,15 @@ public interface Decoder<I, T> {
      */
     String getNomContaineur();
 
+    default String getIdColonne() {
+        return null;
+    }
+
     /**
      * Crée un nouvel objet de type T à partir des données en entrée.
      *
      * @param input les données en entrée.
      * @return un nouvel objet de type T.
      */
-    T creer(I input);
+    T creer(I input, Object... args);
 }

@@ -34,6 +34,11 @@ public class ProfilDecoder implements SQLDecoder<Profil> {
         return "profil";
     }
 
+    @Override
+    public String getIdColonne() {
+        return "id_profil";
+    }
+
     /**
      * Crée un Profil à partir d'un ResultSet SQL.
      *
@@ -41,7 +46,7 @@ public class ProfilDecoder implements SQLDecoder<Profil> {
      * @return le Profil créé.
      */
     @Override
-    public Profil creer(ResultSet input) {
+    public Profil creer(ResultSet input, Object... args) {
         try {
             return new ProfilImpl(stockage, input.getInt("id_profil"), input.getString("nom"));
         } catch (SQLException e) {

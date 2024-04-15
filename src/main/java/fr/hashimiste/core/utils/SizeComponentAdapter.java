@@ -19,7 +19,7 @@ public class SizeComponentAdapter extends ComponentAdapter {
      *
      * @param tailleParDefaut          la taille par défaut de la fenêtre.
      * @param tailleComposantParDefaut la taille par défaut des composants.
-     * @param composants           les composants à redimensionner.
+     * @param composants               les composants à redimensionner.
      */
     public SizeComponentAdapter(Dimension tailleParDefaut, Dimension tailleComposantParDefaut, JComponent... composants) {
         this.tailleParDefaut = tailleParDefaut;

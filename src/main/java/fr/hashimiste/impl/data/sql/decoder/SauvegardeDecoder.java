@@ -10,6 +10,7 @@ import fr.hashimiste.impl.data.sql.filter.EqFilter;
 import fr.hashimiste.impl.jeu.SauvegardeImpl;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
 /**
@@ -46,7 +47,7 @@ public class SauvegardeDecoder implements SQLDecoder<Sauvegarde> {
      * @return la Sauvegarde créée.
      */
     @Override
-    public Sauvegarde creer(ResultSet input) {
+    public Sauvegarde creer(ResultSet input, Object... args) {
         try {
             Timestamp tsReference = input.getTimestamp("reference");
             Historique reference = ((SQLStockage) stockage).getDepuisCache(Historique.class, m -> m.getTimestamp().equals(tsReference))
@@ -56,7 +57,7 @@ public class SauvegardeDecoder implements SQLDecoder<Sauvegarde> {
             Profil profil = ((SQLStockage) stockage).getDepuisCache(Profil.class, m -> m.getId() == idProfil)
                     .orElseGet(() -> stockage.get(Profil.class, new EqFilter("id_profil", idProfil)));
             return new SauvegardeImpl(profil, nom, reference);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

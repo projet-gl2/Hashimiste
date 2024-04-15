@@ -3,11 +3,10 @@ package fr.hashimiste.core.gui;
 import fr.hashimiste.core.data.Stockage;
 import fr.hashimiste.core.image.AppImage;
 import fr.hashimiste.impl.gui.dev.DebugFrame;
-import fr.hashimiste.impl.gui.theme.DebugTheme;
-import fr.hashimiste.impl.gui.theme.DefaultTheme;
 import fr.hashimiste.impl.gui.theme.CandyTheme;
 import fr.hashimiste.impl.gui.theme.DarkTheme;
-
+import fr.hashimiste.impl.gui.theme.DebugTheme;
+import fr.hashimiste.impl.gui.theme.DefaultTheme;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,7 +43,7 @@ public abstract class JFrameTemplate extends JFrame {
      * Constructeur de JFrameTemplate.
      *
      * @param fenetreParente la fenêtre parente.
-     * @param dimension   la taille de la fenêtre.
+     * @param dimension      la taille de la fenêtre.
      */
     protected JFrameTemplate(JFrameTemplate fenetreParente, Dimension dimension) {
         this(fenetreParente, fenetreParente.fichierProperties, fenetreParente.stockage, dimension);
@@ -55,8 +54,8 @@ public abstract class JFrameTemplate extends JFrame {
      *
      * @param fenetreParente    la fenêtre parente.
      * @param fichierProperties le fichier de propriétés.
-     * @param stockage       le système de stockage des données.
-     * @param size           la taille de la fenêtre.
+     * @param stockage          le système de stockage des données.
+     * @param size              la taille de la fenêtre.
      */
     protected JFrameTemplate(JFrame fenetreParente, File fichierProperties, Stockage stockage, Dimension size) {
         this.fenetreParente = fenetreParente;
@@ -95,7 +94,7 @@ public abstract class JFrameTemplate extends JFrame {
     /**
      * Crée un bouton qui, lorsqu'il est cliqué, change la fenêtre actuelle pour une autre.
      *
-     * @param texte  le texte du bouton.
+     * @param texte   le texte du bouton.
      * @param fenetre la nouvelle fenêtre.
      * @return le bouton créé.
      */
@@ -106,7 +105,7 @@ public abstract class JFrameTemplate extends JFrame {
     /**
      * Crée un bouton avec une action lorsqu'il est cliqué.
      *
-     * @param texte   le texte du bouton.
+     * @param texte  le texte du bouton.
      * @param action l'action à exécuter lors du clic.
      * @return le bouton créé.
      */
@@ -117,9 +116,9 @@ public abstract class JFrameTemplate extends JFrame {
     /**
      * Crée un bouton avec une action différente selon le bouton de la souris utilisé pour le clic.
      *
-     * @param texte       le texte du bouton.
-     * @param cliqueDroit l'action à exécuter lors d'un clic droit.
-     * @param cliqueGauche  l'action à exécuter lors d'un clic gauche.
+     * @param texte        le texte du bouton.
+     * @param cliqueDroit  l'action à exécuter lors d'un clic droit.
+     * @param cliqueGauche l'action à exécuter lors d'un clic gauche.
      * @return le bouton créé.
      */
     protected JButton creerBoutton(String texte, Runnable cliqueDroit, Runnable cliqueGauche) {
@@ -159,11 +158,10 @@ public abstract class JFrameTemplate extends JFrame {
                     button.setBackground(theme.getDisabledButtonColor());
                 }
                 button.setForeground(theme.getButtonTextColor());
-            } else if (component instanceof JLabel ) {
+            } else if (component instanceof JLabel) {
                 JLabel label = (JLabel) component;
                 label.setForeground(theme.getTextColor());
-            } else if (component instanceof  JTextArea)
-            {
+            } else if (component instanceof JTextArea) {
                 JTextArea textArea = (JTextArea) component;
                 textArea.setForeground(theme.getTextColor());
             }
@@ -189,9 +187,9 @@ public abstract class JFrameTemplate extends JFrame {
         this.theme = DefaultTheme.INSTANCE;
         if (properties.getProperty("theme").equals("debug")) {
             this.theme = DebugTheme.INSTANCE;
-        }else if(properties.getProperty("theme").equals("candy")){
+        } else if (properties.getProperty("theme").equals("candy")) {
             this.theme = CandyTheme.INSTANCE;
-        }else if(properties.getProperty("theme").equals("dark")){
+        } else if (properties.getProperty("theme").equals("dark")) {
             this.theme = DarkTheme.INSTANCE;
         }
         appliquerTheme(composantStylise.toArray(new JComponent[0]));

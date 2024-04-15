@@ -8,7 +8,6 @@ import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Ile;
 import fr.hashimiste.impl.data.sql.SQLStockage;
 import fr.hashimiste.impl.jeu.CaseVideImpl;
-import fr.hashimiste.impl.jeu.IleImpl;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
@@ -42,7 +41,7 @@ public class Editor extends JFrameTemplate {
     );
     private final JButton butCharger = new JButton("Charger");
     private final JButton butSauvegarder = new JButton("Sauvegarder");
-//    private final JLabel labEstAventure = new JLabel("Aventure");
+    //    private final JLabel labEstAventure = new JLabel("Aventure");
     private final JCheckBox checkEstAventure = new JCheckBox("Aventure");
 
     private transient GrilleBuilder grille = new GrilleBuilder();
@@ -153,7 +152,7 @@ public class Editor extends JFrameTemplate {
             for (int y = 0; y < grille.getDimension().getWidth(); y++) {
                 Case ile = grille.getIle(x, y);
                 if (!(ile instanceof CaseVideImpl) && ile != null) {
-                    gridPanel.add(new Cell((Ile)ile, grille));
+                    gridPanel.add(new Cell((Ile) ile, grille));
                 } else {
                     gridPanel.add(new Cell(x, y, grille));
                 }

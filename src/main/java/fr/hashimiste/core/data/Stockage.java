@@ -5,6 +5,7 @@ import fr.hashimiste.impl.data.sql.filter.EqFilter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 /**
@@ -19,38 +20,38 @@ public interface Stockage {
      * @param extra un paramètre supplémentaire pour la requête.
      * @return une liste d'objets de type T.
      */
-    <T> List<T> charger(Class<T> clazz, String extra);
+    <T> List<T> charger(Class<T> clazz, String extra, Object... args);
 
     /**
      * Charge une liste d'objets de type T à partir du stockage en utilisant des jointures et un filtre.
      *
-     * @param clazz la classe des objets à charger.
+     * @param clazz     la classe des objets à charger.
      * @param jointures la liste des jointures à utiliser.
-     * @param filtre le filtre à utiliser.
+     * @param filtre    le filtre à utiliser.
      * @return une liste d'objets de type T.
      */
-    <T> List<T> charger(Class<T> clazz, List<Join> jointures, Filter filtre);
+    <T> List<T> charger(Class<T> clazz, List<Join> jointures, Filter filtre, Object... args);
 
     /**
      * Charge une liste d'objets de type T à partir du stockage en utilisant des jointures.
      *
-     * @param clazz la classe des objets à charger.
+     * @param clazz     la classe des objets à charger.
      * @param jointures la liste des jointures à utiliser.
      * @return une liste d'objets de type T.
      */
-    default <T> List<T> charger(Class<T> clazz, List<Join> jointures) {
-        return charger(clazz, jointures, null);
+    default <T> List<T> charger(Class<T> clazz, List<Join> jointures, Object... args) {
+        return charger(clazz, jointures, null, args);
     }
 
     /**
      * Charge une liste d'objets de type T à partir du stockage en utilisant un filtre.
      *
-     * @param clazz la classe des objets à charger.
+     * @param clazz  la classe des objets à charger.
      * @param filtre le filtre à utiliser.
      * @return une liste d'objets de type T.
      */
-    default <T> List<T> charger(Class<T> clazz, Filter filtre) {
-        return charger(clazz, null, filtre);
+    default <T> List<T> charger(Class<T> clazz, Filter filtre, Object... args) {
+        return charger(clazz, null, filtre, args);
     }
 
     /**
@@ -59,19 +60,19 @@ public interface Stockage {
      * @param clazz la classe des objets à charger.
      * @return une liste d'objets de type T.
      */
-    default <T> List<T> charger(Class<T> clazz) {
-        return charger(clazz, null, null);
+    default <T> List<T> charger(Class<T> clazz, Object... args) {
+        return charger(clazz, null, null, args);
     }
 
     /**
      * Récupère un objet de type T à partir du stockage en utilisant un filtre.
      *
-     * @param clazz la classe de l'objet à récupérer.
+     * @param clazz  la classe de l'objet à récupérer.
      * @param filtre le filtre à utiliser.
      * @return un objet de type T.
      */
-    default <T> T get(Class<T> clazz, Filter filtre) {
-        return charger(clazz, null, filtre).stream().findFirst().orElse(null);
+    default <T> T get(Class<T> clazz, Filter filtre, Object... args) {
+        return charger(clazz, null, filtre, args).stream().filter(Objects::nonNull).findFirst().orElse(null);
     }
 
     /**
@@ -84,7 +85,7 @@ public interface Stockage {
     /**
      * Supprime des objets de type T du stockage en utilisant un filtre.
      *
-     * @param clazz la classe des objets à supprimer.
+     * @param clazz  la classe des objets à supprimer.
      * @param filtre le filtre à utiliser.
      */
     <T> void supprimer(Class<T> clazz, Filter filtre);

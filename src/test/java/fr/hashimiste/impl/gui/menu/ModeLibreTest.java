@@ -5,14 +5,16 @@ import org.junit.jupiter.api.Test;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-class ModeLibreTest extends TestMenu{
+class ModeLibreTest extends TestMenu {
 
     private ModeLibre modeLibre;
 
     /**
      * Renvoie le conteneur à tester
+     *
      * @return le conteneur à tester
      */
     @Override
@@ -22,6 +24,7 @@ class ModeLibreTest extends TestMenu{
 
     /**
      * Teste l'initialisation du menu
+     *
      * @throws IOException si une erreur d'entrée/sortie survient
      */
     @BeforeEach
@@ -35,7 +38,7 @@ class ModeLibreTest extends TestMenu{
      * Teste le menu mode libre
      */
     @Test
-    void testMenuModeLibre(){
+    void testMenuModeLibre() {
         testerMenu(modeLibre, "Hashimiste", new Dimension(800, 600));
 
         testThemeMenu(modeLibre, "default");

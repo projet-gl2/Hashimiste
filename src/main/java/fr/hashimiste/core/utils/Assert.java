@@ -13,6 +13,7 @@ public class Assert {
 
     /**
      * Vérifie qu'un objet n'est pas null.
+     *
      * @param o l'objet a vérifié.
      */
     public static void nonNull(Object o) {
@@ -21,7 +22,8 @@ public class Assert {
 
     /**
      * Vérifie qu'un objet n'est pas null.
-     * @param o l'objet a vérifié.
+     *
+     * @param o       l'objet a vérifié.
      * @param message le message d'erreur.
      */
     public static void nonNull(Object o, String message) {

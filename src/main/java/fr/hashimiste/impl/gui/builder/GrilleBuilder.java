@@ -3,8 +3,7 @@ package fr.hashimiste.impl.gui.builder;
 import fr.hashimiste.core.data.Stockage;
 import fr.hashimiste.core.data.sql.Identifiable;
 import fr.hashimiste.core.jeu.*;
-import fr.hashimiste.core.utils.UnionIleString;
-import fr.hashimiste.core.utils.UnionIleTechnique;
+import fr.hashimiste.core.utils.Union;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -78,15 +77,6 @@ public class GrilleBuilder implements Grille, Identifiable.UNSAFE {
         return dimension;
     }
 
-    @Override
-    public boolean estAventure() {
-        return aventure;
-    }
-
-    public void setAventure(boolean aventure) {
-        this.aventure = aventure;
-    }
-
     /**
      * Cette méthode est utilisée pour définir la dimension de la grille.
      *
@@ -97,6 +87,15 @@ public class GrilleBuilder implements Grille, Identifiable.UNSAFE {
         this.dimension = dimension;
         this.iles = new Ile[dimension.width][dimension.height];
         return this;
+    }
+
+    @Override
+    public boolean estAventure() {
+        return aventure;
+    }
+
+    public void setAventure(boolean aventure) {
+        this.aventure = aventure;
     }
 
     @Override
@@ -115,12 +114,12 @@ public class GrilleBuilder implements Grille, Identifiable.UNSAFE {
     }
 
     @Override
-    public UnionIleString aide() {
+    public Union<Ile, String> aide() {
         throw UNSUPPORTED_OPERATION_EXCEPTION;
     }
 
     @Override
-    public UnionIleTechnique chercherIle() {
+    public Union<Ile, Technique> chercherIle() {
         throw UNSUPPORTED_OPERATION_EXCEPTION;
     }
 
@@ -157,5 +156,20 @@ public class GrilleBuilder implements Grille, Identifiable.UNSAFE {
      */
     public void clear() {
         this.iles = new Ile[dimension.width][dimension.height];
+    }
+
+    @Override
+    public boolean estJouable() {
+        return false;
+    }
+
+    @Override
+    public void reset() {
+        throw UNSUPPORTED_OPERATION_EXCEPTION;
+    }
+
+    @Override
+    public void chargerSauvegarde(Sauvegarde sauvegarde) {
+        throw UNSUPPORTED_OPERATION_EXCEPTION;
     }
 }

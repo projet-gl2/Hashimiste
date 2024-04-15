@@ -4,6 +4,7 @@ import fr.hashimiste.core.data.Stockage;
 import fr.hashimiste.core.gui.JFrameTemplate;
 import fr.hashimiste.core.joueur.Profil;
 import fr.hashimiste.core.utils.StringUtils;
+import fr.hashimiste.impl.Main;
 import fr.hashimiste.impl.joueur.ProfilImpl;
 
 import javax.swing.*;
@@ -61,10 +62,13 @@ public class ProfilSelection extends JFrameTemplate {
     private void afficherListe() {
         comptePanel.removeAll();
         for (Profil profil : stockage.charger(Profil.class)) {
+            if (profil.getId() == 1 && !Main.DEVELOPMENT) { // Ignore system profile
+                continue;
+            }
             afficherProfil(profil.getNom(), this::chargerProfil, this::suppressionProfil);
             comptePanel.add(Box.createHorizontalStrut(ESPACE_ENTRE_PROFILS));
         }
-        afficherProfil("+", this::ajouterProfil);
+        afficherProfil("\0+\0", this::ajouterProfil);
         comptePanel.revalidate();
         comptePanel.repaint();
     }
@@ -87,7 +91,7 @@ public class ProfilSelection extends JFrameTemplate {
      * @param clickDroit  l'action à effectuer lors d'un clic droit.
      */
     private void afficherProfil(String label, Consumer<MouseEvent> clickGauche, Consumer<MouseEvent> clickDroit) {
-        JButton but = new JButton(label.equals("+") ? " " : label);
+        JButton but = new JButton(label.equals("\0+\0") ? " " : label);
         but.setIcon(new ImageIcon(dessineInitiales(label)));
         but.setBackground(theme.getButtonColor());
         but.setForeground(theme.getButtonTextColor());
@@ -121,6 +125,9 @@ public class ProfilSelection extends JFrameTemplate {
         while (tmp.contains(" ")) {
             initials.append(tmp.charAt(tmp.indexOf(" ") + 1));
             tmp = tmp.substring(tmp.indexOf(" ") + 1);
+        }
+        if (label.equals("\0+\0")) {
+            initials = new StringBuilder("+");
         }
 
         int width = 16 * initials.length();

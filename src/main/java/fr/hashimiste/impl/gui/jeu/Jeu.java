@@ -4,16 +4,15 @@ import fr.hashimiste.core.dev.Debuggable;
 import fr.hashimiste.core.gui.JFrameTemplateProfil;
 import fr.hashimiste.core.jeu.Grille;
 import fr.hashimiste.core.jeu.Historique;
+import fr.hashimiste.core.jeu.Historique.Action;
 import fr.hashimiste.core.jeu.Ile;
 import fr.hashimiste.core.jeu.Sauvegarde;
-import fr.hashimiste.core.jeu.Historique.Action;
-import fr.hashimiste.core.utils.CollectionsUtils;
 import fr.hashimiste.impl.gui.component.GameComponent;
-import fr.hashimiste.impl.gui.component.PreviewComponent;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -29,14 +28,14 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
     private final JButton butMenu = creerBoutton("Menu", fenetreParente);
     private final JButton butVerifier = creerBoutton("Vérifier", this::verifier);
     private final JButton butAide = creerBoutton("Aide", this::aide);
-    private final JButton butCharger = creerBoutton("Charger", this::charger);
-    private final JButton butSauvegarder = creerBoutton("Sauvegarder", this::sauvegarder);
-    private final JButton butCheckpoint = creerBoutton("Checkpoint", this::checkpoint);
     private final List<Historique> historiques = new ArrayList<>();
+    private final JButton butCharger = creerBoutton("Charger", this::charger);
     private transient Historique precedent;
+    private final JButton butSauvegarder = creerBoutton("Sauvegarder", this::sauvegarder);
     private transient List<Sauvegarde> sauvegardes;
-    private transient GameComponent gameComponent;
-
+    private final JButton butCheckpoint = creerBoutton("Checkpoint", this::checkpoint);
+    private final JButton butPrecedent = creerBoutton("Retour", this::precedent);
+    private final transient GameComponent gameComponent;
 
     /**
      * Constructeur de la classe Jeu.
@@ -48,14 +47,12 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
         super(parent);
         this.grille = grille;
 
-
         setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.BOTH;
         constraints.weighty = 0; // Set weighty to 0 for the buttons
 
         JPanel panelButtons = new JPanel(new FlowLayout(FlowLayout.LEFT));
-
 
         for (JButton button : new JButton[]{butMenu, butVerifier, butCharger, butSauvegarder, butCheckpoint, butPrecedent, butAide}) {
             panelButtons.add(button);
@@ -71,14 +68,14 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
         // Add the PreviewComponent to the center of the game panel
         gameComponent = new GameComponent(grille) {
             @Override
-            public void onNewBridge(Ile ile1, Ile ile2, Action action) {
+            public void onNewAction(Ile ile1, Ile ile2, Action action) {
                 precedent = precedent.creerSuivant(ile1, ile2, action);
             }
         };
-    
-        game.add(gameComponent, BorderLayout.CENTER);
-        chargerHistorique(new Historique(grille, null, null, Historique.Action.NOUVELLE_GRILLE));
 
+        game.add(gameComponent, BorderLayout.CENTER);
+        sauvegardes = grille.getSauvegardes(stockage);
+        chargerHistorique(new Historique(grille, null, null, Historique.Action.NOUVELLE_GRILLE));
 
 
         // Add the game panel to the frame
@@ -89,11 +86,16 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
         game.addMouseMotionListener(gameComponent);
         game.addMouseListener(gameComponent);
     }
+
     /**
      * Cette méthode est utilisée pour vérifier le jeu.
      */
     private void verifier() {
-        // TODO
+        if (grille.verification()) {
+            JOptionPane.showMessageDialog(this, "Bravo, vous avez réussi !", "Bravo", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Désolé, vous avez échoué !", "Désolé", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -110,7 +112,8 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
         if (nomSauvegarde != null) {
             Sauvegarde save = sauvegardes.stream().filter(s -> s.getNom().equals(nomSauvegarde)).findFirst().orElse(null);
             if (save != null) {
-//                grille.chargerSauvegarde(save); TODO
+//                grille.chargerSauvegarde(save);
+                gameComponent.loadSave(save);
                 chargerHistorique(save.getReference());
             }
         }
@@ -150,8 +153,6 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
         }
     }
 
-    private final JButton butPrecedent = creerBoutton("Retour", this::precedent);
-
     /**
      * Cette méthode est utilisée pour créer un point de contrôle dans le jeu.
      */
@@ -176,8 +177,8 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
     /**
      * Cette méthode est utilisée pour obtenir de l'aide dans le jeu.
      */
-    private void aide() { //TODO comprendre pourquoi grille peut être nul sur certaines îles
-        JOptionPane.showMessageDialog(this, grille.aide().getStrU(), "Aide", JOptionPane.INFORMATION_MESSAGE);
+    private void aide() {
+        JOptionPane.showMessageDialog(this, grille.aide().getDroite(), "Aide", JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**
@@ -202,7 +203,6 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
         return sb.toString();
     }
 
-
     @Override
     public void mouseDragged(MouseEvent e) {
 
@@ -212,4 +212,6 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
     public void mouseMoved(MouseEvent e) {
         System.out.println("Mouse moved");
     }
+
+
 }

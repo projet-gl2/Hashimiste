@@ -32,7 +32,6 @@ public interface Case {
      * Renvoie le voisin dans la direction indiquée.
      *
      * @param d la direction du voisin cherché.
-     *
      * @return le voisin de la case dans la direction d.
      */
     Case getVoisinCase(Direction d);
@@ -41,7 +40,6 @@ public interface Case {
      * Renvoie l'île dans la direction indiquée.
      *
      * @param d la direction du voisin cherché.
-     *
      * @return l'île voisine de la case dans la direction d.
      */
     Ile getVoisinIle(Direction d);
@@ -50,7 +48,6 @@ public interface Case {
      * Indique si on peut traverser la case dans la direction donnée.
      *
      * @param d la direction dans laquelle la grille est parcourue.
-     *
      * @return -1 si on ne peut pas la traverser (pont perpendiculaire, ile complète, bordure), 0 si on peut continuer (pont parrallèle, case vide, ne devrait pas arriver), et un nombre entre 1 et 8 (île non complétée)
      */
     int opParcours(Direction d);

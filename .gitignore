@@ -120,3 +120,4 @@ doc/
 ### Application Files ###
 *.db
 *.properties
+.idea/copilot

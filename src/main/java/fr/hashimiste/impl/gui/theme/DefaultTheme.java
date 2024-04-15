@@ -24,6 +24,18 @@ public class DefaultTheme implements Theme {
      * Si windows, alors 251, 250, 242, sur mac, 0, 0, 0
      */
     private static final Color TEXTE_BOUTON;
+    /**
+     * La couleur des boutons désactivés dans le thème par défaut.
+     */
+    private static final Color BOUTON_DESACTIVE = new Color(197, 179, 179);
+    /**
+     * La couleur de fond dans le thème par défaut.
+     */
+    private static final Color FOND = new Color(251, 250, 242);
+    /**
+     * La couleur transparente dans le thème par défaut.
+     */
+    private static final Color TRANSPARENT = new Color(0, 0, 0, 0);
 
     static {
         String osName = System.getProperty("os.name").toLowerCase();
@@ -35,21 +47,6 @@ public class DefaultTheme implements Theme {
             TEXTE_BOUTON = new Color(251, 250, 242); // Couleur par défaut
         }
     }
-
-    /**
-     * La couleur des boutons désactivés dans le thème par défaut.
-     */
-    private static final Color BOUTON_DESACTIVE = new Color(197, 179, 179);
-
-    /**
-     * La couleur de fond dans le thème par défaut.
-     */
-    private static final Color FOND = new Color(251, 250, 242);
-
-    /**
-     * La couleur transparente dans le thème par défaut.
-     */
-    private static final Color TRANSPARENT = new Color(0, 0, 0, 0);
 
     /**
      * Le constructeur privé de la classe DefaultTheme.
