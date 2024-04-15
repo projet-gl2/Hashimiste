@@ -103,13 +103,15 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
         for (Bridge bridge : bridges) {
 
             // barrer les iles complètes
-            if(isIsleFull(bridge.getIle1())) // ile1
-            {
-                g2.draw(new Line2D.Float(zeroX + cell_size * bridge.getIle1().getX()+cell_size/5, zeroY +cell_size *bridge.getIle1().getY()+cell_size/5, zeroX + cell_size * bridge.getIle1().getX()+cell_size-cell_size/5, zeroY +cell_size *bridge.getIle1().getY()+cell_size-cell_size/5));
-            }
-            if(isIsleFull(bridge.getIle2())) // ile2
-            {
-                g2.draw(new Line2D.Float(zeroX + cell_size * bridge.getIle2().getX()+cell_size/5, zeroY +cell_size *bridge.getIle2().getY()+cell_size/5, zeroX + cell_size * bridge.getIle2().getX()+cell_size-cell_size/5, zeroY +cell_size *bridge.getIle2().getY()+cell_size-cell_size/5));
+            if(getGrille().getDifficulte() != Difficulte.DIFFICILE) {
+                if (isIsleFull(bridge.getIle1())) // ile1
+                {
+                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.getIle1().getX() + cell_size / 5, zeroY + cell_size * bridge.getIle1().getY() + cell_size / 5, zeroX + cell_size * bridge.getIle1().getX() + cell_size - cell_size / 5, zeroY + cell_size * bridge.getIle1().getY() + cell_size - cell_size / 5));
+                }
+                if (isIsleFull(bridge.getIle2())) // ile2
+                {
+                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.getIle2().getX() + cell_size / 5, zeroY + cell_size * bridge.getIle2().getY() + cell_size / 5, zeroX + cell_size * bridge.getIle2().getX() + cell_size - cell_size / 5, zeroY + cell_size * bridge.getIle2().getY() + cell_size - cell_size / 5));
+                }
             }
 
             if (bridge.n == 2) { // si pont double
@@ -188,23 +190,25 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
                     potentialsBridges.add(b);
                 }
             } else {
-                for (Bridge bridge : bridges) {
-                    if ((bridge.ile1 == ile || bridge.ile2 == ile) && bridge.n != 2) {
-                        potentialsBridges.add(bridge);
-                        break;
+                if (getGrille().getDifficulte() == Difficulte.FACILE) {
+                    for (Bridge bridge : bridges) {
+                        if ((bridge.ile1 == ile || bridge.ile2 == ile) && bridge.n != 2) {
+                            potentialsBridges.add(bridge);
+                            break;
+                        }
                     }
-                }
-                if (ileOuest != null) {
-                    potentialsBridges.add(new Bridge(ileOuest, ile, -1));
-                }
-                if (ileEst != null) {
-                    potentialsBridges.add(new Bridge(ile, ileEst, -1));
-                }
-                if (ileSud != null) {
-                    potentialsBridges.add(new Bridge(ile, ileSud, -1));
-                }
-                if (ileNord != null) {
-                    potentialsBridges.add(new Bridge(ileNord, ile, -1));
+                    if (ileOuest != null) {
+                        potentialsBridges.add(new Bridge(ileOuest, ile, -1));
+                    }
+                    if (ileEst != null) {
+                        potentialsBridges.add(new Bridge(ile, ileEst, -1));
+                    }
+                    if (ileSud != null) {
+                        potentialsBridges.add(new Bridge(ile, ileSud, -1));
+                    }
+                    if (ileNord != null) {
+                        potentialsBridges.add(new Bridge(ileNord, ile, -1));
+                    }
                 }
             }
         }
@@ -297,9 +301,17 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
         final int x = (souris_x - zeroX) / i;
         final int y = (souris_y - zeroY) / i;
         if (potentialsBridges.size() > 1 && getIsle(x, y) == null) {
-            if(isIsleFull(potentialsBridges.get(0).getIle1()) || isIsleFull(potentialsBridges.get(0).getIle2())) {
+
+
+            if(((isIsleFull(potentialsBridges.get(0).getIle1()) && !isIsleFull(potentialsBridges.get(0).getIle2()) || !isIsleFull(potentialsBridges.get(0).getIle1()) && isIsleFull(potentialsBridges.get(0).getIle2())) && !isBridgeExist(potentialsBridges.get(0).getIle1(), potentialsBridges.get(0).getIle2()))) {
                 return 1;
             }
+
+            if(((isIsleFull(potentialsBridges.get(1).getIle1()) && !isIsleFull(potentialsBridges.get(1).getIle2()) || !isIsleFull(potentialsBridges.get(1).getIle1()) && isIsleFull(potentialsBridges.get(1).getIle2())) && !isBridgeExist(potentialsBridges.get(1).getIle1(), potentialsBridges.get(1).getIle2()))) {
+                return 0;
+            }
+
+
             final double sy = souris_y - (zeroY + y * factor);
             final double quarter = factor / 4;
             if (sy < quarter || sy > quarter * 3) {
@@ -504,6 +516,24 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
             }
         }
         repaint();
+    }
+
+    /**
+     * retourne si un pont existe
+     * @param ile1
+     * @param ile2
+     * @return boolean
+     */
+    private boolean isBridgeExist(Ile ile1, Ile ile2)
+    {
+        for(Bridge bridge : bridges)
+        {
+            if(bridge.ile1.equals(ile1) && bridge.ile2.equals(ile2))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
