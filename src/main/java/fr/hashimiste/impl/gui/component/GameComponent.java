@@ -514,6 +514,12 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
         repaint();
     }
 
+    /**
+     * retourne si un pont existe
+     * @param ile1
+     * @param ile2
+     * @return boolean
+     */
     private boolean isBridgeExist(Ile ile1, Ile ile2)
     {
         for(Bridge bridge : bridges)
