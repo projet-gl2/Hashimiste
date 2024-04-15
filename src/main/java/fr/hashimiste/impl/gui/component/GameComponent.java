@@ -76,7 +76,7 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
             g2.setColor(color);
 
             // Si les deux ils du pont ne sont pas pleines
-            if(!isIsleFull(bridge.getIle1()) && !isIsleFull(bridge.getIle2())) {
+            if((!isIsleFull(bridge.getIle1()) && !isIsleFull(bridge.getIle2())) || isBridgeExist(bridge.getIle1(), bridge.getIle2())) {
 
                 // Si le pont est horizontal
                 if (estHorizontal(bridge)) {
@@ -330,7 +330,7 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
      */
     private boolean isIsleFull(Ile ile)
     {
-        return ile.getNbPont() >= ile.getN();
+        return ile.isComplete();
     }
 
     /**
