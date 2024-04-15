@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.function.Predicate;
 
 import static java.lang.Integer.min;
+import static java.lang.Integer.max;
 
 /**
  * Cette classe représente une île dans le jeu.
@@ -129,7 +130,7 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
         int nbTotal = 0;
 
         for (Direction value : Direction.values()) {
-            nbTotal += isVoisinDirection(value) ? min(getVoisinCase(value).opParcours(value), 2) : 0;
+            nbTotal += isVoisinDirection(value) ? min(max(0,getVoisinCase(value).opParcours(value)), 2) : 0;
         }
 
         return nbTotal;

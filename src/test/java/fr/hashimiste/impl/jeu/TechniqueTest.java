@@ -26,7 +26,7 @@ public class TechniqueTest {
      */
     @BeforeAll
     public static void initAll() {
-        g = new GrilleImpl(new Dimension(8, 8), Difficulte.MOYEN, false, false, null);
+        g = new GrilleImpl(0, new Dimension(8, 8), Difficulte.MOYEN, false, false, null);
         listeIle = new ArrayList<>();
     }
 
@@ -416,6 +416,9 @@ public class TechniqueTest {
         g.poserPont(listeIle.get(4), listeIle.get(5), 1);
 
         assertFalse(Technique.TECH_COMPL.test(listeIle.get(0)));
+        assertEquals(2,listeIle.get(2).getN());
+        assertEquals(4,listeIle.get(2).getVoisinCase(Direction.NORD).opParcours(Direction.NORD));
+        assertEquals(2,listeIle.get(2).getNbPontPossible());
         assertTrue(Technique.TECH_COMPL.test(listeIle.get(2)));
         assertFalse(Technique.TECH_COMPL.test(listeIle.get(5)));
         assertTrue(Technique.TECH_COMPL.test(listeIle.get(7)));
