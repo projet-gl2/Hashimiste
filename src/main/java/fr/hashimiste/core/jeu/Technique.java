@@ -135,7 +135,22 @@ public enum Technique {
             "Si le nombre de ponts possibles de l'île est égale à sa valeur," +
                     " alors il faut ajouter tous ces ponts possibles.",
             o -> {
-                int n = o.getN();
+                int n = o.getN() - o.getNbPont();
+                int nbPoss = o.getNbPontPossible();
+                return n == nbPoss;
+            }
+    ),
+    /**
+     * Technique vérifiant si une île a autant de ponts possible que sa valeur.
+     */
+    TECH_COMPL2("Technique Dernier Choix",
+            "S'il ne reste qu'un pont à mettre sur l'île," +
+                    " et qu'il ne reste qu'une seule direction possible où mettre un pont," +
+                    "alors il faut ajouter un pont dans cette direction",
+            o -> {
+                int n = o.getN() - o.getNbPont();
+                if (n != 1)
+                    return false;
                 int nbPoss = o.getNbPontPossible();
                 return n == nbPoss;
             }
