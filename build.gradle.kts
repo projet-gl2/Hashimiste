@@ -1,7 +1,10 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 plugins {
     id("java")
     id("application")
     id("org.sonarqube") version "3.5.0.2730"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 group = "fr.hashimiste"
@@ -36,4 +39,10 @@ sonar {
     properties {
         property("sonar.projectKey", "projet-gl2_Hashimiste_AY4o2rljbqkgiLWt9-aA")
     }
+}
+
+tasks.named<ShadowJar>("shadowJar") {
+    archiveBaseName.set("Grp1")
+    archiveClassifier.set("")
+    archiveVersion.set("")
 }
