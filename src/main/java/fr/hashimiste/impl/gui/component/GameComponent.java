@@ -103,13 +103,15 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
         for (Bridge bridge : bridges) {
 
             // barrer les iles complètes
-            if(isIsleFull(bridge.getIle1())) // ile1
-            {
-                g2.draw(new Line2D.Float(zeroX + cell_size * bridge.getIle1().getX()+cell_size/5, zeroY +cell_size *bridge.getIle1().getY()+cell_size/5, zeroX + cell_size * bridge.getIle1().getX()+cell_size-cell_size/5, zeroY +cell_size *bridge.getIle1().getY()+cell_size-cell_size/5));
-            }
-            if(isIsleFull(bridge.getIle2())) // ile2
-            {
-                g2.draw(new Line2D.Float(zeroX + cell_size * bridge.getIle2().getX()+cell_size/5, zeroY +cell_size *bridge.getIle2().getY()+cell_size/5, zeroX + cell_size * bridge.getIle2().getX()+cell_size-cell_size/5, zeroY +cell_size *bridge.getIle2().getY()+cell_size-cell_size/5));
+            if(getGrille().getDifficulte() != Difficulte.DIFFICILE) {
+                if (isIsleFull(bridge.getIle1())) // ile1
+                {
+                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.getIle1().getX() + cell_size / 5, zeroY + cell_size * bridge.getIle1().getY() + cell_size / 5, zeroX + cell_size * bridge.getIle1().getX() + cell_size - cell_size / 5, zeroY + cell_size * bridge.getIle1().getY() + cell_size - cell_size / 5));
+                }
+                if (isIsleFull(bridge.getIle2())) // ile2
+                {
+                    g2.draw(new Line2D.Float(zeroX + cell_size * bridge.getIle2().getX() + cell_size / 5, zeroY + cell_size * bridge.getIle2().getY() + cell_size / 5, zeroX + cell_size * bridge.getIle2().getX() + cell_size - cell_size / 5, zeroY + cell_size * bridge.getIle2().getY() + cell_size - cell_size / 5));
+                }
             }
 
             if (bridge.n == 2) { // si pont double
@@ -188,23 +190,25 @@ public abstract class GameComponent extends PreviewComponent implements MouseMot
                     potentialsBridges.add(b);
                 }
             } else {
-                for (Bridge bridge : bridges) {
-                    if ((bridge.ile1 == ile || bridge.ile2 == ile) && bridge.n != 2) {
-                        potentialsBridges.add(bridge);
-                        break;
+                if (getGrille().getDifficulte() == Difficulte.FACILE) {
+                    for (Bridge bridge : bridges) {
+                        if ((bridge.ile1 == ile || bridge.ile2 == ile) && bridge.n != 2) {
+                            potentialsBridges.add(bridge);
+                            break;
+                        }
                     }
-                }
-                if (ileOuest != null) {
-                    potentialsBridges.add(new Bridge(ileOuest, ile, -1));
-                }
-                if (ileEst != null) {
-                    potentialsBridges.add(new Bridge(ile, ileEst, -1));
-                }
-                if (ileSud != null) {
-                    potentialsBridges.add(new Bridge(ile, ileSud, -1));
-                }
-                if (ileNord != null) {
-                    potentialsBridges.add(new Bridge(ileNord, ile, -1));
+                    if (ileOuest != null) {
+                        potentialsBridges.add(new Bridge(ileOuest, ile, -1));
+                    }
+                    if (ileEst != null) {
+                        potentialsBridges.add(new Bridge(ile, ileEst, -1));
+                    }
+                    if (ileSud != null) {
+                        potentialsBridges.add(new Bridge(ile, ileSud, -1));
+                    }
+                    if (ileNord != null) {
+                        potentialsBridges.add(new Bridge(ileNord, ile, -1));
+                    }
                 }
             }
         }
