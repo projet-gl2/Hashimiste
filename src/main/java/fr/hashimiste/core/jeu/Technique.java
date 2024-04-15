@@ -131,18 +131,6 @@ public enum Technique {
     /**
      * Technique vérifiant si une île a autant de ponts possible que sa valeur.
      */
-    TECH_COMPL("Technique Égalité",
-            "Si le nombre de ponts possibles de l'île est égale à sa valeur," +
-                    " alors il faut ajouter tous ces ponts possibles.",
-            o -> {
-                int n = o.getN() - o.getNbPont();
-                int nbPoss = o.getNbPontPossible();
-                return n == nbPoss;
-            }
-    ),
-    /**
-     * Technique vérifiant si une île a autant de ponts possible que sa valeur.
-     */
     TECH_COMPL2("Technique Dernier Choix",
             "S'il ne reste qu'un pont à mettre sur l'île," +
                     " et qu'il ne reste qu'une seule direction possible où mettre un pont," +
@@ -151,6 +139,18 @@ public enum Technique {
                 int n = o.getN() - o.getNbPont();
                 if (n != 1)
                     return false;
+                int nbPoss = o.getNbDirectionPossible();
+                return 1 == nbPoss;
+            }
+    ),
+    /**
+     * Technique vérifiant si une île a autant de ponts possible que sa valeur.
+     */
+    TECH_COMPL("Technique Égalité",
+            "Si le nombre de ponts possibles de l'île est égale à sa valeur," +
+                    " alors il faut ajouter tous ces ponts possibles.",
+            o -> {
+                int n = o.getN() - o.getNbPont();
                 int nbPoss = o.getNbPontPossible();
                 return n == nbPoss;
             }
@@ -207,7 +207,7 @@ public enum Technique {
      * @param nom         le nom de la technique.
      * @param description la description de la technique.
      * @param predicate   le prédicat pour tester une condition spécifique sur une île.
-     * @param grilleId
+     * @param grilleId    l'id de la grille qui montre un exemple de la technique.
      */
     Technique(String nom, String description, Predicate<Ile> predicate, int grilleId) {
         this(nom, description, predicate, grilleId, 0L);
@@ -219,6 +219,8 @@ public enum Technique {
      * @param nom         le nom de la technique.
      * @param description la description de la technique.
      * @param predicate   le prédicat pour tester une condition spécifique sur une île.
+     * @param grilleId    l'id de la grille qui montre un exemple de la technique.
+     * @param sauvegardeTimestamp    sauvegarde de la grille pour afficher les bons ponts.
      */
     Technique(String nom, String description, Predicate<Ile> predicate, int grilleId, long sauvegardeTimestamp) {
         this.nom = nom;

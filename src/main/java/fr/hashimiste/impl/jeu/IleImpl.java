@@ -137,6 +137,17 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
     }
 
     @Override
+    public int getNbDirectionPossible() {
+        int nbTotal = 0;
+
+        for (Direction value : Direction.values()) {
+            nbTotal += isVoisinDirection(value) ? min(max(0,getVoisinCase(value).opParcours(value)),1) : 0;
+        }
+
+        return nbTotal;
+    }
+
+    @Override
     public int getNbPontsDirections(Direction direction) {
         return (getVoisinCase(direction) instanceof PontImpl ? ((PontImpl) getVoisinCase(direction)).getN() : 0);
     }

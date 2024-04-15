@@ -417,15 +417,15 @@ public class TechniqueTest {
 
         assertFalse(Technique.TECH_COMPL.test(listeIle.get(0)));
         assertEquals(2,listeIle.get(2).getN());
-        assertEquals(4,listeIle.get(2).getVoisinCase(Direction.NORD).opParcours(Direction.NORD));
+        assertEquals(2,listeIle.get(2).getVoisinCase(Direction.NORD).opParcours(Direction.NORD));
         assertEquals(2,listeIle.get(2).getNbPontPossible());
         assertTrue(Technique.TECH_COMPL.test(listeIle.get(2)));
-        assertFalse(Technique.TECH_COMPL.test(listeIle.get(5)));
+        assertFalse(Technique.TECH_COMPL2.test(listeIle.get(5)));
         assertTrue(Technique.TECH_COMPL.test(listeIle.get(7)));
     }
 
     /**
-     * Test de la technique "Complétion" avec plus de ponts encore
+     * Test de la technique "Égalité" + "Dernier Choix" avec plus de ponts encore
      */
     @Test
     public void testTechniqueCompletion3() {
@@ -449,7 +449,7 @@ public class TechniqueTest {
 
         assertFalse(Technique.TECH_COMPL.test(listeIle.get(0)));
         assertTrue(Technique.TECH_COMPL.test(listeIle.get(2)));
-        assertTrue(Technique.TECH_COMPL.test(listeIle.get(5)));
+        assertTrue(Technique.TECH_COMPL2.test(listeIle.get(5)));
         assertTrue(Technique.TECH_COMPL.test(listeIle.get(7)));
     }
 }
