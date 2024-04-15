@@ -1,5 +1,6 @@
 package fr.hashimiste.impl.gui.jeu;
 
+import fr.hashimiste.core.data.Stockage;
 import fr.hashimiste.core.dev.Debuggable;
 import fr.hashimiste.core.gui.JFrameTemplateProfil;
 import fr.hashimiste.core.jeu.Grille;
@@ -133,10 +134,7 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
         }
         Collections.sort(historiques, Comparator.comparing(Historique::getTimestamp));
         precedent = historique;
-        setActive(precedent != null
-                && precedent.getIle1() != null
-                && precedent.getIle2() != null
-                && precedent.getAction() != Historique.Action.NOUVELLE_GRILLE, butPrecedent);
+
     }
 
     /**
@@ -167,11 +165,13 @@ public class Jeu extends JFrameTemplateProfil implements Debuggable, MouseMotion
      * Cette méthode est utilisée pour revenir à l'état précédent du jeu.
      */
     private void precedent() {
-        precedent = precedent.getAvant();
-        setActive(precedent != null
-                && precedent.getIle1() != null
-                && precedent.getIle2() != null
-                && precedent.getAction() != Historique.Action.NOUVELLE_GRILLE, butPrecedent);
+        if (!(precedent.getAction() == Action.NOUVELLE_GRILLE)){
+            Sauvegarde save=precedent.getAvant().creerSauvegarde(profil, "Retour");
+            stockage.sauvegarder(save);
+            grille.rafraichirSauvegardes(stockage);
+            gameComponent.loadSave(save);
+            precedent = precedent.getAvant();
+        }
     }
 
     /**
