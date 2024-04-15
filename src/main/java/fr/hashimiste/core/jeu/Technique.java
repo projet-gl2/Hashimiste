@@ -11,8 +11,8 @@ public enum Technique {
      * Technique vérifiant si une île est un 4 dans un coin, un 6 en bordure, ou un 8.
      */
     TECH_DEP_1("Technique Bordure",
-            "Si une île de valeur 4 est dans un coin, alors elle est reliée 2 fois à chacun de ses voisins," +
-                    " idem avec une île de valeur 6 qui se trouve en bordure",
+            "Si une île de valeur 4 est dans un coin, \nalors elle est reliée 2 fois à chacun de ses voisins." +
+                    "\nIdem avec une île de valeur 6 qui se trouve en bordure",
             o -> {
                 int n = o.getN();
 
@@ -30,7 +30,8 @@ public enum Technique {
      * Technique vérifiant si une île est un 4 avec deux voisin, un 6 avec trois voisins, ou un 8.
      */
     TECH_DEP_2("Technique Parité",
-            "Si une île a un chiffre pair et son nombre de voisins correspond à n/2 alors elle est reliée 2 fois à chacun de ses voisins",
+            "Si une île a un chiffre pair et son nombre de voisins correspond à n/2 " +
+                    "\nalors elle est reliée 2 fois à chacun de ses voisins",
             o -> {
                 int n = o.getN();
                 int nbV = o.getNbVoisin(); //fonction qui calcule le nombre de voisin possible d'une île
@@ -42,7 +43,7 @@ public enum Technique {
      * Vérifie aussi si elle a au moins un pont avec chacun de ses voisins.
      */
     TECH_BAS_1("Technique Imparité",
-            "Si une île a un chiffre impair n, elle a au minimum n%2+1 voisins. Si elle a " +
+            "Si une île a un chiffre impair n, elle a au minimum n/2+1 voisins. \nSi elle a " +
                     "exactement ce nombre de voisins alors elle est obligatoirement relié au moins une fois à " +
                     "chacun de ses voisins",
             o -> {
@@ -76,9 +77,9 @@ public enum Technique {
      * Vérifie en plus si l'un de ses voisins est un 1.
      */
     TECH_BAS_2("Technique Imparité + Unité",
-            "Si une île a un chiffre impair > 1 elle à au minimum n%2+1 voisins. Si elle a " +
+            "Si une île a un chiffre impair > 1 elle à au minimum n%2+1 voisins. \nSi elle a " +
                     "exactement ce nombre de voisins alors elle est obligatoirement relié au moins une fois à " +
-                    "chacun de ses voisins. Si parmi ses voisins il y a une île avec le chiffre 1, alors l'île sera relié 2 fois à " +
+                    "chacun de ses voisins. \nSi parmi ses voisins il y a une île avec le chiffre 1, alors l'île sera relié 2 fois à " +
                     "tous ses autres voisins",
             o -> {
                 int n = o.getN();
@@ -91,8 +92,8 @@ public enum Technique {
      * Technique vérifiant si une île est un 1 ou un 2 avec un seul voisin.
      */
     TECH_BAS_3("Technique Unité (valeur 1 et 2)",
-            "Si une île a le chiffre 1 ou 2 et qu’elle possède seulement 1 voisin alors elle sera " +
-                    "forcément reliée à ce voisin, cela fonctionne seulement le chiffre 1 et 2 puisque dans le " +
+            "Si une île a le chiffre 1 ou 2 et qu’elle possède seulement 1 voisin \nalors elle sera " +
+                    "forcément reliée à ce voisin. \nCela fonctionne seulement le chiffre 1 et 2 puisque dans le " +
                     "hashi il peut seulement exister maximum 2 ponts entre 2 îles.",
             o -> {
                 int n = o.getN();
@@ -107,7 +108,7 @@ public enum Technique {
     TECH_BAS_4("Technique Unité (valeur 4 et 5)",
             "Si une île de valeur 4 possède trois voisins, " +
                     "dont deux d'entre eux sont de valeurs 1, alors on peut la compléter. " +
-                    "Même chose si une île est de valeur 5, avec trois voisins de valeur 1.",
+                    "\nMême chose si une île est de valeur 5, avec trois voisins de valeur 1.",
             o -> (o.getN() == 4 && o.getNbVoisin() == 3 && o.getNbVoisinFiltre(i -> i.getN() == 1) == 2)
                     || (o.getN() == 5 && o.getNbVoisin() == 4 && o.getNbVoisinFiltre(i -> i.getN() == 1) == 3),
             1003, 1712865272868L),
@@ -115,7 +116,7 @@ public enum Technique {
      * Technique vérifiant si une île est un 6 avec un 1 pour voisin, et si elle n'a pas de ponts avec ses voisins qui ne sont pas des 1.
      */
     TECH_BAS_5("Technique Unité (valeur 6)",
-            "Si une île de valeur 6 possède un voisin de valeur 1, alors il possède au moins " +
+            "Si une île de valeur 6 possède un voisin de valeur 1, \nalors il possède au moins " +
                     "un pont avec chacun de ses autres voisins.",
             o -> {
                 boolean verif = false;
@@ -134,7 +135,7 @@ public enum Technique {
     TECH_COMPL2("Technique Dernier Choix",
             "S'il ne reste qu'un pont à mettre sur l'île," +
                     " et qu'il ne reste qu'une seule direction possible où mettre un pont," +
-                    "alors il faut ajouter un pont dans cette direction",
+                    "\nalors il faut ajouter un pont dans cette direction",
             o -> {
                 int n = o.getN() - o.getNbPont();
                 if (n != 1)
@@ -148,7 +149,7 @@ public enum Technique {
      */
     TECH_COMPL("Technique Égalité",
             "Si le nombre de ponts possibles de l'île est égale à sa valeur," +
-                    " alors il faut ajouter tous ces ponts possibles.",
+                    " \nalors il faut ajouter tous ces ponts possibles.",
             o -> {
                 int n = o.getN() - o.getNbPont();
                 int nbPoss = o.getNbPontPossible();
