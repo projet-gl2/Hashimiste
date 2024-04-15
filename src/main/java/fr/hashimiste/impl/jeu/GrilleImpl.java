@@ -139,6 +139,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
                 consumer = consumer.andThen(v -> iles[fI][ile1.getY()] = new PontImpl(fI, ile1.getY(), n, this, Direction.EST, ile1, ile2));
             }
         }
+        this.nbClicSurAide = 0;
         consumer.accept(null);
     }
 
@@ -247,28 +248,32 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
     @Override
     public Union<Ile, String> aide() {
         Union<Ile, Technique> uIT = this.chercherIle();
+
         String mess = "";
-        if (nbClicSurAide == 0) mess = "La " + uIT.getDroite().getNom() + " peut être utilisée !";
-        if (nbClicSurAide == 1)
-            mess = "La " + uIT.getDroite().getNom() + " peut être utilisée : " + uIT.getDroite().getDescription();
-        if (nbClicSurAide == 2)
-            mess = "La " + uIT.getDroite().getNom() + " peut être utilisée dans la région " + uIT.getGauche().getRegion();
-        if (nbClicSurAide > 2)
-            mess = "La " + uIT.getDroite().getNom() + " peut être utilisée en x = " + uIT.getGauche().getX() + " et en y = " + uIT.getGauche().getY();
+        if(uIT.getGauche() != null) {
+            if (nbClicSurAide == 0) mess = "La " + uIT.getDroite().getNom() + " peut être utilisée !";
+            if (nbClicSurAide == 1)
+                mess = "La " + uIT.getDroite().getNom() + " peut être utilisée : " + uIT.getDroite().getDescription();
+            if (nbClicSurAide == 2)
+                mess = "La " + uIT.getDroite().getNom() + " peut être utilisée dans la région " + uIT.getGauche().getRegion();
+            if (nbClicSurAide > 2)
+                mess = "La " + uIT.getDroite().getNom() + " peut être utilisée en x = " + uIT.getGauche().getX() + " et en y = " + uIT.getGauche().getY() + "\n\n(avec x la coordonnée de gauche à droite en partant de 0\net y la coordonnées de haut en bas en partant de 0)";
 
-        System.out.println(mess);
+            System.out.println(mess);
 
-        nbClicSurAide++;
-
+            nbClicSurAide++;
+        }
+        else{
+            mess = "Aucune technique trouvée. Force.";
+        }
         return new Union<>(uIT.getGauche(), mess);
     }
 
     @Override
     public Union<Ile, Technique> chercherIle() {
-        if (this.verification()) return null; //TODO quand verification sera fait correctement, remettre le not au début
-        else {
+        {
             Technique[] lTech = Technique.values();
-            int fIndMin = lTech.length; //une liste des fonctions qui appliquent une technique
+            int fIndMin = lTech.length - 1; //une liste des fonctions qui appliquent une technique
             //elles prennent en paramètre une île, et renvoient vrai si la technique s'applique à l'île
 
             Ile aideIle = null; //l'île sur laquelle on peut avancer à l'aide des techniques
@@ -280,7 +285,7 @@ public class GrilleImpl implements Grille, Identifiable.UNSAFE {
                     if (tempCase instanceof IleImpl) {   //si l'île existe
                         tempIle = (IleImpl) tempCase;
                         if (!(tempIle.isComplete())) { //si l'île n'est pas complète
-                            for (int fInd = 0; fInd < fIndMin; fInd++) { //parcours techniques
+                            for (int fInd = 0; fInd <= fIndMin; fInd++) { //parcours techniques
                                 if (lTech[fInd].test(tempIle)) { //si la technique s'applique à l'île
                                     aideIle = tempIle;
                                     fIndMin = fInd; //on ne vérifie que les techniques de plus bas niveau que celles trouvées précédemments

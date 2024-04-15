@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.function.Predicate;
 
 import static java.lang.Integer.min;
+import static java.lang.Integer.max;
 
 /**
  * Cette classe représente une île dans le jeu.
@@ -69,23 +70,23 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
     public boolean isVoisinDirection(Direction direction) {
         switch (direction) {
             case NORD:
-                if (x < 1)
-                    return false;
-                break;
-            case EST:
-                if (y > grille.getDimension().getWidth() - 2)
-                    return false;
-                break;
-            case SUD:
-                if (x > grille.getDimension().getHeight() - 2)
-                    return false;
-                break;
-            case OUEST:
                 if (y < 1)
                     return false;
                 break;
+            case EST:
+                if (x > grille.getDimension().getWidth() - 2)
+                    return false;
+                break;
+            case SUD:
+                if (y > grille.getDimension().getHeight() - 2)
+                    return false;
+                break;
+            case OUEST:
+                if (x < 1)
+                    return false;
+                break;
         }
-        return (getVoisinCase(direction).opParcours(direction) > 0);
+        return (getVoisinCase(direction).opParcours(direction) > -2);
     }
 
     @Override
@@ -104,7 +105,7 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
         int nbTotal = 0;
 
         for (Direction value : Direction.values()) {
-            if (isVoisinDirection(value)) {
+            if (isVoisinDirection(value) && getVoisinCase(value).getVoisinIle(value) != null) {
                 nbTotal += filtre.test(getVoisinCase(value).getVoisinIle(value)) ? 1 : 0;
             }
         }
@@ -129,7 +130,7 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
         int nbTotal = 0;
 
         for (Direction value : Direction.values()) {
-            nbTotal += isVoisinDirection(value) ? min(getVoisinCase(value).opParcours(value), 2) : 0;
+            nbTotal += isVoisinDirection(value) ? min(max(0,getVoisinCase(value).opParcours(value)), 2) : 0;
         }
 
         return nbTotal;
@@ -142,6 +143,8 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
 
     @Override
     public int getValeurIleDirection(Direction direction) {
+        Case c = getVoisinCase(direction);
+        if(c == null) return 0;
         return getVoisinCase(direction).opParcours(direction);
     }
 
@@ -151,14 +154,14 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
         int w = (int) this.grille.getDimension().getWidth();
         int h = (int) this.grille.getDimension().getHeight();
 
-        if (this.x < h / 3) reg = "NORD";
-        else if (this.x > (h / 3) * 2) reg = "SUD";
+        if (this.y < w / 3) reg = "NORD";
+        else if (this.y > 2 * (w / 3)) reg = "SUD";
         else reg = "CENTRE";
 
         reg = reg + "-";
 
-        if (this.y < w / 3) reg = reg + "OUEST";
-        else if (this.y > 2 * (w / 3)) reg = reg + "EST";
+        if (this.x < h / 3) reg = reg + "OUEST";
+        else if (this.x > (h / 3) * 2) reg = reg + "EST";
         else reg = reg + "CENTRE";
 
         return reg;
@@ -173,13 +176,13 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
     public Case getVoisinCase(Direction d) {
         switch (d) {
             case NORD:
-                return x < 1 ? null : grille.getIle(x - 1, y);
-            case EST:
-                return y > grille.getDimension().getWidth() - 2 ? null : grille.getIle(x, y + 1);
-            case SUD:
-                return x > grille.getDimension().getHeight() - 2 ? null : grille.getIle(x + 1, y);
-            case OUEST:
                 return y < 1 ? null : grille.getIle(x, y - 1);
+            case EST:
+                return x > grille.getDimension().getWidth() - 2 ? null : grille.getIle(x + 1, y);
+            case SUD:
+                return y > grille.getDimension().getHeight() - 2 ? null : grille.getIle(x, y + 1);
+            case OUEST:
+                return x < 1 ? null : grille.getIle(x - 1, y );
             default:
                 return null;
         }
@@ -192,8 +195,6 @@ public class IleImpl implements Ile, Identifiable.UNSAFE {
 
     @Override
     public int opParcours(Direction d) {
-        if (isComplete())
-            return -1;
         return n - getNbPont();
     }
 
