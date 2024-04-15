@@ -577,7 +577,8 @@ INSERT OR IGNORE INTO historique (`date`, `id_map`, `id_ile1`, `id_ile2`, `actio
 INSERT OR IGNORE INTO historique (`date`, `id_map`, `id_ile1`, `id_ile2`, `action`, `avant`) VALUES (1712880137964, 2, 77, 78, 3, 1712880137782);
 INSERT OR IGNORE INTO sauvegarde (id_profil, nom, reference) VALUES (1, 'Solution 2', 1712880137964);
 INSERT OR IGNORE INTO historique (`date`, `id_map`, `id_ile1`, `id_ile2`, `action`) VALUES (1712923427849, 3, 0, 0, 0);
-INSERT OR IGNORE INTO historique (`date`, `id_map`, `id_ile1`, `id_ile2`, `action`, `avant`) VALUES (1712923430701,3,85,86,2,1712923427849);
+INSERT OR IGNORE INTO historique (`date`, `id_map`, `id_ile1`, `id_ile2`, `action`, `avant`) VALUES (1712923427839,3,99,100,2,1712923427849);
+INSERT OR IGNORE INTO historique (`date`, `id_map`, `id_ile1`, `id_ile2`, `action`, `avant`) VALUES (1712923430701,3,85,86,2,1712923427839);
 INSERT OR IGNORE INTO historique (`date`, `id_map`, `id_ile1`, `id_ile2`, `action`, `avant`) VALUES (1712923431616,3,85,92,2,1712923430701);
 INSERT OR IGNORE INTO historique (`date`, `id_map`, `id_ile1`, `id_ile2`, `action`, `avant`) VALUES (1712923439218,3,86,87,2,1712923431616);
 INSERT OR IGNORE INTO historique (`date`, `id_map`, `id_ile1`, `id_ile2`, `action`, `avant`) VALUES (1712923439352,3,86,87,3,1712923439218);
